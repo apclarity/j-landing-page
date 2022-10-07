@@ -27,7 +27,7 @@
           </svg>
         </button>
         <!-- Logo -->
-        <router-link class="block" to="/">
+        <!-- <router-link class="block" to="/">
           <svg width="32" height="32" viewBox="0 0 32 32">
             <defs>
               <linearGradient x1="28.538%" y1="20.229%" x2="100%" y2="108.156%" id="logo-a">
@@ -44,7 +44,16 @@
             <path d="M7.404 2.503l18.339 26.19A15.93 15.93 0 0116 32C7.163 32 0 24.837 0 16 0 10.327 2.952 5.344 7.404 2.503z" fill="url(#logo-a)" />
             <path d="M2.223 24.14L29.777 7.86A15.926 15.926 0 0132 16c0 8.837-7.163 16-16 16-5.864 0-10.991-3.154-13.777-7.86z" fill="url(#logo-b)" />
           </svg>
-        </router-link>
+          
+        </router-link> -->
+        <a href="/dashboard/main" class="">
+          <img
+              src="/src/images/cropped-logo-jobhun-3.png" 
+              height="20"
+              alt="Logo Jobhun"
+              class="mr-3 h-6 sm:h-9"
+            />
+        </a>
       </div>
 
       <!-- Links -->
@@ -481,7 +490,7 @@
                       <path class="fill-current text-slate-600" :class="currentRoute.fullPath.includes('settings') && 'text-indigo-500'" d="M5.7 10.714c.195.4.298.84.3 1.286a3 3 0 11-3-3c.446.002.885.105 1.286.3l7.007-7.007 1.414 1.414L5.7 10.714z" />
                       <path class="fill-current text-slate-400" :class="currentRoute.fullPath.includes('settings') && 'text-indigo-300'" d="M19.707 9.292a3.012 3.012 0 00-1.415 1.415L13.286 5.7c-.4.195-.84.298-1.286.3a3 3 0 113-3 2.969 2.969 0 01-.3 1.286l5.007 5.006z" />                      
                     </svg>
-                    <span class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Settings</span>
+                    <span class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Pengaturan</span>
                   </div>
                   <!-- Icon -->
                   <div class="flex shrink-0 ml-2">
@@ -493,6 +502,13 @@
               </a>
               <div class="lg:hidden lg:sidebar-expanded:block 2xl:block">
                 <ul class="pl-9 mt-1" :class="!parentLink.expanded && 'hidden'">
+                  <router-link to="/settings/bidang/tabel" custom v-slot="{ href, navigate, isExactActive }">
+                    <li class="mb-1 last:mb-0">
+                      <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate" :class="isExactActive && '!text-indigo-500'" :href="href" @click="navigate">
+                        <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Bidang</span>
+                      </a>
+                    </li>
+                  </router-link>
                   <router-link to="/settings/account" custom v-slot="{ href, navigate, isExactActive }">
                     <li class="mb-1 last:mb-0">
                       <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate" :class="isExactActive && '!text-indigo-500'" :href="href" @click="navigate">
