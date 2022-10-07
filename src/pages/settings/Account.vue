@@ -22,7 +22,7 @@
           <!-- Content --> 
           <div class="bg-white shadow-lg rounded-sm mb-8">
             <div class="flex flex-col md:flex-row md:-mr-px">
-              <SettingsSidebar />
+              <!-- <SettingsSidebar /> -->
               <AccountPanel />
             </div>
           </div>

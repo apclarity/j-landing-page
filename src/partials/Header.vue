@@ -19,7 +19,7 @@
         </div>
 
         <!-- Header: Right side -->
-        <div class="flex items-center space-x-3">
+        <div class="flex items-center space-x-3" v-show="user != ''">
           <div>
             <button
               class="w-8 h-8 flex items-center justify-center bg-slate-100 hover:bg-slate-200 transition duration-150 rounded-full ml-3"
@@ -58,7 +58,7 @@ import UserMenu from '../components/DropdownProfile.vue'
 
 export default {
   name: 'Header',
-  props: ['sidebarOpen'],
+  props: ['sidebarOpen', 'user'],
   components: {
     SearchModal,
     Notifications,
