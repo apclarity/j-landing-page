@@ -64,7 +64,7 @@ import AvatarPage from './pages/component/AvatarPage.vue'
 import TooltipPage from './pages/component/TooltipPage.vue'
 import AccordionPage from './pages/component/AccordionPage.vue'
 import IconsPage from './pages/component/IconsPage.vue'
-import MainLayout from './pages/MainLayout.vue'
+import LayoutUtama from './pages/layout/Utama.vue'
 
 const routerHistory = createWebHistory()
 
@@ -73,7 +73,7 @@ const router = createRouter({
   routes: [
     {
       path: "/",
-      component: MainLayout,
+      component: LayoutUtama,
       children: [
         {
           path: '/dashboard/analytics',

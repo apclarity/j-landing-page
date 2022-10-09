@@ -25,7 +25,7 @@
     >
       <div v-show="dropdownOpen" class="origin-top-right z-10 absolute top-full min-w-44 bg-white border border-slate-200 py-1.5 rounded shadow-lg overflow-hidden mt-1" :class="align === 'right' ? 'right-0' : 'left-0'">
         <div class="pt-0.5 pb-2 px-3 mb-1 border-b border-slate-200">
-          <div class="font-medium text-slate-800">Acme Inc.</div>
+          <div class="font-medium text-slate-800">{{session.name}}</div>
           <div class="text-xs text-slate-500 italic">Administrator</div>
         </div>
         <ul
@@ -51,7 +51,7 @@ import UserAvatar from '../images/user-avatar-32.png'
 
 export default {
   name: 'DropdownProfile',
-  props: ['align'],
+  props: ['align','session'],
   data() {
     return {
       UserAvatar: UserAvatar,

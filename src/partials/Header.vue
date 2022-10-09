@@ -39,7 +39,7 @@
           <Help align="right" />
           <!-- Divider -->
           <hr class="w-px h-6 bg-slate-200" />
-          <UserMenu align="right" />
+          <UserMenu align="right" :session="session" />
 
         </div>
 
@@ -58,17 +58,19 @@ import UserMenu from '../components/DropdownProfile.vue'
 
 export default {
   name: 'Header',
-  props: ['sidebarOpen', 'user'],
+  props: ['sidebarOpen', 'session'],
   components: {
     SearchModal,
     Notifications,
     Help,
     UserMenu,
   },
-  setup() {
+  setup(props) {
+    const session = props.session
     const searchModalOpen = ref(false)
     return {
       searchModalOpen,
+      session
     }  
   }  
 }
