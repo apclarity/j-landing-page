@@ -66,6 +66,8 @@ import AccordionPage from "./pages/component/AccordionPage.vue";
 import IconsPage from "./pages/component/IconsPage.vue";
 import MainLayout from "./pages/MainLayout.vue";
 import SettingsBidangTabel from "./pages/settings/Bidang/Tabel.vue";
+import SettingsIndustriTabel from "./pages/settings/Industri/Tabel.vue";
+import SettingsKelasTabel from "./pages/settings/Kelas/Tabel.vue";
 
 const routerHistory = createWebHistory();
 
@@ -83,6 +85,14 @@ const router = createRouter({
         {
           path: "/settings/bidang/tabel",
           component: SettingsBidangTabel,
+        },
+        {
+          path: "/settings/industri/tabel",
+          component: SettingsIndustriTabel,
+        },
+        {
+          path: "/settings/kelas/tabel",
+          component: SettingsKelasTabel,
         },
       ],
     },
