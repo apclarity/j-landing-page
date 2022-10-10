@@ -68,6 +68,8 @@ export default {
     const checked = computed(() => props.selected.includes(props.value))
 
     function check() {
+      console.log(props.selected)
+      console.log(props.value)
       let updatedSelected = [...props.selected]
       if (this.checked) {
         updatedSelected.splice(updatedSelected.indexOf(props.value), 1)

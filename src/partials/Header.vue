@@ -1,3 +1,21 @@
+<script setup>
+import { ref } from 'vue'
+import { isObjectEmpty } from '../utils/Helper'
+
+import SearchModal from '../components/ModalSearch.vue'
+import Notifications from '../components/DropdownNotifications.vue'
+import Help from '../components/DropdownHelp.vue'
+import UserMenu from '../components/DropdownProfile.vue'
+
+const props = defineProps({
+  sidebarOpen: Boolean,
+  session: Object,
+})
+
+const searchModalOpen = ref(false)
+    
+</script>
+
 <template>
   <header class="sticky top-0 bg-white border-b border-slate-200 z-30">
     <div class="px-4 sm:px-6 lg:px-8">
@@ -19,7 +37,7 @@
         </div>
 
         <!-- Header: Right side -->
-        <div class="flex items-center space-x-3" v-show="user != ''">
+        <div class="flex items-center space-x-3" v-show="!isObjectEmpty(session)">
           <div>
             <button
               class="w-8 h-8 flex items-center justify-center bg-slate-100 hover:bg-slate-200 transition duration-150 rounded-full ml-3"
@@ -47,31 +65,3 @@
     </div>
   </header>
 </template>
-
-<script>
-import { ref } from 'vue'
-
-import SearchModal from '../components/ModalSearch.vue'
-import Notifications from '../components/DropdownNotifications.vue'
-import Help from '../components/DropdownHelp.vue'
-import UserMenu from '../components/DropdownProfile.vue'
-
-export default {
-  name: 'Header',
-  props: ['sidebarOpen', 'session'],
-  components: {
-    SearchModal,
-    Notifications,
-    Help,
-    UserMenu,
-  },
-  setup(props) {
-    const session = props.session
-    const searchModalOpen = ref(false)
-    return {
-      searchModalOpen,
-      session
-    }  
-  }  
-}
-</script>

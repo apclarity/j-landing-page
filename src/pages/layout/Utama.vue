@@ -21,12 +21,12 @@
 
 <script setup>
   import { ref, computed } from 'vue'
-  import { useSessionStore } from './store'
+  import { useLayoutStore } from './store'
   import Sidebar from '../../partials/Sidebar.vue'
   import Header from '../../partials/Header.vue'
 
   const sidebarOpen = ref(false)
   
-  const sessionStore = useSessionStore()
-  const session = computed(() => sessionStore.session)
+  const layoutStore = useLayoutStore()
+  const session = computed(() => layoutStore.session)
 </script>

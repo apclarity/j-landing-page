@@ -1,3 +1,39 @@
+<script setup>
+  import { ref, onMounted, onUnmounted } from 'vue'
+  import UserAvatar from '../images/user-avatar-32.png'
+
+  const props = defineProps({
+    align: String,
+    session: Object,
+  })
+
+  const dropdownOpen = ref(false)
+  const trigger = ref(null)
+  const dropdown = ref(null)
+
+  // close on click outside
+  const clickHandler = ({ target }) => {
+    if (!dropdownOpen.value || dropdown.value.contains(target) || trigger.value.contains(target)) return
+    dropdownOpen.value = false
+  }
+
+  // close if the esc key is pressed
+  const keyHandler = ({ keyCode }) => {
+    if (!dropdownOpen.value || keyCode !== 27) return
+    dropdownOpen.value = false
+  }
+
+  onMounted(() => {
+    document.addEventListener('click', clickHandler)
+    document.addEventListener('keydown', keyHandler)
+  })
+
+  onUnmounted(() => {
+    document.removeEventListener('click', clickHandler)
+    document.removeEventListener('keydown', keyHandler)
+  })
+</script>
+
 <template>
   <div class="relative inline-flex">
     <button
@@ -9,7 +45,7 @@
     >
       <img class="w-8 h-8 rounded-full" :src="UserAvatar" width="32" height="32" alt="User" />
       <div class="flex items-center truncate">
-        <span class="truncate ml-2 text-sm font-medium group-hover:text-slate-800">Acme Inc.</span>
+        <span class="truncate ml-2 text-sm font-medium group-hover:text-slate-800">{{session.name}}</span>
         <svg class="w-3 h-3 shrink-0 ml-1 fill-current text-slate-400" viewBox="0 0 12 12">
           <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
         </svg>
@@ -44,52 +80,3 @@
     </transition>
   </div>
 </template>
-
-<script>
-import { ref, onMounted, onUnmounted } from 'vue'
-import UserAvatar from '../images/user-avatar-32.png'
-
-export default {
-  name: 'DropdownProfile',
-  props: ['align','session'],
-  data() {
-    return {
-      UserAvatar: UserAvatar,
-    }
-  },  
-  setup() {
-
-    const dropdownOpen = ref(false)
-    const trigger = ref(null)
-    const dropdown = ref(null)
-
-    // close on click outside
-    const clickHandler = ({ target }) => {
-      if (!dropdownOpen.value || dropdown.value.contains(target) || trigger.value.contains(target)) return
-      dropdownOpen.value = false
-    }
-
-    // close if the esc key is pressed
-    const keyHandler = ({ keyCode }) => {
-      if (!dropdownOpen.value || keyCode !== 27) return
-      dropdownOpen.value = false
-    }
-
-    onMounted(() => {
-      document.addEventListener('click', clickHandler)
-      document.addEventListener('keydown', keyHandler)
-    })
-
-    onUnmounted(() => {
-      document.removeEventListener('click', clickHandler)
-      document.removeEventListener('keydown', keyHandler)
-    })
-
-    return {
-      dropdownOpen,
-      trigger,
-      dropdown,
-    }
-  }
-}
-</script>

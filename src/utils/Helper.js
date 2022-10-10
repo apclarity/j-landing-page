@@ -18,12 +18,10 @@ export const convertArrayDataFromApi = (datas, settings, additional = {}) => {
 };
 
 export const convertDataFromApi = (data, settings, additional = {}) => {
-  //{Name: "test"}
-  //settings[Name] = name
   let dataReturn = {};
   for (const key in settings) {
     if (key == "Status") dataReturn[settings[key]] = STATUS[data[key]];
-    else if (key == "CreatedAt")
+    else if (key == "CreatedAt" || key == 'created_at')
       dataReturn[settings[key]] = moment(data[key])
         .utc()
         .format("DD/MM/YYYY HH:mm:ss");
@@ -36,7 +34,17 @@ export const convertDataFromApi = (data, settings, additional = {}) => {
   return dataReturn;
 };
 
-export const getListObjectFromListId = (arrayObject=[], arrayId=[], key="id") =>{
+/* Ambil list object dari array of object sesuai kondisi field
+  Contoh: arrayObject = [{id: 2, name:"andre"}, {id: 3, name:"boy"}, {id: 4, name:"cynthia"}]
+
+  getArrayOfObjectFromArrayOfField(arrayObject, ["andre","boy"], "name")
+  akan menghasilkan [{id: 2, name:"andre"}, {id: 3, name:"boy"}]
+
+  kalo ga dikasih payload ke 3, otomatis akan ambil dari key "id". contoh
+  getArrayOfObjectFromArrayOfField(arrayObject, [2,3], "name") akan menghasilkan
+  akan menghasilkan [{id: 2, name:"andre"}, {id: 3, name:"boy"}]
+*/
+export const getArrayOfObjectFromArrayOfField = (arrayObject=[], arrayId=[], key="id") =>{
   let listObject = [];
   arrayObject.map((obj) => {
     if (arrayId.includes(obj[key])) {
@@ -53,6 +61,10 @@ export const convertApiDateToWebDate = (theDate="") => {
   return ""
 }
 
+/*
+  mengubah tanggal ke format YYYY-MM-DD HH:mm:ss
+  jika tidak ada payload yang dikirim, akan mengembalikan tanggal sekarang
+*/
 export const convertToWebDate = (theDate="") => {
   let jsDate = new Date()
   if(/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/.test(theDate)){
@@ -61,17 +73,29 @@ export const convertToWebDate = (theDate="") => {
   return moment(jsDate).tz("Asia/Jakarta").format("YYYY-MM-DD HH:mm:ss")
 }
 
-
+/*
+  mengubah tanggal ke format yang dipakai oleh API
+  gunakan ini untuk kirim tanggal ke backend
+*/
 export const convertToApiDate = (theDate) => {
   let jsDate = new Date(theDate)
 
   return moment(jsDate).tz("Asia/Jakarta").toISOString()
 }
 
+/*
+  konversi string ke format angka
+  contoh: 1000000 jadi 1.000.000
+*/
 export const convertMoneyNominalFormat = (value) => {
   return (value + "").replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ".")
 }
 
+/* Convert gambar ke base64
+  dibutuhkan biasanya oleh API untuk post gambar
+  payload: url gambar (string)
+  return base64 nya
+*/
 export const getBase64Image = async (url) => {
   const data = await fetch(url);
   const blob = await data.blob();
@@ -85,6 +109,17 @@ export const getBase64Image = async (url) => {
   });
 };
 
+/* Validasi resolusi dan ukuran gambar
+  payload = e adalah event gambar
+    ratio = string. contoh= "1:1" atau "500:200"
+    maxsize = integer dalam kilobyte. contoh = 1048576
+
+  return berupa objek response = {
+    message: String,
+    theImage: gambarnya,
+    isOk: Boolean berhasil atau tidaknya validasi
+  }
+*/
 export const validatePicture = (e, ratio, maxSize) => {
   return new Promise(function(resolve) {
     const reader = new FileReader();
@@ -125,9 +160,32 @@ export const validatePicture = (e, ratio, maxSize) => {
   });
 };
 
+/* Ambil array of key dari array of object
+  Contoh: obj = [{id: 2, name:"andre"}, {id: 3, name:"boy"}]
+
+  getArrayOfObjectField(obj, "name") akan menghasilkan ["andre","boy"]
+
+  kalo ga dikasih payload ke 2, otomatis akan ambil dari key "id". contoh
+  getArrayOfObjectField(obj) akan menghasilkan [2,3]
+*/
 export const getArrayOfObjectField = (objArray = [], column="id") => {
   let result = objArray.map(a => a[column]);
   return result
+}
+
+// Cek kalo objek nya kosong, return true/false
+export const isObjectEmpty = (obj = {}) => {
+  if(Object.keys(obj).length === 0 && obj.constructor === Object){
+    return true
+  }
+  return false
+}
+
+export const getObjectValue = (object, defaultValue = {}) => {
+  if(typeof object === 'undefined'){
+    return defaultValue
+  }
+  return object
 }
 
 export const STATUS = ["Baru", "Diterima", "Dipublikasikan", "Ditolak"];

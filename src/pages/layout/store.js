@@ -1,10 +1,19 @@
 import { defineStore } from "pinia"
 
-export const useSessionStore = defineStore({
-    id: "session",
+export const useLayoutStore = defineStore({
+    id: "layout",
     state: () => ({
         session: {
-            name:"wow"
+            name:"user"
         },
-    })
+        dashboardAlert: {}
+    }),
+    actions: {
+        setSession: (payload={}) => {
+            this.session = payload
+        },
+        setDashboardLayouts: (payload={}) => {
+            this.dashboardAlert = payload
+        }
+    }
 })

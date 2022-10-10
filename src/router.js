@@ -65,8 +65,9 @@ import TooltipPage from './pages/component/TooltipPage.vue'
 import AccordionPage from './pages/component/AccordionPage.vue'
 import IconsPage from './pages/component/IconsPage.vue'
 import LayoutUtama from './pages/layout/Utama.vue'
+import SettingsBidangTabel from "./pages/settings/Bidang/Tabel.vue";
 
-const routerHistory = createWebHistory()
+const routerHistory = createWebHistory();
 
 const router = createRouter({
   history: routerHistory,
@@ -76,272 +77,276 @@ const router = createRouter({
       component: LayoutUtama,
       children: [
         {
-          path: '/dashboard/analytics',
-          component: Analytics
-        }
-      ]
+          path: "/dashboard/analytics",
+          component: Analytics,
+        },
+        {
+          path: "/settings/bidang/tabel",
+          component: SettingsBidangTabel,
+        },
+      ],
     },
     {
-      path: '/dashboard/main',
-      component: Dashboard
+      path: "/dashboard/main",
+      component: Dashboard,
     },
     {
-      path: '/dashboard/fintech',
-      component: Fintech
-    },    
-    {
-      path: '/ecommerce/customers',
-      component: Customers
+      path: "/dashboard/fintech",
+      component: Fintech,
     },
     {
-      path: '/ecommerce/orders',
-      component: Orders
+      path: "/ecommerce/customers",
+      component: Customers,
     },
     {
-      path: '/ecommerce/invoices',
-      component: Invoices
+      path: "/ecommerce/orders",
+      component: Orders,
     },
     {
-      path: '/ecommerce/shop',
-      component: Shop
+      path: "/ecommerce/invoices",
+      component: Invoices,
     },
     {
-      path: '/ecommerce/shop-2',
-      component: Shop2
+      path: "/ecommerce/shop",
+      component: Shop,
     },
     {
-      path: '/ecommerce/product',
-      component: Product
+      path: "/ecommerce/shop-2",
+      component: Shop2,
     },
     {
-      path: '/ecommerce/cart',
-      component: Cart
+      path: "/ecommerce/product",
+      component: Product,
     },
     {
-      path: '/ecommerce/cart-2',
-      component: Cart2
+      path: "/ecommerce/cart",
+      component: Cart,
     },
     {
-      path: '/ecommerce/cart-3',
-      component: Cart3
+      path: "/ecommerce/cart-2",
+      component: Cart2,
     },
     {
-      path: '/ecommerce/pay',
-      component: Pay
+      path: "/ecommerce/cart-3",
+      component: Cart3,
     },
     {
-      path: '/campaigns',
-      component: Campaigns
+      path: "/ecommerce/pay",
+      component: Pay,
     },
     {
-      path: '/community/users-tabs',
-      component: UsersTabs
+      path: "/campaigns",
+      component: Campaigns,
     },
     {
-      path: '/community/users-tiles',
-      component: UsersTiles
+      path: "/community/users-tabs",
+      component: UsersTabs,
     },
     {
-      path: '/community/profile',
-      component: Profile
+      path: "/community/users-tiles",
+      component: UsersTiles,
     },
     {
-      path: '/community/feed',
-      component: Feed
+      path: "/community/profile",
+      component: Profile,
     },
     {
-      path: '/community/forum',
-      component: Forum
+      path: "/community/feed",
+      component: Feed,
     },
     {
-      path: '/community/forum-post',
-      component: ForumPost
-    },    
-    {
-      path: '/community/meetups',
-      component: Meetups
+      path: "/community/forum",
+      component: Forum,
     },
     {
-      path: '/community/meetups-post',
-      component: MeetupsPost
+      path: "/community/forum-post",
+      component: ForumPost,
     },
     {
-      path: '/finance/cards',
-      component: CreditCards
-    }, 
-    {
-      path: '/finance/transactions',
-      component: Transactions
+      path: "/community/meetups",
+      component: Meetups,
     },
     {
-      path: '/finance/transaction-details',
-      component: TransactionDetails
+      path: "/community/meetups-post",
+      component: MeetupsPost,
     },
     {
-      path: '/job/job-listing',
-      component: JobListing
+      path: "/finance/cards",
+      component: CreditCards,
     },
     {
-      path: '/job/job-post',
-      component: JobPost
+      path: "/finance/transactions",
+      component: Transactions,
     },
     {
-      path: '/job/company-profile',
-      component: CompanyProfile
-    },            
-    {
-      path: '/messages',
-      component: Messages
+      path: "/finance/transaction-details",
+      component: TransactionDetails,
     },
     {
-      path: '/tasks/kanban',
-      component: TasksKanban
+      path: "/job/job-listing",
+      component: JobListing,
     },
     {
-      path: '/tasks/list',
-      component: TasksList
-    },    
-    {
-      path: '/inbox',
-      component: Inbox
+      path: "/job/job-post",
+      component: JobPost,
     },
     {
-      path: '/calendar',
-      component: Calendar
+      path: "/job/company-profile",
+      component: CompanyProfile,
     },
     {
-      path: '/settings/account',
-      component: Account
+      path: "/messages",
+      component: Messages,
     },
     {
-      path: '/settings/notifications',
-      component: Notifications
+      path: "/tasks/kanban",
+      component: TasksKanban,
     },
     {
-      path: '/settings/apps',
-      component: Apps
+      path: "/tasks/list",
+      component: TasksList,
     },
     {
-      path: '/settings/plans',
-      component: Plans
+      path: "/inbox",
+      component: Inbox,
     },
     {
-      path: '/settings/billing',
-      component: Billing
+      path: "/calendar",
+      component: Calendar,
     },
     {
-      path: '/settings/feedback',
-      component: Feedback
+      path: "/settings/account",
+      component: Account,
     },
     {
-      path: '/utility/changelog',
-      component: Changelog
+      path: "/settings/notifications",
+      component: Notifications,
     },
     {
-      path: '/utility/roadmap',
-      component: Roadmap
+      path: "/settings/apps",
+      component: Apps,
     },
     {
-      path: '/utility/faqs',
-      component: Faqs
+      path: "/settings/plans",
+      component: Plans,
     },
     {
-      path: '/utility/empty-state',
-      component: EmptyState
+      path: "/settings/billing",
+      component: Billing,
     },
     {
-      path: '/utility/404',
-      component: PageNotFound
+      path: "/settings/feedback",
+      component: Feedback,
     },
     {
-      path: '/utility/knowledge-base',
-      component: KnowledgeBase
+      path: "/utility/changelog",
+      component: Changelog,
     },
     {
-      path: '/signin',
-      component: Signin
+      path: "/utility/roadmap",
+      component: Roadmap,
     },
     {
-      path: '/signup',
-      component: Signup
+      path: "/utility/faqs",
+      component: Faqs,
     },
     {
-      path: '/reset-password',
-      component: ResetPassword
+      path: "/utility/empty-state",
+      component: EmptyState,
     },
     {
-      path: '/onboarding-01',
-      component: Onboarding01
+      path: "/utility/404",
+      component: PageNotFound,
     },
     {
-      path: '/onboarding-02',
-      component: Onboarding02
+      path: "/utility/knowledge-base",
+      component: KnowledgeBase,
     },
     {
-      path: '/onboarding-03',
-      component: Onboarding03
+      path: "/signin",
+      component: Signin,
     },
     {
-      path: '/onboarding-04',
-      component: Onboarding04
+      path: "/signup",
+      component: Signup,
     },
     {
-      path: '/component/button',
-      component: ButtonPage
+      path: "/reset-password",
+      component: ResetPassword,
     },
     {
-      path: '/component/form',
-      component: FormPage
+      path: "/onboarding-01",
+      component: Onboarding01,
     },
     {
-      path: '/component/dropdown',
-      component: DropdownPage
+      path: "/onboarding-02",
+      component: Onboarding02,
     },
     {
-      path: '/component/alert',
-      component: AlertPage
+      path: "/onboarding-03",
+      component: Onboarding03,
     },
     {
-      path: '/component/modal',
-      component: ModalPage
+      path: "/onboarding-04",
+      component: Onboarding04,
     },
     {
-      path: '/component/pagination',
-      component: PaginationPage
+      path: "/component/button",
+      component: ButtonPage,
     },
     {
-      path: '/component/tabs',
-      component: TabsPage
+      path: "/component/form",
+      component: FormPage,
     },
     {
-      path: '/component/breadcrumb',
-      component: BreadcrumbPage
+      path: "/component/dropdown",
+      component: DropdownPage,
     },
     {
-      path: '/component/badge',
-      component: BadgePage
+      path: "/component/alert",
+      component: AlertPage,
     },
     {
-      path: '/component/avatar',
-      component: AvatarPage
+      path: "/component/modal",
+      component: ModalPage,
     },
     {
-      path: '/component/tooltip',
-      component: TooltipPage
+      path: "/component/pagination",
+      component: PaginationPage,
     },
     {
-      path: '/component/accordion',
-      component: AccordionPage
+      path: "/component/tabs",
+      component: TabsPage,
     },
     {
-      path: '/component/icons',
-      component: IconsPage
+      path: "/component/breadcrumb",
+      component: BreadcrumbPage,
     },
     {
-      path: '/:pathMatch(.*)*',
-      component: PageNotFound
-    }
-  ]
-})
+      path: "/component/badge",
+      component: BadgePage,
+    },
+    {
+      path: "/component/avatar",
+      component: AvatarPage,
+    },
+    {
+      path: "/component/tooltip",
+      component: TooltipPage,
+    },
+    {
+      path: "/component/accordion",
+      component: AccordionPage,
+    },
+    {
+      path: "/component/icons",
+      component: IconsPage,
+    },
+    {
+      path: "/:pathMatch(.*)*",
+      component: PageNotFound,
+    },
+  ],
+});
 
-export default router
+export default router;
