@@ -1,7 +1,22 @@
+<script setup>
+import { toRefs, computed } from 'vue'
+import TabelData from './TabelData.vue'
+
+const props = defineProps({
+  page: Number,
+  perPage: Number,
+  industris: Array,
+  total: Number
+})
+
+const { page, perPage, industris, total } = toRefs(props)
+
+const adjustingIndex = computed(() => perPage.value * (page.value - 1))
+</script>
 <template>
   <div class="bg-white shadow-lg rounded-sm border border-slate-200 relative">
     <header class="px-5 py-4">
-      <h2 class="font-semibold text-slate-800">Data Industri <span class="text-slate-400 font-medium">67</span></h2>
+      <h2 class="font-semibold text-slate-800">Data Industri <span class="text-slate-400 font-medium">{{total}}</span></h2>
     </header>
     <div>
 
@@ -28,12 +43,12 @@
           </thead>
           <!-- Table body -->
           <tbody class="text-sm divide-y divide-slate-200">
-            <DataTable
+            <TabelData
               v-for="(industri, index) in industris"
               :key="industri.id"
               :value="industri.id"
               :industri="industri"
-              :index="index"
+              :index="index + adjustingIndex"
             />
           </tbody>
         </table>
@@ -42,64 +57,3 @@
     </div>
   </div>
 </template>
-
-<script>
-import { ref} from 'vue'
-import DataTable from './DataTable.vue'
-
-export default {
-  name: 'SettingIndustriTableHeader',
-  components: {
-    DataTable,
-  },  
-  props: ['selectedItems'],
-  setup() {
-    const industris = ref([
-      {
-        id: '0',
-        industri: 'Astronomic',
-      },
-      {
-        id: '1',
-        industri: 'Engineering',
-      },
-      {
-        id: '2',
-        industri: 'Medical'
-      },
-      {
-        id: '3',
-        industri: 'Astronomic'
-      },
-      {
-        id: '4',
-        industri: 'Engineering'
-      },
-      {
-        id: '5',
-        industri: 'Medical'
-      },
-      {
-        id: '6',
-        industri: 'Information & Technology'
-      },
-      {
-        id: '7',
-        industri: 'Engineering'
-      },
-      {
-        id: '8',
-        industri: 'Medical'
-      },
-      {
-        id: '9',
-        industri: 'Information & Technology'
-      }
-    ])
-
-    return {
-      industris,
-    }
-  }
-}
-</script>

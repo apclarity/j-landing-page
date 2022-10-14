@@ -1,10 +1,18 @@
+<script setup>
+import { toRefs } from "vue"
+const props = defineProps({
+  industri: Object,
+  index: Number
+})
+const { industri, index } = toRefs(props)
+</script>
 <template>
   <tr>
      <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-      <div class="font-medium text-sky-500">{{index+1}}</div>
+      <div class="font-medium text-black">{{index+1}}</div>
     </td> 
     <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-      <div class="font-medium text-sky-500">{{bidang.bidang}}</div>
+      <div class="font-medium text-black">{{industri.name}}</div>
     </td>   
     <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap w-px">
       <div class="space-x-1">
@@ -25,15 +33,3 @@
     </td>
   </tr>  
 </template>
-
-<script>
-export default {
-  name: 'SettingBidangTableData',
-  props: ['bidang','index'],
-  setup() {
-
-    return {
-    }
-  },
-}
-</script>

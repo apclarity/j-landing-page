@@ -10,10 +10,10 @@
 <template>
   <tr>
      <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-      <div class="font-medium text-sky-500">{{index+1}}</div>
+      <div class="font-medium text-black">{{index+1}}</div>
     </td> 
     <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-      <div class="font-medium text-sky-500">{{bidang.name}}</div>
+      <div class="font-medium text-black">{{bidang.name}}</div>
     </td>   
     <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap w-px">
       <div class="space-x-1">

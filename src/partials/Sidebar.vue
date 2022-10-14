@@ -1,13 +1,13 @@
 <template>
   <div>
     <!-- Sidebar backdrop (mobile only) -->
-    <div class="fixed inset-0 bg-slate-900 bg-opacity-30 z-40 lg:hidden lg:z-auto transition-opacity duration-200" :class="sidebarOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'" aria-hidden="true"></div>
+    <div class="fixed inset-0 bg-gray-100 bg-opacity-30 z-40 lg:hidden lg:z-auto transition-opacity duration-200" :class="sidebarOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'" aria-hidden="true"></div>
 
     <!-- Sidebar -->
     <div
       id="sidebar"
       ref="sidebar"
-      class="flex flex-col absolute z-40 left-0 top-0 lg:static lg:left-auto lg:top-auto lg:translate-x-0 h-screen overflow-y-scroll lg:overflow-y-auto no-scrollbar w-64 lg:w-20 lg:sidebar-expanded:!w-64 2xl:!w-64 shrink-0 bg-slate-800 p-4 transition-all duration-200 ease-in-out"
+      class="flex flex-col absolute z-40 left-0 top-0 lg:static lg:left-auto lg:top-auto lg:translate-x-0 h-screen overflow-y-scroll lg:overflow-y-auto no-scrollbar w-64 lg:w-20 lg:sidebar-expanded:!w-64 2xl:!w-64 shrink-0 drop-shadow-lg bg-white p-4 transition-all duration-200 ease-in-out"
       :class="sidebarOpen ? 'translate-x-0' : '-translate-x-64'"
     >
 
@@ -46,12 +46,11 @@
           </svg>
           
         </router-link> -->
-        <a href="/dashboard/main" class="">
+        <a href="/dashboard/main" class="mx-auto">
           <img
               src="/src/images/cropped-logo-jobhun-3.png" 
-              height="20"
               alt="Logo Jobhun"
-              class="mr-3 h-6 sm:h-9"
+              class="h-10 sm:h-8"
             />
         </a>
       </div>
@@ -60,26 +59,26 @@
       <div class="space-y-8">
         <!-- Pages group -->
         <div>
-          <h3 class="text-xs uppercase text-slate-500 font-semibold pl-3">
+          <!-- <h3 class="text-xs uppercase text-black font-semibold pl-3">
             <span class="hidden lg:block lg:sidebar-expanded:hidden 2xl:hidden text-center w-6" aria-hidden="true">•••</span>
             <span class="lg:hidden lg:sidebar-expanded:block 2xl:block">Pages</span>
-          </h3>
-          <ul class="mt-3">
+          </h3> -->
+          <ul>
             <!-- Dashboard -->
             <SidebarLinkGroup v-slot="parentLink" :activeCondition="currentRoute.fullPath === '/' || currentRoute.fullPath.includes('dashboard')">
-              <a class="block text-slate-200 hover:text-white truncate transition duration-150" :class="(currentRoute.fullPath === '/' || currentRoute.fullPath.includes('dashboard')) && 'hover:text-slate-200'" href="#0" @click.prevent="sidebarExpanded ? parentLink.handleClick() : sidebarExpanded = true">
+              <a class="block text-black hover:text-black-700 truncate transition duration-150" :class="(currentRoute.fullPath === '/' || currentRoute.fullPath.includes('dashboard')) && 'hover:text-emerald-500'" href="#0" @click.prevent="sidebarExpanded ? parentLink.handleClick() : sidebarExpanded = true">
                 <div class="flex items-center justify-between">
                   <div class="flex items-center">
                     <svg class="shrink-0 h-6 w-6" viewBox="0 0 24 24">
-                      <path class="fill-current text-slate-400" :class="(currentRoute.fullPath === '/' || currentRoute.fullPath.includes('dashboard')) && '!text-indigo-500'" d="M12 0C5.383 0 0 5.383 0 12s5.383 12 12 12 12-5.383 12-12S18.617 0 12 0z" />
-                      <path class="fill-current text-slate-600" :class="(currentRoute.fullPath === '/' || currentRoute.fullPath.includes('dashboard')) && 'text-indigo-600'" d="M12 3c-4.963 0-9 4.037-9 9s4.037 9 9 9 9-4.037 9-9-4.037-9-9-9z" />
-                      <path class="fill-current text-slate-400" :class="(currentRoute.fullPath === '/' || currentRoute.fullPath.includes('dashboard')) && 'text-indigo-200'" d="M12 15c-1.654 0-3-1.346-3-3 0-.462.113-.894.3-1.285L6 6l4.714 3.301A2.973 2.973 0 0112 9c1.654 0 3 1.346 3 3s-1.346 3-3 3z" />                      
+                      <path class="fill-current" :class="(currentRoute.fullPath === '/' || currentRoute.fullPath.includes('dashboard')) && '!text-gray-500'" d="M12 0C5.383 0 0 5.383 0 12s5.383 12 12 12 12-5.383 12-12S18.617 0 12 0z" />
+                      <path class="fill-current" :class="(currentRoute.fullPath === '/' || currentRoute.fullPath.includes('dashboard')) && 'text-black'" d="M12 3c-4.963 0-9 4.037-9 9s4.037 9 9 9 9-4.037 9-9-4.037-9-9-9z" />
+                      <path class="fill-current" :class="(currentRoute.fullPath === '/' || currentRoute.fullPath.includes('dashboard')) && 'text-white'" d="M12 15c-1.654 0-3-1.346-3-3 0-.462.113-.894.3-1.285L6 6l4.714 3.301A2.973 2.973 0 0112 9c1.654 0 3 1.346 3 3s-1.346 3-3 3z" />                      
                     </svg>
                     <span class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Dashboard</span>
                   </div>
                   <!-- Icon -->
                   <div class="flex shrink-0 ml-2">
-                    <svg class="w-3 h-3 shrink-0 ml-1 fill-current text-slate-400" :class="parentLink.expanded && 'rotate-180'" viewBox="0 0 12 12">
+                    <svg class="w-3 h-3 shrink-0 ml-1 fill-current text-black" :class="parentLink.expanded && 'rotate-180'" viewBox="0 0 12 12">
                       <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
                     </svg>
                   </div>
@@ -87,23 +86,23 @@
               </a>
               <div class="lg:hidden lg:sidebar-expanded:block 2xl:block">
                 <ul class="pl-9 mt-1" :class="!parentLink.expanded && 'hidden'">
-                  <router-link to="/" custom v-slot="{ href, navigate, isExactActive }">
+                  <router-link to="/dashboard/main" custom v-slot="{ href, navigate, isExactActive }">
                     <li class="mb-1 last:mb-0">
-                      <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate" :class="isExactActive && '!text-indigo-500'" :href="href" @click="navigate">
+                      <a class="block text-black hover:text-emerald-500 transition duration-150 truncate" :class="isExactActive && '!text-emerald-500'" :href="href" @click="navigate">
                         <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Main</span>
                       </a>
                     </li>
                   </router-link>
                   <router-link to="/dashboard/analytics" custom v-slot="{ href, navigate, isExactActive }">
                     <li class="mb-1 last:mb-0">
-                      <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate" :class="isExactActive && '!text-indigo-500'" :href="href" @click="navigate">
+                      <a class="block text-black hover:text-emerald-500 transition duration-150 truncate" :class="isExactActive && '!text-emerald-500'" :href="href" @click="navigate">
                         <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Analytics</span>
                       </a>
                     </li>
                   </router-link> 
                   <router-link to="/dashboard/fintech" custom v-slot="{ href, navigate, isExactActive }">
                     <li class="mb-1 last:mb-0">
-                      <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate" :class="isExactActive && '!text-indigo-500'" :href="href" @click="navigate">
+                      <a class="block text-black hover:text-emerald-500 transition duration-150 truncate" :class="isExactActive && '!text-emerald-500'" :href="href" @click="navigate">
                         <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Fintech</span>
                       </a>
                     </li>
@@ -481,20 +480,20 @@
             </router-link>            
             <!-- Settings -->
             <SidebarLinkGroup v-slot="parentLink" :activeCondition="currentRoute.fullPath.includes('settings')">
-              <a class="block text-slate-200 hover:text-white truncate transition duration-150" :class="currentRoute.fullPath.includes('settings') && 'hover:text-slate-200'" href="#0" @click.prevent="sidebarExpanded ? parentLink.handleClick() : sidebarExpanded = true">            
+              <a class="block text-black hover:text-black-700 truncate transition duration-150" :class="currentRoute.fullPath.includes('settings') && 'hover:text-emerald-500'" href="#0" @click.prevent="sidebarExpanded ? parentLink.handleClick() : sidebarExpanded = true">            
                 <div class="flex items-center justify-between">
                   <div class="flex items-center">
                     <svg class="shrink-0 h-6 w-6" viewBox="0 0 24 24">
-                      <path class="fill-current text-slate-600" :class="currentRoute.fullPath.includes('settings') && 'text-indigo-500'" d="M19.714 14.7l-7.007 7.007-1.414-1.414 7.007-7.007c-.195-.4-.298-.84-.3-1.286a3 3 0 113 3 2.969 2.969 0 01-1.286-.3z" />
-                      <path class="fill-current text-slate-400" :class="currentRoute.fullPath.includes('settings') && 'text-indigo-300'" d="M10.714 18.3c.4-.195.84-.298 1.286-.3a3 3 0 11-3 3c.002-.446.105-.885.3-1.286l-6.007-6.007 1.414-1.414 6.007 6.007z" />
-                      <path class="fill-current text-slate-600" :class="currentRoute.fullPath.includes('settings') && 'text-indigo-500'" d="M5.7 10.714c.195.4.298.84.3 1.286a3 3 0 11-3-3c.446.002.885.105 1.286.3l7.007-7.007 1.414 1.414L5.7 10.714z" />
-                      <path class="fill-current text-slate-400" :class="currentRoute.fullPath.includes('settings') && 'text-indigo-300'" d="M19.707 9.292a3.012 3.012 0 00-1.415 1.415L13.286 5.7c-.4.195-.84.298-1.286.3a3 3 0 113-3 2.969 2.969 0 01-.3 1.286l5.007 5.006z" />                      
+                      <path class="fill-current text-black" :class="currentRoute.fullPath.includes('settings') && 'text-gray-500'" d="M19.714 14.7l-7.007 7.007-1.414-1.414 7.007-7.007c-.195-.4-.298-.84-.3-1.286a3 3 0 113 3 2.969 2.969 0 01-1.286-.3z" />
+                      <path class="fill-current text-gray-500" :class="currentRoute.fullPath.includes('settings') && 'text-white'" d="M10.714 18.3c.4-.195.84-.298 1.286-.3a3 3 0 11-3 3c.002-.446.105-.885.3-1.286l-6.007-6.007 1.414-1.414 6.007 6.007z" />
+                      <path class="fill-current text-black" :class="currentRoute.fullPath.includes('settings') && 'text-black'" d="M5.7 10.714c.195.4.298.84.3 1.286a3 3 0 11-3-3c.446.002.885.105 1.286.3l7.007-7.007 1.414 1.414L5.7 10.714z" />
+                      <path class="fill-current text-gray-500" :class="currentRoute.fullPath.includes('settings') && 'text-white'" d="M19.707 9.292a3.012 3.012 0 00-1.415 1.415L13.286 5.7c-.4.195-.84.298-1.286.3a3 3 0 113-3 2.969 2.969 0 01-.3 1.286l5.007 5.006z" />                      
                     </svg>
                     <span class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Pengaturan</span>
                   </div>
                   <!-- Icon -->
                   <div class="flex shrink-0 ml-2">
-                    <svg class="w-3 h-3 shrink-0 ml-1 fill-current text-slate-400" :class="parentLink.expanded && 'rotate-180'" viewBox="0 0 12 12">
+                    <svg class="w-3 h-3 shrink-0 ml-1 fill-current text-black" :class="parentLink.expanded && 'rotate-180'" viewBox="0 0 12 12">
                       <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
                     </svg>
                   </div>
@@ -504,63 +503,63 @@
                 <ul class="pl-9 mt-1" :class="!parentLink.expanded && 'hidden'">
                   <router-link to="/settings/bidang/tabel" custom v-slot="{ href, navigate, isExactActive }">
                     <li class="mb-1 last:mb-0">
-                      <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate" :class="isExactActive && '!text-indigo-500'" :href="href" @click="navigate">
+                      <a class="block text-black hover:text-emerald-500 transition duration-150 truncate" :class="isExactActive && '!text-emerald-500'" :href="href" @click="navigate">
                         <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Bidang</span>
                       </a>
                     </li>
                   </router-link>
                   <router-link to="/settings/industri/tabel" custom v-slot="{ href, navigate, isExactActive }">
                     <li class="mb-1 last:mb-0">
-                      <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate" :class="isExactActive && '!text-indigo-500'" :href="href" @click="navigate">
+                      <a class="block text-black hover:text-emerald-500 transition duration-150 truncate" :class="isExactActive && '!text-emerald-500'" :href="href" @click="navigate">
                         <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Industri</span>
                       </a>
                     </li>
                   </router-link>
                   <router-link to="/settings/kelas/tabel" custom v-slot="{ href, navigate, isExactActive }">
                     <li class="mb-1 last:mb-0">
-                      <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate" :class="isExactActive && '!text-indigo-500'" :href="href" @click="navigate">
+                      <a class="block text-black hover:text-emerald-500 transition duration-150 truncate" :class="isExactActive && '!text-emerald-500'" :href="href" @click="navigate">
                         <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Kelas</span>
                       </a>
                     </li>
                   </router-link>
                   <router-link to="/settings/account" custom v-slot="{ href, navigate, isExactActive }">
                     <li class="mb-1 last:mb-0">
-                      <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate" :class="isExactActive && '!text-indigo-500'" :href="href" @click="navigate">
+                      <a class="block text-black hover:text-emerald-500 transition duration-150 truncate" :class="isExactActive && '!text-emerald-500'" :href="href" @click="navigate">
                         <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">My Account</span>
                       </a>
                     </li>
                   </router-link>
                   <router-link to="/settings/notifications" custom v-slot="{ href, navigate, isExactActive }">
                     <li class="mb-1 last:mb-0">
-                      <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate" :class="isExactActive && '!text-indigo-500'" :href="href" @click="navigate">
+                      <a class="block text-black hover:text-emerald-500 transition duration-150 truncate" :class="isExactActive && '!text-emerald-500'" :href="href" @click="navigate">
                         <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">My Notifications</span>
                       </a>
                     </li>
                   </router-link>
                   <router-link to="/settings/apps" custom v-slot="{ href, navigate, isExactActive }">
                     <li class="mb-1 last:mb-0">
-                      <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate" :class="isExactActive && '!text-indigo-500'" :href="href" @click="navigate">
+                      <a class="block text-black hover:text-emerald-500 transition duration-150 truncate" :class="isExactActive && '!text-emerald-500'" :href="href" @click="navigate">
                         <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Connected Apps</span>
                       </a>
                     </li>
                   </router-link>
                   <router-link to="/settings/plans" custom v-slot="{ href, navigate, isExactActive }">
                     <li class="mb-1 last:mb-0">
-                      <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate" :class="isExactActive && '!text-indigo-500'" :href="href" @click="navigate">
+                      <a class="block text-black hover:text-emerald-500 transition duration-150 truncate" :class="isExactActive && '!text-emerald-500'" :href="href" @click="navigate">
                         <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Plans</span>
                       </a>
                     </li>
                   </router-link>                       
                   <router-link to="/settings/billing" custom v-slot="{ href, navigate, isExactActive }">
                     <li class="mb-1 last:mb-0">
-                      <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate" :class="isExactActive && '!text-indigo-500'" :href="href" @click="navigate">
+                      <a class="block text-black hover:text-emerald-500 transition duration-150 truncate" :class="isExactActive && '!text-emerald-500'" :href="href" @click="navigate">
                         <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Billing & Invoices</span>
                       </a>
                     </li>
                   </router-link>
                   <router-link to="/settings/feedback" custom v-slot="{ href, navigate, isExactActive }">
                     <li class="mb-1 last:mb-0">
-                      <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate" :class="isExactActive && '!text-indigo-500'" :href="href" @click="navigate">
+                      <a class="block text-black hover:text-emerald-500 transition duration-150 truncate" :class="isExactActive && '!text-emerald-500'" :href="href" @click="navigate">
                         <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Give Feedback</span>
                       </a>
                     </li>

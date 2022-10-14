@@ -3,8 +3,8 @@ import { PAGINATION_LIMIT } from "../../../utils/Constants";
 import { isObjectEmpty } from "../../../utils/Helper";
 import api from "../../../utils/Api";
 
-export const useBidangStore = defineStore({
-  id: "bidang",
+export const useKelasStore = defineStore({
+  id: "kelas",
   state: () => ({
     data: [],
     pagination: {
@@ -13,7 +13,6 @@ export const useBidangStore = defineStore({
       page: 1,
       total: 0,
     },
-    bidang: {},
   }),
   getters: {
     getPaginationSearch(state) {
@@ -21,10 +20,10 @@ export const useBidangStore = defineStore({
     },
   },
   actions: {
-    async getBidangs() {
+    async getKelas() {
       try {
         const result = await api.get(
-          "/other/sector-index?search=" +
+          "/class/class-index?search" +
             this.pagination.search +
             "&per_page=" +
             this.pagination.per_page +
@@ -33,17 +32,6 @@ export const useBidangStore = defineStore({
         );
         this.data = result.data;
         this.pagination = result.pagination;
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    async create(bidang) {
-      await api.post("/other/sector-create", bidang);
-    },
-    async getById(payload) {
-      try {
-        const result = await api.get("/other/sector-detail/" + payload);
-        this.data = result.data;
       } catch (error) {
         console.log(error);
       }

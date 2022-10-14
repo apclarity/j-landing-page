@@ -6,6 +6,7 @@
   import SearchForm from '../../../components/SearchForm.vue'
   import TabelHeader from './TabelHeader.vue'
   import PaginationClassic from '../../../components/PaginationClassic.vue'
+  import ModalTambah from './ModalTambah.vue'
 
   const bidangStore = useBidangStore()
   const { data, pagination } = storeToRefs(bidangStore)
@@ -15,6 +16,34 @@
       page, search, per_page: perPage
     })
     await bidangStore.getBidangs()
+  }
+  
+  const namaBidang = ref("")
+
+  const saveButton = async () => {
+    const payload = {
+      name: namaBidang,
+      id: id
+    }
+
+    await bidangStore.create(payload)
+    namaBidang.value = ''
+  }
+
+  const search = ref("")
+
+  const searchClick = (searchString) => {
+    getData(1, searchString)
+  }
+
+  const changePage = (page) => {
+    getData(page, search)
+  }
+
+  const formOpenStatus = ref(false)
+  
+  const closeForm = () => {
+    formOpenStatus.value = false
   }
 
   onMounted(() => {
@@ -38,20 +67,25 @@
         <!-- Right: Actions  -->
         <div class="grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2">
           <!-- Search form -->
-          <SearchForm placeholder="Cari bidang" />
+          <SearchForm placeholder="Cari bidang" v-model="search" @searchClick="searchClick" />
           <!-- Create invoice button -->
-          <button class="btn bg-indigo-500 hover:bg-indigo-600 text-white">
+          <button class="btn bg-emerald-500 hover:bg-emerald-600 text-white" @click.stop="formOpenStatus = true">
             <svg class="w-4 h-4 fill-current opacity-50 shrink-0" viewBox="0 0 16 16">
               <path d="M15 7H9V1c0-.6-.4-1-1-1S7 .4 7 1v6H1c-.6 0-1 .4-1 1s.4 1 1 1h6v6c0 .6.4 1 1 1s1-.4 1-1V9h6c.6 0 1-.4 1-1s-.4-1-1-1z" />
             </svg>
             <span class="hidden xs:block ml-2">Tambah bidang</span>
+            <ModalTambah 
+              :formOpenStatus="formOpenStatus" 
+              @closeForm="closeForm" 
+              v-model="namaBidang"/>
           </button>
         </div>            
-
       </div>
 
       <!-- Table -->
-      <TabelHeader :bidangs="data"
+      <TabelHeader 
+        :bidangs="data"
+        :total="pagination.total"
         :page="pagination.page"
         :perPage="pagination.per_page" />
 
@@ -61,10 +95,10 @@
           :total="pagination.total"
           :perPage="pagination.per_page"
           :page="pagination.page"
-          @clickNav="getData"
+          @clickNav="changePage"
+          :disabled="disabledPrevious"
         />
       </div>          
-
     </div>
   </main>
 </template>

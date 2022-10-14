@@ -1,5 +1,5 @@
 <script setup>
-  import { computed } from 'vue'
+  import { computed, ref } from 'vue'
   const props = defineProps({
     total: Number,
     perPage: Number,
@@ -24,20 +24,34 @@
   const emit = defineEmits(['clickNav'])
 
   const clickNav = (page) => emit('clickNav', page)
+
+  const isFromOne = props.page == 1
+  const isToEqualTotal = to == props.total
+
 </script>
 <template>
   <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
     <nav class="mb-4 sm:mb-0 sm:order-1" role="navigation" aria-label="Navigation">
       <ul class="flex justify-center">
         <li class="ml-3 first:ml-0">
-          <a class="btn bg-white border-slate-200 text-slate-300 cursor-not-allowed" href="#0" :disabled="from == 1" @click="clickNav(props.page-1)">&lt;- Previous</a>
+          <button class="btn bg-white hover:border-slate-300 text-emerald-500" 
+            :class="{
+              'cursor-not-allowed border-slate-200 text-slate-300': props.page == 1,
+            }" 
+            :disabled="props.page == 1"
+            @click="clickNav(props.page-1)">&lt;- Previous</button>
         </li>
         <li class="ml-3 first:ml-0">
-          <a class="btn bg-white border-slate-200 hover:border-slate-300 text-indigo-500" href="#0" :disabled="to == props.total" @click="clickNav(props.page+1)">Next -&gt;</a>
+          <button class="btn bg-white border-slate-200 hover:border-slate-300 text-emerald-500" 
+            :class="{
+              'cursor-not-allowed border-slate-200 text-slate-300': to == props.total,
+            }" 
+            :disabled="to == props.total"
+            @click="clickNav(props.page+1)">Next -&gt;</button>
         </li>
       </ul>
     </nav>
-    <div class="text-sm text-slate-500 text-center sm:text-left">
+    <div class="text-sm text-black text-center sm:text-left">
       Showing <span class="font-medium text-slate-600">{{from}}</span> to <span class="font-medium text-slate-600">{{to}}</span> of <span class="font-medium text-slate-600">{{props.total}}</span> results
     </div>
   </div>

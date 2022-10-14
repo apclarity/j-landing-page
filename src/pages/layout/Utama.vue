@@ -2,7 +2,7 @@
   <div class="flex h-screen overflow-hidden">
 
     <!-- Sidebar -->
-    <Sidebar :sidebarOpen="sidebarOpen" @close-sidebar="sidebarOpen = false" v-show="session.name != 'null'"/>
+    <Sidebar :sidebarOpen="sidebarOpen" @close-sidebar="sidebarOpen = false" v-show="session.name != 'user'"/>
 
     <!-- Content area -->
     <div class="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">

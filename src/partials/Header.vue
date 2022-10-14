@@ -1,29 +1,32 @@
 <script setup>
-import { ref } from 'vue'
-import { isObjectEmpty } from '../utils/Helper'
+import { ref, computed } from 'vue'
+  import { isObjectEmpty } from '../utils/Helper'
+  import { useLayoutStore } from '../pages/layout/store'
 
-import SearchModal from '../components/ModalSearch.vue'
-import Notifications from '../components/DropdownNotifications.vue'
-import Help from '../components/DropdownHelp.vue'
-import UserMenu from '../components/DropdownProfile.vue'
+  import SearchModal from '../components/ModalSearch.vue'
+  import Notifications from '../components/DropdownNotifications.vue'
+  import Help from '../components/DropdownHelp.vue'
+  import UserMenu from '../components/DropdownProfile.vue'
 
-const props = defineProps({
-  sidebarOpen: Boolean,
-  session: Object,
-})
+  const props = defineProps({
+    sidebarOpen: Boolean,
+    session: Object,
+  })
 
-const searchModalOpen = ref(false)
-    
+  const searchModalOpen = ref(false)
+  const sidebarOpen = ref(false)
+
+  const layoutStore = useLayoutStore()
+  const session = computed(() => layoutStore.session)
 </script>
 
 <template>
-  <header class="sticky top-0 bg-white border-b border-slate-200 z-30">
+  <header class="sticky top-0 bg-white z-30 shadow-lg">
     <div class="px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16 -mb-px">
 
         <!-- Header: Left side -->
         <div class="flex">
-
           <!-- Hamburger button -->
           <button class="text-slate-500 hover:text-slate-600 lg:hidden" @click.stop="$emit('toggle-sidebar')" aria-controls="sidebar" :aria-expanded="sidebarOpen">
             <span class="sr-only">Open sidebar</span>
@@ -33,11 +36,13 @@ const searchModalOpen = ref(false)
               <rect x="4" y="17" width="16" height="2" />
             </svg>
           </button>
-
+          <a href="/homepage/index" class="">
+            <img src="/src/images/cropped-logo-jobhun-3.png" alt="Logo Jobhun" class="h-10 sm:h-8" />
+          </a>
         </div>
 
         <!-- Header: Right side -->
-        <div class="flex items-center space-x-3" v-show="!isObjectEmpty(session)">
+        <div class="flex items-center space-x-3">
           <div>
             <button
               class="w-8 h-8 flex items-center justify-center bg-slate-100 hover:bg-slate-200 transition duration-150 rounded-full ml-3"
@@ -53,14 +58,14 @@ const searchModalOpen = ref(false)
             </button>          
             <SearchModal id="search-modal" searchId="search" :modalOpen="searchModalOpen" @open-modal="searchModalOpen = true" @close-modal="searchModalOpen = false" />
           </div>
-          <Notifications align="right" />
-          <Help align="right" />
+          <div v-show="session.name != 'user'">
+            <Notifications align="right" />
+            <Help align="right" />
+          </div>
           <!-- Divider -->
           <hr class="w-px h-6 bg-slate-200" />
-          <UserMenu align="right" :session="session" />
-
+          <UserMenu align="right" />
         </div>
-
       </div>
     </div>
   </header>

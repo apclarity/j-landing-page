@@ -3,21 +3,20 @@
   import TabelData from './TabelData.vue'
 
   const props = defineProps({
+    total: Number,
     page: Number,
     perPage: Number,
-    bidangs: Array,
-    total: Number
+    kelass: Array,
   })
 
-  const { page, perPage, bidangs, total } = toRefs(props)
+  const { page, perPage, kelass, total } = toRefs(props)
 
-  const adjustingIndex = computed(()=> perPage.value * (page.value-1))
+  const adjustingIndex = computed(() => perPage.value * (page.value - 1))
 </script>
-
 <template>
   <div class="bg-white shadow-lg rounded-sm border border-slate-200 relative">
     <header class="px-5 py-4">
-      <h2 class="font-semibold text-slate-800">Data Bidang <span class="text-slate-400 font-medium">{{total}}</span></h2>
+      <h2 class="font-semibold text-slate-800">Data Kelas <span class="text-slate-400 font-medium">{{total}}</span></h2>
     </header>
     <div>
       <!-- Table -->
@@ -34,7 +33,10 @@
                 </div>
               </th>
               <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                <div class="font-semibold text-left">Bidang</div>
+                <div class="font-semibold text-left">Kelas</div>
+              </th>
+              <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
+                <div class="font-semibold text-left">Kode kelas</div>
               </th>
               <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
                 <div class="font-semibold text-left">Actions</div>
@@ -44,10 +46,11 @@
           <!-- Table body -->
           <tbody class="text-sm divide-y divide-slate-200">
             <TabelData
-              v-for="(bidang, index) in bidangs"
-              :key="bidang.id"
-              :value="bidang.id"
-              :bidang="bidang"
+              v-for="(kelas, index) in kelass"
+              :key="kelas.id"
+              :value="kelas.id"
+              :kelas="kelas"
+              :kode="kelas.kode"
               :index="index + adjustingIndex"
             />
           </tbody>

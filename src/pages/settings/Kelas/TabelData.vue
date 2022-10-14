@@ -1,10 +1,21 @@
+<script setup>
+  import { toRefs } from "vue"
+  const props = defineProps({
+    kelas: Object,
+    index: Number
+  })
+  const { kelas, index } = toRefs(props)
+</script>
 <template>
   <tr>
-     <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-      <div class="font-medium text-sky-500">{{index+1}}</div>
+    <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
+      <div class="font-medium text-black">{{index+1}}</div>
     </td> 
     <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-      <div class="font-medium text-sky-500">{{industri.industri}}</div>
+      <div class="font-medium text-black">{{kelas.name}}</div>
+    </td> 
+    <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
+      <div class="font-medium text-black">{{kelas.code}}</div>
     </td>   
     <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap w-px">
       <div class="space-x-1">
@@ -25,15 +36,3 @@
     </td>
   </tr>  
 </template>
-
-<script>
-export default {
-  name: 'SettingIndustriTableData',
-  props: ['industri','index'],
-  setup() {
-
-    return {
-    }
-  },
-}
-</script>
