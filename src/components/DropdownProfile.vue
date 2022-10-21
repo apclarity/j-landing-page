@@ -89,7 +89,7 @@
       @click.prevent="dropdownOpen = !dropdownOpen" :aria-expanded="dropdownOpen">
       <img class="w-8 h-8 rounded-full" :src="UserAvatar" width="32" height="32" alt="User" />
       <div class="flex items-center truncate">
-        <span class="truncate ml-2 text-sm font-medium text-black hover:text-emerald-500">Daftar/Masuk</span>
+        <span class="truncate ml-2 text-sm font-medium text-black hover:text-jobhunGreen duration-300">Daftar/Masuk</span>
         <svg class="w-3 h-3 shrink-0 ml-1 fill-current text-slate-400" viewBox="0 0 12 12">
           <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
         </svg>
@@ -111,11 +111,11 @@
               to="/settings/account" @click="dropdownOpen = false">Settings</router-link>
           </li> -->
           <li>
-            <router-link class="font-medium text-sm text-black hover:text-emerald-500 flex items-center py-1 px-3"
+            <router-link class="font-medium text-sm text-black hover:text-jobhunGreen duration-300 flex items-center py-1 px-3"
               to="/signin" @click="dropdownOpen = false">Masuk</router-link>
           </li>
           <li>
-            <router-link class="font-medium text-sm text-black hover:text-emerald-500 flex items-center py-1 px-3"
+            <router-link class="font-medium text-sm text-black hover:text-jobhunGreen duration-300 flex items-center py-1 px-3"
               to="/signin" @click="dropdownOpen = false">Daftar</router-link>
           </li>
         </ul>

@@ -1,5 +1,5 @@
 <template>
-  <div class="relative inline-flex w-full">
+  <div class="relative inline-flex ">
     <button
       ref="trigger"
       class="btn w-full justify-between min-w-44 bg-white border-slate-200 hover:border-slate-300 text-slate-500 hover:text-slate-600"
