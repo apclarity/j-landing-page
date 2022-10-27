@@ -23,14 +23,7 @@ export const useBidangStore = defineStore({
   actions: {
     async getBidangs() {
       try {
-        const result = await api.get(
-          "/other/sector-index?search=" +
-            this.pagination.search +
-            "&per_page=" +
-            this.pagination.per_page +
-            "&page=" +
-            this.pagination.page
-        );
+        const result = await api.get("/other/sector-index?search=", this.pagination);
         this.data = result.data;
         this.pagination = result.pagination;
       } catch (error) {

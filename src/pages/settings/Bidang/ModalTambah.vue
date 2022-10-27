@@ -6,20 +6,22 @@ const props = defineProps({
     formOpenStatus: {
         default: false
     },
-    namaBidang: String,
-    id: Number
+    item: {
+        type: Object,
+        default: {}
+    }
 })
 
-const { formOpenStatus, namaBidang, id } = toRefs(props)
+const { formOpenStatus, item } = toRefs(props)
 
-const emits = defineEmits(["closeForm", "saveButton", "update:namaBidang"])
+const emits = defineEmits(["closeForm", "saveButton"])
 
 const closeForm = ()=> {
     emits('closeForm')
 }
 
 const createBidang = () => {
-    emits('saveButton')
+    emits('saveButton', item.value)
 }
 </script>
 <template>
@@ -38,8 +40,7 @@ const createBidang = () => {
                             class="form-input w-full px-2 py-1 focus:border-emerald-500"
                             required
                             type="text"  
-                            :value="namaBidang"
-                            @input="$emit('update:namaBidang', $event.target.value)" />
+                            v-model="item.name" />
                     </div>
                     <button type="submit"
                         class="btn-sm bg-emerald-500 hover:bg-emerald-600 text-white whitespace-nowrap">Tambah</button>

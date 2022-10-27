@@ -1,3 +1,25 @@
+<script setup>
+  import {ref} from "vue"
+  import {useSigninStore} from "./store"
+  import {useRouter} from "vue-router"
+  import { MSG_WELCOME } from "./constant"
+
+  const router = useRouter()
+  const signinStore = useSigninStore()
+
+  const auth = ref({
+    email: "",
+    password: ""
+  })
+
+  const login = async () => {
+    if(auth.value.email != "" && auth.value.password != ""){
+      if(await signinStore.login(auth.value)){
+        router.push('/homepage/index')
+      }
+    }
+  }
+</script>
 <template>
   <main class="bg-white">
 
@@ -32,24 +54,24 @@
           </div>          
 
           <div class="max-w-sm mx-auto px-4 py-8">
-            <h1 class="text-3xl text-slate-800 font-bold mb-6">Welcome back! ✨</h1>
+            <h1 class="text-3xl text-slate-800 font-bold mb-6">{{MSG_WELCOME}} ✨</h1>
             <!-- Form -->
-            <form>
+            <form @submit.prevent="">
               <div class="space-y-4">
                 <div>
                   <label class="block text-sm font-medium mb-1" for="email">Email Address</label>
-                  <input id="email" class="form-input w-full" type="email" />
+                  <input id="email" class="form-input w-full" type="email" v-model="auth.email"/>
                 </div>
                 <div>
                   <label class="block text-sm font-medium mb-1" for="password">Password</label>
-                  <input id="password" class="form-input w-full" type="password" autoComplete="on" />
+                  <input id="password" class="form-input w-full" type="password" autoComplete="on" v-model="auth.password"/>
                 </div>
               </div>
               <div class="flex items-center justify-between mt-6">
                 <div class="mr-1">
                   <router-link class="text-sm underline hover:no-underline" to="/reset-password">Forgot Password?</router-link>
                 </div>
-                <router-link class="btn bg-indigo-500 hover:bg-indigo-600 text-white ml-3" to="/">Sign In</router-link>
+                <a class="btn bg-indigo-500 hover:bg-indigo-600 text-white ml-3" @click="login">Sign In</a>
               </div>
             </form>
             <!-- Footer -->
@@ -76,18 +98,11 @@
 
       <!-- Image -->
       <div class="hidden md:block absolute top-0 bottom-0 right-0 md:w-1/2" aria-hidden="true">
-        <img class="object-cover object-center w-full h-full" src="../images/auth-image.jpg" width="760" height="1024" alt="Authentication" />
-        <img class="absolute top-1/4 left-0 -translate-x-1/2 ml-8 hidden lg:block" src="../images/auth-decoration.png" width="218" height="224" alt="Authentication decoration" />
+        <img class="object-cover object-center w-full h-full" src="../../images/auth-image.jpg" width="760" height="1024" alt="Authentication" />
+        <img class="absolute top-1/4 left-0 -translate-x-1/2 ml-8 hidden lg:block" src="../../images/auth-decoration.png" width="218" height="224" alt="Authentication decoration" />
       </div>
 
     </div>
 
   </main>
 </template>
-
-<script>
-
-export default {
-  name: 'Signin',
-}
-</script>

@@ -11,25 +11,15 @@
   const bidangStore = useBidangStore()
   const { data, pagination } = storeToRefs(bidangStore)
 
+  //===== Get Data =======================================================
   const getData = async (page=1, search="", perPage=PAGINATION_LIMIT) => {
     bidangStore.setPagination({
       page, search, per_page: perPage
     })
     await bidangStore.getBidangs()
   }
-  
-  const namaBidang = ref("")
 
-  const saveButton = async () => {
-    const payload = {
-      name: namaBidang,
-      id: id
-    }
-
-    await bidangStore.create(payload)
-    namaBidang.value = ''
-  }
-
+  //===== Search & Pagination ============================================
   const search = ref("")
 
   const searchClick = (searchString) => {
@@ -40,12 +30,19 @@
     getData(page, search)
   }
 
+  //===== Create Data ====================================================
   const formOpenStatus = ref(false)
-  
+
+  const saveButton = async (payload={}) => {
+    formOpenStatus.value = false
+    await bidangStore.create(payload)
+  }
+
   const closeForm = () => {
     formOpenStatus.value = false
   }
 
+  //===== Events ========================================================
   onMounted(() => {
     getData()
   })
@@ -75,9 +72,10 @@
             </svg>
             <span class="hidden xs:block ml-2">Tambah bidang</span>
             <ModalTambah 
-              :formOpenStatus="formOpenStatus" 
-              @closeForm="closeForm" 
-              v-model="namaBidang"/>
+              :formOpenStatus="formOpenStatus"
+              @saveButton="saveButton"
+              @closeForm="closeForm"
+              />
           </button>
         </div>            
       </div>
@@ -96,7 +94,6 @@
           :perPage="pagination.per_page"
           :page="pagination.page"
           @clickNav="changePage"
-          :disabled="disabledPrevious"
         />
       </div>          
     </div>
