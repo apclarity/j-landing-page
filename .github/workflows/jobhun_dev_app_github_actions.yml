@@ -1,0 +1,24 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ staging ]
+
+jobs:
+
+  build:
+    name: Deployment Dev
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - name: SSH Remote
+        uses: garygrossgarten/github-action-ssh@release
+        with:
+          host: ${{ secrets.EC2_HOST_DNS }}
+          username: ${{ secrets.EC2_SSH_USERNAME }}
+          privateKey: ${{ secrets.EC2_SSH_KEY }}
+          command: |
+            cd /var/www/html/spapendaftaran
+            git pull origin development
+            npm install
+            npm run build
