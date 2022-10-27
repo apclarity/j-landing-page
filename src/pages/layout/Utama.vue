@@ -2,7 +2,7 @@
   <div class="flex h-screen overflow-hidden">
 
     <!-- Sidebar -->
-    <Sidebar :sidebarOpen="sidebarOpen" @close-sidebar="sidebarOpen = false" v-show="session.name != 'user'"/>
+    <Sidebar :sidebarOpen="sidebarOpen" @close-sidebar="sidebarOpen = false" v-show="session.first_name"/>
 
     <!-- Content area -->
     <div class="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
@@ -25,7 +25,7 @@
   import Sidebar from '../../partials/Sidebar.vue'
   import Header from '../../partials/Header.vue'
 
-  const sidebarOpen = ref(false)
+  const sidebarOpen = ref(true)
   
   const layoutStore = useLayoutStore()
   const session = computed(() => layoutStore.session)

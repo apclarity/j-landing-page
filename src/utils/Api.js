@@ -1,16 +1,27 @@
 import axios from "axios";
+import _ from "lodash"
 import router from "../router";
 import { useLayoutStore } from "../pages/layout/store";
 
-const api = axios.create({
-  //baseURL: 'https://smartit-32ba08c9.localhost.run/pendaftaran-api/public/api',
-  //baseURL: 'http://localhost:9010/api/v1',
-  // baseURL: "http://192.168.100.160:9010/api/v1",
-  baseURL: "https://dev.apijobhun.com/api/v1",
+const apiAxios = axios.create({
+  baseURL: import.meta.env.VITE_API_URL,
 });
 
-api.defaults.timeout = 10000;
-api.interceptors.request.use(
+const isDev = import.meta.env.VITE_APP_ENV == "dev"
+
+const serializeUrlQuery = function(obj) {
+  if(_.isEmpty(obj))
+    return ""
+  var str = [];
+  for (var p in obj)
+    if (obj.hasOwnProperty(p)) {
+      str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+    }
+  return "?" + str.join("&");
+}
+
+apiAxios.defaults.timeout = 10000;
+apiAxios.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
     config.headers.Authorization = token ? `Bearer ${token}` : "";
@@ -20,16 +31,16 @@ api.interceptors.request.use(
     return Promise.reject(error);
   }
 );
-api.interceptors.response.use(
+apiAxios.interceptors.response.use(
   (response) => {
-    const layout = useLayoutStore()
+    const layoutStore = useLayoutStore()
     if (response.status >= 200 || response.status < 300) {
       if (
         response.config.method == "post" ||
         response.config.method == "put" ||
         response.config.method == "delete"
       ) {
-        layout.setDashboardLayouts({
+        layoutStore.setDashboardLayouts({
           status: response.data.success,
           visible: true,
           description: response.data.message,
@@ -41,8 +52,8 @@ api.interceptors.response.use(
     }
   },
   (error) => {
+    console.log(error)
     const layout = useLayoutStore()
-    console.log(error.response.data);
     let message = error.response.data.message;
     if (error.response.data.statusCode == 401) {
       message = "Sesi kamu sudah habis, silakan login ulang";
@@ -59,5 +70,60 @@ api.interceptors.response.use(
     return Promise.reject(error.response.data);
   }
 );
+
+export const api = {
+  get: function(url="", payload={}){
+    return new Promise(async(resolve, reject)=>{
+      try {
+        let res = await apiAxios.get(url, serializeUrlQuery(payload))
+        resolve(res)
+      } catch (error) {
+        if(isDev){
+          console.log("ERROR GET API: " + url + ", error:", error)
+        }
+        reject(false)
+      }
+    })
+  },
+  post: function(url="", payload={}){
+    return new Promise(async(resolve, reject)=>{
+      try {
+        let res = await apiAxios.post(url, payload)
+        resolve(res)
+      } catch (error) {
+        if(isDev){
+          console.log("ERROR POST API: " + url + ", error:", error)
+        }
+        reject(false)
+      }
+    })
+  },
+  put: function(url="", payload={}){
+    return new Promise(async(resolve, reject)=>{
+      try {
+        let res = apiAxios.put(url, payload)
+        resolve(res)
+      } catch (error) {
+        if(isDev){
+          console.log("ERROR PUT API: " + url + ", error:", error)
+        }
+        reject(false)
+      }
+    })
+  },
+  delete: function(url=""){
+    return new Promise(async(resolve, reject)=>{
+      try {
+        let res = apiAxios.delete(url, payload)
+        resolve(res)
+      } catch (error) {
+        if(isDev){
+          console.log("ERROR DELETE API: " + url + ", error:", error)
+        }
+        reject(false)
+      }
+    })
+  }
+}
 
 export default api;
