@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue'
+  import { ref, computed } from 'vue'
   import { isObjectEmpty } from '../utils/Helper'
   import { useLayoutStore } from '../pages/layout/store'
 
@@ -7,6 +7,7 @@ import { ref, computed } from 'vue'
   import Notifications from '../components/DropdownNotifications.vue'
   import Help from '../components/DropdownHelp.vue'
   import UserMenu from '../components/DropdownProfile.vue'
+  import MenuNavbar from '../pages/Homepage/MenuNavbar.vue'
 
   const props = defineProps({
     sidebarOpen: Boolean,
@@ -36,15 +37,18 @@ import { ref, computed } from 'vue'
               <rect x="4" y="17" width="16" height="2" />
             </svg>
           </button>
-          <a href="/homepage/index" class="">
-            <img src="/src/images/cropped-logo-jobhun-3.png" alt="Logo Jobhun" class="h-10 sm:h-8" />
-          </a>
+          <div v-show="session.name != ''">
+            <a href="/homepage/index" class="">
+              <img src="/src/images/cropped-logo-jobhun-3.png" alt="Logo Jobhun" class="h-10 sm:h-8" />
+            </a>
+          </div>
         </div>
 
         <!-- Header: Right side -->
         <div class="flex items-center space-x-3">
           <div>
-            <button
+            <MenuNavbar />
+            <!-- <button
               class="w-8 h-8 flex items-center justify-center bg-slate-100 hover:bg-slate-200 transition duration-150 rounded-full ml-3"
               :class="{ 'bg-slate-200': searchModalOpen }"
               @click.stop="searchModalOpen = true"
@@ -56,9 +60,9 @@ import { ref, computed } from 'vue'
                 <path class="fill-current text-slate-400" d="M15.707 14.293L13.314 11.9a8.019 8.019 0 01-1.414 1.414l2.393 2.393a.997.997 0 001.414 0 .999.999 0 000-1.414z" />
               </svg>
             </button>          
-            <SearchModal id="search-modal" searchId="search" :modalOpen="searchModalOpen" @open-modal="searchModalOpen = true" @close-modal="searchModalOpen = false" />
+            <SearchModal id="search-modal" searchId="search" :modalOpen="searchModalOpen" @open-modal="searchModalOpen = true" @close-modal="searchModalOpen = false" /> -->
           </div>
-          <div v-show="session.name != 'user'">
+          <div v-if="session.name != 'user'">
             <Notifications align="right" />
             <Help align="right" />
           </div>
