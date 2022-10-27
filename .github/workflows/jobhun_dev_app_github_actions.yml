@@ -19,6 +19,6 @@ jobs:
           privateKey: ${{ secrets.EC2_SSH_KEY }}
           command: |
             cd /var/www/html/spapendaftaran
-            git pull origin development
+            git pull origin staging
             npm install
             npm run build
