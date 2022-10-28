@@ -79,14 +79,14 @@
         <div class="lg:w-1/2 my-auto">
             <div class="w-full max-w-1xl mx-auto">
                 <div class="mb-5">
-                    <h1 class="xl:text-7xl md:text-5xl text-3xl text-black font-bold">
+                    <h1 class="xl:text-5xl md:text-4xl text-2xl text-black font-bold">
                         Temukan Experts Terbaik untuk Berbagai Kebutuhan
                     </h1>
                 </div>
             </div>
             <div class="w-full max-w-1xl">
                 <div class="mb-5">
-                    <p class="xl:text-4xl md:text-xl text-3lg text-black">
+                    <p class="xl:text-2xl md:text-lg text-2lg text-black">
                         Di Jobhun, kamu bisa menemukan experts terbaik untuk kebutuhan konsultasi privat/grup, pelatihan,
                         narasumber acara,
                         hingga proyek lepas.

@@ -1,5 +1,6 @@
 <template>
   <div class="relative inline-flex">
+    <hr class="w-px h-6 bg-slate-200" />
     <button
       ref="trigger"
       class="w-8 h-8 flex items-center justify-center bg-slate-100 hover:bg-slate-200 transition duration-150 rounded-full"

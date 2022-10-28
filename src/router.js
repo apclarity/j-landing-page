@@ -69,6 +69,7 @@ import SettingsBidangTabel from "./pages/settings/Bidang/Tabel.vue";
 import SettingsIndustriTabel from "./pages/settings/Industri/Tabel.vue";
 import SettingsKelasTabel from "./pages/settings/Kelas/Tabel.vue";
 import Homepage from "./pages/Homepage/Index.vue";
+import DetailExpert from "./pages/Experts/DetailExpert/Index.vue";
 
 const routerHistory = createWebHistory();
 
@@ -102,6 +103,10 @@ const router = createRouter({
         {
           path: "/settings/kelas/tabel",
           component: SettingsKelasTabel,
+        },
+        {
+          path: "/experts/detailexpert/:id",
+          component: DetailExpert,
         },
         {
           path: "/component/modal",
