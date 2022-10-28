@@ -16,13 +16,11 @@
   const layoutStore = useLayoutStore()
   const session = computed(() => layoutStore.session)
 
-  // close on click outside
   const clickHandler = ({ target }) => {
     if (!dropdownOpen.value || dropdown.value.contains(target) || trigger.value.contains(target)) return
     dropdownOpen.value = false
   }
 
-  // close if the esc key is pressed
   const keyHandler = ({ keyCode }) => {
     if (!dropdownOpen.value || keyCode !== 27) return
     dropdownOpen.value = false
@@ -101,15 +99,7 @@
       <div v-show="dropdownOpen"
         class="origin-top-right z-10 absolute top-full min-w-44 bg-white border border-slate-200 py-1.5 rounded shadow-lg overflow-hidden mt-1"
         :class="align === 'right' ? 'right-0' : 'left-0'">
-        <!-- <div class="pt-0.5 pb-2 px-3 mb-1 border-b border-slate-200">
-          <div class="font-medium text-slate-800">test</div>
-          <div class="text-xs text-slate-500 italic">Administrator</div>
-        </div> -->
         <ul ref="dropdown" @focusin="dropdownOpen = true" @focusout="dropdownOpen = false">
-          <!-- <li>
-            <router-link class="font-medium text-sm text-indigo-500 hover:text-indigo-600 flex items-center py-1 px-3"
-              to="/settings/account" @click="dropdownOpen = false">Settings</router-link>
-          </li> -->
           <li>
             <router-link class="font-medium text-sm text-black hover:text-jobhunGreen duration-300 flex items-center py-1 px-3"
               to="/signin" @click="dropdownOpen = false">Masuk</router-link>

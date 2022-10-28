@@ -12,6 +12,7 @@
 
       <main>
         <router-view />
+        <Footer/>
       </main>
 
     </div> 
@@ -24,6 +25,7 @@
   import { useLayoutStore } from './store'
   import Sidebar from '../../partials/Sidebar.vue'
   import Header from '../../partials/Header.vue'
+  import Footer from '../../pages/layout/Footer.vue'
 
   const sidebarOpen = ref(false)
   

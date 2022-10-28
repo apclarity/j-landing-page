@@ -1,5 +1,10 @@
 <script setup>
+    import { ref } from 'vue'
+    import { useRouter } from 'vue-router'
     import Rating from './Ratings.vue'  
+    import ModalPreview from './ModalLayananExpert.vue'
+
+    const router = useRouter()
     
     const props = defineProps({
         item: {
@@ -9,6 +14,12 @@
     })
 
     const { item } = props
+
+    const isPreviewMentor = ref(false)
+
+    const openPreviewMentor = () => {
+        isPreviewMentor.value = true
+    }
 </script>
 <template>
     <div
@@ -22,10 +33,10 @@
                 <div class="grow">
                     <!-- Header -->
                     <header class="mb-3">
-                        <a href="#">
-                            <p class="text-lg text-slate-800 font-semibold truncate">{{item.title}}
-                            </p>
+                        <a class="text-lg text-slate-800 font-semibold truncate" href="#" @click="openPreviewMentor">
+                            {{item.title}}
                         </a>
+                        <ModalPreview :isPreviewMentor="isPreviewMentor" :expertID="item.id" @close-modal="isPreviewMentor = false" />
                     </header>
                     <!-- Features list -->
                     <ul class="text-sm space-y-2 mb-5">
@@ -41,18 +52,23 @@
                                 <path
                                     d="M15 15V5l-5-5H2c-.6 0-1 .4-1 1v14c0 .6.4 1 1 1h12c.6 0 1-.4 1-1zM3 2h6v4h4v8H3V2z" />
                             </svg>
-                            <div>{{item.bidang}}</div>
+                            <router-link to="google.com" class=" space-x-1 line-clamp-1 hover:line-clamp-none">
+                                <div v-for="service in item.services" :key="service"
+                                    class="inline-flex text-sm font-medium bg-emerald-100 text-emerald-600 rounded-md text-center px-2 py-0.5 my-1">
+                                    {{service.title}}
+                                </div>
+                            </router-link>
                         </li>
                         <li class="flex items-center">
                             <svg class="w-4 h-4 fill-current text-slate-400 shrink-0 mr-3" viewBox="0 0 16 16">
                                 <path
                                     d="M13 7h2v6a1 1 0 01-1 1H4v2l-4-3 4-3v2h9V7zM3 9H1V3a1 1 0 011-1h10V0l4 3-4 3V4H3v5z" />
                             </svg>
-                            <div class=" space-x-1 line-clamp-1 hover:line-clamp-none">
+                            <router-link to="google.com" class=" space-x-1 line-clamp-1 hover:line-clamp-none">
                                 <div v-for="service in item.services" :key="service" class="inline-flex text-sm font-medium bg-emerald-100 text-emerald-600 rounded-md text-center px-2 py-0.5 my-1">
                                     {{service.title}}
                                 </div>
-                            </div>
+                            </router-link>
                         </li>
                     </ul>
                     <!-- Rating -->

@@ -26,12 +26,9 @@
               <NotificationsPanel />
             </div>
           </div>
-
         </div>        
       </main>
-
     </div> 
-
   </div>
 </template>
 
