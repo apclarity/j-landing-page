@@ -13,7 +13,7 @@
                 <CardMentors/>
                 <Carousel/>
                 <StickyChat />
-                <Footer/>
+                <Footer />
             </div>
         </div>
 </template>

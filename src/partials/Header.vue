@@ -1,6 +1,6 @@
 <script setup>
   import { ref, computed } from 'vue'
-  import { isObjectEmpty } from '../utils/Helper'
+  import { isVariableEmpty } from '../utils/Helper'
   import { useLayoutStore } from '../pages/layout/store'
 
   import SearchModal from '../components/ModalSearch.vue'
@@ -14,7 +14,7 @@
     session: Object,
   })
 
-  const searchModalOpen = ref(false)
+  //const searchModalOpen = ref(false)
   const sidebarOpen = ref(false)
 
   const layoutStore = useLayoutStore()
@@ -62,7 +62,7 @@
             </button>          
             <SearchModal id="search-modal" searchId="search" :modalOpen="searchModalOpen" @open-modal="searchModalOpen = true" @close-modal="searchModalOpen = false" /> -->
           </div>
-          <div v-if="session.name != 'user'">
+          <div v-if="!isVariableEmpty(session.first_name)">
             <Notifications align="right" />
             <Help align="right" />
           </div>

@@ -1,6 +1,7 @@
 import axios from "axios";
 import _ from "lodash"
 import router from "../router";
+import { useToast } from "vue-toastification";
 import { useLayoutStore } from "../pages/layout/store";
 
 const apiAxios = axios.create({
@@ -40,10 +41,9 @@ apiAxios.interceptors.response.use(
         response.config.method == "put" ||
         response.config.method == "delete"
       ) {
-        layoutStore.setDashboardLayouts({
-          status: response.data.success,
-          visible: true,
-          description: response.data.message,
+        const toast = useToast();
+        toast.success(response.data.message, {
+          timeout: 2000
         });
       }
       return Promise.resolve(response.data.data);
@@ -52,20 +52,14 @@ apiAxios.interceptors.response.use(
     }
   },
   (error) => {
-    console.log(error)
-    const layout = useLayoutStore()
     let message = error.response.data.message;
-    if (error.response.data.statusCode == 401) {
-      message = "Sesi kamu sudah habis, silakan login ulang";
-    }
-    layout.setDashboardLayouts({
-      status: error.response.data.success,
-      visible: true,
-      description: message,
+    const toast = useToast();
+    toast.error(message, {
+      timeout: 2000
     });
     if (error.response.data.statusCode == 401) {
       localStorage.removeItem("token");
-      router.push("/login");
+      router.push("/signin");
     }
     return Promise.reject(error.response.data);
   }

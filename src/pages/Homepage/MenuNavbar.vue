@@ -75,8 +75,7 @@
                     enter-from-class="opacity-0 -translate-y-2" enter-to-class="opacity-100 translate-y-0"
                     leave-active-class="transition ease-out duration-200" leave-from-class="opacity-100" leave-to-class="opacity-0">
                     <div v-show="dropdownOpen"
-                        class="origin-top-right z-10 absolute top-full min-w-44 bg-white border border-slate-200 py-1.5 rounded shadow-lg overflow-hidden mt-1 duration-300"
-                        :class="align === 'right' ? 'right-0' : 'left-0'">
+                        class="origin-top-right z-10 absolute top-full min-w-44 bg-white border border-slate-200 py-1.5 rounded shadow-lg overflow-hidden mt-1 duration-300">
                         <ul ref="dropdown" @focusin="dropdownOpen = true" @focusout="dropdownOpen = false" v-for="(menuLayanan, i) in menuLayanans" :key="i">
                             <li>
                                 <router-link
