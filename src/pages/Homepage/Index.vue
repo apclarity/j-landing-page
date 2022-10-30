@@ -3,7 +3,6 @@
     import Banner from './Banner.vue'
     import CardMentors from './CardMentors.vue'
     import Carousel from './Carousel.vue'
-    import Footer from './Footer.vue'
     import StickyChat from './StickyChat.vue'
 </script>
 <template>
@@ -12,8 +11,7 @@
                 <Banner/>
                 <CardMentors/>
                 <Carousel/>
-                <StickyChat />
-                <Footer />
+                <StickyChat/>
             </div>
         </div>
 </template>
