@@ -2,6 +2,10 @@
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import ModalBasic from '../../components/ModalBasic.vue'
+import IconKonsultasi from '../../partials/icons/icon-konsultasi.vue'
+import IconPelatihan from '../../partials/icons/icon-pelatihan.vue'
+import IconUndangExpert from '../../partials/icons/icon-undang-expert.vue'
+import IconRekrutExpert from '../../partials/icons/icon-rekrut-expert.vue'
 
 
 const router = useRouter()
@@ -56,9 +60,15 @@ const scrollTo = (id) => {
                         <li v-for="layanan in itemsModal" :key="layanan">
                             <button @click="scrollTo(layanan.id)" 
                                 class="w-full h-full text-left py-3 px-4 rounded bg-white border-2 border-gray-300 hover:border-jobhunGreen shadow-sm duration-150 ease-in-out">
-                                <div class="flex items-center">
-                                    <div class="w-4 h-4 border-4 border-gray-500 rounded-full mr-3"></div>
-                                    <div class="grow">
+                                <div class="items-center flex">
+                                    <!-- <div class="w-4 h-4 border-4 border-gray-500 rounded-full mr-3"></div> -->
+                                    <div class="flex-none w-1/6 mx-2">
+                                        <IconKonsultasi height="30px" class="mx-5" v-if="layanan.title == 'Konsultasi'" />
+                                        <IconPelatihan height="30px" class="mx-5" v-if="layanan.title == 'Pelatihan'" />
+                                        <IconUndangExpert height="30px" class="mx-5" v-if="layanan.title == 'Undang Expert'" />
+                                        <IconRekrutExpert height="30px" class="mx-5" v-if="layanan.title == 'Rekrut Expert'" />
+                                    </div>
+                                    <div class="shrink w-full">
                                         <div class="flex flex-wrap items-center justify-between mb-0.5">
                                             <span class="font-bold text-black text-md">
                                                 {{layanan.title}}
@@ -72,13 +82,13 @@ const scrollTo = (id) => {
                 </div>
             </div>
             <!-- Modal footer -->
-            <div class="px-5 py-4">
+            <!-- <div class="px-5 py-4">
                 <div class="flex flex-wrap justify-end space-x-2">
                     <button class="btn-sm border-slate-200 hover:border-slate-300 text-slate-600"
                         @click.stop="closeModal()">Cancel</button>
                     <button class="btn-sm bg-indigo-500 hover:bg-indigo-600 text-white">Change Plan</button>
                 </div>
-            </div>
+            </div> -->
         </ModalBasic>
         <!-- End -->
     </div>
