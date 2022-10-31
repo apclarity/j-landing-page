@@ -188,5 +188,32 @@ export const getObjectValue = (object, defaultValue = {}) => {
   return object
 }
 
+export const isVariableEmpty = (payload) => {
+  switch (typeof payload) {
+    case "string":
+      if(payload == ""){
+        return true
+      }
+      break;
+    case "number":
+      if(payload == 0){
+        return true
+      }
+      break;
+    case "object":
+      return isObjectEmpty(payload)
+    case "undefined":
+      return true
+    default:
+      if(Array.isArray(payload)){
+        if(payload.length == 0){
+          return true
+        }
+      }
+      break
+  }
+  return false
+}
+
 export const STATUS = ["Baru", "Diterima", "Dipublikasikan", "Ditolak"];
 export const ROLES = ["Public","Administrator", "User"];
