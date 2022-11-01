@@ -187,7 +187,7 @@
 <template>
     <div class="">
         <div class="px-0 lg:px-8 py-8 w-full max-w-9xl mx-auto">
-            <h1 class="text-2xl md:text-3xl text-slate-800 text-center font-bold">Rekomendasi mentor unggulan</h1>
+            <h1 class="text-2xl md:text-3xl text-slate-800 text-center font-bold">Rekomendasi expert unggulan</h1>
             <div class="grid grid-cols-1 xl:grid-cols-4 md:grid-cols-2 gap-6 mt-10 px-28">
                 <div v-for="(mentor, i) in mentors" :key="i">
                     <CardMentor :item="mentor" />
