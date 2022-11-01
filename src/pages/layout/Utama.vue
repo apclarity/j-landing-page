@@ -31,4 +31,6 @@
   
   const layoutStore = useLayoutStore()
   const session = computed(() => layoutStore.session)
+
+  layoutStore.getSession()
 </script>

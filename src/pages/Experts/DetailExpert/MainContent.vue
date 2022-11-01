@@ -34,14 +34,14 @@
     <div class="lg:px-60 px-10 mb-10">
         <div class="-mt-32 mb-6 sm:mb-3">
             <div class="flex flex-col items-center sm:flex-row sm:justify-between sm:items-end">
-                <div class="inline-flex -ml-1 -mt-1 mb-4 sm:mb-0">
-                    <img class="rounded-full border-4 border-white" :src="dataExpert.imgProfile" width="200"/>
+                <div class="inline-flex -mt-1 mb-4 sm:mb-0">
+                    <img class="rounded-full ring-8 ring-white" :src="dataExpert.imgProfile" width="200"/>
                 </div>
             </div>
         </div>
         <header class="mb-6">
             <div class="grid grid-flow-row md:flex">
-                <div class="mb-2 flex-none md:w-1/4 w1/2">
+                <div class="mb-2 flex-none md:w-1/4">
                     <h1 class="text-2xl text-slate-800 font-bold">{{ dataExpert.name }}</h1>
                 </div>
                 <div class="shrink w-full">

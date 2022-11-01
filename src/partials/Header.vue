@@ -1,6 +1,6 @@
 <script setup>
   import { ref, computed } from 'vue'
-  import { isVariableEmpty } from '../utils/Helper'
+  import { isObjectEmpty, isVariableEmpty } from '../utils/Helper'
   import { useLayoutStore } from '../pages/layout/store'
 
   import SearchModal from '../components/ModalSearch.vue'
@@ -14,11 +14,45 @@
     session: Object,
   })
 
-  //const searchModalOpen = ref(false)
+  const sidebarMobile = [
+    {
+      title: "Cari Expert",
+      to: "#"
+    },
+    {
+      title: "Jadi Expert",
+      to: "#"
+    },
+    {
+      title: "Layanan",
+      dropdown: [
+        {
+          title: 'Konsultasi',
+          to: '#'
+        },
+        {
+          title: 'Pelatihan',
+          to: '/dashboard/main'
+        },
+        {
+          title: 'Undang Expert',
+          to: '#'
+        },
+        {
+          title: 'Rekrut Expert',
+          to: '#'
+        }
+      ],
+      to: "#"
+    }
+  ]
+
   const sidebarOpen = ref(false)
 
   const layoutStore = useLayoutStore()
   const session = computed(() => layoutStore.session)
+
+  const isSessionEmpty = computed(() => isObjectEmpty(layoutStore.sessionFirstName))
 </script>
 
 <template>
@@ -26,7 +60,7 @@
     <div class="px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16 -mb-px">
         <div class="flex">
-          <button class="text-slate-500 hover:text-slate-600 lg:hidden" @click.stop="$emit('toggle-sidebar')" aria-controls="sidebar" :aria-expanded="sidebarOpen">
+          <button class="text-slate-500 hover:text-slate-600 md:hidden" v-if="!isSessionEmpty">
             <span class="sr-only">Open sidebar</span>
             <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <rect x="4" y="5" width="16" height="2" />
@@ -34,9 +68,9 @@
               <rect x="4" y="17" width="16" height="2" />
             </svg>
           </button>
-          <div v-show="session.name != ''">
+          <div v-if="isSessionEmpty">
             <a href="/homepage/index" class="">
-              <img src="/src/images/cropped-logo-jobhun-3.png" alt="Logo Jobhun" class="h-10 sm:h-8" />
+              <img src="/src/images/cropped-logo-jobhun-3.png" alt="Logo Jobhun" class="h-8 md:h-10" />
             </a>
           </div>
         </div>
@@ -44,11 +78,10 @@
           <div>
             <MenuNavbar />
           </div>
-          <div v-if="!isVariableEmpty(session.first_name)">
-            <Notifications align="right" />
+          <div v-if="!isSessionEmpty">
+            <Notifications align="right" class="mx-2" />
             <Help align="right" />
           </div>
-          <!-- <hr class="w-px h-6 bg-slate-200" /> -->
           <UserMenu align="right" />
         </div>
       </div>

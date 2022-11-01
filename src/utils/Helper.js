@@ -1,5 +1,5 @@
 import moment, { max } from "moment";
-import 'moment-timezone';
+import "moment-timezone";
 
 export const convertPaginationFromApi = (data) => {
   let returnData = {};
@@ -21,7 +21,7 @@ export const convertDataFromApi = (data, settings, additional = {}) => {
   let dataReturn = {};
   for (const key in settings) {
     if (key == "Status") dataReturn[settings[key]] = STATUS[data[key]];
-    else if (key == "CreatedAt" || key == 'created_at')
+    else if (key == "CreatedAt" || key == "created_at")
       dataReturn[settings[key]] = moment(data[key])
         .utc()
         .format("DD/MM/YYYY HH:mm:ss");
@@ -44,7 +44,11 @@ export const convertDataFromApi = (data, settings, additional = {}) => {
   getArrayOfObjectFromArrayOfField(arrayObject, [2,3], "name") akan menghasilkan
   akan menghasilkan [{id: 2, name:"andre"}, {id: 3, name:"boy"}]
 */
-export const getArrayOfObjectFromArrayOfField = (arrayObject=[], arrayId=[], key="id") =>{
+export const getArrayOfObjectFromArrayOfField = (
+  arrayObject = [],
+  arrayId = [],
+  key = "id"
+) => {
   let listObject = [];
   arrayObject.map((obj) => {
     if (arrayId.includes(obj[key])) {
@@ -52,44 +56,44 @@ export const getArrayOfObjectFromArrayOfField = (arrayObject=[], arrayId=[], key
     }
   });
   return listObject;
-}
+};
 
-export const convertApiDateToWebDate = (theDate="") => {
-  console.log(theDate)
-  if(theDate != "" && theDate != null)
-    return moment(theDate).tz("Asia/Jakarta").format("YYYY-MM-DD HH:mm:ss")
-  return ""
-}
+export const convertApiDateToWebDate = (theDate = "") => {
+  console.log(theDate);
+  if (theDate != "" && theDate != null)
+    return moment(theDate).tz("Asia/Jakarta").format("YYYY-MM-DD HH:mm:ss");
+  return "";
+};
 
 /*
   mengubah tanggal ke format YYYY-MM-DD HH:mm:ss
   jika tidak ada payload yang dikirim, akan mengembalikan tanggal sekarang
 */
-export const convertToWebDate = (theDate="") => {
-  let jsDate = new Date()
-  if(/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/.test(theDate)){
-    jsDate = new Date(theDate)
+export const convertToWebDate = (theDate = "") => {
+  let jsDate = new Date();
+  if (/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/.test(theDate)) {
+    jsDate = new Date(theDate);
   }
-  return moment(jsDate).tz("Asia/Jakarta").format("YYYY-MM-DD HH:mm:ss")
-}
+  return moment(jsDate).tz("Asia/Jakarta").format("YYYY-MM-DD HH:mm:ss");
+};
 
 /*
   mengubah tanggal ke format yang dipakai oleh API
   gunakan ini untuk kirim tanggal ke backend
 */
 export const convertToApiDate = (theDate) => {
-  let jsDate = new Date(theDate)
+  let jsDate = new Date(theDate);
 
-  return moment(jsDate).tz("Asia/Jakarta").toISOString()
-}
+  return moment(jsDate).tz("Asia/Jakarta").toISOString();
+};
 
 /*
   konversi string ke format angka
   contoh: 1000000 jadi 1.000.000
 */
 export const convertMoneyNominalFormat = (value) => {
-  return (value + "").replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-}
+  return (value + "").replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+};
 
 /* Convert gambar ke base64
   dibutuhkan biasanya oleh API untuk post gambar
@@ -121,7 +125,7 @@ export const getBase64Image = async (url) => {
   }
 */
 export const validatePicture = (e, ratio, maxSize) => {
-  return new Promise(function(resolve) {
+  return new Promise(function (resolve) {
     const reader = new FileReader();
     const picFile = e.target.files[0];
     reader.readAsDataURL(picFile);
@@ -132,8 +136,8 @@ export const validatePicture = (e, ratio, maxSize) => {
       image.onload = (e) => {
         let validationResponse = {
           theImage: null,
-          isOk: false
-        }
+          isOk: false,
+        };
         const height = e.target.height;
         const width = e.target.width;
 
@@ -141,20 +145,22 @@ export const validatePicture = (e, ratio, maxSize) => {
         var resultDevideRatio =
           parseFloat(ratioSisi[0]) / parseFloat(ratioSisi[1]);
         if (width / height != resultDevideRatio) {
-          validationResponse.message = "Maaf ratio gambar yang dipilih tidak " + ratio;
+          validationResponse.message =
+            "Maaf ratio gambar yang dipilih tidak " + ratio;
           resolve(validationResponse);
         }
         if (picFile.size > maxSize) {
           const maxSizeToMb = (maxSize / 1048576).toFixed(2);
-          validationResponse.message = "Maaf ukuran maksimal " + maxSizeToMb + " mb"
+          validationResponse.message =
+            "Maaf ukuran maksimal " + maxSizeToMb + " mb";
           resolve(validationResponse);
         }
         validationResponse = {
-            message: "Berhasil memilih gambar",
-            theImage: theImage,
-            isOk: true
-          }
-          resolve(validationResponse);
+          message: "Berhasil memilih gambar",
+          theImage: theImage,
+          isOk: true,
+        };
+        resolve(validationResponse);
       };
     };
   });
@@ -168,52 +174,54 @@ export const validatePicture = (e, ratio, maxSize) => {
   kalo ga dikasih payload ke 2, otomatis akan ambil dari key "id". contoh
   getArrayOfObjectField(obj) akan menghasilkan [2,3]
 */
-export const getArrayOfObjectField = (objArray = [], column="id") => {
-  let result = objArray.map(a => a[column]);
-  return result
-}
+export const getArrayOfObjectField = (objArray = [], column = "id") => {
+  let result = objArray.map((a) => a[column]);
+  return result;
+};
 
 // Cek kalo objek nya kosong, return true/false
 export const isObjectEmpty = (obj = {}) => {
-  if(Object.keys(obj).length === 0 && obj.constructor === Object){
-    return true
+  if (Object.keys(obj).length === 0 && obj.constructor === Object) {
+    return true;
   }
-  return false
-}
+  return false;
+};
 
 export const getObjectValue = (object, defaultValue = {}) => {
-  if(typeof object === 'undefined'){
-    return defaultValue
+  if (typeof object === "undefined") {
+    return defaultValue;
   }
-  return object
-}
+  return object;
+};
 
 export const isVariableEmpty = (payload) => {
+  console.log(payload);
+  console.log(typeof payload);
   switch (typeof payload) {
     case "string":
-      if(payload == ""){
-        return true
+      if (payload == "") {
+        return true;
       }
       break;
     case "number":
-      if(payload == 0){
-        return true
+      if (payload == 0) {
+        return true;
       }
       break;
     case "object":
-      return isObjectEmpty(payload)
+      return isObjectEmpty(payload);
     case "undefined":
-      return true
+      return true;
     default:
-      if(Array.isArray(payload)){
-        if(payload.length == 0){
-          return true
+      if (Array.isArray(payload)) {
+        if (payload.length == 0) {
+          return true;
         }
       }
-      break
+      break;
   }
-  return false
-}
+  return false;
+};
 
 export const STATUS = ["Baru", "Diterima", "Dipublikasikan", "Ditolak"];
-export const ROLES = ["Public","Administrator", "User"];
+export const ROLES = ["Public", "Administrator", "User"];

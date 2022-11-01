@@ -15,7 +15,7 @@
   const login = async () => {
     if(auth.value.email != "" && auth.value.password != ""){
       if(await signinStore.login(auth.value)){
-        router.push('/homepage/index')
+        router.push('/')
       }
     }
   }

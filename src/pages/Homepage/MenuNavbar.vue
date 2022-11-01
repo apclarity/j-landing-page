@@ -31,32 +31,46 @@
     const menuLayanans = [
         {
             title: 'Konsultasi',
+            hidden: false,
             to: '#'
         },
         {
             title: 'Pelatihan',
+            hidden: false,
             to: '/dashboard/main'
         },
         {
             title: 'Undang Expert',
+            hidden: false,
             to: '#'
         },
         {
             title: 'Rekrut Expert',
+            hidden: false,
             to: '#'
         },
+        {
+            title: 'Cari Expert',
+            hidden: true,
+            to: '#'
+        },
+        {
+            title: 'Jadi Expert',
+            hidden: true,
+            to: '#'
+        }
     ]
 </script>
 <template>
-    <div class="hidden w-full md:block md:w-auto" id="mobile-menu">
+    <div class="w-full md:block md:w-auto">
         <ul
-            class="flex flex-col p-4 mt-4 rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0">
-            <li>
+            class="flex flex-col p-4 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
+            <li class="hidden md:block">
                 <a href="#"
                     class="block py-2 pr-4 pl-3 text-black rounded hover:text-jobhunGreen md:p-0 duration-300">
                     Cari Expert</a>
             </li>
-            <li>
+            <li class="hidden md:block">
                 <a href="#"
                     class="block py-2 pr-4 pl-3 text-black rounded hover:text-jobhunGreen md:p-0 duration-300">
                     Jadi Expert</a>
@@ -77,10 +91,12 @@
                     <div v-show="dropdownOpen"
                         class="origin-top-right z-10 absolute top-full min-w-44 bg-white border border-slate-200 py-1.5 rounded shadow-lg overflow-hidden mt-1 duration-300">
                         <ul ref="dropdown" @focusin="dropdownOpen = true" @focusout="dropdownOpen = false" v-for="(menuLayanan, i) in menuLayanans" :key="i">
-                            <li>
+                            <li :class="menuLayanan.hidden ? 'md:hidden': ''">
                                 <router-link
                                     class="font-medium text-sm text-black hover:text-jobhunGreen flex items-center duration-300 py-1 px-3"
-                                    :to="menuLayanan.to" @click="dropdownOpen = false">{{menuLayanan.title}}</router-link>
+                                    :to="menuLayanan.to" @click="dropdownOpen = false">
+                                    {{menuLayanan.title}}
+                                </router-link>
                             </li>
                         </ul>
                     </div>
