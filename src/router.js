@@ -81,7 +81,7 @@ const router = createRouter({
       component: LayoutUtama,
       children: [
         {
-          path: "/homepage/index",
+          path: "/",
           component: Homepage,
         },
         {

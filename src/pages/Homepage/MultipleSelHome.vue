@@ -56,31 +56,11 @@ import { ref, computed, onMounted, onUnmounted } from 'vue'
             class="form-input shadow py-2.5 my-3 focus:outline-none focus:bg-white focus:border-emerald-500 md:w-48 sm:w-50 mr-3 h-10"
             type="search" @click.prevent="dropdownOpen = !dropdownOpen"
             :aria-expanded="dropdownOpen"/>
-        <!-- <transition enter-active-class="transition ease-out duration-200 transform" enter-from-class="opacity-0 -translate-y-2"
-            enter-to-class="opacity-100 translate-y-0" leave-active-class="transition ease-out duration-200"
-            leave-from-class="opacity-100" leave-to-class="opacity-0">
-            <div v-show="dropdownOpen"
-                class="origin-top-right z-10 absolute top-full min-w-56 bg-white border border-slate-200 pt-1.5 rounded shadow-lg mt-1"
-                :class="align === 'right' ? 'right-0' : 'left-0'">
-                <div ref="dropdown" class="">
-                    <ul class="mb-4 overflow-y-auto" v-for="bidang in bidangs" as="template" :key="bidang.id" :value="bidang">
-                        <li class="py-1 px-3 overflow-auto">
-                            <label class="flex items-center">
-                                <input type="checkbox" class="form-checkbox" />
-                                <span class="text-sm font-medium ml-2">{{bidang.title}}</span>
-                            </label>
-                        </li>
-                    </ul>
-                    
-                </div>
-            </div>
-        </transition> -->
         <transition enter-active-class="transition ease-out duration-200 transform" enter-from-class="opacity-0 -translate-y-2"
             enter-to-class="opacity-100 translate-y-0" leave-active-class="transition ease-out duration-200"
             leave-from-class="opacity-100" leave-to-class="opacity-0">
             <div v-show="dropdownOpen"
-                class="origin-top-right z-10 absolute top-full min-w-56 max-h-60 bg-white border border-slate-200 pt-1.5 rounded shadow-lg mt-1"
-                :class="align === 'right' ? 'right-0' : 'left-0'">
+                class="origin-top-right z-10 absolute top-full min-w-56 max-h-60 bg-white border border-slate-200 pt-1.5 rounded shadow-lg mt-1">
                 <div ref="dropdown" class="">
                     <ul class="overflow-y-auto pb-3 h-48 text-sm text-white" >
                         <li v-for="bidang in bidangs"

@@ -1,24 +1,24 @@
 import axios from "axios";
-import _ from "lodash"
+import _ from "lodash";
 import router from "../router";
+import { useToast } from "vue-toastification";
 import { useLayoutStore } from "../pages/layout/store";
 
 const apiAxios = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
 });
 
-const isDev = import.meta.env.VITE_APP_ENV == "dev"
+const isDev = import.meta.env.VITE_APP_ENV == "dev";
 
-const serializeUrlQuery = function(obj) {
-  if(_.isEmpty(obj))
-    return ""
+const serializeUrlQuery = function (obj) {
+  if (_.isEmpty(obj)) return "";
   var str = [];
   for (var p in obj)
     if (obj.hasOwnProperty(p)) {
       str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
     }
   return "?" + str.join("&");
-}
+};
 
 apiAxios.defaults.timeout = 10000;
 apiAxios.interceptors.request.use(
@@ -33,17 +33,16 @@ apiAxios.interceptors.request.use(
 );
 apiAxios.interceptors.response.use(
   (response) => {
-    const layoutStore = useLayoutStore()
+    const layoutStore = useLayoutStore();
     if (response.status >= 200 || response.status < 300) {
       if (
         response.config.method == "post" ||
         response.config.method == "put" ||
         response.config.method == "delete"
       ) {
-        layoutStore.setDashboardLayouts({
-          status: response.data.success,
-          visible: true,
-          description: response.data.message,
+        const toast = useToast();
+        toast.success(response.data.message, {
+          timeout: 2000,
         });
       }
       return Promise.resolve(response.data.data);
@@ -52,78 +51,74 @@ apiAxios.interceptors.response.use(
     }
   },
   (error) => {
-    console.log(error)
-    const layout = useLayoutStore()
     let message = error.response.data.message;
-    if (error.response.data.statusCode == 401) {
-      message = "Sesi kamu sudah habis, silakan login ulang";
+    if (error.response.data.statusCode != 401) {
+      const toast = useToast();
+      toast.error(message, {
+        timeout: 2000,
+      });
     }
-    layout.setDashboardLayouts({
-      status: error.response.data.success,
-      visible: true,
-      description: message,
-    });
-    if (error.response.data.statusCode == 401) {
-      localStorage.removeItem("token");
-      router.push("/login");
-    }
+    // if (error.response.data.statusCode == 401) {
+    //   localStorage.removeItem("token");
+    //   router.push("/signin");
+    // }
     return Promise.reject(error.response.data);
   }
 );
 
 export const api = {
-  get: function(url="", payload={}){
-    return new Promise(async(resolve, reject)=>{
+  get: function (url = "", payload = {}) {
+    return new Promise(async (resolve, reject) => {
       try {
-        let res = await apiAxios.get(url, serializeUrlQuery(payload))
-        resolve(res)
+        let res = await apiAxios.get(url, serializeUrlQuery(payload));
+        resolve(res);
       } catch (error) {
-        if(isDev){
-          console.log("ERROR GET API: " + url + ", error:", error)
+        if (isDev) {
+          console.log("ERROR GET API: " + url + ", error:", error);
         }
-        reject(false)
+        reject(false);
       }
-    })
+    });
   },
-  post: function(url="", payload={}){
-    return new Promise(async(resolve, reject)=>{
+  post: function (url = "", payload = {}) {
+    return new Promise(async (resolve, reject) => {
       try {
-        let res = await apiAxios.post(url, payload)
-        resolve(res)
+        let res = await apiAxios.post(url, payload);
+        resolve(res);
       } catch (error) {
-        if(isDev){
-          console.log("ERROR POST API: " + url + ", error:", error)
+        if (isDev) {
+          console.log("ERROR POST API: " + url + ", error:", error);
         }
-        reject(false)
+        reject(false);
       }
-    })
+    });
   },
-  put: function(url="", payload={}){
-    return new Promise(async(resolve, reject)=>{
+  put: function (url = "", payload = {}) {
+    return new Promise(async (resolve, reject) => {
       try {
-        let res = apiAxios.put(url, payload)
-        resolve(res)
+        let res = apiAxios.put(url, payload);
+        resolve(res);
       } catch (error) {
-        if(isDev){
-          console.log("ERROR PUT API: " + url + ", error:", error)
+        if (isDev) {
+          console.log("ERROR PUT API: " + url + ", error:", error);
         }
-        reject(false)
+        reject(false);
       }
-    })
+    });
   },
-  delete: function(url=""){
-    return new Promise(async(resolve, reject)=>{
+  delete: function (url = "") {
+    return new Promise(async (resolve, reject) => {
       try {
-        let res = apiAxios.delete(url, payload)
-        resolve(res)
+        let res = apiAxios.delete(url, payload);
+        resolve(res);
       } catch (error) {
-        if(isDev){
-          console.log("ERROR DELETE API: " + url + ", error:", error)
+        if (isDev) {
+          console.log("ERROR DELETE API: " + url + ", error:", error);
         }
-        reject(false)
+        reject(false);
       }
-    })
-  }
-}
+    });
+  },
+};
 
 export default api;
