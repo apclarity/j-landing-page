@@ -83,7 +83,7 @@
                         HQ: IndigoSpace Surabaya, Jl. Bendul Merisi Selatan Airdas 55, Bendul Merisi, Wonocolo, Surabaya 60238
                     </p>
                     <p class="mr-4 md:mr-6">
-                        E-mail: info@jobhun.id;partnership@jobhun.id | Phone: 081332905635
+                        E-mail: info@jobhun.id; partnership@jobhun.id | Phone: 081332905635
                     </p>
                 </li>
             </ul>

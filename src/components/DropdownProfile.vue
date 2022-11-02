@@ -91,16 +91,19 @@ const isSessionEmpty = computed(() => isVariableEmpty(sessionFirstName.value))
     </transition>
   </div>
   <div class="relative inline-flex" v-else>
-    <button ref="trigger" class="inline-flex justify-center items-center group" aria-haspopup="true"
+    <button ref="trigger" class="inline-flex justify-center items-center group" aria-haspopup="true" data-popover-target="popover-description" data-popover-placement="bottom-end"
       @click.prevent="dropdownOpen = !dropdownOpen" :aria-expanded="dropdownOpen">
-      <img class="w-8 h-8 rounded-full" :src="UserAvatar" width="32" height="32" alt="User" />
-      <div class="flex items-center truncate">
-        <span class="truncate ml-2 text-sm font-medium text-black hover:text-jobhunGreen duration-300">Daftar/Masuk</span>
-        <svg class="w-3 h-3 shrink-0 ml-1 fill-current text-slate-400" viewBox="0 0 12 12">
-          <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
-        </svg>
-      </div>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="h-5 w-5 fill-gray-700" alt="Masuk/Daftar">
+        <path
+          d="M352 96h64c17.7 0 32 14.3 32 32V384c0 17.7-14.3 32-32 32H352c-17.7 0-32 14.3-32 32s14.3 32 32 32h64c53 0 96-43 96-96V128c0-53-43-96-96-96H352c-17.7 0-32 14.3-32 32s14.3 32 32 32zm-7.5 177.4c4.8-4.5 7.5-10.8 7.5-17.4s-2.7-12.9-7.5-17.4l-144-136c-7-6.6-17.2-8.4-26-4.6s-14.5 12.5-14.5 22v72H32c-17.7 0-32 14.3-32 32v64c0 17.7 14.3 32 32 32H160v72c0 9.6 5.7 18.2 14.5 22s19 2 26-4.6l144-136z" />
+      </svg>
     </button>
+    <div data-popover id="popover-description" role="tooltip"
+      class="inline-block absolute invisible z-10 w-72 text-sm font-light text-gray-500 bg-white rounded-lg border border-gray-200 shadow-sm opacity-0 transition-opacity duration-300 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400">
+      <div class="p-3 space-y-2">
+          <h3 class="font-semibold text-gray-900 dark:text-white">Masuk/Daftar</h3>
+      </div>
+    </div>
     <transition enter-active-class="transition ease-out duration-200 transform"
       enter-from-class="opacity-0 -translate-y-2" enter-to-class="opacity-100 translate-y-0"
       leave-active-class="transition ease-out duration-200" leave-from-class="opacity-100" leave-to-class="opacity-0">
