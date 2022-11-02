@@ -117,7 +117,7 @@
                         </svg>
                     </button> -->
                     <button
-                        class="bg-jobhunGreen h-10 hover:bg-emerald-600 text-white px-7 rounded">
+                        class="bg-jobhunGreen text-sm h-9 hover:bg-emerald-600 text-white px-5 rounded">
                         Cari
                     </button>
                 </form>

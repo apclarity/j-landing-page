@@ -58,7 +58,7 @@
 <template>
   <header class="sticky top-0 bg-white z-30 shadow-lg">
     <div class="px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16 -mb-px">
+      <div class="flex items-center justify-between h-16">
         <div class="flex">
           <button class="text-slate-500 hover:text-slate-600 md:hidden" v-if="!isSessionEmpty">
             <span class="sr-only">Open sidebar</span>
