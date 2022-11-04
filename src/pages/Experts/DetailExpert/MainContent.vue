@@ -29,7 +29,7 @@ onMounted(()=>{
 </script>
 <template>
     <div class="relative h-96 bg-slate-200 -z-20 -mt-10 md:mt-0">
-        <img class="object-cover h-full w-full object-top" src="../../../images/jobhun-ilustration-background/banner-ilustrasi-01.svg"
+        <img class="object-cover h-full w-full object-top" src="../../../images/jobhun-ilustration-background/banner-ilustrasi-01.png"
             alt="Profile background" />
     </div>
     <div class="lg:px-60 px-10 mb-10">

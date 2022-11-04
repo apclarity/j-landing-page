@@ -74,7 +74,7 @@ const login = async () => {
                             <div class="flex items-center justify-between mt-6">
                                 <div class="mr-1">
                                     <label class="flex items-center">
-                                        <input type="checkbox" class="form-checkbox" />
+                                        <input type="checkbox" class="form-checkbox text-jobhunGreen"/>
                                         <span class="text-sm ml-2">Dengan mendaftar, kamu telah menyetujui <a href="#" class="text-jobhunGreen hover:text-emerald-600"><b>Ketentuan Pengguna</b></a> dan <a href="#" class="text-jobhunGreen hover:text-emerald-600"><b>Kebijakan Privasi</b></a>.</span>
                                     </label>
                                 </div>
@@ -91,7 +91,7 @@ const login = async () => {
                                     class="font-medium text-jobhunGreen hover:text-emerald-600" to="/signin">
                                     Masuk 
                                 </router-link>
-                                 di sini!
+                                di sini!
                             </div>
                             <!-- Warning
               <div class="mt-5">
