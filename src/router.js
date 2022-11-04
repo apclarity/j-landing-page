@@ -45,7 +45,7 @@ import EmptyState from "./pages/utility/EmptyState.vue";
 import PageNotFound from "./pages/utility/PageNotFound.vue";
 import KnowledgeBase from "./pages/utility/KnowledgeBase.vue";
 import Signin from "./pages/auth/Signin.vue";
-import Signup from "./pages/Signup.vue";
+import Signup from "./pages/auth/Signup.vue";
 import ResetPassword from "./pages/ResetPassword.vue";
 import Onboarding01 from "./pages/Onboarding01.vue";
 import Onboarding02 from "./pages/Onboarding02.vue";

@@ -41,11 +41,13 @@
               <div class="space-y-4">
                 <div>
                   <label class="block text-sm font-medium mb-1" for="email">Email</label>
-                  <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full" type="email" v-model="auth.email"/>
+                  <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full" 
+                  type="email" v-model="auth.email" required/>
                 </div>
                 <div>
                   <label class="block text-sm font-medium mb-1" for="password">Kata sandi</label>
-                  <input class="bg-gray-100 border-0 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full" required type="password" autoComplete="on" v-model="auth.password"/>
+                  <input class="bg-gray-100 border-0 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full" 
+                  required type="password" autoComplete="on" v-model="auth.password"/>
                 </div>
               </div>
               <div class="flex items-center justify-between mt-6">
@@ -58,7 +60,7 @@
             <!-- Footer -->
             <div class="pt-5 mt-6 border-t border-slate-200">
               <div class="text-sm">
-                Belum memiliki akun? <router-link class="font-medium text-jobhunGreen hover:text-emerald-600" to="/signup">Daftar</router-link>
+                Belum memiliki akun? <router-link class="font-medium text-jobhunGreen hover:text-emerald-600" to="/signup">Daftar</router-link> di sini!
               </div>
               <!-- Warning
               <div class="mt-5">
@@ -73,13 +75,12 @@
               </div> -->
             </div>
           </div>
-
         </div>
       </div>
 
       <!-- Image -->
       <div class="hidden md:block absolute top-0 bottom-0 right-0 md:w-1/2" aria-hidden="true">
-        <img class="object-cover object-center w-full h-full" src="../../images/signin/banner-ilustrasi-04.svg" width="760" height="1024" alt="Authentication" />
+        <img class="object-cover object-center w-full h-full" src="../../images/signin/banner-ilustrasi-04.png" width="760" height="1024" alt="Authentication" />
         <img class="absolute top-1/4 left-0 -translate-x-1/2 hidden lg:block" src="../../images/signin/roket-02.png" width="218" height="224" alt="Authentication decoration" />
       </div>
     </div>

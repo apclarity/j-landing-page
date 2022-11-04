@@ -11,11 +11,40 @@
 
     const dataExperts = {
             id: 1,
-        name: 'Carolyn Nanana Nanana Nanana',
-            about: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                    labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                    laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                    voluptate velit esse cillum dolore eu fugiat nulla pariatur.`,
+            profile: {
+                imgProfile: new URL("../../../images/user-36-03.jpg", import.meta.url),
+                name: 'Carolyn Nanana Nanana Nanana',
+                position: 'Startup Founder',
+                formalEducation: 'Universitas Dr. Soetomo (Bachelor of Communications) 2015 ',
+                domicile: 'Surabaya',
+                tagBidang: [
+                    {
+                        title: 'Sales'
+                    },
+                    {
+                        title: 'Marketing'
+                    }
+                ],
+                experience: [
+                    {
+                        position: 'Founder of Sate Shincan',
+                        city: 'Surabaya',
+                        dateStart: 'April 2017',
+                        dateEnd: 'Mei 2020',
+                    },
+                    {
+                        position: "Supervisor in McDonald's",
+                        city: 'Bali',
+                        dateStart: 'Desember 2020',
+                        dateEnd: 'Saat ini',
+                    }
+                ],
+                linkedin: '#',
+                about: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+                voluptate velit esse cillum dolore eu fugiat nulla pariatur.`,
+            },
             services: [
                 {
                     title: "Konsultasi",
@@ -49,8 +78,7 @@
                     laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
                     voluptate velit esse cillum dolore eu fugiat nulla pariatur.`,
                 }
-            ],
-            imgProfile: new URL("../../../images/user-36-03.jpg", import.meta.url),
+            ]
         }
 </script>
 <template>

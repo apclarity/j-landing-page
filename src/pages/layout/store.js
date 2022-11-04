@@ -24,6 +24,7 @@ export const useLayoutStore = defineStore({
     },
     signOut() {
       localStorage.removeItem("token");
+      this.setSession({});
     },
   },
   getters: {

@@ -5,21 +5,22 @@
     const mentors = ref ([
         {
             id: 6,
-            title: 'Pak Bejo',
-            proffession: 'Chef at Nasi Goreng Pipiw lalala kentrung dar der dor dar der dor dar der dor dar der dor',
-            bidang: 'Food',
+            title: 'Michael Sutejo',
+            proffession: 'Sales Marketing',
+            bidangs: [
+                {
+                    title: 'Sales'
+                },
+                {
+                    title: 'Marketing'
+                }
+            ],
             services: [
                 {
-                    title: 'Paud'
+                    title: 'Sales'
                 },
                 {
-                    title: 'Tk'
-                },
-                {
-                    title: 'SD'
-                },
-                {
-                    title: 'SMP'
+                    title: 'Marketing'
                 }
             ],
             rating: 4
@@ -27,8 +28,15 @@
         {
             id: 7,
             title: 'Pak Bejo',
-            proffession: 'Chef at Nasi Goreng Pipiw',
-            bidang: 'Food',
+            proffession: 'Supervisor',
+            bidangs: [
+                {
+                    title: 'Sales'
+                },
+                {
+                    title: 'Marketing'
+                }
+            ],
             services: [
                 {
                     title: 'Paud'
@@ -48,8 +56,15 @@
         {
             id: 8,
             title: 'Pak Bejo',
-            proffession: 'Chef at Nasi Goreng Pipiw',
-            bidang: 'Food',
+            proffession: 'Engineer',
+            bidangs: [
+                {
+                    title: 'Sales'
+                },
+                {
+                    title: 'Marketing'
+                }
+            ],
             services: [
                 {
                     title: 'Paud'
@@ -70,7 +85,14 @@
             id: 9,
             title: 'Pak Bejo',
             proffession: 'Chef at Nasi Goreng Pipiw',
-            bidang: 'Food',
+            bidangs: [
+                {
+                    title: 'Sales'
+                },
+                {
+                    title: 'Marketing'
+                }
+            ],
             services: [
                 {
                     title: 'Paud'
@@ -103,7 +125,14 @@
             id: 10,
             title: 'Pak Bejo',
             proffession: 'Chef at Nasi Goreng Pipiw lalala kentrung dar der dor dar der dor dar der dor dar der dor',
-            bidang: 'Food',
+            bidangs: [
+                {
+                    title: 'Sales'
+                },
+                {
+                    title: 'Marketing'
+                }
+            ],
             services: [
                 {
                     title: 'Paud'
@@ -124,15 +153,36 @@
             id: 11,
             title: 'Pak Bejo',
             proffession: 'Chef at Nasi Goreng Pipiw',
-            bidang: 'Food',
-            services: [],
+            bidangs: [
+                {
+                    title: 'Sales'
+                },
+                {
+                    title: 'Marketing'
+                }
+            ],
+            services: [
+                {
+                    title: 'Sales'
+                },
+                {
+                    title: 'Marketing'
+                }
+            ],
             rating: 2
         },
         {
             id: 12,
             title: 'Pak Bejo',
             proffession: 'Chef at Nasi Goreng Pipiw',
-            bidang: 'Food',
+            bidangs: [
+                {
+                    title: 'Sales'
+                },
+                {
+                    title: 'Marketing'
+                }
+            ],
             services: [
                 {
                     title: 'Paud'
@@ -153,7 +203,14 @@
             id: 13,
             title: 'Pak Bejo',
             proffession: 'Chef at Nasi Goreng Pipiw',
-            bidang: 'Food',
+            bidangs: [
+                {
+                    title: 'Sales'
+                },
+                {
+                    title: 'Marketing'
+                }
+            ],
             services: [
                 {
                     title: 'Paud'
@@ -193,7 +250,7 @@
                     <CardMentor :item="mentor" />
                 </div>
             </div>
-            <div class="text-end mt-5 px-28">
+            <div class="text-end text-sm mt-5 px-28">
                 <a href="">Cari experts lainnya -&gt;</a>
             </div>
         </div>

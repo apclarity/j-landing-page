@@ -52,7 +52,7 @@ import { ref, computed, onMounted, onUnmounted } from 'vue'
 </script>
 <template>
     <div class="relative inline-flex mt-1">
-        <input id="action-search" placeholder="Kebutuhan" v-model="selected"
+        <input id="action-search" placeholder="Bidang" v-model="selected"
             class="form-input shadow py-2.5 my-3 focus:outline-none focus:bg-white focus:border-emerald-500 md:w-48 sm:w-50 mr-3 h-10"
             type="search" @click.prevent="dropdownOpen = !dropdownOpen"
             :aria-expanded="dropdownOpen"/>
