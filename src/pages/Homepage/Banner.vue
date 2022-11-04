@@ -95,27 +95,13 @@
             </div>
             <div class="relative w-full max-w-1xl columns-2xl mt-5">
                 <form class="relative">
-                    <input id="action-search" placeholder="Cari"
+                    <input id="action-search" placeholder="Nama atau perusahaan"
                         class="form-input shadow py-2.5 my-3 focus:outline-none focus:bg-white focus:border-emerald-500 md:w-48 sm:w-48 xs:w-48 mr-3 h-10"
                         type="search" />
-                    <!-- <button data-dropdown-toggle="dropdown"
-                        class="text-black bg-white button-size hover:bg-gray-50 border focus:outline-none font-medium rounded text-sm px-4 py-2.5 text-center inline-flex items-center mr-3"
-                        type="button">Bidang
-                        <svg class="w-3 h-3 shrink-0 ml-1 fill-current text-slate-400" viewBox="0 0 12 12">
-                            <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
-                        </svg>
-                    </button> -->
-                    <Combobox :bidangs="itemsBidang"/>
-                    <!-- <DropdownBidang :bidangs="itemBidang"/> -->
-                    
+                    <input id="action-search" placeholder="Profesi"
+                        class="form-input shadow py-2.5 my-3 focus:outline-none focus:bg-white focus:border-emerald-500 md:w-48 sm:w-48 xs:w-48 mr-3 h-10"
+                        type="search" />
                     <MultiSel :bidangs="itemsBidang"/>
-                    <!-- <button data-dropdown-toggle="dropdown"
-                        class="text-black bg-white button-size hover:bg-gray-50 border focus:outline-none font-medium rounded text-sm px-4 py-2.5 text-center inline-flex items-center mr-3"
-                        type="button">Kebutuhan
-                        <svg class="w-3 h-3 shrink-0 ml-1 fill-current text-slate-400" viewBox="0 0 12 12">
-                            <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
-                        </svg>
-                    </button> -->
                     <button
                         class="bg-jobhunGreen text-sm h-9 hover:bg-emerald-600 text-white px-5 rounded">
                         Cari

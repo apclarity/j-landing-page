@@ -69,9 +69,9 @@
             </svg>
           </button>
           <div v-if="isSessionEmpty">
-            <a href="/homepage/index" class="">
+            <router-link to="/" class="">
               <img src="/src/images/cropped-logo-jobhun-3.png" alt="Logo Jobhun" class="h-8 md:h-10" />
-            </a>
+            </router-link>
           </div>
         </div>
         <div class="flex items-center space-x-3">
@@ -80,7 +80,6 @@
           </div>
           <div v-if="!isSessionEmpty">
             <Notifications align="right" class="mx-2" />
-            <Help align="right" />
           </div>
           <UserMenu align="right" />
         </div>

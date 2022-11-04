@@ -1,30 +1,31 @@
 <script setup>
-    import { onMounted } from 'vue'
-    import { useRoute } from 'vue-router'
-    import IconKonsultasi from '../../../partials/icons/icon-konsultasi.vue'
-    import IconPelatihan from '../../../partials/icons/icon-pelatihan.vue'
-    import IconUndangExpert from '../../../partials/icons/icon-undang-expert.vue'
-    import IconRekrutExpert from '../../../partials/icons/icon-rekrut-expert.vue'
+import { onMounted } from 'vue'
+import { useRoute } from 'vue-router'
+import IconKonsultasi from '../../../partials/icons/icon-konsultasi.vue'
+import IconPelatihan from '../../../partials/icons/icon-pelatihan.vue'
+import IconUndangExpert from '../../../partials/icons/icon-undang-expert.vue'
+import IconRekrutExpert from '../../../partials/icons/icon-rekrut-expert.vue'
+import IconLinkedin from '../../../partials/icons/icon-linkedin.vue'
 
-    const props = defineProps({
-        dataExpert: Object
-    })
+const props = defineProps({
+    dataExpert: Object
+})
 
-    const { dataExpert } = props
+const { dataExpert } = props
 
-    const route = useRoute()
+const route = useRoute()
 
-    onMounted(()=>{
-        let querySection = route.query.section
-        if(querySection == null){
-            return
-        }
-        let sectionID = document.getElementById(querySection)
-        if(sectionID == null){
-            return
-        }
-        document.getElementById(querySection).scrollIntoView()
-    })
+onMounted(()=>{
+    let querySection = route.query.section
+    if(querySection == null){
+        return
+    }
+    let sectionID = document.getElementById(querySection)
+    if(sectionID == null){
+        return
+    }
+    document.getElementById(querySection).scrollIntoView()
+})
 </script>
 <template>
     <div class="relative h-96 bg-slate-200 -z-20 -mt-10 md:mt-0">
@@ -32,115 +33,85 @@
             alt="Profile background" />
     </div>
     <div class="lg:px-60 px-10 mb-10">
-        <div class="-mt-32 mb-6 sm:mb-3">
-            <div class="flex flex-col items-center sm:flex-row sm:justify-between sm:items-end">
+        <div class="-mt-32 mb-6 sm:mb-3 md:flex">
+            <div class="flex flex-col items-center md:w-1/4 sm:flex-row sm:justify-between sm:items-end">
                 <div class="inline-flex -mt-1 mb-4 sm:mb-0">
-                    <img class="rounded-full ring-8 ring-white" :src="dataExpert.imgProfile" width="200"/>
+                    <img class="rounded-full ring-8 ring-white" :src="dataExpert.profile.imgProfile" width="200"/>
                 </div>
             </div>
         </div>
         <header class="mb-6">
             <div class="grid grid-flow-row md:flex">
-                <div class="mb-2 flex-none md:w-1/4">
-                    <h1 class="text-2xl text-slate-800 font-bold">{{ dataExpert.name }}</h1>
+                <div class="mb-2 flex-none md:w-1/4 mr-0 md:mr-5">
+                    <h1 class="text-2xl sm:text-left text-center text-slate-800 font-bold">{{ dataExpert.profile.name }} ✨</h1>
+                    <div class="sm:text-left text-center mt-3">
+                        <span class="text-sm">
+                            Jabatan
+                        </span>
+                    </div>
+                    <div class="sm:text-left text-center text-black">
+                        <span class="font-bold text-sm">
+                            {{dataExpert.profile.position}}
+                        </span>
+                    </div>
+                    <div class="sm:text-left text-center mt-3">
+                        <span class="text-sm">
+                            Pendidikan
+                        </span>
+                    </div>
+                    <div class="sm:text-left text-center text-black">
+                        <span class="font-bold text-sm">
+                            {{dataExpert.profile.formalEducation}}
+                        </span>
+                    </div>
+                    <div class="sm:text-left text-center mt-3">
+                        <span class="text-sm">
+                            Domisili
+                        </span>
+                    </div>
+                    <div class="text-center sm:text-left text-black">
+                        <span class="font-bold text-sm">
+                            {{dataExpert.profile.domicile}}
+                        </span>
+                    </div>
+                    <div class="flex justify-center items-center sm:justify-start">
+                        <a href="https://www.linkedin.com/company/13406000/" class="text-jobhunGreen mt-3 hover:text-gray-900 duration-300">
+                            <IconLinkedin class="w-7 h-7" />
+                        </a>
+                    </div>
                 </div>
                 <div class="shrink w-full">
-                    <div class="text-sm">
+                    <div class="text-sm mt-5 sm:mt-0">
                         <p>
-                            {{ dataExpert.about }}
+                            {{ dataExpert.profile.about }}
                         </p>
                     </div>
-                    <div class="mt-10">
-                        <div class="bg-white p-4 border border-slate-200 rounded-sm shadow-sm">
+                    <div class="mt-3">
+                        <router-link to="/" class=" space-x-1 line-clamp-1 hover:line-clamp-none">
+                            <div v-for="bidang in dataExpert.profile.tagBidang" :key="bidang"
+                                class="inline-flex text-sm font-medium bg-emerald-100 text-jobhunGreen rounded-md text-center px-2 py-0.5 my-1">
+                                {{bidang.title}}
+                            </div>
+                        </router-link>
+                    </div>
+                    <div class="mt-5">
+                        <div>
+                            <span class="text-sm">
+                                Pengalaman
+                            </span>
+                        </div>
+                        <div class="bg-white p-4 border border-slate-200 rounded-sm shadow-sm mt-3" v-for="pengalaman in dataExpert.profile.experience" :key="pengalaman">
                             <ul class="space-y-3">
                                 <li class="sm:flex sm:items-center sm:justify-between">
                                     <div class="sm:grow flex items-center text-sm">
-                                        <div class="w-8 h-8 rounded-full shrink-0 bg-amber-500 my-2 mr-3">
-                                            <svg class="w-8 h-8 fill-current text-amber-50" viewBox="0 0 32 32">
-                                                <path
-                                                    d="M21 14a.75.75 0 0 1-.75-.75 1.5 1.5 0 0 0-1.5-1.5.75.75 0 1 1 0-1.5 1.5 1.5 0 0 0 1.5-1.5.75.75 0 1 1 1.5 0 1.5 1.5 0 0 0 1.5 1.5.75.75 0 1 1 0 1.5 1.5 1.5 0 0 0-1.5 1.5.75.75 0 0 1-.75.75Zm-7 10a1 1 0 0 1-1-1 4 4 0 0 0-4-4 1 1 0 0 1 0-2 4 4 0 0 0 4-4 1 1 0 0 1 2 0 4 4 0 0 0 4 4 1 1 0 0 1 0 2 4 4 0 0 0-4 4 1 1 0 0 1-1 1Z" />
-                                            </svg>
-                                        </div>
                                         <div>
-                                            <div class="font-medium text-slate-800">Senior Product Designer</div>
+                                            <div class="font-medium text-slate-800">{{ pengalaman.position }}</div>
                                             <div class="flex flex-nowrap items-center space-x-2 whitespace-nowrap">
-                                                <div>Remote</div>
+                                                <div>{{pengalaman.city}}</div>
                                                 <div class="text-slate-400">·</div>
-                                                <div>April, 2020 - Today</div>
+                                                <div>{{ pengalaman.dateStart }} - {{pengalaman.dateEnd}}</div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="sm:ml-2 mt-2 sm:mt-0">
-                                        <ul class="flex flex-wrap sm:justify-end -m-1">
-                                            <li class="m-1">
-                                                <button
-                                                    class="inline-flex items-center justify-center text-xs font-medium leading-5 rounded-full px-2.5 py-0.5 border border-slate-200 hover:border-slate-300 shadow-sm bg-white text-slate-500 duration-150 ease-in-out">Marketing</button>
-                                            </li>
-                                            <li class="m-1">
-                                                <button
-                                                    class="inline-flex items-center justify-center text-xs font-medium leading-5 rounded-full px-2.5 py-0.5 border border-slate-200 hover:border-slate-300 shadow-sm bg-white text-slate-500 duration-150 ease-in-out">+4</button>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li class="sm:flex sm:items-center sm:justify-between">
-                                    <div class="sm:grow flex items-center text-sm">
-                                        <div class="w-8 h-8 rounded-full shrink-0 bg-indigo-500 my-2 mr-3">
-                                            <svg class="w-8 h-8 fill-current text-indigo-50" viewBox="0 0 32 32">
-                                                <path
-                                                    d="M8.994 20.006a1 1 0 0 1-.707-1.707l4.5-4.5a1 1 0 0 1 1.414 0l3.293 3.293 4.793-4.793a1 1 0 1 1 1.414 1.414l-5.5 5.5a1 1 0 0 1-1.414 0l-3.293-3.293L9.7 19.713a1 1 0 0 1-.707.293Z" />
-                                            </svg>
-                                        </div>
-                                        <div>
-                                            <div class="font-medium text-slate-800">Product Designer</div>
-                                            <div class="flex flex-nowrap items-center space-x-2 whitespace-nowrap">
-                                                <div>Milan, IT</div>
-                                                <div class="text-slate-400">·</div>
-                                                <div>April, 2018 - April 2020</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="sm:ml-2 mt-2 sm:mt-0">
-                                        <ul class="flex flex-wrap sm:justify-end -m-1">
-                                            <li class="m-1">
-                                                <button
-                                                    class="inline-flex items-center justify-center text-xs font-medium leading-5 rounded-full px-2.5 py-0.5 border border-slate-200 hover:border-slate-300 shadow-sm bg-white text-slate-500 duration-150 ease-in-out">Marketing</button>
-                                            </li>
-                                            <li class="m-1">
-                                                <button
-                                                    class="inline-flex items-center justify-center text-xs font-medium leading-5 rounded-full px-2.5 py-0.5 border border-slate-200 hover:border-slate-300 shadow-sm bg-white text-slate-500 duration-150 ease-in-out">+4</button>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li class="sm:flex sm:items-center sm:justify-between">
-                                    <div class="sm:grow flex items-center text-sm">
-                                        <div class="w-8 h-8 rounded-full shrink-0 bg-indigo-500 my-2 mr-3">
-                                            <svg class="w-8 h-8 fill-current text-indigo-50" viewBox="0 0 32 32">
-                                                <path
-                                                    d="M8.994 20.006a1 1 0 0 1-.707-1.707l4.5-4.5a1 1 0 0 1 1.414 0l3.293 3.293 4.793-4.793a1 1 0 1 1 1.414 1.414l-5.5 5.5a1 1 0 0 1-1.414 0l-3.293-3.293L9.7 19.713a1 1 0 0 1-.707.293Z" />
-                                            </svg>
-                                        </div>
-                                        <div>
-                                            <div class="font-medium text-slate-800">Product Designer</div>
-                                            <div class="flex flex-nowrap items-center space-x-2 whitespace-nowrap">
-                                                <div>Milan, IT</div>
-                                                <div class="text-slate-400">·</div>
-                                                <div>April, 2018 - April 2020</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="sm:ml-2 mt-2 sm:mt-0">
-                                        <ul class="flex flex-wrap sm:justify-end -m-1">
-                                            <li class="m-1">
-                                                <button
-                                                    class="inline-flex items-center justify-center text-xs font-medium leading-5 rounded-full px-2.5 py-0.5 border border-slate-200 hover:border-slate-300 shadow-sm bg-white text-slate-500 duration-150 ease-in-out">Marketing</button>
-                                            </li>
-                                            <li class="m-1">
-                                                <button
-                                                    class="inline-flex items-center justify-center text-xs font-medium leading-5 rounded-full px-2.5 py-0.5 border border-slate-200 hover:border-slate-300 shadow-sm bg-white text-slate-500 duration-150 ease-in-out">+4</button>
-                                            </li>
-                                        </ul>
                                     </div>
                                 </li>
                             </ul>
