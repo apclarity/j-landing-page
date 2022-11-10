@@ -1,8 +1,8 @@
 <script>
 </script>
 <template>
-    <div class="fixed sticky-chat z-30 px-5">
-        <div class="rounded-full shadow-xl color-basic p-2">
+    <div class="fixed sticky-chat z-5 px-5">
+        <div class="rounded-full shadow-xl color-basic p-1">
             <a href="https://wa.me/6281332905635" class="">
                 <svg class="hover:fill-black fill-white duration-300" x="0px" y="0px" width="40" height="40" viewBox="0 0 32 32">
                     <path fill-rule="evenodd"

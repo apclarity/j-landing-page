@@ -1,44 +1,39 @@
 <script setup>
-    import { ref } from 'vue'
-    import { useRouter } from 'vue-router'
-    import Rating from './Ratings.vue'  
-    import ModalPreview from './ModalLayananExpert.vue'
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import Rating from './Ratings.vue'  
+import ModalPreview from './ModalLayananExpert.vue'
 
-    const router = useRouter()
-    
-    const props = defineProps({
-        item: {
-            type: Object,
-            required: true
-        }
-    })
+const router = useRouter()
 
-    const { item } = props
-
-    const isPreviewMentor = ref(false)
-
-    const openPreviewMentor = () => {
-        isPreviewMentor.value = true
+const props = defineProps({
+    item: {
+        type: Object,
+        required: true
     }
+})
+
+const { item } = props
+
+const isPreviewMentor = ref(false)
+
+const openPreviewMentor = () => {
+    isPreviewMentor.value = true
+}
 </script>
 <template>
     <div
         class="col-span-full sm:col-span-6 xl:col-span-3 bg-white shadow-lg rounded-sm border border-slate-200">
         <div class="flex flex-col h-full">
-            <!-- Image -->
             <img class="w-full" src="../../images/applications-image-01.jpg" width="286" height="160"/>
-            <!-- Card Content -->
             <div class="grow flex flex-col p-5">
-                <!-- Card body -->
                 <div class="grow">
-                    <!-- Header -->
                     <header class="mb-3">
                         <a class="text-lg text-slate-800 font-semibold truncate" href="#" @click="openPreviewMentor">
-                            {{item.title}}
+                            {{item.Fullname}}
                         </a>
                         <ModalPreview :isPreviewMentor="isPreviewMentor" :expertID="item.id" @close-modal="isPreviewMentor = false" />
                     </header>
-                    <!-- Features list -->
                     <ul class="text-sm space-y-2 mb-5">
                         <li class="flex items-center">
                             <svg class="w-4 h-4 fill-current text-slate-400 shrink-0 mr-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
@@ -71,7 +66,6 @@
                             </router-link>
                         </li>
                     </ul>
-                    <!-- Rating -->
                     <Rating :ratingValues="item.rating" />
                 </div>
             </div>
