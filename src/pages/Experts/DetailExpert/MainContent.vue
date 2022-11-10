@@ -1,17 +1,16 @@
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
-import IconKonsultasi from '../../../partials/icons/icon-konsultasi.vue'
-import IconPelatihan from '../../../partials/icons/icon-pelatihan.vue'
-import IconUndangExpert from '../../../partials/icons/icon-undang-expert.vue'
-import IconRekrutExpert from '../../../partials/icons/icon-rekrut-expert.vue'
 import IconLinkedin from '../../../partials/icons/icon-linkedin.vue'
+import ItemLayanan from './Layanan.vue'
+import ItemTestimonies from './Ulasan.vue'
 
 const props = defineProps({
-    dataExpert: Object
+    dataExpert: Object,
+    testimonies: Object
 })
 
-const { dataExpert } = props
+const { dataExpert, testimonies } = props
 
 const route = useRoute()
 
@@ -26,6 +25,9 @@ onMounted(()=>{
     }
     document.getElementById(querySection).scrollIntoView()
 })
+
+const openTab = ref(1)
+const toggleTabs = (tabNumber) => (openTab.value = tabNumber)
 </script>
 <template>
     <div class="relative h-96 bg-slate-200 -z-20 -mt-10 md:mt-0">
@@ -89,7 +91,7 @@ onMounted(()=>{
                     <div class="mt-3">
                         <router-link to="/" class=" space-x-1 line-clamp-1 hover:line-clamp-none">
                             <div v-for="bidang in dataExpert.profile.tagBidang" :key="bidang"
-                                class="inline-flex text-sm font-medium bg-emerald-100 text-jobhunGreen rounded-md text-center px-2 py-0.5 my-1">
+                                class="inline-flex text-sm font-medium bg-emerald-100 hover:bg-emerald-200 text-jobhunGreen rounded-md text-center px-2 py-0.5 my-1">
                                 {{bidang.title}}
                             </div>
                         </router-link>
@@ -120,31 +122,36 @@ onMounted(()=>{
                 </div>
             </div>
         </header>
-        <div v-for="layanan in dataExpert.services" :key="layanan" :id="layanan.id">
-            <hr class="my-16 border-gray-300 sm:mx-auto lg:my-16">
-            <div class="flex">
-                <div class="flex-none w-1/4 flex justify-center items-center mx-5 lg:mx-0 md:mx-0">
-                    <IconKonsultasi height="100px" v-if="layanan.title == 'Konsultasi'" />
-                    <IconPelatihan height="100px" v-if="layanan.title == 'Pelatihan'" />
-                    <IconUndangExpert height="100px" v-if="layanan.title == 'Undang Expert'"/>
-                    <IconRekrutExpert height="100px" v-if="layanan.title == 'Rekrut Expert'" />
-                </div>
-                <div class="shrink w-full">
-                    <div class="font-bold text-3xl text-black">
-                        {{ layanan.title }}
-                    </div>
-                    <div class="text-sm mt-5">
-                        <p>
-                            {{ layanan.desc}}
-                        </p>
-                    </div>
-                    <div>
-                        <button class="h-9 mt-5 bg-jobhunGreen hover:bg-emerald-600 text-white px-7 rounded text-sm">
-                            Daftar
-                        </button>
-                    </div>
+        <div class="mb-10 border-b border-gray-200">
+            <ul class="flex flex-wrap -mb-px text-sm font-medium text-center">
+                <li class="mr-2">
+                    <button class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-jobhunGreen " 
+                        @click="toggleTabs(1)"
+                        v-bind:class="{ 'text-black': openTab !== 1, 'text-jobhunGreen border-jobhunGreen': openTab === 1}"
+                        >Pilih layanan
+                    </button>
+                </li>
+                <li class="mr-2">
+                    <button
+                        class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-jobhunGreen"
+                        @click="toggleTabs(2)"
+                        v-bind:class="{ 'text-black': openTab !== 2, 'text-jobhunGreen border-jobhunGreen': openTab === 2}"
+                        >Ulasan expert
+                    </button>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <div class="rounded-lg" v-if="openTab === 1">
+                <div v-for="layanan in dataExpert.services" :key="layanan" :id="layanan.id">
+                    <ItemLayanan :itemLayanan="layanan" />
                 </div>
             </div>
-        </div>      
+            <div class="p-4 rounded-lg" v-if="openTab === 2">
+                <div v-for="testimoni in testimonies" :key="testimoni">
+                    <ItemTestimonies :testimonies="testimoni" />
+                </div>
+            </div>
+        </div>
     </div>
 </template>
