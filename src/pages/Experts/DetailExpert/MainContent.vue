@@ -149,7 +149,7 @@ const toggleTabs = (tabNumber) => (openTab.value = tabNumber)
             </div>
             <div class="p-4 rounded-lg" v-if="openTab === 2">
                 <div v-for="testimoni in testimonies" :key="testimoni">
-                    <ItemTestimonies :testimonies="testimoni" />
+                    <ItemTestimonies :testimonies="testimoni" :ratingValues="testimonies.rating"  />
                 </div>
             </div>
         </div>

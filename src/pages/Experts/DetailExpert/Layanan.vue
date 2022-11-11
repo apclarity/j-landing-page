@@ -37,7 +37,7 @@ onMounted(() => {
             <IconRekrutExpert height="100px" v-if="itemLayanan.title == 'Rekrut Expert'" />
         </div>
         <div class="shrink w-full">
-            <div class="font-bold text-3xl text-black">
+            <div class="font-bold text-xl text-black">
                 {{ itemLayanan.title }}
             </div>
             <div class="text-sm mt-5">

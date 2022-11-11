@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import Rating from './Ratings.vue'  
+import Rating from '../../components/Ratings.vue'  
 import ModalPreview from './ModalLayananExpert.vue'
 
 const router = useRouter()

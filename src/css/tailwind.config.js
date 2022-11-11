@@ -8,6 +8,9 @@ module.exports = {
         jobhunGreen: {
           DEFAULT: "#48b391",
         },
+        jobhunYellow: {
+          DEFAULT: "#FFD200",
+        },
       },
       boxShadow: {
         DEFAULT:

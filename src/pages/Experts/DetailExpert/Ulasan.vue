@@ -1,4 +1,6 @@
 <script setup>
+import Rating from '../../../components/Ratings.vue'
+
 const props = defineProps({
     testimonies: Object
 })
@@ -7,7 +9,7 @@ const { testimonies } = props
 </script>
 <template>
     <div class="p-1 mb-3">
-        <div class="max-w-md rounded-lg border border-gray-200 shadow-md p-5">
+        <div class="max-w rounded-lg border border-gray-200 shadow-md p-5">
             <div class="flex items-center space-x-3">
                 <div class="">
                     <img class="w-10 rounded-full" :src="testimonies.img" alt="Photo profile">
@@ -16,6 +18,9 @@ const { testimonies } = props
                     <p class="text-sm font-medium text-black truncate">
                         {{ testimonies.name }}
                     </p>
+                </div>
+                <div class="mt-3">
+                    <Rating :ratingValues="testimonies.rating" />
                 </div>
             </div>
             <div>
