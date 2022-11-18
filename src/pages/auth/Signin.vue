@@ -54,7 +54,7 @@
                 <div class="mr-1">
                   <router-link class="text-sm underline hover:no-underline" to="/reset-password">Lupa kata sandi?</router-link>
                 </div>
-                <a class="btn bg-jobhunGreen hover:bg-emerald-600 text-white ml-3" @click="login">Masuk</a>
+                <button class="btn bg-jobhunGreen hover:bg-emerald-600 text-white ml-3" @click="login">Masuk</button>
               </div>
             </form>
             <!-- Footer -->

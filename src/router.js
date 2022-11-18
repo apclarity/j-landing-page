@@ -70,6 +70,7 @@ import SettingsIndustriTabel from "./pages/settings/Industri/Tabel.vue";
 import SettingsKelasTabel from "./pages/settings/Kelas/Tabel.vue";
 import Homepage from "./pages/Homepage/Index.vue";
 import DetailExpert from "./pages/Experts/DetailExpert/Index.vue";
+import FormKonsultasi from "./pages/Experts/DetailExpert/Services/Index.vue";
 
 const routerHistory = createWebHistory();
 
@@ -107,6 +108,10 @@ const router = createRouter({
         {
           path: "/experts/detailexpert/:id",
           component: DetailExpert,
+        },
+        {
+          path: "/experts/formkonsultasi",
+          component: FormKonsultasi,
         },
         {
           path: "/component/modal",

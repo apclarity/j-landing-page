@@ -3,10 +3,10 @@ import { ref } from 'vue'
 import MainContent from './MainContent.vue'
 
 const items = [
-{
-    img: new URL("../../images/carousel-homepage/Logo Web Baru-01.svg", import.meta.url),
-    id: 0,
-}
+    {
+        img: new URL("../../images/carousel-homepage/Logo Web Baru-01.svg", import.meta.url),
+        id: 0,
+    }
 ]
 
 const dataExperts = {
@@ -50,21 +50,25 @@ const dataExperts = {
             title: "Konsultasi",
             id: "konsultasi",
             desc: `Fitur ini akan membantumu terhubung dengan expert melalui konsultasi privat/grup untuk persiapan karier. Kamu bisa memilih topik pembahasan dan waktu pelaksanaan untuk konsultasi secara fleksibel.`,
+            to: "/experts/formkonsultasi"
         },
         {
             title: "Pelatihan",
             id: "pelatihan",
             desc: `Lengkapi keterampilan dan kemampuanmu melalui pelatihan secara intensif bersama dengan expert, baik secara privat/grup. Kamu bisa menentukan topik pembahasan dan waktu pelaksanaan untuk pelatihan secara fleksibel.`,
+            to: "/"
         },
         {
             title: "Undang Expert",
             id: "undang-expert",
             desc: `Temukan expert yang tepat untuk berbagai acara, seperti seminar, workshop, talkshow, hingga training. Fitur ini akan membantumu menemukan expert terbaik untuk kebutuhan pembicara atau narasumber sesuai dengan kualifikasi yang dibutuhkan.`,
+            to: "/"
         },
         {
             title: "Rekrut Expert",
             id: "rekrut-expert",
             desc: `Membutuhkan keahlian dari expert untuk proyek? Dapatkan talenta terbaik untuk pengerjaan proyek sesuai dengan kualifikasi, jangka waktu, dan budget dari perusahaan. Melalui fitur ini, perusahaan bisa mendapatkan talenta tanpa perlu repot dalam proses rekrutmen hingga penggajian. `,
+            to: "/"
         }
     ]
 }
