@@ -1,6 +1,10 @@
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
+import { useLayoutStore } from '../../../pages/layout/store'
+import { isObjectEmpty } from '../../../utils/Helper'
+
+import ModalLogin from './ModalIsUserLogin.vue'
 import IconKonsultasi from '../../../partials/icons/icon-konsultasi.vue'
 import IconPelatihan from '../../../partials/icons/icon-pelatihan.vue'
 import IconUndangExpert from '../../../partials/icons/icon-undang-expert.vue'
@@ -8,10 +12,22 @@ import IconRekrutExpert from '../../../partials/icons/icon-rekrut-expert.vue'
 import IconLinkedin from '../../../partials/icons/icon-linkedin.vue'
 
 const props = defineProps({
-    itemLayanan: Object
+    itemLayanan: Object,
+    session: Object,
 })
 
 const { itemLayanan } = props
+
+const layoutStore = useLayoutStore()
+const session = computed(() => layoutStore.session)
+
+const isSessionEmpty = computed(() => isObjectEmpty(layoutStore.sessionFirstName))
+
+const isUserLogin = ref(false)
+
+const openModalLogin = () => {
+    isUserLogin.value = true
+}
 
 const route = useRoute()
 
@@ -46,9 +62,15 @@ onMounted(() => {
                 </p>
             </div>
             <div>
-                <button class="h-9 mt-5 bg-jobhunGreen hover:bg-emerald-600 text-white px-7 rounded text-sm">
-                    Daftar
+                <button v-if="isSessionEmpty" 
+                class="h-9 mt-5 bg-jobhunGreen hover:bg-emerald-600 text-white px-7 rounded text-sm">
+                    <span @click="openModalLogin">Daftar</span>
                 </button>
+                <button v-else
+                class="h-9 mt-5 bg-jobhunGreen hover:bg-emerald-600 text-white px-7 rounded text-sm">
+                    <router-link :to="itemLayanan.to">Daftar</router-link>
+                </button>
+                <ModalLogin :isUserLogin="isUserLogin" @close-modal="isUserLogin = false" />
             </div>
         </div>
     </div>
