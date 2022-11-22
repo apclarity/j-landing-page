@@ -10,7 +10,7 @@ const dataExpertKonsultasi = {
         position: 'Startup Founder',
         formalEducation: 'Universitas Dr. Soetomo (Bachelor of Communications) 2015 ',
         domicile: 'Surabaya',
-        price: '100000',
+        price: '300000',
         detailKonsultasis: [
             {
                 id: 'jadwal',
@@ -26,6 +26,10 @@ const dataExpertKonsultasi = {
                 id: 'posisi',
                 title: "Jenis materi",
                 desc: 'Teori, praktek, tools, soft skill'
+            },
+            {
+                id: 'tarif',
+                title: "Tarif",
             }
         ],
         linkedin: '#',
