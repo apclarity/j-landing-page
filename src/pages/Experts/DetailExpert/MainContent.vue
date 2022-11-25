@@ -23,7 +23,9 @@ onMounted(()=>{
     if(sectionID == null){
         return
     }
-    document.getElementById(querySection).scrollIntoView()
+    document.getElementById(querySection).scrollIntoView({
+        block: 'center'
+    })
 })
 
 const openTab = ref(1)

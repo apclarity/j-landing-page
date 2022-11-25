@@ -41,8 +41,8 @@
               <div class="space-y-4">
                 <div>
                   <label class="block text-sm font-medium mb-1" for="email">Email</label>
-                  <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full" 
-                  type="email" v-model="auth.email" required/>
+                  <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-md"
+                    type="email" required placeholder="Input angka" v-model="formExpertPelatihan.totalPerson" />
                 </div>
                 <div>
                   <label class="block text-sm font-medium mb-1" for="password">Kata sandi</label>

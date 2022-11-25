@@ -70,7 +70,9 @@ import SettingsIndustriTabel from "./pages/settings/Industri/Tabel.vue";
 import SettingsKelasTabel from "./pages/settings/Kelas/Tabel.vue";
 import Homepage from "./pages/Homepage/Index.vue";
 import DetailExpert from "./pages/Experts/DetailExpert/Index.vue";
-import FormKonsultasi from "./pages/Experts/DetailExpert/Services/Index.vue";
+import FormKonsultasi from "./pages/Experts/DetailExpert/Services/Konsultasi/Index.vue";
+import FormPelatihan from "./pages/Experts/DetailExpert/Services/Pelatihan/Index.vue";
+import FormUndangExpert from "./pages/Experts/DetailExpert/Services/UndangExpert/Index.vue";
 
 const routerHistory = createWebHistory();
 
@@ -112,6 +114,14 @@ const router = createRouter({
         {
           path: "/experts/formkonsultasi",
           component: FormKonsultasi,
+        },
+        {
+          path: "/experts/formpelatihan",
+          component: FormPelatihan,
+        },
+        {
+          path: "/experts/formundangexpert",
+          component: FormUndangExpert,
         },
         {
           path: "/component/modal",
