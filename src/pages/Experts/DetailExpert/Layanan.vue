@@ -62,14 +62,15 @@ onMounted(() => {
                 </p>
             </div>
             <div>
-                <button v-if="isSessionEmpty" 
+                <button v-if="isSessionEmpty" @click="openModalLogin"
                 class="h-9 mt-5 bg-jobhunGreen hover:bg-emerald-600 text-white px-7 rounded text-sm">
-                    <span @click="openModalLogin">Daftar</span>
+                    <span >Daftar</span>
                 </button>
-                <button v-else
-                class="h-9 mt-5 bg-jobhunGreen hover:bg-emerald-600 text-white px-7 rounded text-sm">
-                    <router-link :to="itemLayanan.to">Daftar</router-link>
-                </button>
+                <router-link v-else :to="itemLayanan.to">
+                    <button class="h-9 mt-5 bg-jobhunGreen hover:bg-emerald-600 text-white px-7 rounded text-sm">
+                        <span>Daftar</span>
+                    </button>
+                </router-link>
                 <ModalLogin :isUserLogin="isUserLogin" @close-modal="isUserLogin = false" />
             </div>
         </div>

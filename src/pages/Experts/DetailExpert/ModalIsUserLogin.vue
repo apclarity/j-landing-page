@@ -16,6 +16,10 @@ const closeModal = ()=> {
     emit("close-modal")
 }
 
+const toSignIn = () => {
+    router.push({ path: '/signin'})
+}
+
 // const scrollTo = (id) => {
 //     router.push({ path: '/experts/detailexpert/' + props.expertID, query: { section: id } })
 // }
@@ -42,8 +46,9 @@ const closeModal = ()=> {
                     </span>
                 </div>
                 <div class="mx-auto text-center px-8">
-                    <button class="h-9 mt-3 bg-jobhunGreen hover:bg-emerald-600 text-white px-7 rounded text-sm">
-                        <router-link to="/signin">Masuk</router-link>
+                    <button @click="toSignIn"
+                    class="h-9 mt-3 bg-jobhunGreen hover:bg-emerald-600 text-white px-7 rounded text-sm">
+                        <span>Masuk</span>
                     </button>
                 </div>
             </div>

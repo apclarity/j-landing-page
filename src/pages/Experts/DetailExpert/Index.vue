@@ -56,13 +56,13 @@ const dataExperts = {
             title: "Pelatihan",
             id: "pelatihan",
             desc: `Lengkapi keterampilan dan kemampuanmu melalui pelatihan secara intensif bersama dengan expert, baik secara privat/grup. Kamu bisa menentukan topik pembahasan dan waktu pelaksanaan untuk pelatihan secara fleksibel.`,
-            to: "/"
+            to: "/experts/formpelatihan"
         },
         {
             title: "Undang Expert",
             id: "undang-expert",
             desc: `Temukan expert yang tepat untuk berbagai acara, seperti seminar, workshop, talkshow, hingga training. Fitur ini akan membantumu menemukan expert terbaik untuk kebutuhan pembicara atau narasumber sesuai dengan kualifikasi yang dibutuhkan.`,
-            to: "/"
+            to: "/experts/formundangexpert"
         },
         {
             title: "Rekrut Expert",

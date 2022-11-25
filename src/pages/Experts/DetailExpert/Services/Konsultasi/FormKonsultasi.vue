@@ -1,15 +1,16 @@
 <script setup>
 import { onMounted, ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
-import IconCalendar from '../../../../partials/icons/icon-calendar.vue'
-import IconClock from '../../../../partials/icons/icon-clock.vue'
-import IconMateri from '../../../../partials/icons/icon-materi.vue'
-import IconLinkedin from '../../../../partials/icons/icon-linkedin.vue'
-import IconTarif from '../../../../partials/icons/icon-rupiah.vue'
-import Tooltip from '../../../../components/TooltipRed.vue'
+import IconCalendar from '../../../../../partials/icons/icon-calendar.vue'
+import IconClock from '../../../../../partials/icons/icon-clock.vue'
+import IconMateri from '../../../../../partials/icons/icon-materi.vue'
+import IconLinkedin from '../../../../../partials/icons/icon-linkedin.vue'
+import IconTarif from '../../../../../partials/icons/icon-rupiah.vue'
+import Tooltip from '../../../../../components/TooltipRed.vue'
 import DateSingle from './DateSingle.vue'
 import MultiSel from './MultipleSelectFormKonsultasi.vue'
 import { PrinterIcon } from '@heroicons/vue/20/solid'
+import ModalAjukan from './ModalAjukanKonsultasi.vue'
 
 const props = defineProps({
     dataExpertKonsultasi: Object
@@ -40,6 +41,19 @@ const total = computed(()=> {
     return "Rp" + total.toString().replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1\.")
     return total
 })
+
+const formExpertKonsultasi = ref({
+    date: "",
+    startHour: "",
+    startMinute: "",
+    endHour: "",
+    endMinute: "",
+    discussion: "",
+    topic: "",
+    total: "",
+    duration: ""
+})
+
 const itemTopic = [
     {
         id: 1,
@@ -129,11 +143,17 @@ const minutes = [
 ]
 
 const dropdownOpen = ref(false)
+
+const isUserAjukan = ref(false)
+
+const openModalAjukanKonsultasi = () => {
+    isUserAjukan.value = true
+}
 </script>
 <template>
     <div class="relative h-96 bg-slate-200 -z-20 -mt-10 md:mt-0">
         <img class="object-cover h-full w-full object-top"
-            src="../../../../images/jobhun-ilustration-background/banner-ilustrasi-01.png" alt="Profile background" />
+            src="../../../../../images/jobhun-ilustration-background/banner-ilustrasi-01.png" alt="Profile background" />
     </div>
     <div class="lg:px-60 px-10 mb-10">
         <div class="-mt-32 mb-6 sm:mb-3 md:flex">
@@ -210,54 +230,47 @@ const dropdownOpen = ref(false)
                         </div>
                     </div>
                 </div>
-                <!-- <div class="flex justify-end mt-5">
-                    <div class="font-bold text-lg text-black">
-                        Tarif {{ pricePerHour }},-/jam
-                    </div>
-                </div> -->
                 </div>
             <hr class="my-10 border-gray-300 sm:mx-auto" />
         </header>
-        <div>
+        <form action="">
             <div>
-                <span class="text-lg font-bold text-black">
-                    Daftar konsultasi
-                </span>
-            </div>
-            <div class="max-w-xl mt-5">
                 <div>
-                    <label class="block text-sm font-medium mb-1 text-black">Pengajuan tanggal mentoring</label>
-                    <div class="flex items-center space-x-2">
-                        <DateSingle />
-                        <Tooltip position="right" class="">
-                            <div class="text-xs whitespace-nowrap">Silakan sesuaikan dengan jadwal expert yang tersedia</div>
-                        </Tooltip>
-                    </div>
-                    
+                    <span class="text-lg font-bold text-black">
+                        Daftar konsultasi
+                    </span>
                 </div>
-                <div class="mt-4">
-                    <label class="block text-sm font-medium mb-1 text-black">Pengajuan waktu mentoring</label>
-                    <!-- <input type="text" 
-                    class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                    required placeholder="Silakan sesuaikan dengan jadwal mentor yang tersedia"> -->
+                <div class="max-w-xl mt-5">
+                    <div>
+                        <label class="block text-sm font-medium mb-1 text-black">Pengajuan tanggal mentoring</label>
                         <div class="flex items-center space-x-2">
-                            <select required 
+                            <DateSingle v-model="formExpertKonsultasi.date" />
+                            <Tooltip position="right" class="">
+                                <div class="text-xs whitespace-nowrap">Silakan sesuaikan dengan jadwal expert yang tersedia</div>
+                            </Tooltip>
+                        </div>
+            
+                    </div>
+                    <div class="mt-4">
+                        <label class="block text-sm font-medium mb-1 text-black">Pengajuan waktu mentoring</label>
+                        <div class="flex items-center space-x-2">
+                            <select required v-model="formExpertKonsultasi.startHour"
                                 class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-14"
                                 @click.prevent="dropdownOpen = !dropdownOpen">
                                 <option v-for="hour in hours" :key="hour.text">{{hour.text}}</option>
                             </select>
                             <span class="px-1">:</span>
-                            <select required
+                            <select required v-model="formExpertKonsultasi.endMinute"
                                 class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-14">
                                 <option v-for="minute in minutes" :key="minute.text">{{minute.text}}</option>
                             </select>
                             <span class="text-1xl px-3">-</span>
-                            <select required
+                            <select required v-model="formExpertKonsultasi.startHour"
                                 class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-14">
                                 <option v-for="hour in hours" :key="hour.text">{{hour.text}}</option>
                             </select>
                             <span class="px-1">:</span>
-                            <select required
+                            <select required v-model="formExpertKonsultasi.endMinute"
                                 class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-14">
                                 <option v-for="minute in minutes" :key="minute.text">{{minute.text}}</option>
                             </select>
@@ -266,54 +279,58 @@ const dropdownOpen = ref(false)
                             </Tooltip>
                         </div>
                     </div>
-                <div class="mt-4">
-                    <label class="block text-sm font-medium mb-1 text-black">Durasi mentoring</label>
-                    <div class="custom-number-input w-32">
-                        <div class="flex flex-row h-8 w-full rounded-lg relative bg-transparent mt-1">
-                            <button @click="decrement()"
-                                class=" border-0 bg-gray-100 hover:bg-gray-300 hover:ring-emerald-500 focus:ring-jobhunGreen h-full w-20 rounded-l cursor-pointer outline-none">
-                                <span class="m-auto text-2xl font-thin">−</span>
-                            </button>
-                            <div type="number"
-                                class="border-0 bg-gray-100 hover:ring-emerald-500 focus:ring-jobhunGreen p-1.5 text-sm w-full text-center flex items-center text-gray-700"
-                                >
-                                {{duration}} jam
+                    <div class="mt-4">
+                        <label class="block text-sm font-medium mb-1 text-black">Durasi mentoring</label>
+                        <div class="custom-number-input w-32">
+                            <div class="flex flex-row h-8 w-full rounded-lg relative bg-transparent mt-1">
+                                <button @click="decrement()"
+                                    class=" border-0 bg-gray-100 hover:bg-gray-300 hover:ring-emerald-500 focus:ring-jobhunGreen h-full w-20 rounded-l cursor-pointer outline-none">
+                                    <span class="m-auto text-2xl font-thin">−</span>
+                                </button>
+                                <div type="number"
+                                    class="border-0 bg-gray-100 hover:ring-emerald-500 focus:ring-jobhunGreen p-1.5 text-sm w-full text-center flex items-center text-gray-700">
+                                    {{duration}} jam
+                                </div>
+                                <button @click="increment()"
+                                    class="border-0 bg-gray-100 hover:bg-gray-300 hover:ring-emerald-500 focus:ring-jobhunGreen h-full w-20 rounded-r cursor-pointer">
+                                    <span class="m-auto text-2xl font-thin">+</span>
+                                </button>
                             </div>
-                            <button @click="increment()"
-                                class="border-0 bg-gray-100 hover:bg-gray-300 hover:ring-emerald-500 focus:ring-jobhunGreen h-full w-20 rounded-r cursor-pointer">
-                                <span class="m-auto text-2xl font-thin">+</span>
-                            </button>
                         </div>
                     </div>
-                </div>
-                <div class="mt-4">
-                    <label class="block text-sm font-medium mb-1 text-black">Jenis pembahasan</label>
-                    <MultiSel :topics="itemTopic" class="w-full"  />
-                </div>
-                <div class="mt-4">
-                    <label class="block text-sm font-medium mb-1 text-black">Jelaskan secara spesifik topik/pembahasan apa saja yang ingin kamu pelajari dari expert!</label>
-                    <textarea rows="5" class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                        required/>
-                </div>
-            </div>
-        </div>
-        <hr class="my-10 border-gray-300 sm:mx-auto" />
-        <div>
-            <div class="flex justify-end mt-5">
-                <div class="font-bold text-lg text-black">
-                    Total {{ total }},-
+                    <div class="mt-4">
+                        <label class="block text-sm font-medium mb-1 text-black">Jenis pembahasan</label>
+                        <MultiSel :topics="itemTopic" v-model="formExpertKonsultasi.discussion" class="w-full" />
+                    </div>
+                    <div class="mt-4">
+                        <label class="block text-sm font-medium mb-1 text-black">Jelaskan secara spesifik topik/pembahasan apa saja
+                            yang ingin kamu pelajari dari expert!</label>
+                        <textarea rows="5"
+                            class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
+                            required v-model="topic" />
+                    </div>
                 </div>
             </div>
-        </div>
-        <div>
-            <div class="flex justify-end">
-                <div>
-                    <button class="h-9 mt-5 bg-jobhunGreen hover:bg-emerald-600 text-white px-7 rounded text-sm">
-                        <router-link to="/">Ajukan</router-link>
-                    </button>
+            <hr class="my-10 border-gray-300 sm:mx-auto" />
+            <div>
+                <div class="flex justify-end mt-5">
+                    <div class="font-bold text-lg text-black">
+                        Total {{ total }},-
+                    </div>
                 </div>
             </div>
-        </div>
+            <div>
+                <div class="flex justify-end">
+                    <div>
+                        <button @click="openModalAjukanKonsultasi" type="submit"
+                            class="h-9 mt-5 bg-jobhunGreen hover:bg-emerald-600 text-white px-7 rounded text-sm">
+                            Ajukan
+                        </button>
+                        <ModalAjukan :isUserAjukan="isUserAjukan" @close-modal="isUserAjukan = false" />
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
 </template>
 <style>
