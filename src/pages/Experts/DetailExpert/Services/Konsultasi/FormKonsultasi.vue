@@ -8,9 +8,9 @@ import IconLinkedin from '../../../../../partials/icons/icon-linkedin.vue'
 import IconTarif from '../../../../../partials/icons/icon-rupiah.vue'
 import Tooltip from '../../../../../components/TooltipRed.vue'
 import DateSingle from './DateSingle.vue'
-import MultiSel from './MultipleSelectFormKonsultasi.vue'
 import { PrinterIcon } from '@heroicons/vue/20/solid'
 import ModalAjukan from './ModalAjukanKonsultasi.vue'
+import Multiselect from '@vueform/multiselect'
 
 const props = defineProps({
     dataExpertKonsultasi: Object
@@ -48,11 +48,15 @@ const formExpertKonsultasi = ref({
     startMinute: "",
     endHour: "",
     endMinute: "",
-    discussion: "",
+    discussion: [],
     topic: "",
     total: "",
     duration: ""
 })
+
+const discussions = [
+    'Digital Marketing', 'Accounting', 'Content Creator'
+]
 
 const itemTopic = [
     {
@@ -300,7 +304,9 @@ const openModalAjukanKonsultasi = () => {
                     </div>
                     <div class="mt-4">
                         <label class="block text-sm font-medium mb-1 text-black">Jenis pembahasan</label>
-                        <MultiSel :topics="itemTopic" v-model="formExpertKonsultasi.discussion" class="w-full" />
+                        <Multiselect v-model="formExpertKonsultasi.discussion" mode="tags" :close-on-select="false"
+                            class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen text-sm w-full"
+                            :create-option="true" :options="discussions" />
                     </div>
                     <div class="mt-4">
                         <label class="block text-sm font-medium mb-1 text-black">Jelaskan secara spesifik topik/pembahasan apa saja

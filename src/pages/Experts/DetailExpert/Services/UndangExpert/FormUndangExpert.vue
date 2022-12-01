@@ -30,6 +30,16 @@ const formUndangExpert = ref({
     topic: ""
 })
 
+const isNumberCurrency = (evt) => {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+        evt.preventDefault();;
+    } else {
+        return true;
+    }
+}
+
 const itemTopic = [
     {
         id: 1,
@@ -201,13 +211,11 @@ const openModalAjukanPelatihan = () => {
                                 <div>
                                     <IconCalendar height="30px" v-if="services.id == 'jadwal'" />
                                     <IconClock height="30px" v-if="services.id == 'waktu'" />
-                                    <IconMateri height="30px" v-if="services.id == 'posisi'" />
-                                    <IconTarif height="30px" v-if="services.id == 'tarif'" />
                                 </div>
                                 <div class="font-bold text-sm text-slate-800 mx-auto mt-2">
                                     {{ services.title }}
                                 </div>
-                                <div class="flex items-center">
+                                <div class="flex items-center text-center">
                                     <div class="text-sm" v-if="services.id != 'tarif'">
                                         {{ services.desc }}
                                     </div>
@@ -247,7 +255,7 @@ const openModalAjukanPelatihan = () => {
                         <label class="block text-sm font-medium mb-1 text-black">Nama acara/kegiatan</label>
                         <input
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                            v-model="formUndangExpert.eventName" />
+                            v-model="formUndangExpert.eventName" required />
                     </div>
                     <div class="mt-4">
                         <label class="block text-sm font-medium mb-1 text-black">Penjelasan tentang acara/kegiatan</label>
@@ -264,7 +272,7 @@ const openModalAjukanPelatihan = () => {
                     <div class="mt-4">
                         <label class="block text-sm font-medium mb-1 text-black">Jenis pelatihan</label>
                         <div class="flex items-center" v-for="undangExpert in radioUndangExpert" :key="undangExpert">
-                            <input id="default-radio-1" type="radio" v-model="formUndangExpert.typePelatihan"
+                            <input id="default-radio-1" type="radio" v-model="formUndangExpert.typePelatihan" required
                                 class="w-4 h-4 text-jobhunGreen bg-gray-200 border-gray-200 focus:ring-jobhunGreen focus:ring-1 hover:ring-jobhunGreen hover:ring-1">
                             <label for="default-radio-1" class="ml-2 text-sm font-medium text-black">{{ undangExpert.text }}</label>
                         </div>
@@ -273,14 +281,14 @@ const openModalAjukanPelatihan = () => {
                         <label class="block text-sm font-medium mb-1 text-black">Jumlah target peserta secara spesifik</label>
                         <input
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-md"
-                            type="email" required v-model="formUndangExpert.target" />
+                            @keypress="isNumberCurrency($event)" required v-model="formUndangExpert.target" placeholder="Input angka" />
                     </div>
                     <div class="mt-4">
                         <label class="block text-sm font-medium mb-1 text-black">Berapa budget yang diajukan untuk fee
                             speaker?</label>
                         <input
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-md"
-                            type="email" required v-model="formUndangExpert.budget" />
+                            @keypress="isNumberCurrency($event)" required v-model="formUndangExpert.budget" placeholder="Input angka" />
                     </div>
                     <div class="mt-4">
                         <label class="block text-sm font-medium mb-1 text-black">Jelaskan secara spesifik topik/pembahasan

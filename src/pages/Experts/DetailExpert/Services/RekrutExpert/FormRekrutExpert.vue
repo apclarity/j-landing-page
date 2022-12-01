@@ -1,49 +1,65 @@
 <script setup>
-import { onMounted, ref, computed } from 'vue'
+import { onMounted, ref, computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import IconCalendar from '../../../../../partials/icons/icon-calendar.vue'
-import IconClock from '../../../../../partials/icons/icon-clock.vue'
-import IconMateri from '../../../../../partials/icons/icon-materi.vue'
+import IconStar from '../../../../../partials/icons/icon-star.vue'
+import IconBriefcase from '../../../../../partials/icons/icon-briefcase.vue'
 import IconLinkedin from '../../../../../partials/icons/icon-linkedin.vue'
-import IconTarif from '../../../../../partials/icons/icon-rupiah.vue'
-import Tooltip from '../../../../../components/TooltipRed.vue'
-import MultiSel from './MultipleSelectFormPelatihan.vue'
-import DropdownCheckbox from './DropdownCheckbox.vue'
+import DateSingle from './DateSingleRekrutExpert.vue'
 import { PrinterIcon } from '@heroicons/vue/20/solid'
-import ModalAjukan from './ModalAjukanPelatihan.vue'
-import Multiselect from '@vueform/multiselect'
+import ModalAjukan from './ModalAjukanRekrutExpert.vue'
+import RegionJSON from '../../../../../utils/json/regencies.json'
+import { convertRawIntToRupiah } from '../../../../../utils/Helper'
 
 const props = defineProps({
-    dataExpertPelatihan: Object
+    dataRekrutExpert: Object
 })
 
-const { dataExpertPelatihan } = props
+const { dataRekrutExpert } = props
 
-const formExpertPelatihan = ref({
-    typePelatihan: "",
-    totalPerson: "",
-    session: "",
-    topic: "",
-    startHour: "",
-    startMinute: "",
-    endHour: "",
-    endMinute: "",
-    days: null
+const formRekrutExpert = ref({
+    company: "",
+    location: "",
+    website: "",
+    linkedin: "",
+    email: "",
+    phone: "",
+    projectDetail: "",
+    jobDetail: "",
+    termCondition: "",
+    deadline: "",
+    budget: ""
 })
 
-const days = [
-    'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'
-]
-
-const isNumberCurrency = (evt) => {
-    evt = (evt) ? evt : window.event;
-    var charCode = (evt.which) ? evt.which : evt.keyCode;
-    if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
-        evt.preventDefault();;
-    } else {
-        return true;
-    }
+const formatBudget = ()=>{
+    formRekrutExpert.value.budget = convertRawIntToRupiah(formRekrutExpert.value.budget)
 }
+
+const jsonCity = [
+    {
+        "id": "1101",
+        "province_id": "11",
+        "name": "KABUPATEN SIMEULUE",
+        "alt_name": "KABUPATEN SIMEULUE",
+        "latitude": 2.61667,
+        "longitude": 96.08333
+    },
+    {
+        "id": "1102",
+        "province_id": "11",
+        "name": "KABUPATEN ACEH SINGKIL",
+        "alt_name": "KABUPATEN ACEH SINGKIL",
+        "latitude": 2.41667,
+        "longitude": 97.91667
+    },
+    {
+        "id": "1103",
+        "province_id": "11",
+        "name": "KABUPATEN ACEH SELATAN",
+        "alt_name": "KABUPATEN ACEH SELATAN",
+        "latitude": 3.16667,
+        "longitude": 97.41667
+    },
+]
 
 const itemTopic = [
     {
@@ -116,12 +132,6 @@ const itemTopic = [
     },
 ]
 
-const hours = [
-    { text: '00' }, { text: '01' }, { text: '02' }, { text: '03' }, { text: '04' }, { text: '05' }, { text: '06' }, { text: '07' }, { text: '08' },
-    { text: '09' }, { text: '10' }, { text: '11' }, { text: '12' }, { text: '13' }, { text: '14' }, { text: '15' }, { text: '16' }, { text: '17' },
-    { text: '18' }, { text: '19' }, { text: '20' }, { text: '21' }, { text: '22' }, { text: '23' }, { text: '24' },
-]
-
 const minutes = [
     { text: '00' }, { text: '01' }, { text: '02' }, { text: '03' }, { text: '04' }, { text: '05' }, { text: '06' }, { text: '07' }, { text: '08' },
     { text: '09' }, { text: '10' }, { text: '11' }, { text: '12' }, { text: '13' }, { text: '14' }, { text: '15' }, { text: '16' }, { text: '17' },
@@ -133,26 +143,26 @@ const minutes = [
     { text: '59' }
 ]
 
-const radioPelatihan = [
+const radioUndangExpert = [
     {
-        text: 'Teori'
+        text: 'Talkshow'
     },
     {
-        text: 'Studi kasus'
+        text: 'Workshop'
+    },
+    {
+        text: 'Lainnya'
     }
 ]
+
+const dropdownOpen = ref(false)
 
 const isUserAjukan = ref(false)
 
 const openModalAjukanPelatihan = () => {
     isUserAjukan.value = true
 }
-
-const dropdownDay = ref(false)
 </script>
-<style src="@vueform/multiselect/themes/default.css">
-
-</style>
 <template>
     <div class="relative h-96 bg-slate-200 -z-20 -mt-10 md:mt-0">
         <img class="object-cover h-full w-full object-top"
@@ -163,7 +173,7 @@ const dropdownDay = ref(false)
         <div class="-mt-32 mb-6 sm:mb-3 md:flex">
             <div class="flex flex-col items-center md:w-1/4 sm:flex-row sm:justify-between sm:items-end">
                 <div class="inline-flex -mt-1 mb-4 sm:mb-0">
-                    <img class="rounded-full ring-8 ring-white" :src="dataExpertPelatihan.profile.imgProfile"
+                    <img class="rounded-full ring-8 ring-white" :src="dataRekrutExpert.profile.imgProfile"
                         width="200" />
                 </div>
             </div>
@@ -172,7 +182,7 @@ const dropdownDay = ref(false)
             <div class="grid grid-flow-row md:flex">
                 <div class="mb-2 flex-none md:w-2/6 mr-0 md:mr-5">
                     <h1 class="text-2xl sm:text-left text-center text-slate-800 font-bold">
-                        {{ dataExpertPelatihan.profile.name }} ✨
+                        {{ dataRekrutExpert.profile.name }} ✨
                     </h1>
                     <div class="sm:text-left text-center mt-3">
                         <span class="text-sm">
@@ -181,7 +191,7 @@ const dropdownDay = ref(false)
                     </div>
                     <div class="sm:text-left text-center text-black">
                         <span class="font-bold text-sm">
-                            {{ dataExpertPelatihan.profile.position }}
+                            {{ dataRekrutExpert.profile.position }}
                         </span>
                     </div>
                     <div class="sm:text-left text-center mt-3">
@@ -191,7 +201,7 @@ const dropdownDay = ref(false)
                     </div>
                     <div class="sm:text-left text-center text-black">
                         <span class="font-bold text-sm">
-                            {{ dataExpertPelatihan.profile.formalEducation }}
+                            {{ dataRekrutExpert.profile.formalEducation }}
                         </span>
                     </div>
                     <div class="sm:text-left text-center mt-3">
@@ -201,7 +211,7 @@ const dropdownDay = ref(false)
                     </div>
                     <div class="text-center sm:text-left text-black">
                         <span class="font-bold text-sm">
-                            {{ dataExpertPelatihan.profile.domicile }}
+                            {{ dataRekrutExpert.profile.domicile }}
                         </span>
                     </div>
                     <div class="flex justify-center items-center sm:justify-start">
@@ -212,14 +222,12 @@ const dropdownDay = ref(false)
                     </div>
                 </div>
                 <div class="grid md:grid-cols-2 gap-6 w-full">
-                    <div class="" v-for="services in dataExpertPelatihan.profile.detailPelatihans" :key="services">
+                    <div class="" v-for="services in dataRekrutExpert.profile.detailRekrutExperts" :key="services">
                         <div class="w-full bg-white border border-gray-200 rounded-sm shadow-sm">
                             <div class="flex flex-col items-center p-4 my-5">
                                 <div>
-                                    <IconCalendar height="30px" v-if="services.id == 'jadwal'" />
-                                    <IconClock height="30px" v-if="services.id == 'waktu'" />
-                                    <IconMateri height="30px" v-if="services.id == 'posisi'" />
-                                    <IconTarif height="30px" v-if="services.id == 'tarif'" />
+                                    <IconStar height="30px" v-if="services.id == 'skill'" />
+                                    <IconBriefcase height="30px" v-if="services.id == 'jobType'" />
                                 </div>
                                 <div class="font-bold text-sm text-slate-800 mx-auto mt-2">
                                     {{ services.title }}
@@ -243,68 +251,75 @@ const dropdownDay = ref(false)
             <div>
                 <div>
                     <span class="text-lg font-bold text-black">
-                        Daftar pelatihan
+                        Pengajuan Expert untuk Proyek
                     </span>
                 </div>
                 <div class="max-w-xl mt-5">
                     <div>
-                        <label class="block text-sm font-medium mb-1 text-black">Jenis pelatihan</label>
-                        <div class="flex items-center" v-for="pelatihan in radioPelatihan" :key="pelatihan">
-                            <input type="radio" v-model="formExpertPelatihan.typePelatihan" required
-                                class="w-4 h-4 text-jobhunGreen bg-gray-200 border-gray-200 focus:ring-jobhunGreen focus:ring-1 hover:ring-jobhunGreen hover:ring-1">
-                            <label class="ml-2 text-sm font-medium text-black">{{ pelatihan.text }}</label>
+                        <label class="block text-sm font-medium mb-1 text-black">Nama perusahaan</label>
+                        <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
+                            required v-model="formRekrutExpert.company" />
+                    </div>
+                    <div class="mt-4">
+                        <label class="block text-sm font-medium mb-1 text-black">Lokasi perusahaan</label>
+                        <div class="flex items-center">
+                            <select required v-model="formRekrutExpert.location"
+                                class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
+                                @click.prevent="dropdownOpen = !dropdownOpen">
+                                <option v-for="city in jsonCity" :key="city">{{city.name}}</option>
+                            </select>
+                            
                         </div>
                     </div>
                     <div class="mt-4">
-                        <label class="block text-sm font-medium mb-1 text-black">Jika grup, berapa peserta yang akan mengikuti
-                            pelatihan?</label>
-                        <input
-                            class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-md"
-                            @keypress="isNumberCurrency($event)" required placeholder="Input angka" v-model="formExpertPelatihan.totalPerson" />
+                        <label class="block text-sm font-medium mb-1 text-black">Website perusahaan</label>
+                        <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
+                            required v-model="formRekrutExpert.website" />
                     </div>
                     <div class="mt-4">
-                        <label class="block text-sm font-medium mb-1 text-black">Berapa sesi pertemuan yang diajukan?</label>
-                        <input
-                            class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-md"
-                            @keypress="isNumberCurrency($event)" required placeholder="Input angka" v-model="formExpertPelatihan.session" />
+                        <label class="block text-sm font-medium mb-1 text-black">LinkedIn perusahaan</label>
+                        <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
+                            required v-model="formRekrutExpert.linkedin" />
                     </div>
                     <div class="mt-4">
-                        <label class="block text-sm font-medium mb-1 text-black">Jelaskan secara spesifik topik/pembahasan
-                            apa saja yang ingin kamu pelajari dari expert!</label>
+                        <label class="block text-sm font-medium mb-1 text-black">Email perusahaan</label>
+                        <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
+                            required v-model="formRekrutExpert.email" type="email" />
+                    </div>
+                    <div class="mt-4">
+                        <label class="block text-sm font-medium mb-1 text-black">Nomor telepon perusahaan</label>
+                        <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
+                            required v-model="formRekrutExpert.phone" />
+                    </div>
+                    <div class="mt-4">
+                        <label class="block text-sm font-medium mb-1 text-black">Detail proyek</label>
                         <textarea rows="5"
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                            required v-model="formExpertPelatihan.topic" />
+                            required v-model="formRekrutExpert.projectDetail" />
                     </div>
                     <div class="mt-4">
-                        <label class="block text-sm font-medium mb-1 text-black">Pengajuan hari kelas</label>
-                        <Multiselect v-model="formExpertPelatihan.days" mode="tags"
-                            :close-on-select="false" class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen text-sm w-full"
-                            :create-option="true" :options="days" />
+                        <label class="block text-sm font-medium mb-1 text-black">Detail pekerjaan expert</label>
+                        <textarea rows="5"
+                            class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
+                            required v-model="formRekrutExpert.jobDetail" />
                     </div>
                     <div class="mt-4">
-                        <label class="block text-sm font-medium mb-1 text-black">Pengajuan waktu mentoring</label>
+                        <label class="block text-sm font-medium mb-1 text-black">Syarat dan kualifikasi</label>
+                        <textarea rows="5"
+                            class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
+                            required v-model="formRekrutExpert.termCondition" />
+                    </div>
+                    <div class="mt-4">
+                        <label class="block text-sm font-medium mb-1 text-black">Batas waktu pekerjaan</label>
                         <div class="flex items-center space-x-2">
-                            <select required v-model="formExpertPelatihan.startHour"
-                                class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-14"
-                                @click.prevent="dropdownOpen = !dropdownOpen">
-                                <option v-for="hour in hours" :key="hour.text">{{hour.text}}</option>
-                            </select>
-                            <span class="px-1">:</span>
-                            <select required v-model="formExpertPelatihan.startMinute"
-                                class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-14">
-                                <option v-for="minute in minutes" :key="minute.text">{{minute.text}}</option>
-                            </select>
-                            <span class="text-1xl px-3">-</span>
-                            <select required v-model="formExpertPelatihan.endHour"
-                                class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-14">
-                                <option v-for="hour in hours" :key="hour.text">{{hour.text}}</option>
-                            </select>
-                            <span class="px-1">:</span>
-                            <select required v-model="formExpertPelatihan.endMinute"
-                                class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-14">
-                                <option v-for="minute in minutes" :key="minute.text">{{minute.text}}</option>
-                            </select>
+                            <DateSingle v-model="formRekrutExpert.deadline" />
                         </div>
+                    </div>
+                    <div class="mt-4">
+                        <label class="block text-sm font-medium mb-1 text-black">Budget yang dimiliki</label>
+                        <input
+                            class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-md"
+                            @input="formatBudget" placeholder="Rp" required v-model="formRekrutExpert.budget" />
                     </div>
                 </div>
             </div>
@@ -312,7 +327,7 @@ const dropdownDay = ref(false)
                 <div class="flex justify-end">
                     <div>
                         <button class="h-9 mt-5 bg-jobhunGreen hover:bg-emerald-600 text-white px-7 rounded text-sm"
-                            @click="openModalAjukanPelatihan" type="submit">
+                            type="submit" @click="openModalAjukanPelatihan">
                             Ajukan
                         </button>
                         <ModalAjukan :isUserAjukan="isUserAjukan" @close-modal="isUserAjukan = false" />

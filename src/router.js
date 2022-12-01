@@ -73,6 +73,7 @@ import DetailExpert from "./pages/Experts/DetailExpert/Index.vue";
 import FormKonsultasi from "./pages/Experts/DetailExpert/Services/Konsultasi/Index.vue";
 import FormPelatihan from "./pages/Experts/DetailExpert/Services/Pelatihan/Index.vue";
 import FormUndangExpert from "./pages/Experts/DetailExpert/Services/UndangExpert/Index.vue";
+import FormRekrutExpert from "./pages/Experts/DetailExpert/Services/RekrutExpert/Index.vue";
 
 const routerHistory = createWebHistory();
 
@@ -122,6 +123,10 @@ const router = createRouter({
         {
           path: "/experts/formundangexpert",
           component: FormUndangExpert,
+        },
+        {
+          path: "/experts/formrekrutexpert",
+          component: FormRekrutExpert,
         },
         {
           path: "/component/modal",

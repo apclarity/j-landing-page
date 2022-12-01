@@ -1,78 +1,84 @@
 <script setup>
-    import {ref} from 'vue'
-    import Combobox from './Combobox.vue'
-    import MultiSel from './MultipleSelHome.vue'
+import {ref} from 'vue'
+import Combobox from './Combobox.vue'
+import MultiSel from './MultipleSelHome.vue'
 
-    const itemsBidang = [
-        {
-            id: 1,
-            title: 'Submarine',
-        },
-        {
-            id: 2,
-            title: 'Astronout',
-        },
-        {
-            id: 3,
-            title: 'Kang Kayu',
-        },
-        {
-            id: 4,
-            title: 'Petani',
-        },
-        {
-            id: 5,
-            title: 'Robotics',
-        },
-        {
-            id: 6,
-            title: 'Cooking',
-        },
-        {
-            id: 7,
-            title: 'Mechanics',
-        },
-        {
-            id: 8,
-            title: 'Engineer',
-        },
-        {
-            id: 9,
-            title: 'Submarine',
-        },
-        {
-            id: 10,
-            title: 'Submarine',
-        },
-        {
-            id: 4,
-            title: 'Petani',
-        },
-        {
-            id: 5,
-            title: 'Robotics',
-        },
-        {
-            id: 6,
-            title: 'Cooking',
-        },
-        {
-            id: 7,
-            title: 'Mechanics',
-        },
-        {
-            id: 8,
-            title: 'Engineer',
-        },
-        {
-            id: 9,
-            title: 'Submarine',
-        },
-        {
-            id: 10,
-            title: 'Submarine',
-        },
-    ]
+const itemsBidang = [
+    {
+        id: 1,
+        title: 'Submarine',
+    },
+    {
+        id: 2,
+        title: 'Astronout',
+    },
+    {
+        id: 3,
+        title: 'Kang Kayu',
+    },
+    {
+        id: 4,
+        title: 'Petani',
+    },
+    {
+        id: 5,
+        title: 'Robotics',
+    },
+    {
+        id: 6,
+        title: 'Cooking',
+    },
+    {
+        id: 7,
+        title: 'Mechanics',
+    },
+    {
+        id: 8,
+        title: 'Engineer',
+    },
+    {
+        id: 9,
+        title: 'Submarine',
+    },
+    {
+        id: 10,
+        title: 'Submarine',
+    },
+    {
+        id: 4,
+        title: 'Petani',
+    },
+    {
+        id: 5,
+        title: 'Robotics',
+    },
+    {
+        id: 6,
+        title: 'Cooking',
+    },
+    {
+        id: 7,
+        title: 'Mechanics',
+    },
+    {
+        id: 8,
+        title: 'Engineer',
+    },
+    {
+        id: 9,
+        title: 'Submarine',
+    },
+    {
+        id: 10,
+        title: 'Submarine',
+    },
+]
+
+const searchInHomepage = ref({
+    company: '',
+    profession: '',
+    sector: ''
+})
 </script>
 <template>
     <div class="justify-center px-4 sm:px-6 lg:mx-44 pt-8 lg:pt-20 flex">
@@ -97,12 +103,14 @@
                 <form class="relative">
                     <input id="action-search" placeholder="Nama atau perusahaan"
                         class="form-input shadow py-2.5 my-3 focus:outline-none focus:bg-white focus:border-emerald-500 md:w-48 sm:w-48 xs:w-48 mr-3 h-10"
-                        type="search" />
+                        type="search" v-model="company" />
                     <input id="action-search" placeholder="Profesi"
                         class="form-input shadow py-2.5 my-3 focus:outline-none focus:bg-white focus:border-emerald-500 md:w-48 sm:w-48 xs:w-48 mr-3 h-10"
-                        type="search" />
-                    <MultiSel :bidangs="itemsBidang"/>
-                    <button
+                        type="search" v-model="profession" />
+                    <input id="action-search" placeholder="Bidang"
+                        class="form-input shadow py-2.5 my-3 focus:outline-none focus:bg-white focus:border-emerald-500 md:w-48 sm:w-48 xs:w-48 mr-3 h-10"
+                        type="search" v-model="sector" />
+                    <button type="submit"
                         class="bg-jobhunGreen text-sm h-9 hover:bg-emerald-600 text-white px-5 rounded">
                         Cari
                     </button>
