@@ -30,7 +30,7 @@
     }
 </script>
 <template>
-    <div class="xl:px-80 sm:px-10 md:px-20 py-36">
+    <div class="xl:px-80 sm:px-10 md:px-20">
         <Splide :options="options" class="">
             <SplideSlide v-for="(item, i) in items" :key="i">
                 <img :src="item.img" class="shadow-xl border-jobhunGreen">

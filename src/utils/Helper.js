@@ -223,5 +223,9 @@ export const isVariableEmpty = (payload) => {
   return false;
 };
 
+export const convertRawIntToRupiah = (rawInt) => {
+  return "Rp" + rawInt.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
+
 export const STATUS = ["Baru", "Diterima", "Dipublikasikan", "Ditolak"];
 export const ROLES = ["Public", "Administrator", "User"];

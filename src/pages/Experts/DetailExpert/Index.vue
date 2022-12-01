@@ -68,7 +68,7 @@ const dataExperts = {
             title: "Rekrut Expert",
             id: "rekrut-expert",
             desc: `Membutuhkan keahlian dari expert untuk proyek? Dapatkan talenta terbaik untuk pengerjaan proyek sesuai dengan kualifikasi, jangka waktu, dan budget dari perusahaan. Melalui fitur ini, perusahaan bisa mendapatkan talenta tanpa perlu repot dalam proses rekrutmen hingga penggajian. `,
-            to: "/"
+            to: "/experts/formrekrutexpert"
         }
     ]
 }
