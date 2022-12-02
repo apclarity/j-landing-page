@@ -26,8 +26,6 @@ const formExpertPelatihan = ref({
     topic: "",
     startHour: "",
     startMinute: "",
-    endHour: "",
-    endMinute: "",
     days: null
 })
 
@@ -44,77 +42,6 @@ const isNumberCurrency = (evt) => {
         return true;
     }
 }
-
-const itemTopic = [
-    {
-        id: 1,
-        title: 'Submarine',
-    },
-    {
-        id: 2,
-        title: 'Astronout',
-    },
-    {
-        id: 3,
-        title: 'Kang Kayu',
-    },
-    {
-        id: 4,
-        title: 'Petani',
-    },
-    {
-        id: 5,
-        title: 'Robotics',
-    },
-    {
-        id: 6,
-        title: 'Cooking',
-    },
-    {
-        id: 7,
-        title: 'Mechanics',
-    },
-    {
-        id: 8,
-        title: 'Engineer',
-    },
-    {
-        id: 9,
-        title: 'Submarine',
-    },
-    {
-        id: 10,
-        title: 'Submarine',
-    },
-    {
-        id: 4,
-        title: 'Petani',
-    },
-    {
-        id: 5,
-        title: 'Robotics',
-    },
-    {
-        id: 6,
-        title: 'Cooking',
-    },
-    {
-        id: 7,
-        title: 'Mechanics',
-    },
-    {
-        id: 8,
-        title: 'Engineer',
-    },
-    {
-        id: 9,
-        title: 'Submarine',
-    },
-    {
-        id: 10,
-        title: 'Submarine',
-    },
-]
 
 const hours = [
     { text: '00' }, { text: '01' }, { text: '02' }, { text: '03' }, { text: '04' }, { text: '05' }, { text: '06' }, { text: '07' }, { text: '08' },
@@ -135,10 +62,10 @@ const minutes = [
 
 const radioPelatihan = [
     {
-        text: 'Teori'
+        text: 'Privat'
     },
     {
-        text: 'Studi kasus'
+        text: 'Grup'
     }
 ]
 
@@ -218,10 +145,8 @@ const dropdownDay = ref(false)
                                 <div>
                                     <IconCalendar height="30px" v-if="services.id == 'jadwal'" />
                                     <IconClock height="30px" v-if="services.id == 'waktu'" />
-                                    <IconMateri height="30px" v-if="services.id == 'posisi'" />
-                                    <IconTarif height="30px" v-if="services.id == 'tarif'" />
                                 </div>
-                                <div class="font-bold text-sm text-slate-800 mx-auto mt-2">
+                                <div class="font-bold text-center text-sm text-slate-800 mx-auto mt-2">
                                     {{ services.title }}
                                 </div>
                                 <div class="flex items-center text-center">
@@ -249,10 +174,15 @@ const dropdownDay = ref(false)
                 <div class="max-w-xl mt-5">
                     <div>
                         <label class="block text-sm font-medium mb-1 text-black">Jenis pelatihan</label>
-                        <div class="flex items-center" v-for="pelatihan in radioPelatihan" :key="pelatihan">
-                            <input type="radio" v-model="formExpertPelatihan.typePelatihan" required
+                        <div class="flex items-center">
+                            <input type="radio" v-model="formExpertPelatihan.typePelatihan" required value="Privat"
                                 class="w-4 h-4 text-jobhunGreen bg-gray-200 border-gray-200 focus:ring-jobhunGreen focus:ring-1 hover:ring-jobhunGreen hover:ring-1">
-                            <label class="ml-2 text-sm font-medium text-black">{{ pelatihan.text }}</label>
+                                <span class="text-sm ml-1 text-black">Privat</span>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="radio" v-model="formExpertPelatihan.typePelatihan" required value="Grup"
+                                class="w-4 h-4 text-jobhunGreen bg-gray-200 border-gray-200 focus:ring-jobhunGreen focus:ring-1 hover:ring-jobhunGreen hover:ring-1">
+                            <span class="text-sm ml-1 text-black">Grup</span>
                         </div>
                     </div>
                     <div class="mt-4">
@@ -269,8 +199,7 @@ const dropdownDay = ref(false)
                             @keypress="isNumberCurrency($event)" required placeholder="Input angka" v-model="formExpertPelatihan.session" />
                     </div>
                     <div class="mt-4">
-                        <label class="block text-sm font-medium mb-1 text-black">Jelaskan secara spesifik topik/pembahasan
-                            apa saja yang ingin kamu pelajari dari expert!</label>
+                        <label class="block text-sm font-medium mb-1 text-black">Jelaskan secara spesifik topik/pembahasan apa saja yang ingin kamu pelajari?</label>
                         <textarea rows="5"
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
                             required v-model="formExpertPelatihan.topic" />
@@ -291,16 +220,6 @@ const dropdownDay = ref(false)
                             </select>
                             <span class="px-1">:</span>
                             <select required v-model="formExpertPelatihan.startMinute"
-                                class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-14">
-                                <option v-for="minute in minutes" :key="minute.text">{{minute.text}}</option>
-                            </select>
-                            <span class="text-1xl px-3">-</span>
-                            <select required v-model="formExpertPelatihan.endHour"
-                                class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-14">
-                                <option v-for="hour in hours" :key="hour.text">{{hour.text}}</option>
-                            </select>
-                            <span class="px-1">:</span>
-                            <select required v-model="formExpertPelatihan.endMinute"
                                 class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-14">
                                 <option v-for="minute in minutes" :key="minute.text">{{minute.text}}</option>
                             </select>

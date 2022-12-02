@@ -5,7 +5,7 @@ import IconCalendar from '../../../../../partials/icons/icon-calendar.vue'
 import IconClock from '../../../../../partials/icons/icon-clock.vue'
 import IconMateri from '../../../../../partials/icons/icon-materi.vue'
 import IconLinkedin from '../../../../../partials/icons/icon-linkedin.vue'
-import IconTarif from '../../../../../partials/icons/icon-rupiah.vue'
+import IconCoins from '../../../../../partials/icons/icon-coins.vue'
 import Tooltip from '../../../../../components/TooltipRed.vue'
 import DateSingle from './DateSingle.vue'
 import { PrinterIcon } from '@heroicons/vue/20/solid'
@@ -46,8 +46,6 @@ const formExpertKonsultasi = ref({
     date: "",
     startHour: "",
     startMinute: "",
-    endHour: "",
-    endMinute: "",
     discussion: [],
     topic: "",
     total: "",
@@ -55,78 +53,7 @@ const formExpertKonsultasi = ref({
 })
 
 const discussions = [
-    'Digital Marketing', 'Accounting', 'Content Creator'
-]
-
-const itemTopic = [
-    {
-        id: 1,
-        title: 'Submarine',
-    },
-    {
-        id: 2,
-        title: 'Astronout',
-    },
-    {
-        id: 3,
-        title: 'Kang Kayu',
-    },
-    {
-        id: 4,
-        title: 'Petani',
-    },
-    {
-        id: 5,
-        title: 'Robotics',
-    },
-    {
-        id: 6,
-        title: 'Cooking',
-    },
-    {
-        id: 7,
-        title: 'Mechanics',
-    },
-    {
-        id: 8,
-        title: 'Engineer',
-    },
-    {
-        id: 9,
-        title: 'Submarine',
-    },
-    {
-        id: 10,
-        title: 'Submarine',
-    },
-    {
-        id: 4,
-        title: 'Petani',
-    },
-    {
-        id: 5,
-        title: 'Robotics',
-    },
-    {
-        id: 6,
-        title: 'Cooking',
-    },
-    {
-        id: 7,
-        title: 'Mechanics',
-    },
-    {
-        id: 8,
-        title: 'Engineer',
-    },
-    {
-        id: 9,
-        title: 'Submarine',
-    },
-    {
-        id: 10,
-        title: 'Submarine',
-    },
+    'Teori', 'Praktik', 'Tools', 'Soft Skill'
 ]
 
 const hours = [
@@ -217,17 +144,17 @@ const openModalAjukanKonsultasi = () => {
                                     <IconCalendar height="30px" v-if="services.id == 'jadwal'" />
                                     <IconClock height="30px" v-if="services.id == 'waktu'" />
                                     <IconMateri height="30px" v-if="services.id == 'posisi'" />
-                                    <IconTarif height="30px" v-if="services.id == 'tarif'" />
+                                    <IconCoins height="30px" v-if="services.id == 'tarif'" />
                                 </div>
-                                <div class="font-bold text-sm text-slate-800 mx-auto mt-2">
+                                <div class="font-bold text-sm text-center text-slate-800 mx-auto mt-2">
                                     {{ services.title }}
                                 </div>
-                                <div class="flex items-center">
+                                <div class="flex items-center text-center">
                                     <div class="text-sm" v-if="services.id != 'tarif'">
                                         {{ services.desc }}
                                     </div>
                                     <div class="text-sm" v-else>
-                                        Tarif {{ pricePerHour }},-/jam
+                                        {{ pricePerHour }},-/jam
                                     </div>
                                 </div>
                             </div>
@@ -248,7 +175,7 @@ const openModalAjukanKonsultasi = () => {
                     <div>
                         <label class="block text-sm font-medium mb-1 text-black">Pengajuan tanggal mentoring</label>
                         <div class="flex items-center space-x-2">
-                            <DateSingle v-model="formExpertKonsultasi.date" />
+                            <DateSingle v-model="formExpertKonsultasi.date" required />
                             <Tooltip position="right" class="">
                                 <div class="text-xs whitespace-nowrap">Silakan sesuaikan dengan jadwal expert yang tersedia</div>
                             </Tooltip>
@@ -268,16 +195,6 @@ const openModalAjukanKonsultasi = () => {
                                 class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-14">
                                 <option v-for="minute in minutes" :key="minute.text">{{minute.text}}</option>
                             </select>
-                            <span class="text-1xl px-3">-</span>
-                            <select required v-model="formExpertKonsultasi.startHour"
-                                class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-14">
-                                <option v-for="hour in hours" :key="hour.text">{{hour.text}}</option>
-                            </select>
-                            <span class="px-1">:</span>
-                            <select required v-model="formExpertKonsultasi.endMinute"
-                                class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-14">
-                                <option v-for="minute in minutes" :key="minute.text">{{minute.text}}</option>
-                            </select>
                             <Tooltip position="right" class="">
                                 <div class="text-xs whitespace-nowrap">Silakan sesuaikan dengan jadwal expert yang tersedia</div>
                             </Tooltip>
@@ -287,18 +204,18 @@ const openModalAjukanKonsultasi = () => {
                         <label class="block text-sm font-medium mb-1 text-black">Durasi mentoring</label>
                         <div class="custom-number-input w-32">
                             <div class="flex flex-row h-8 w-full rounded-lg relative bg-transparent mt-1">
-                                <button @click="decrement()"
+                                <div @click="decrement()"
                                     class=" border-0 bg-gray-100 hover:bg-gray-300 hover:ring-emerald-500 focus:ring-jobhunGreen h-full w-20 rounded-l cursor-pointer outline-none">
-                                    <span class="m-auto text-2xl font-thin">−</span>
-                                </button>
+                                    <span class="text-2xl ml-2 font-thin">−</span>
+                                </div>
                                 <div type="number"
                                     class="border-0 bg-gray-100 hover:ring-emerald-500 focus:ring-jobhunGreen p-1.5 text-sm w-full text-center flex items-center text-gray-700">
                                     {{duration}} jam
                                 </div>
-                                <button @click="increment()"
+                                <div @click="increment()"
                                     class="border-0 bg-gray-100 hover:bg-gray-300 hover:ring-emerald-500 focus:ring-jobhunGreen h-full w-20 rounded-r cursor-pointer">
-                                    <span class="m-auto text-2xl font-thin">+</span>
-                                </button>
+                                    <span class="ml-2 text-2xl font-thin">+</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -306,7 +223,7 @@ const openModalAjukanKonsultasi = () => {
                         <label class="block text-sm font-medium mb-1 text-black">Jenis pembahasan</label>
                         <Multiselect v-model="formExpertKonsultasi.discussion" mode="tags" :close-on-select="false"
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen text-sm w-full"
-                            :create-option="true" :options="discussions" />
+                            :create-option="true" required :options="discussions" />
                     </div>
                     <div class="mt-4">
                         <label class="block text-sm font-medium mb-1 text-black">Jelaskan secara spesifik topik/pembahasan apa saja
