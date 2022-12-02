@@ -61,77 +61,6 @@ const jsonCity = [
     },
 ]
 
-const itemTopic = [
-    {
-        id: 1,
-        title: 'Submarine',
-    },
-    {
-        id: 2,
-        title: 'Astronout',
-    },
-    {
-        id: 3,
-        title: 'Kang Kayu',
-    },
-    {
-        id: 4,
-        title: 'Petani',
-    },
-    {
-        id: 5,
-        title: 'Robotics',
-    },
-    {
-        id: 6,
-        title: 'Cooking',
-    },
-    {
-        id: 7,
-        title: 'Mechanics',
-    },
-    {
-        id: 8,
-        title: 'Engineer',
-    },
-    {
-        id: 9,
-        title: 'Submarine',
-    },
-    {
-        id: 10,
-        title: 'Submarine',
-    },
-    {
-        id: 4,
-        title: 'Petani',
-    },
-    {
-        id: 5,
-        title: 'Robotics',
-    },
-    {
-        id: 6,
-        title: 'Cooking',
-    },
-    {
-        id: 7,
-        title: 'Mechanics',
-    },
-    {
-        id: 8,
-        title: 'Engineer',
-    },
-    {
-        id: 9,
-        title: 'Submarine',
-    },
-    {
-        id: 10,
-        title: 'Submarine',
-    },
-]
-
 const minutes = [
     { text: '00' }, { text: '01' }, { text: '02' }, { text: '03' }, { text: '04' }, { text: '05' }, { text: '06' }, { text: '07' }, { text: '08' },
     { text: '09' }, { text: '10' }, { text: '11' }, { text: '12' }, { text: '13' }, { text: '14' }, { text: '15' }, { text: '16' }, { text: '17' },
@@ -141,18 +70,6 @@ const minutes = [
     { text: '43' }, { text: '44' }, { text: '45' }, { text: '46' }, { text: '47' }, { text: '48' }, { text: '49' },
     { text: '50' }, { text: '51' }, { text: '52' }, { text: '53' }, { text: '54' }, { text: '55' }, { text: '56' }, { text: '57' }, { text: '58' },
     { text: '59' }
-]
-
-const radioUndangExpert = [
-    {
-        text: 'Talkshow'
-    },
-    {
-        text: 'Workshop'
-    },
-    {
-        text: 'Lainnya'
-    }
 ]
 
 const dropdownOpen = ref(false)
@@ -229,7 +146,7 @@ const openModalAjukanPelatihan = () => {
                                     <IconStar height="30px" v-if="services.id == 'skill'" />
                                     <IconBriefcase height="30px" v-if="services.id == 'jobType'" />
                                 </div>
-                                <div class="font-bold text-sm text-slate-800 mx-auto mt-2">
+                                <div class="font-bold text-sm text-center text-slate-800 mx-auto mt-2">
                                     {{ services.title }}
                                 </div>
                                 <div class="flex items-center text-center">

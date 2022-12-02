@@ -11,6 +11,7 @@ import DateSingle from '../Konsultasi/DateSingle.vue'
 import DropdownCheckbox from './DropdownCheckbox.vue'
 import { PrinterIcon } from '@heroicons/vue/20/solid'
 import ModalAjukan from './ModalAjukanUndangExpert.vue'
+import { convertRawIntToRupiah } from '../../../../../utils/Helper'
 
 const props = defineProps({
     dataUndangExpert: Object
@@ -40,76 +41,9 @@ const isNumberCurrency = (evt) => {
     }
 }
 
-const itemTopic = [
-    {
-        id: 1,
-        title: 'Submarine',
-    },
-    {
-        id: 2,
-        title: 'Astronout',
-    },
-    {
-        id: 3,
-        title: 'Kang Kayu',
-    },
-    {
-        id: 4,
-        title: 'Petani',
-    },
-    {
-        id: 5,
-        title: 'Robotics',
-    },
-    {
-        id: 6,
-        title: 'Cooking',
-    },
-    {
-        id: 7,
-        title: 'Mechanics',
-    },
-    {
-        id: 8,
-        title: 'Engineer',
-    },
-    {
-        id: 9,
-        title: 'Submarine',
-    },
-    {
-        id: 10,
-        title: 'Submarine',
-    },
-    {
-        id: 4,
-        title: 'Petani',
-    },
-    {
-        id: 5,
-        title: 'Robotics',
-    },
-    {
-        id: 6,
-        title: 'Cooking',
-    },
-    {
-        id: 7,
-        title: 'Mechanics',
-    },
-    {
-        id: 8,
-        title: 'Engineer',
-    },
-    {
-        id: 9,
-        title: 'Submarine',
-    },
-    {
-        id: 10,
-        title: 'Submarine',
-    },
-]
+const formatBudget = () => {
+    formUndangExpert.value.budget = convertRawIntToRupiah(formUndangExpert.value.budget)
+}
 
 const hours = [
     { text: '00' }, { text: '01' }, { text: '02' }, { text: '03' }, { text: '04' }, { text: '05' }, { text: '06' }, { text: '07' }, { text: '08' },
@@ -126,18 +60,6 @@ const minutes = [
     { text: '43' }, { text: '44' }, { text: '45' }, { text: '46' }, { text: '47' }, { text: '48' }, { text: '49' },
     { text: '50' }, { text: '51' }, { text: '52' }, { text: '53' }, { text: '54' }, { text: '55' }, { text: '56' }, { text: '57' }, { text: '58' },
     { text: '59' }
-]
-
-const radioUndangExpert = [
-    {
-        text: 'Talkshow'
-    },
-    {
-        text: 'Workshop'
-    },
-    {
-        text: 'Lainnya'
-    }
 ]
 
 const isUserAjukan = ref(false)
@@ -212,7 +134,7 @@ const openModalAjukanPelatihan = () => {
                                     <IconCalendar height="30px" v-if="services.id == 'jadwal'" />
                                     <IconClock height="30px" v-if="services.id == 'waktu'" />
                                 </div>
-                                <div class="font-bold text-sm text-slate-800 mx-auto mt-2">
+                                <div class="font-bold text-center text-sm text-slate-800 mx-auto mt-2">
                                     {{ services.title }}
                                 </div>
                                 <div class="flex items-center text-center">
@@ -264,17 +186,27 @@ const openModalAjukanPelatihan = () => {
                             required v-model="formUndangExpert.eventDescription" />
                     </div>
                     <div class="mt-4">
-                        <label class="block text-sm font-medium mb-1 text-black">Pengajuan tanggal mentoring</label>
+                        <label class="block text-sm font-medium mb-1 text-black">Tanggal pelaksanaan acara</label>
                         <div class="flex items-center space-x-2">
                             <DateSingle v-model="formUndangExpert.date" />
                         </div>
                     </div>
                     <div class="mt-4">
-                        <label class="block text-sm font-medium mb-1 text-black">Jenis pelatihan</label>
-                        <div class="flex items-center" v-for="undangExpert in radioUndangExpert" :key="undangExpert">
-                            <input id="default-radio-1" type="radio" v-model="formUndangExpert.typePelatihan" required
+                        <label class="block text-sm font-medium mb-1 text-black">Format acara</label>
+                        <div class="flex items-center">
+                            <input type="radio" v-model="formUndangExpert.typePelatihan" required value="Talkshow"
                                 class="w-4 h-4 text-jobhunGreen bg-gray-200 border-gray-200 focus:ring-jobhunGreen focus:ring-1 hover:ring-jobhunGreen hover:ring-1">
-                            <label for="default-radio-1" class="ml-2 text-sm font-medium text-black">{{ undangExpert.text }}</label>
+                            <span class="text-sm ml-1 text-black">Talkshow</span>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="radio" v-model="formUndangExpert.typePelatihan" required value="Workshop"
+                                class="w-4 h-4 text-jobhunGreen bg-gray-200 border-gray-200 focus:ring-jobhunGreen focus:ring-1 hover:ring-jobhunGreen hover:ring-1">
+                            <span class="text-sm ml-1 text-black">Workshop</span>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="radio" v-model="formUndangExpert.typePelatihan" required value="Lainnya"
+                                class="w-4 h-4 text-jobhunGreen bg-gray-200 border-gray-200 focus:ring-jobhunGreen focus:ring-1 hover:ring-jobhunGreen hover:ring-1">
+                            <span class="text-sm ml-1 text-black">Lainnya</span>
                         </div>
                     </div>
                     <div class="mt-4">
@@ -288,11 +220,10 @@ const openModalAjukanPelatihan = () => {
                             speaker?</label>
                         <input
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-md"
-                            @keypress="isNumberCurrency($event)" required v-model="formUndangExpert.budget" placeholder="Input angka" />
+                            @input="formatBudget" required v-model="formUndangExpert.budget" placeholder="Rp" />
                     </div>
                     <div class="mt-4">
-                        <label class="block text-sm font-medium mb-1 text-black">Jelaskan secara spesifik topik/pembahasan
-                            apa saja yang ingin kamu pelajari dari expert!</label>
+                        <label class="block text-sm font-medium mb-1 text-black">Apakah Jobhun bisa mendapatkan benefit promosi lainnya? Jika ada, sebutkan!</label>
                         <textarea rows="5"
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
                             required v-model="formUndangExpert.topic" />
