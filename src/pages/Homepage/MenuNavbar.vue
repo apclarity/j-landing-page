@@ -56,7 +56,7 @@
         {
             title: 'Cari Expert',
             hidden: true,
-            to: '#'
+            to: '/experts/cariexpert'
         },
         {
             title: 'Jadi Expert',
@@ -69,7 +69,7 @@
     <div class="w-full md:block md:w-auto">
         <ul class="flex flex-col p-4 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
             <li class="hidden md:block">
-                <a href="#"
+                <a href="/experts/cariexpert"
                     class="block py-2 pr-4 pl-3 text-black rounded hover:text-jobhunGreen md:p-0 duration-300">
                     Cari Expert</a>
             </li>
@@ -139,7 +139,6 @@
                     </transition>
                 </div>
             </li>
-
         </ul>
     </div>
 </template>

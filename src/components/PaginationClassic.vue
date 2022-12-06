@@ -34,7 +34,7 @@
     <nav class="mb-4 sm:mb-0 sm:order-1" role="navigation" aria-label="Navigation">
       <ul class="flex justify-center">
         <li class="ml-3 first:ml-0">
-          <button class="btn bg-white hover:border-slate-300 text-emerald-500" 
+          <button class="btn bg-white hover:border-slate-300 text-jobhunGreen" 
             :class="{
               'cursor-not-allowed border-slate-200 text-slate-300': props.page == 1,
             }" 
@@ -42,7 +42,7 @@
             @click="clickNav(props.page-1)">&lt;- Previous</button>
         </li>
         <li class="ml-3 first:ml-0">
-          <button class="btn bg-white border-slate-200 hover:border-slate-300 text-emerald-500" 
+          <button class="btn bg-white border-slate-200 hover:border-slate-300 text-jobhunGreen" 
             :class="{
               'cursor-not-allowed border-slate-200 text-slate-300': to == props.total,
             }" 
