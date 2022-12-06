@@ -262,7 +262,7 @@ const mentors = ref ([
                 </div>
             </div>
             <div class="text-end text-sm mt-5 px-28">
-                <a href="#">Cari experts lainnya -&gt;</a>
+                <a href="/experts/cariexpert">Cari experts lainnya -&gt;</a>
             </div>
         </div>
     </div>

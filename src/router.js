@@ -74,6 +74,7 @@ import FormKonsultasi from "./pages/Experts/DetailExpert/Services/Konsultasi/Ind
 import FormPelatihan from "./pages/Experts/DetailExpert/Services/Pelatihan/Index.vue";
 import FormUndangExpert from "./pages/Experts/DetailExpert/Services/UndangExpert/Index.vue";
 import FormRekrutExpert from "./pages/Experts/DetailExpert/Services/RekrutExpert/Index.vue";
+import CariExpert from "./pages/Experts/CariExpert/Index.vue";
 
 const routerHistory = createWebHistory();
 
@@ -127,6 +128,10 @@ const router = createRouter({
         {
           path: "/experts/formrekrutexpert",
           component: FormRekrutExpert,
+        },
+        {
+          path: "/experts/cariexpert",
+          component: CariExpert,
         },
         {
           path: "/component/modal",
