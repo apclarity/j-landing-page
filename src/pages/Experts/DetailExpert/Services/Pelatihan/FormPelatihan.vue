@@ -90,7 +90,7 @@ const dropdownDay = ref(false)
         <div class="-mt-32 mb-6 sm:mb-3 md:flex">
             <div class="flex flex-col items-center md:w-1/4 sm:flex-row sm:justify-between sm:items-end">
                 <div class="inline-flex -mt-1 mb-4 sm:mb-0">
-                    <img class="rounded-full ring-8 ring-white" :src="dataExpertPelatihan.profile.imgProfile"
+                    <img class="rounded-full ring-8 ring-white" :src="dataExpertPelatihan.image"
                         width="200" />
                 </div>
             </div>
@@ -99,7 +99,7 @@ const dropdownDay = ref(false)
             <div class="grid grid-flow-row md:flex">
                 <div class="mb-2 flex-none md:w-2/6 mr-0 md:mr-5">
                     <h1 class="text-2xl sm:text-left text-center text-slate-800 font-bold">
-                        {{ dataExpertPelatihan.profile.name }} ✨
+                        {{ dataExpertPelatihan.name }} ✨
                     </h1>
                     <div class="sm:text-left text-center mt-3">
                         <span class="text-sm">
@@ -108,7 +108,7 @@ const dropdownDay = ref(false)
                     </div>
                     <div class="sm:text-left text-center text-black">
                         <span class="font-bold text-sm">
-                            {{ dataExpertPelatihan.profile.position }}
+                            {{ dataExpertPelatihan.profession }}
                         </span>
                     </div>
                     <div class="sm:text-left text-center mt-3">
@@ -118,7 +118,7 @@ const dropdownDay = ref(false)
                     </div>
                     <div class="sm:text-left text-center text-black">
                         <span class="font-bold text-sm">
-                            {{ dataExpertPelatihan.profile.formalEducation }}
+                            {{ dataExpertPelatihan.education.school }}
                         </span>
                     </div>
                     <div class="sm:text-left text-center mt-3">
@@ -128,34 +128,47 @@ const dropdownDay = ref(false)
                     </div>
                     <div class="text-center sm:text-left text-black">
                         <span class="font-bold text-sm">
-                            {{ dataExpertPelatihan.profile.domicile }}
+                            {{ dataExpertPelatihan.domicile }}
                         </span>
                     </div>
                     <div class="flex justify-center items-center sm:justify-start">
-                        <a href="https://www.linkedin.com/company/13406000/"
+                        <a :href="dataExpertPelatihan.social_media.linkedin"
                             class="text-jobhunGreen mt-3 hover:text-gray-900 duration-300">
                             <IconLinkedin class="w-7 h-7" />
                         </a>
                     </div>
                 </div>
-                <div class="grid md:grid-cols-2 gap-6 w-full">
-                    <div class="" v-for="services in dataExpertPelatihan.profile.detailPelatihans" :key="services">
-                        <div class="w-full bg-white border border-gray-200 rounded-sm shadow-sm">
-                            <div class="flex flex-col items-center p-4 my-5">
-                                <div>
-                                    <IconCalendar height="30px" v-if="services.id == 'jadwal'" />
-                                    <IconClock height="30px" v-if="services.id == 'waktu'" />
-                                </div>
-                                <div class="font-bold text-center text-sm text-slate-800 mx-auto mt-2">
-                                    {{ services.title }}
-                                </div>
-                                <div class="flex items-center text-center">
-                                    <div class="text-sm" v-if="services.id != 'tarif'">
-                                        {{ services.desc }}
+                <div class="grid md:grid-cols-2 gap-6 w-full h-1/2">
+                    <div class="w-full bg-white border border-gray-200 rounded-sm shadow-sm">
+                        <div class="flex flex-col items-center p-4 my-5">
+                            <div>
+                                <IconCalendar height="30px"/>
+                            </div>
+                            <div class="font-bold text-center text-sm text-slate-800 mx-auto mt-2">
+                                Rekomendasi hari
+                            </div>
+                            <div class="text-center">
+                                <div class="text-sm inline-flex"
+                                    v-for="(day, index) in dataExpertPelatihan.service.consultation.day_recomendations" :key="index">
+                                    <div>
+                                        <span v-if="index != 0">, </span>{{ day }}
                                     </div>
-                                    <div class="text-sm" v-else>
-                                        Tarif {{ pricePerHour }},-/jam
-                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full bg-white border border-gray-200 rounded-sm shadow-sm">
+                        <div class="flex flex-col items-center p-4 my-5">
+                            <div>
+                                <IconClock height="30px" />
+                            </div>
+                            <div class="font-bold text-center text-sm text-slate-800 mx-auto mt-2">
+                                Rekomendasi waktu
+                            </div>
+                            <div class="flex items-center text-center">
+                                <div class="text-sm">
+                                    {{ dataExpertPelatihan.service.consultation.time_recomendation_start + ".00 - " +
+                                    dataExpertPelatihan.service.consultation.time_recomendation_end + ".00 WIB" }}
                                 </div>
                             </div>
                         </div>

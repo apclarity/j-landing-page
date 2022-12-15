@@ -51,6 +51,7 @@ apiAxios.interceptors.response.use(
     }
   },
   (error) => {
+    console.log(error);
     let message = error.response.data.message;
     if (error.response.data.statusCode != 401) {
       const toast = useToast();

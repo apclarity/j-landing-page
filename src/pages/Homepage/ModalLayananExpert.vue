@@ -14,28 +14,11 @@ const props = defineProps({
     isPreviewMentor: Boolean,
     expertID: {
         required: true,
-        type: Number
-    }
+        value: Number
+    },
+    service: Object,
+    section: Object
 })
-
-const itemsModal = [
-    {
-        title: 'Konsultasi',
-        id: 'konsultasi',
-    },
-    {
-        title: 'Pelatihan',
-        id: 'pelatihan',
-    },
-    {
-        title: 'Undang Expert',
-        id: 'undang-expert',
-    },
-    {
-        title: 'Rekrut Expert',
-        id: 'rekrut-expert',
-    }
-]
 
 const emit = defineEmits(['close-modal'])
 
@@ -57,21 +40,42 @@ const scrollTo = (id) => {
                     <div class="mb-4 font-bold text-lg text-black">Layanan</div>
                     <!-- Options -->
                     <ul class="space-y-2 mb-4">
-                        <li v-for="layanan in itemsModal" :key="layanan">
+                        <li v-for="layanan in service" :key="layanan">
                             <button @click="scrollTo(layanan.id)" 
                                 class="w-full h-full text-left py-3 px-4 rounded bg-white border-2 border-gray-300 hover:border-jobhunGreen shadow-sm duration-150 ease-in-out">
                                 <div class="items-center flex">
                                     <!-- <div class="w-4 h-4 border-4 border-gray-500 rounded-full mr-3"></div> -->
                                     <div class="flex-none w-1/6 mx-2">
-                                        <IconKonsultasi height="30px" class="mx-5" v-if="layanan.title == 'Konsultasi'" />
-                                        <IconPelatihan height="30px" class="mx-5" v-if="layanan.title == 'Pelatihan'" />
-                                        <IconUndangExpert height="30px" class="mx-5" v-if="layanan.title == 'Undang Expert'" />
-                                        <IconRekrutExpert height="30px" class="mx-5" v-if="layanan.title == 'Rekrut Expert'" />
+                                        <IconKonsultasi height="30px" class="mx-5" v-if="layanan == 'consultation'" />
+                                        <IconPelatihan height="30px" class="mx-5" v-if="layanan == 'training'" />
+                                        <IconUndangExpert height="30px" class="mx-5" v-if="layanan == 'invite-expert'" />
+                                        <IconRekrutExpert height="30px" class="mx-5" v-if="layanan == 'recruit-expert'" />
                                     </div>
-                                    <div class="shrink w-full">
+                                    <div class="shrink w-full" v-if="layanan == 'consultation'">
                                         <div class="flex flex-wrap items-center justify-between mb-0.5">
                                             <span class="font-bold text-black text-md">
-                                                {{layanan.title}}
+                                                Konsultasi
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="shrink w-full" v-else-if="layanan == 'training'">
+                                        <div class="flex flex-wrap items-center justify-between mb-0.5">
+                                            <span class="font-bold text-black text-md">
+                                                Pelatihan
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="shrink w-full" v-else-if="layanan == 'invite-expert'">
+                                        <div class="flex flex-wrap items-center justify-between mb-0.5">
+                                            <span class="font-bold text-black text-md">
+                                                Undang Expert
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="shrink w-full" v-else>
+                                        <div class="flex flex-wrap items-center justify-between mb-0.5">
+                                            <span class="font-bold text-black text-md">
+                                                Rekrut Expert
                                             </span>
                                         </div>
                                     </div>

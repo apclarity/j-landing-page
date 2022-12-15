@@ -1,20 +1,18 @@
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 import CardExpert from './CardExpert.vue'
-import { useDataExpertsHomepage } from './store'
+import { useDataExpertsHomepageStore } from '../../../stores/store-expert-featured'
 import { storeToRefs } from 'pinia'
 import ModalCariExpert from './ModalCariExpert.vue'
 import Multiselect from '@vueform/multiselect'
 import PaginationNumeric from '../../../pages/component/PaginationJobhun.vue'
 
-const dataExperts = useDataExpertsHomepage()
+const dataExpertsHomepageStore = useDataExpertsHomepageStore()
 
-onMounted(() => {
-    dataExperts.getDataExperts()
-})
+const { experts } = storeToRefs(dataExpertsHomepageStore)
 
-const { experts } = storeToRefs(dataExperts)
-const limit = ref(12)
+dataExpertsHomepageStore.getDataExperts()
+const limit = 12
 
 const advanceFilterCariExpert = ref({
     sectors: [],
@@ -30,6 +28,12 @@ const sectors = {
     enam: 'enam',
     tujuh: 'tujuh'
 }
+
+const searchCariExpert = ref({
+    company: '',
+    profession: '',
+    sector: ''
+})
 
 const deleteSectors = (index)=>{
     advanceFilterCariExpert.value.sectors.splice(index, 1)
@@ -62,13 +66,14 @@ const openPreviewMentor = () => {
                     <div class="mt-5">
                         <form class="hidden lg:block">
                             <input id="action-search" placeholder="Nama atau perusahaan"
-                                class="form-input shadow py-2.5 my-3 focus:outline-none focus:bg-white focus:border-emerald-500 md:w-96 sm:w-80 w-80 mr-5 h-10"
-                                type="search" v-model="company" />
+                                class="form-input align-middle shadow py-2.5 my-3 focus:outline-none focus:bg-white focus:border-emerald-500 md:w-96 sm:w-80 w-80 mr-5 h-10"
+                                type="search" v-model="searchCariExpert.company" />
                             <input id="action-search" placeholder="Profesi"
-                                class="form-input shadow py-2.5 my-3 focus:outline-none focus:bg-white focus:border-emerald-500 md:w-72 sm:w-64 w-48 mr-5 h-10"
-                                type="search" v-model="profession" />
-                            <Multiselect v-model="advanceFilterCariExpert.sectors" :close-on-select="false" placeholder="Bidang" mode="multiple"
-                                class="form-input align-middle inline-flex py-2.5 shadow my-0 focus:outline-none focus:bg-white focus:border-emerald-500 h-10 md:w-72 sm:w-64 w-48 ml-0 mr-5"
+                                class="form-input align-middle shadow py-2.5 my-3 focus:outline-none focus:bg-white focus:border-emerald-500 md:w-72 sm:w-64 w-48 mr-5 h-10"
+                                type="search" v-model="searchCariExpert.profession" />
+                            <Multiselect v-model="searchCariExpert.sectors" :close-on-select="false" placeholder="Bidang" mode="multiple" :searchable="true"
+                                class="form-input align-middle inline-flex py-2.5 ms-ring shadow my-0 focus:outline-none focus:bg-white focus:border-emerald-500 h-10 md:w-72 sm:w-64 w-48 ml-0 mr-5 mt-0"
+                                :classes="{ containerActive: 'ring-0', search: 'w-full border-none absolute inset-0 outline-none focus:ring-0 appearance-none border-0 text-base font-sans bg-white rounded pl-3.5 rtl:pl-0 rtl:pr-3.5', }"
                                 required :options="sectors">
                                 <template v-slot:multiplelabel="{ values }">
                                     <div class="multiselect-multiple-label">
@@ -76,7 +81,7 @@ const openPreviewMentor = () => {
                                     </div>
                                 </template>
                             </Multiselect>
-                            <button type="submit" class="bg-jobhunGreen text-sm h-9 hover:bg-emerald-600 text-white px-5 w-24 rounded">
+                            <button type="submit" class="bg-jobhunGreen text-sm h-9 hover:bg-emerald-600 text-white px-5 w-24 rounded align-middle">
                                 Cari
                             </button>
                             <div class="my-3">
@@ -98,13 +103,15 @@ const openPreviewMentor = () => {
                         </form>
                         <form class="block lg:hidden">
                             <input id="action-search" placeholder="Nama atau perusahaan"
-                                class="form-input shadow py-2.5 my-3 focus:outline-none focus:bg-white focus:border-emerald-500 md:w-96 sm:w-full w-full mr-5 h-10"
-                                type="search" v-model="company" />
+                                class="form-input align-middle shadow py-2.5 my-3 focus:outline-none focus:bg-white focus:border-emerald-500 md:w-96 sm:w-full w-full mr-5 h-10"
+                                type="search" v-model="searchCariExpert.company" />
                             <input id="action-search" placeholder="Profesi"
-                                class="form-input shadow py-2.5 my-3 focus:outline-none focus:bg-white focus:border-emerald-500 md:w-96 sm:w-full w-full mr-5 h-10"
-                                type="search" v-model="profession" />
-                            <Multiselect v-model="advanceFilterCariExpert.sectors" :close-on-select="false" placeholder="Bidang" mode="multiple"
-                                class="form-input align-middle inline-flex shadow py-2.5 my-3 focus:outline-none focus:bg-white focus:border-emerald-500 h-10 md:w-96 sm:w-full w-full ml-0 mr-5"
+                                class="form-input align-middle shadow py-2.5 my-3 focus:outline-none focus:bg-white focus:border-emerald-500 md:w-96 sm:w-full w-full mr-5 h-10"
+                                type="search" v-model="searchCariExpert.profession" />
+                            <Multiselect v-model="searchCariExpert.sectors" :close-on-select="false" placeholder="Bidang" mode="multiple"
+                                :searchable="true"
+                                class="form-input align-middle inline-flex py-2.5 ms-ring shadow my-0 focus:outline-none focus:bg-white focus:border-emerald-500 h-10 md:w-96 sm:w-full w-full ml-0 mr-5 mt-0"
+                                :classes="{ containerActive: 'ring-0', search: 'w-full border-none absolute inset-0 focus:outline-none focus:bg-white focus:border-emerald-500 appearance-none text-base font-sans bg-white rounded pl-3.5 rtl:pl-0 rtl:pr-3.5', }"
                                 required :options="sectors">
                                 <template v-slot:multiplelabel="{ values }">
                                     <div class="multiselect-multiple-label">
@@ -112,9 +119,7 @@ const openPreviewMentor = () => {
                                     </div>
                                 </template>
                             </Multiselect>
-                            <!-- <button type="button" @click="openPreviewMentor">Filters</button> -->
-                            <!-- <ModalCariExpert :isPreviewMentor="isPreviewMentor" @close-modal="isPreviewMentor = false" /> -->
-                            <button type="submit" class="bg-jobhunGreen text-sm h-9 hover:bg-emerald-600 text-white px-5 w-24 rounded">
+                            <button type="submit" class="bg-jobhunGreen align-middle text-sm h-9 my-3 hover:bg-emerald-600 text-white px-5 w-24 rounded">
                                 Cari
                             </button>
                             <div class="my-3">
@@ -137,9 +142,9 @@ const openPreviewMentor = () => {
                     </div>
                 </div>
             </div>
-            <div class="grid grid-cols-1 xl:grid-cols-3 md:grid-cols-2 gap-6 mt-5 px-5 lg:px-28 md:px-10">
-                <div v-for="(expert, i) in experts" :key="i">
-                    <CardExpert :item="expert" v-if="i < limit" />
+            <div class="grid grid-cols-1 xl:grid-cols-4 md:grid-cols-2 gap-6 mt-5 px-5 lg:px-28 md:px-10">
+                <div v-for="(expert, index) in experts" :key="expert">
+                    <CardExpert :expert="expert" v-if="index < limit" />
                 </div>
             </div>
             <div class="text-end text-sm mt-10 px-28">
@@ -148,3 +153,16 @@ const openPreviewMentor = () => {
         </div>
     </div>
 </template>
+<style>
+.ms-ring {
+        --ms-bg: #FFFFFF;
+        --ms-bg-disabled: #F3F4F6;
+        --ms-border-color: #D1D5DB;
+        --ms-border-width: 1px;
+        --ms-radius: 4px;
+        --ms-py: 7px;
+        --ms-px: 1rem;
+        --ms-placeholder-color: #9CA3AF;
+        --ms-max-height: 10rem;
+}
+</style>

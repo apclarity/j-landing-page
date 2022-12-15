@@ -27,7 +27,7 @@
                 </div>
             </div>
             <!-- Rate -->
-            <div class="inline-flex text-sm font-medium text-jobhunYellow">{{ratingValues}}</div>
+            <div class="inline-flex text-sm font-medium text-slate-400">{{ratingValues}}</div>
         </div>
     </div>
 </template>

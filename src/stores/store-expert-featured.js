@@ -1,8 +1,9 @@
 import { defineStore } from "pinia";
-import api from "../../utils/Api";
-import { INDEX_EXPERT_URL } from "./constants";
+import api from "../utils/Api";
 
-export const useDataExpertsHomepage = defineStore({
+const INDEX_EXPERT_URL = "/expert-featured.json";
+
+export const useDataExpertsHomepageStore = defineStore({
   id: "dataExpertsHomepage",
   state: () => ({
     experts: [],
@@ -13,10 +14,8 @@ export const useDataExpertsHomepage = defineStore({
     },
     async getDataExperts() {
       try {
-        console.log("sebelum");
         let res = await api.get(INDEX_EXPERT_URL);
-        console.log(res);
-        this.experts = res.Data;
+        this.experts = res.data;
       } catch (error) {}
     },
   },

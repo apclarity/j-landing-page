@@ -1,0 +1,154 @@
+{
+  "process_time": 30,
+  "success": true,
+  "statusCode": 200,
+  "message": "success",
+  "data": {
+    "data": [
+      {
+                "id": 1,
+                "name": "Zunedi",
+                "profession": "Digital Marketer",
+                "sector": ["marketing","sales"],
+                "service": ["consultation","training","recruit-expert"],
+                "star": 4.8,
+                "image": "https://freepngimg.com/thumb/donald_duck/80482-artwork-donald-carrier-duck-mail-font-cartoon-thumb.png"
+            },
+            {
+                "id": 2,
+                "name": "Sinambela",
+                "profession": "Student",
+                "sector": ["Design"],
+                "service": ["consultation","recruit-expert"],
+                "star": 2,
+                "image": "https://akcdn.detik.net.id/api/wm/2022/10/19/lisa-blackpink-di-bvlgari-avrora-awards-1_169.png"
+            },
+            {
+                "id": 3,
+                "name": "Zunedi Sinambela",
+                "profession": "Staff",
+                "sector": ["writter"],
+                "service": ["consultation","training"],
+                "star": 5,
+                "image": "https://www.ups.com/assets/resources/webcontent/images/manage-shipping-profile-G-1189349093-Q421.jpg"
+            },
+            {
+                "id": 4,
+                "name": "Zunedi",
+                "profession": "Digital Marketer",
+                "sector": ["marketing","sales"],
+                "service": ["consultation","training","recruit-expert"],
+                "star": 4.8,
+                "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIahyAV6FxD0OJtV9XIySHG8vej2ulIAcyrg&usqp=CAU"
+            },
+            {
+                "id": 5,
+                "name": "Sinambela",
+                "profession": "Student",
+                "sector": ["Design"],
+                "service": ["consultation","recruit-expert"],
+                "star": 3,
+                "image": "https://cdn20.pamono.com/p/s/1/4/1400005_70ohcj4uee/andy-warhol-muhammad-ali-20th-century-art-print.jpg"
+            },
+            {
+                "id": 6,
+                "name": "Zunedi Sinambela",
+                "profession": "Staff",
+                "sector": ["writter"],
+                "service": ["consultation","training"],
+                "star": 4.1,
+                "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1B5GlesOwjTRH0F-aYQg1tlOeOORVihbjmHnWJ7JxAq1zGOLbsVcIo5aQXM54GMRb6JY&usqp=CAU"
+            },
+            {
+                "id": 7,
+                "name": "Sinambela",
+                "profession": "Student",
+                "sector": ["Design"],
+                "service": ["consultation","recruit-expert"],
+                "star": 3,
+                "image": "https://akcdn.detik.net.id/api/wm/2022/10/19/lisa-blackpink-di-bvlgari-avrora-awards-1_169.png"
+            },
+            {
+                "id": 8,
+                "name": "Zunedi Sinambela",
+                "profession": "Staff",
+                "sector": ["writter"],
+                "service": ["consultation","training"],
+                "star": 4.1,
+                "image": "https://www.ups.com/assets/resources/webcontent/images/manage-shipping-profile-G-1189349093-Q421.jpg"
+            },
+            {
+                "id": 9,
+                "name": "Zunedi",
+                "profession": "Digital Marketer",
+                "sector": ["marketing","sales"],
+                "service": ["consultation","training","recruit-expert"],
+                "star": 4.8,
+                "image": "https://www.ups.com/assets/resources/webcontent/images/manage-shipping-profile-G-1189349093-Q421.jpg"
+            },
+            {
+                "id": 10,
+                "name": "Sinambela",
+                "profession": "Student",
+                "sector": ["Design"],
+                "service": ["consultation","recruit-expert"],
+                "star": 2,
+                "image": "https://akcdn.detik.net.id/api/wm/2022/10/19/lisa-blackpink-di-bvlgari-avrora-awards-1_169.png"
+            },
+            {
+                "id": 11,
+                "name": "Zunedi Sinambela",
+                "profession": "Staff",
+                "sector": ["writter"],
+                "service": ["consultation","training"],
+                "star": 5,
+                "image": "https://www.ups.com/assets/resources/webcontent/images/manage-shipping-profile-G-1189349093-Q421.jpg"
+            },
+            {
+                "id": 12,
+                "name": "Zunedi",
+                "profession": "Digital Marketer",
+                "sector": ["marketing","sales"],
+                "service": ["consultation","training","recruit-expert"],
+                "star": 4.8,
+                "image": "https://www.ups.com/assets/resources/webcontent/images/manage-shipping-profile-G-1189349093-Q421.jpg"
+            },
+            {
+                "id": 13,
+                "name": "Sinambela",
+                "profession": "Student",
+                "sector": ["Design"],
+                "service": ["consultation","recruit-expert"],
+                "star": 3,
+                "image": "https://akcdn.detik.net.id/api/wm/2022/10/19/lisa-blackpink-di-bvlgari-avrora-awards-1_169.png"
+            },
+            {
+                "id": 14,
+                "name": "Zunedi Sinambela",
+                "profession": "Staff",
+                "sector": ["writter"],
+                "service": ["consultation","training"],
+                "star": 4.1,
+                "image": "https://www.ups.com/assets/resources/webcontent/images/manage-shipping-profile-G-1189349093-Q421.jpg"
+            },
+            {
+                "id": 15,
+                "name": "Sinambela",
+                "profession": "Student",
+                "sector": ["Design"],
+                "service": ["consultation","recruit-expert"],
+                "star": 3,
+                "image": "https://akcdn.detik.net.id/api/wm/2022/10/19/lisa-blackpink-di-bvlgari-avrora-awards-1_169.png"
+            },
+            {
+                "id": 16,
+                "name": "Zunedi Sinambela",
+                "profession": "Staff",
+                "sector": ["writter"],
+                "service": ["consultation","training"],
+                "star": 4.1,
+                "image": "https://www.ups.com/assets/resources/webcontent/images/manage-shipping-profile-G-1189349093-Q421.jpg"
+            }
+    ]
+  }
+}
