@@ -17,7 +17,6 @@ const props = defineProps({
 
 const { detailExpert, testimonies, services } = props
 
-
 const route = useRoute()
 
 onMounted(()=>{
@@ -151,8 +150,8 @@ const toggleTabs = (tabNumber) => (openTab.value = tabNumber)
         </div>
         <div>
             <div class="rounded-lg" v-if="openTab === 1">
-                <div v-for="layanan in detailExpert.available_services" :key="layanan" :id="layanan.id">
-                    <ItemLayanan :itemLayanan="layanan" :descLayanan="services" />
+                <div v-for="layanan in detailExpert.available_services" :key="layanan" :id="layanan">
+                    <ItemLayanan :itemLayanan="layanan" :descLayanan="services" :expertID="detailExpert.id" />
                 </div>
             </div>
             <div class="p-4 rounded-lg" v-if="openTab === 2">

@@ -3,10 +3,14 @@ import { ref } from 'vue'
 import FormUndangExpert from './FormUndangExpert.vue'
 import { useDataExpertDetailStore } from '../../../../../stores/store-experts'
 import { storeToRefs } from 'pinia'
+import { useRoute } from 'vue-router'
 
 const dataExpertDetailStore = useDataExpertDetailStore()
 
-await dataExpertDetailStore.getDataDetailExpert()
+const route = useRoute()
+const id = route.params.id
+
+await dataExpertDetailStore.getDataDetailExpert(id)
 
 const { detailExpert } = storeToRefs(dataExpertDetailStore)
 

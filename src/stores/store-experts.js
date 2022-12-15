@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import api from "../utils/Api";
 
-const DETAIL_EXPERT_URL = "/detail-experts.json";
+const DETAIL_EXPERT_URL = "/expert/expert-profile/";
 
 export const useDataExpertDetailStore = defineStore({
   id: "dataDetailExpert",
@@ -15,9 +15,9 @@ export const useDataExpertDetailStore = defineStore({
     setDetailDataExpert(payload = {}) {
       this.detailExpert = payload;
     },
-    async getDataDetailExpert() {
+    async getDataDetailExpert(id) {
       try {
-        let res = await api.get(DETAIL_EXPERT_URL);
+        let res = await api.get(DETAIL_EXPERT_URL + id);
         console.log(res);
         this.detailExpert = res;
       } catch (error) {

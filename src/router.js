@@ -114,19 +114,19 @@ const router = createRouter({
           component: DetailExpert,
         },
         {
-          path: "/experts/formkonsultasi",
+          path: "/experts/formkonsultasi/:id",
           component: FormKonsultasi,
         },
         {
-          path: "/experts/formpelatihan",
+          path: "/experts/formpelatihan/:id",
           component: FormPelatihan,
         },
         {
-          path: "/experts/formundangexpert",
+          path: "/experts/formundangexpert/:id",
           component: FormUndangExpert,
         },
         {
-          path: "/experts/formrekrutexpert",
+          path: "/experts/formrekrutexpert/:id",
           component: FormRekrutExpert,
         },
         {

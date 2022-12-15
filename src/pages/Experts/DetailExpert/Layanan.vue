@@ -14,9 +14,10 @@ import IconLinkedin from '../../../partials/icons/icon-linkedin.vue'
 const props = defineProps({
     itemLayanan: String,
     session: Object,
+    expertID: Number
 })
 
-const { itemLayanan } = props
+const { itemLayanan, expertID } = props
 
 const layoutStore = useLayoutStore()
 const session = computed(() => layoutStore.session)
@@ -67,7 +68,7 @@ onMounted(() => {
                 class="h-9 mt-5 bg-jobhunGreen hover:bg-emerald-600 text-white px-7 rounded text-sm">
                     <span >Daftar</span>
                 </button>
-                <router-link v-else to="/experts/formkonsultasi">
+                <router-link v-else :to="'/experts/formkonsultasi/' + expertID">
                     <button class="h-9 mt-5 bg-jobhunGreen hover:bg-emerald-600 text-white px-7 rounded text-sm">
                         <span>Daftar</span>
                     </button>
@@ -90,7 +91,7 @@ onMounted(() => {
                     class="h-9 mt-5 bg-jobhunGreen hover:bg-emerald-600 text-white px-7 rounded text-sm">
                     <span>Daftar</span>
                 </button>
-                <router-link v-else to="/experts/formpelatihan">
+                <router-link v-else :to="'/experts/formpelatihan/' + expertID">
                     <button class="h-9 mt-5 bg-jobhunGreen hover:bg-emerald-600 text-white px-7 rounded text-sm">
                         <span>Daftar</span>
                     </button>
@@ -113,7 +114,7 @@ onMounted(() => {
                     class="h-9 mt-5 bg-jobhunGreen hover:bg-emerald-600 text-white px-7 rounded text-sm">
                     <span>Daftar</span>
                 </button>
-                <router-link v-else to="/experts/formundangexpert">
+                <router-link v-else :to="'/experts/formundangexpert/' + expertID">
                     <button class="h-9 mt-5 bg-jobhunGreen hover:bg-emerald-600 text-white px-7 rounded text-sm">
                         <span>Daftar</span>
                     </button>
@@ -137,7 +138,7 @@ onMounted(() => {
                     class="h-9 mt-5 bg-jobhunGreen hover:bg-emerald-600 text-white px-7 rounded text-sm">
                     <span>Daftar</span>
                 </button>
-                <router-link v-else to="/experts/formrekrutexpert">
+                <router-link v-else :to="'/experts/formrekrutexpert/'+ expertID">
                     <button class="h-9 mt-5 bg-jobhunGreen hover:bg-emerald-600 text-white px-7 rounded text-sm">
                         <span>Daftar</span>
                     </button>

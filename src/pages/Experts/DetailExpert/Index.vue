@@ -3,10 +3,14 @@ import { ref, onMounted, computed } from 'vue'
 import MainContent from './MainContent.vue'
 import { useDataExpertDetailStore } from '../../../stores/store-experts'
 import { storeToRefs } from 'pinia'
+import { useRoute } from 'vue-router'
 
 const dataExpertDetailStore = useDataExpertDetailStore()
 
-await dataExpertDetailStore.getDataDetailExpert()
+const route = useRoute()
+const id = route.params.id
+
+await dataExpertDetailStore.getDataDetailExpert(id)
 
 const { detailExpert } = storeToRefs(dataExpertDetailStore)
 
@@ -39,7 +43,7 @@ const testimonies= [
         <div class="xl:flex">
             <div class="md:flex flex-1">
                 <div class="relative pb-8">
-                    <MainContent :detailExpert="detailExpert" :testimonies="testimonies" :services="services" :expertID="detailExpert.available_services"  v-if="detailExpert != null"/>
+                    <MainContent :detailExpert="detailExpert" :testimonies="testimonies" v-if="detailExpert != null"/>
                 </div>
             </div>
         </div>

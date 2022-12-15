@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from 'vue'
-import CardMentor from './CardMentor.vue'
+import CardMentor from './CardExpertHome.vue'
 import { useDataExpertsHomepageStore } from '../../stores/store-expert-featured'
 import { storeToRefs } from 'pinia'
 

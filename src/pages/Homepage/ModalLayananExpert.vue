@@ -6,7 +6,7 @@ import IconKonsultasi from '../../partials/icons/icon-konsultasi.vue'
 import IconPelatihan from '../../partials/icons/icon-pelatihan.vue'
 import IconUndangExpert from '../../partials/icons/icon-undang-expert.vue'
 import IconRekrutExpert from '../../partials/icons/icon-rekrut-expert.vue'
-
+import { serviceMap } from '../../utils/DataHelper'
 
 const router = useRouter()
 
@@ -16,8 +16,7 @@ const props = defineProps({
         required: true,
         value: Number
     },
-    service: Object,
-    section: Object
+    service: Array
 })
 
 const emit = defineEmits(['close-modal'])
@@ -41,7 +40,7 @@ const scrollTo = (id) => {
                     <!-- Options -->
                     <ul class="space-y-2 mb-4">
                         <li v-for="layanan in service" :key="layanan">
-                            <button @click="scrollTo(layanan.id)" 
+                            <button @click="scrollTo(layanan)" 
                                 class="w-full h-full text-left py-3 px-4 rounded bg-white border-2 border-gray-300 hover:border-jobhunGreen shadow-sm duration-150 ease-in-out">
                                 <div class="items-center flex">
                                     <!-- <div class="w-4 h-4 border-4 border-gray-500 rounded-full mr-3"></div> -->
