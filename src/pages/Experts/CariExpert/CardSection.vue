@@ -3,7 +3,6 @@ import { ref, onMounted, onUnmounted, computed } from 'vue'
 import CardExpert from './CardExpert.vue'
 import { useDataExpertsHomepageStore } from '../../../stores/store-expert-featured'
 import { storeToRefs } from 'pinia'
-import ModalCariExpert from './ModalCariExpert.vue'
 import Multiselect from '@vueform/multiselect'
 import PaginationNumeric from '../../../pages/component/PaginationJobhun.vue'
 

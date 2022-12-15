@@ -32,7 +32,7 @@ const openPreviewMentor = () => {
                         <a class="text-lg text-slate-800 font-semibold truncate" href="#" @click="openPreviewMentor">
                             {{ expert.name}}
                         </a>
-                        <ModalCariExpert :isPreviewMentor="isPreviewMentor" :expertID="expert.id"
+                        <ModalCariExpert :isPreviewMentor="isPreviewMentor" :expertID="expert.id" :service="expert.available_services"
                             @close-modal="isPreviewMentor = false" />
                     </header>
                     <ul class="text-sm space-y-2 mb-5">
