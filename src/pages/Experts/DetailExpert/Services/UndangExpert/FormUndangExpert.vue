@@ -137,7 +137,7 @@ const openModalAjukanPelatihan = () => {
                             </div>
                             <div class="text-center">
                                 <div class="text-sm inline-flex"
-                                    v-for="(day, index) in dataUndangExpert.service.consultation.day_recomendations" :key="index">
+                                    v-for="(day, index) in dataUndangExpert.service.invite_expert.day_recomendations" :key="index">
                                     <div>
                                         <span v-if="index != 0">, </span>{{ day }}
                                     </div>
@@ -155,8 +155,8 @@ const openModalAjukanPelatihan = () => {
                             </div>
                             <div class="flex items-center text-center">
                                 <div class="text-sm">
-                                    {{ dataUndangExpert.service.consultation.time_recomendation_start + ".00 - " +
-                                    dataUndangExpert.service.consultation.time_recomendation_end + ".00 WIB" }}
+                                    {{ dataUndangExpert.service.invite_expert.time_recomendation_start + ".00 - " +
+                                    dataUndangExpert.service.invite_expert.time_recomendation_end + ".00 WIB" }}
                                 </div>
                             </div>
                         </div>
