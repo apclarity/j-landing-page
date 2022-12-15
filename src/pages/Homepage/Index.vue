@@ -1,7 +1,7 @@
 <script setup>
     import { ref, computed } from 'vue'
     import Banner from './Banner.vue'
-    import CardMentors from './CardExpertsHome.vue'
+    import CardMentors from './CardSectionHome.vue'
     import Carousel from './Carousel.vue'
     import StickyChat from './StickyChat.vue'
 </script>
