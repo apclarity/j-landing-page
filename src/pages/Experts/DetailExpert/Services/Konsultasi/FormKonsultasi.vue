@@ -13,13 +13,13 @@ import ModalAjukan from './ModalAjukanKonsultasi.vue'
 import Multiselect from '@vueform/multiselect'
 
 const props = defineProps({
-    dataExpertKonsultasi: Object
+    layananExpertKonsultasi: Object
 })
 
-const { dataExpertKonsultasi } = props
+const { layananExpertKonsultasi } = props
 
 const duration = ref(1)
-const price = ref(dataExpertKonsultasi.profile.price)
+const price = ref(layananExpertKonsultasi.service.consultation.fee)
 
 const increment = ()=>{
     duration.value += 1
@@ -90,14 +90,14 @@ const openModalAjukanKonsultasi = () => {
         <div class="-mt-32 mb-6 sm:mb-3 md:flex">
             <div class="flex flex-col items-center md:w-1/4 sm:flex-row sm:justify-between sm:items-end">
                 <div class="inline-flex -mt-1 mb-4 sm:mb-0">
-                    <img class="rounded-full ring-8 ring-white" :src="dataExpertKonsultasi.profile.imgProfile" width="200" />
+                    <img class="rounded-full ring-8 ring-white" :src="layananExpertKonsultasi.image" width="200" />
                 </div>
             </div>
         </div>
         <header class="mb-6">
             <div class="grid grid-flow-row md:flex">
                 <div class="mb-2 flex-none md:w-2/6 mr-0 md:mr-5">
-                    <h1 class="text-2xl sm:text-left text-center text-slate-800 font-bold">{{ dataExpertKonsultasi.profile.name }} ✨
+                    <h1 class="text-2xl sm:text-left text-center text-slate-800 font-bold">{{ layananExpertKonsultasi.name }} ✨
                     </h1>
                     <div class="sm:text-left text-center mt-3">
                         <span class="text-sm">
@@ -106,7 +106,7 @@ const openModalAjukanKonsultasi = () => {
                     </div>
                     <div class="sm:text-left text-center text-black">
                         <span class="font-bold text-sm">
-                            {{ dataExpertKonsultasi.profile.position }}
+                            {{ layananExpertKonsultasi.profession }}
                         </span>
                     </div>
                     <div class="sm:text-left text-center mt-3">
@@ -116,7 +116,7 @@ const openModalAjukanKonsultasi = () => {
                     </div>
                     <div class="sm:text-left text-center text-black">
                         <span class="font-bold text-sm">
-                            {{ dataExpertKonsultasi.profile.formalEducation }}
+                            {{ layananExpertKonsultasi.education.school }}
                         </span>
                     </div>
                     <div class="sm:text-left text-center mt-3">
@@ -126,36 +126,79 @@ const openModalAjukanKonsultasi = () => {
                     </div>
                     <div class="text-center sm:text-left text-black">
                         <span class="font-bold text-sm">
-                            {{ dataExpertKonsultasi.profile.domicile }}
+                            {{ layananExpertKonsultasi.domicile }}
                         </span>
                     </div>
                     <div class="flex justify-center items-center sm:justify-start">
-                        <a href="https://www.linkedin.com/company/13406000/"
+                        <a :href="layananExpertKonsultasi.social_media.linkedin"
                             class="text-jobhunGreen mt-3 hover:text-gray-900 duration-300">
                             <IconLinkedin class="w-7 h-7" />
                         </a>
                     </div>
                 </div>
                 <div class="grid md:grid-cols-2 gap-6 w-full">
-                    <div class="" v-for="services in dataExpertKonsultasi.profile.detailKonsultasis" :key="services">
-                        <div class="w-full bg-white border border-gray-200 rounded-sm shadow-sm">
-                            <div class="flex flex-col items-center p-4 my-5">
-                                <div>
-                                    <IconCalendar height="30px" v-if="services.id == 'jadwal'" />
-                                    <IconClock height="30px" v-if="services.id == 'waktu'" />
-                                    <IconMateri height="30px" v-if="services.id == 'posisi'" />
-                                    <IconCoins height="30px" v-if="services.id == 'tarif'" />
-                                </div>
-                                <div class="font-bold text-sm text-center text-slate-800 mx-auto mt-2">
-                                    {{ services.title }}
-                                </div>
-                                <div class="flex items-center text-center">
-                                    <div class="text-sm" v-if="services.id != 'tarif'">
-                                        {{ services.desc }}
+                    <div class="w-full bg-white border border-gray-200 rounded-sm shadow-sm">
+                        <div class="flex flex-col items-center p-4 my-5">
+                            <div>
+                                <IconCalendar height="30px" />
+                            </div>
+                            <div class="font-bold text-sm text-center text-slate-800 mx-auto mt-2">
+                                Rekomendasi hari
+                            </div>
+                            <div class="text-center">
+                                <div class="text-sm inline-flex"
+                                    v-for="(day, index) in layananExpertKonsultasi.service.consultation.day_recomendations" :key="index">
+                                    <div>
+                                        <span v-if="index != 0">, </span>{{ day }}
                                     </div>
-                                    <div class="text-sm" v-else>
-                                        {{ pricePerHour }},-/jam
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full bg-white border border-gray-200 rounded-sm shadow-sm">
+                        <div class="flex flex-col items-center p-4 my-5">
+                            <div>
+                                <IconClock height="30px"/>
+                            </div>
+                            <div class="font-bold text-sm text-center text-slate-800 mx-auto mt-2">
+                                Rekomendasi waktu
+                            </div>
+                            <div class="flex items-center text-center">
+                                <div class="text-sm">
+                                    {{ layananExpertKonsultasi.service.consultation.time_recomendation_start + ".00 - " + layananExpertKonsultasi.service.consultation.time_recomendation_end + ".00 WIB" }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full bg-white border border-gray-200 rounded-sm shadow-sm">
+                        <div class="flex flex-col items-center p-4 my-5">
+                            <div>
+                                <IconMateri height="30px" />
+                            </div>
+                            <div class="font-bold text-sm text-center text-slate-800 mx-auto mt-2">
+                                Jenis materi
+                            </div>
+                            <div class="text-center">
+                                <div class="text-sm inline-flex"
+                                    v-for="(material, index) in layananExpertKonsultasi.service.consultation.material_types" :key="index">
+                                    <div>
+                                        <span v-if="index != 0">, </span>{{ material }}
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full bg-white border border-gray-200 rounded-sm shadow-sm">
+                        <div class="flex flex-col items-center p-4 my-5">
+                            <div>
+                                <IconCoins height="30px" />
+                            </div>
+                            <div class="font-bold text-sm text-center text-slate-800 mx-auto mt-2">
+                                Tarif
+                            </div>
+                            <div class="flex items-center text-center">
+                                <div class="text-sm">
+                                    {{ pricePerHour }},-/jam
                                 </div>
                             </div>
                         </div>
@@ -230,7 +273,7 @@ const openModalAjukanKonsultasi = () => {
                             yang ingin kamu pelajari dari expert!</label>
                         <textarea rows="5"
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                            required v-model="topic" />
+                            required v-model="formExpertKonsultasi.topic" />
                     </div>
                 </div>
             </div>

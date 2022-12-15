@@ -90,7 +90,7 @@ const openModalAjukanPelatihan = () => {
         <div class="-mt-32 mb-6 sm:mb-3 md:flex">
             <div class="flex flex-col items-center md:w-1/4 sm:flex-row sm:justify-between sm:items-end">
                 <div class="inline-flex -mt-1 mb-4 sm:mb-0">
-                    <img class="rounded-full ring-8 ring-white" :src="dataRekrutExpert.profile.imgProfile"
+                    <img class="rounded-full ring-8 ring-white" :src="dataRekrutExpert.image"
                         width="200" />
                 </div>
             </div>
@@ -99,7 +99,7 @@ const openModalAjukanPelatihan = () => {
             <div class="grid grid-flow-row md:flex">
                 <div class="mb-2 flex-none md:w-2/6 mr-0 md:mr-5">
                     <h1 class="text-2xl sm:text-left text-center text-slate-800 font-bold">
-                        {{ dataRekrutExpert.profile.name }} ✨
+                        {{ dataRekrutExpert.name }} ✨
                     </h1>
                     <div class="sm:text-left text-center mt-3">
                         <span class="text-sm">
@@ -108,7 +108,7 @@ const openModalAjukanPelatihan = () => {
                     </div>
                     <div class="sm:text-left text-center text-black">
                         <span class="font-bold text-sm">
-                            {{ dataRekrutExpert.profile.position }}
+                            {{ dataRekrutExpert.profession }}
                         </span>
                     </div>
                     <div class="sm:text-left text-center mt-3">
@@ -118,7 +118,7 @@ const openModalAjukanPelatihan = () => {
                     </div>
                     <div class="sm:text-left text-center text-black">
                         <span class="font-bold text-sm">
-                            {{ dataRekrutExpert.profile.formalEducation }}
+                            {{ dataRekrutExpert.education.school }}
                         </span>
                     </div>
                     <div class="sm:text-left text-center mt-3">
@@ -128,33 +128,47 @@ const openModalAjukanPelatihan = () => {
                     </div>
                     <div class="text-center sm:text-left text-black">
                         <span class="font-bold text-sm">
-                            {{ dataRekrutExpert.profile.domicile }}
+                            {{ dataRekrutExpert.domicile }}
                         </span>
                     </div>
                     <div class="flex justify-center items-center sm:justify-start">
-                        <a href="https://www.linkedin.com/company/13406000/"
+                        <a :href="dataRekrutExpert.social_media.linkedin"
                             class="text-jobhunGreen mt-3 hover:text-gray-900 duration-300">
                             <IconLinkedin class="w-7 h-7" />
                         </a>
                     </div>
                 </div>
-                <div class="grid md:grid-cols-2 gap-6 w-full">
-                    <div class="" v-for="services in dataRekrutExpert.profile.detailRekrutExperts" :key="services">
-                        <div class="w-full bg-white border border-gray-200 rounded-sm shadow-sm">
-                            <div class="flex flex-col items-center p-4 my-5">
-                                <div>
-                                    <IconStar height="30px" v-if="services.id == 'skill'" />
-                                    <IconBriefcase height="30px" v-if="services.id == 'jobType'" />
-                                </div>
-                                <div class="font-bold text-sm text-center text-slate-800 mx-auto mt-2">
-                                    {{ services.title }}
-                                </div>
-                                <div class="flex items-center text-center">
-                                    <div class="text-sm" v-if="services.id != 'tarif'">
-                                        {{ services.desc }}
+                <div class="grid md:grid-cols-2 gap-6 w-full h-1/2">
+                    <div class="w-full bg-white border border-gray-200 rounded-sm shadow-sm">
+                        <div class="flex flex-col items-center p-4 my-5">
+                            <div>
+                                <IconStar height="30px"/>
+                            </div>
+                            <div class="font-bold text-sm text-center text-slate-800 mx-auto mt-2">
+                                Kemampuan yang dimiliki
+                            </div>
+                            <div class="text-center">
+                                <div class="text-sm inline-flex"
+                                    v-for="(capabilities, index) in dataRekrutExpert.service.recruit_expert.capabilities" :key="index">
+                                    <div>
+                                        <span v-if="index != 0">, </span>{{ capabilities }}
                                     </div>
-                                    <div class="text-sm" v-else>
-                                        Tarif {{ pricePerHour }},-/jam
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full bg-white border border-gray-200 rounded-sm shadow-sm">
+                        <div class="flex flex-col items-center p-4 my-5">
+                            <div>
+                                <IconBriefcase height="30px"/>
+                            </div>
+                            <div class="font-bold text-sm text-center text-slate-800 mx-auto mt-2">
+                                Jenis pekerjaan yang bisa diterima
+                            </div>
+                            <div class="text-center">
+                                <div class="text-sm inline-flex" v-for="(typeOfWorks, index) in dataRekrutExpert.service.recruit_expert.acceptable_type_of_works" :key="index">
+                                    <div>
+                                        <span v-if="index != 0">, </span>{{ typeOfWorks }}
                                     </div>
                                 </div>
                             </div>

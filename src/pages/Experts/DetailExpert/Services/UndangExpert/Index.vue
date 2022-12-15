@@ -1,34 +1,18 @@
 <script setup>
 import { ref } from 'vue'
 import FormUndangExpert from './FormUndangExpert.vue'
+import { useDataExpertDetailStore } from '../../../../../stores/store-experts'
+import { storeToRefs } from 'pinia'
 
-const dataUndangExpert = {
-    id: 1,
-    profile: {
-        imgProfile: new URL("../../../../../images/user-36-03.jpg", import.meta.url),
-        name: 'Carolyn Nanana Nanana Nanana',
-        position: 'Startup Founder',
-        formalEducation: 'Universitas Dr. Soetomo (Bachelor of Communications) 2015 ',
-        domicile: 'Surabaya',
-        price: '300000',
-        detailUndangExperts: [
-            {
-                id: 'jadwal',
-                title: 'Rekomendasi hari',
-                desc: 'Senin, Selasa, Rabu, Kamis, Jumat'
-            },
-            {
-                id: 'waktu',
-                title: "Rekomendasi waktu",
-                desc: '17.00 - 21.00 WIB'
-            }
-        ],
-        linkedin: '#',
-    }
-}
+const dataExpertDetailStore = useDataExpertDetailStore()
+
+await dataExpertDetailStore.getDataDetailExpert()
+
+const { detailExpert } = storeToRefs(dataExpertDetailStore)
+
 </script>
 <template>
     <div class="py-8 md:py-0 mx-auto mb-10">
-        <FormUndangExpert :dataUndangExpert="dataUndangExpert" />
+        <FormUndangExpert :dataUndangExpert="detailExpert" />
     </div>
 </template>

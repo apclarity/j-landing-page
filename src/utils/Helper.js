@@ -87,6 +87,30 @@ export const convertToApiDate = (theDate) => {
   return moment(jsDate).tz("Asia/Jakarta").toISOString();
 };
 
+const months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+export const convertToWebDateMonthName = (theDate = "") => {
+  const monthNames = months;
+  let jsDate = new Date();
+  if (!isVariableEmpty(theDate)) {
+    jsDate = new Date(theDate);
+  }
+  return monthNames[jsDate.getMonth()] + ", " + jsDate.getFullYear();
+};
+
 /*
   konversi string ke format angka
   contoh: 1000000 jadi 1.000.000
@@ -181,6 +205,9 @@ export const getArrayOfObjectField = (objArray = [], column = "id") => {
 
 // Cek kalo objek nya kosong, return true/false
 export const isObjectEmpty = (obj = {}) => {
+  if (obj == null) {
+    return true;
+  }
   if (Object.keys(obj).length === 0 && obj.constructor === Object) {
     return true;
   }
@@ -195,16 +222,14 @@ export const getObjectValue = (object, defaultValue = {}) => {
 };
 
 export const isVariableEmpty = (payload) => {
-  console.log(payload);
-  console.log(typeof payload);
   switch (typeof payload) {
     case "string":
-      if (payload == "") {
+      if (payload === "") {
         return true;
       }
       break;
     case "number":
-      if (payload == 0) {
+      if (payload === 0) {
         return true;
       }
       break;
@@ -214,7 +239,7 @@ export const isVariableEmpty = (payload) => {
       return true;
     default:
       if (Array.isArray(payload)) {
-        if (payload.length == 0) {
+        if (payload.length === 0) {
           return true;
         }
       }

@@ -4,7 +4,10 @@
     <div class="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
       <Header :sidebarOpen="sidebarOpen" :session="session" @toggle-sidebar="sidebarOpen = !sidebarOpen" />
       <main>
-        <router-view />
+        <Suspense>
+          <template #default><router-view /></template>
+          <template #fallback>Loading...</template>
+        </Suspense>
         <Footer/>
       </main>
     </div> 

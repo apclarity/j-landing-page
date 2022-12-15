@@ -103,13 +103,13 @@ const searchInHomepage = ref({
                 <form class="relative">
                     <input id="action-search" placeholder="Nama atau perusahaan"
                         class="form-input shadow py-2.5 my-3 focus:outline-none focus:bg-white focus:border-emerald-500 md:w-48 sm:w-48 xs:w-48 mr-3 h-10"
-                        type="search" v-model="company" />
+                        type="search" v-model="searchInHomepage.company" />
                     <input id="action-search" placeholder="Profesi"
                         class="form-input shadow py-2.5 my-3 focus:outline-none focus:bg-white focus:border-emerald-500 md:w-48 sm:w-48 xs:w-48 mr-3 h-10"
-                        type="search" v-model="profession" />
+                        type="search" v-model="searchInHomepage.profession" />
                     <input id="action-search" placeholder="Bidang"
                         class="form-input shadow py-2.5 my-3 focus:outline-none focus:bg-white focus:border-emerald-500 md:w-48 sm:w-48 xs:w-48 mr-3 h-10"
-                        type="search" v-model="sector" />
+                        type="search" v-model="searchInHomepage.sector" />
                     <button type="submit"
                         class="bg-jobhunGreen text-sm h-9 hover:bg-emerald-600 text-white px-5 rounded">
                         Cari
