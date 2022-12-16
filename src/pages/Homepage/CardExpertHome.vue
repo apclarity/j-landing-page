@@ -30,9 +30,9 @@ const openPreviewMentor = () => {
             <div class="grow flex flex-col p-5">
                 <div class="grow">
                     <header class="mb-3">
-                        <a class="text-lg text-slate-800 font-semibold truncate" href="#" @click="openPreviewMentor">
+                        <router-link class="text-lg text-slate-800 font-semibold truncate" to="" @click="openPreviewMentor">
                             {{ expert.name}}
-                        </a>
+                        </router-link>
                         <ModalPreview :isPreviewMentor="isPreviewMentor" :expertID="expert.id" :service="expert.available_services" @close-modal="isPreviewMentor = false" />
                     </header>
                     <ul class="text-sm space-y-2 mb-5">

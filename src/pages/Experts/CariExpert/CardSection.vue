@@ -65,13 +65,13 @@ const openPreviewMentor = () => {
                     <div class="mt-5">
                         <form class="hidden lg:block">
                             <input id="action-search" placeholder="Nama atau perusahaan"
-                                class="form-input align-middle shadow py-2.5 my-3 focus:outline-none focus:bg-white focus:border-emerald-500 md:w-96 sm:w-80 w-80 mr-5 h-10"
+                                class="form-input align-middle shadow my-3 focus:outline-none focus:bg-white focus:border-emerald-500 md:w-96 sm:w-80 w-80 mr-5 h-12"
                                 type="search" v-model="searchCariExpert.company" />
                             <input id="action-search" placeholder="Profesi"
-                                class="form-input align-middle shadow py-2.5 my-3 focus:outline-none focus:bg-white focus:border-emerald-500 md:w-72 sm:w-64 w-48 mr-5 h-10"
+                                class="form-input align-middle shadow my-3 focus:outline-none focus:bg-white focus:border-emerald-500 md:w-72 sm:w-64 w-48 mr-5 h-12"
                                 type="search" v-model="searchCariExpert.profession" />
                             <Multiselect v-model="searchCariExpert.sectors" :close-on-select="false" placeholder="Bidang" mode="multiple" :searchable="true"
-                                class="form-input align-middle inline-flex py-2.5 ms-ring shadow my-0 focus:outline-none focus:bg-white focus:border-emerald-500 h-10 md:w-72 sm:w-64 w-48 ml-0 mr-5 mt-0"
+                                class="form-input align-middle inline-flex p-2 ms-ring shadow my-0 focus:outline-none focus:bg-white focus:border-emerald-500 h-12 md:w-72 sm:w-64 w-48 ml-0 mr-5 mt-0"
                                 :classes="{ containerActive: 'ring-0', search: 'w-full border-none absolute inset-0 outline-none focus:ring-0 appearance-none border-0 text-base font-sans bg-white rounded pl-3.5 rtl:pl-0 rtl:pr-3.5', }"
                                 required :options="sectors">
                                 <template v-slot:multiplelabel="{ values }">
@@ -102,14 +102,14 @@ const openPreviewMentor = () => {
                         </form>
                         <form class="block lg:hidden">
                             <input id="action-search" placeholder="Nama atau perusahaan"
-                                class="form-input align-middle shadow py-2.5 my-3 focus:outline-none focus:bg-white focus:border-emerald-500 md:w-96 sm:w-full w-full mr-5 h-10"
+                                class="form-input align-middle shadow py-2.5 my-3 focus:outline-none focus:bg-white focus:border-emerald-500 md:w-96 sm:w-full w-full mr-5 h-12"
                                 type="search" v-model="searchCariExpert.company" />
                             <input id="action-search" placeholder="Profesi"
-                                class="form-input align-middle shadow py-2.5 my-3 focus:outline-none focus:bg-white focus:border-emerald-500 md:w-96 sm:w-full w-full mr-5 h-10"
+                                class="form-input align-middle shadow py-2.5 my-3 focus:outline-none focus:bg-white focus:border-emerald-500 md:w-96 sm:w-full w-full mr-5 h-12"
                                 type="search" v-model="searchCariExpert.profession" />
                             <Multiselect v-model="searchCariExpert.sectors" :close-on-select="false" placeholder="Bidang" mode="multiple"
                                 :searchable="true"
-                                class="form-input align-middle inline-flex py-2.5 ms-ring shadow my-0 focus:outline-none focus:bg-white focus:border-emerald-500 h-10 md:w-96 sm:w-full w-full ml-0 mr-5 mt-0"
+                                class="form-input align-middle inline-flex p-2 ms-ring shadow my-0 focus:outline-none focus:bg-white focus:border-emerald-500 h-12 md:w-96 sm:w-full w-full ml-0 mr-5 mt-0"
                                 :classes="{ containerActive: 'ring-0', search: 'w-full border-none absolute inset-0 focus:outline-none focus:bg-white focus:border-emerald-500 appearance-none text-base font-sans bg-white rounded pl-3.5 rtl:pl-0 rtl:pr-3.5', }"
                                 required :options="sectors">
                                 <template v-slot:multiplelabel="{ values }">
