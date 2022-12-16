@@ -91,14 +91,14 @@ const searchInHomepage = ref({
             <div class="mt-5 w-full">
                 <form class="w-full">
                     <input id="action-search" placeholder="Nama atau perusahaan"
-                        class="form-input shadow py-2.5 my-3 focus:outline-none focus:bg-white focus:border-emerald-500 md:w-96 sm:w-60 w-48 mr-5 h-10"
-                        type="search" v-model="company" />
+                        class="form-input shadow my-3 focus:outline-none focus:bg-white focus:border-emerald-500 md:w-96 sm:w-60 w-48 mr-5 h-10"
+                        type="search" v-model="searchInHomepage.company" />
                     <input id="action-search" placeholder="Profesi"
-                        class="form-input shadow py-2.5 my-3 focus:outline-none focus:bg-white focus:border-emerald-500 md:w-72 sm:w-64 w-48 mr-5 h-10"
-                        type="search" v-model="profession" />
+                        class="form-input shadow my-3 focus:outline-none focus:bg-white focus:border-emerald-500 md:w-72 sm:w-64 w-48 mr-5 h-10"
+                        type="search" v-model="searchInHomepage.profession" />
                     <input id="action-search" placeholder="Bidang"
-                        class="form-input shadow py-2.5 my-3 focus:outline-none focus:bg-white focus:border-emerald-500 md:w-72 sm:w-64 w-48 mr-5 h-10"
-                        type="search" v-model="sector" />
+                        class="form-input shadow my-3 py-10 focus:outline-none focus:bg-white focus:border-emerald-500 md:w-72 sm:w-64 w-48 mr-5 h-10"
+                        type="search" v-model="searchInHomepage.sector" />
                     <button type="submit"
                         class="bg-jobhunGreen text-sm h-9 hover:bg-emerald-600 text-white px-5 w-24 rounded">
                         Cari
