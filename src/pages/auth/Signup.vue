@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue"
+import { computed, ref } from "vue"
 import { useSigninStore } from "./store"
 import { useRouter } from "vue-router"
 import { MSG_SIGNUP } from "./constant"
@@ -18,7 +18,10 @@ const auth = ref({
 
 const signUp = async () => {
     if (auth.value.email != "" && auth.value.password != "" && auth.value.firstName != "" && auth.value.lastName != "" && auth.value.phone != "" && auth.value.confirmPassword != "" ) {
-        if (await signinStore.login(auth.value)) {
+        if(auth.value.confirmPassword != auth.value.password){
+            alert('Kata sandi tidak sesuai')
+        }else {
+            await signinStore.login(auth.value)
             router.push('/')
         }
     }
@@ -83,7 +86,7 @@ const onlyNumber = (evt)=> {
                                     <label class="block text-sm font-medium mb-1" for="password">Konfirmasi kata sandi</label>
                                     <input class="bg-gray-100 border-0 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
                                         required type="password" autoComplete="on" v-model="auth.confirmPassword" />
-                                </div>
+                                    <span class="text-xs text-thin text-red-700" v-if="auth.confirmPassword != auth.password">Kata sandi tidak sesuai</span>                                </div>
                             </div>
                             <div class="flex items-center justify-between mt-6">
                                 <div class="mr-1">
