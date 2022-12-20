@@ -75,6 +75,10 @@ import FormPelatihan from "./pages/Experts/DetailExpert/Services/Pelatihan/Index
 import FormUndangExpert from "./pages/Experts/DetailExpert/Services/UndangExpert/Index.vue";
 import FormRekrutExpert from "./pages/Experts/DetailExpert/Services/RekrutExpert/Index.vue";
 import CariExpert from "./pages/Experts/CariExpert/Index.vue";
+import LayananKonsultasiNavbar from "./pages/Homepage/MenuLayananNavBar/Konsultasi/Index.vue";
+import LayananPelatihanNavbar from "./pages/Homepage/MenuLayananNavBar/Pelatihan/Index.vue";
+import LayananUndangExpertNavbar from "./pages/Homepage/MenuLayananNavBar/UndangExpert/Index.vue";
+import LayananRekrutExpertNavbar from "./pages/Homepage/MenuLayananNavBar/RekrutExpert/Index.vue";
 
 const routerHistory = createWebHistory();
 
@@ -136,6 +140,22 @@ const router = createRouter({
         {
           path: "/component/modal",
           component: ModalPage,
+        },
+        {
+          path: "/layanan/konsultasi",
+          component: LayananKonsultasiNavbar,
+        },
+        {
+          path: "/layanan/pelatihan",
+          component: LayananPelatihanNavbar,
+        },
+        {
+          path: "/layanan/undangexpert",
+          component: LayananUndangExpertNavbar,
+        },
+        {
+          path: "/layanan/rekrutexpert",
+          component: LayananRekrutExpertNavbar,
         },
       ],
     },

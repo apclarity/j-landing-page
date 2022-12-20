@@ -8,15 +8,29 @@ const router = useRouter()
 const signinStore = useSigninStore()
 
 const auth = ref({
+    firstName: "",
+    lastName: "",
     email: "",
-    password: ""
+    phone: "",
+    password: "",
+    confirmPassword: ""
 })
 
-const login = async () => {
-    if (auth.value.email != "" && auth.value.password != "") {
+const signUp = async () => {
+    if (auth.value.email != "" && auth.value.password != "" && auth.value.firstName != "" && auth.value.lastName != "" && auth.value.phone != "" && auth.value.confirmPassword != "" ) {
         if (await signinStore.login(auth.value)) {
             router.push('/')
         }
+    }
+}
+
+const onlyNumber = (evt)=> {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+        evt.preventDefault();;
+    } else {
+        return true;
     }
 }
 </script>
@@ -42,22 +56,22 @@ const login = async () => {
                                     <label class="block text-sm font-medium mb-1">Nama depan</label>
                                     <input
                                         class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                                        type="text" v-model="auth.email" required />
+                                        type="text" v-model="auth.firstName" required />
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium mb-1">Nama belakang</label>
                                     <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                                        type="text" v-model="auth.email" required />
+                                        type="text" v-model="auth.lastName" required />
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">Nomor WhatsApp</label>
+                                    <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
+                                        type="text" v-model="auth.phone" required @keypress="onlyNumber($event)" />
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium mb-1" for="email">Email</label>
                                     <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
                                         type="email" v-model="auth.email" required />
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium mb-1">Nomor WhatsApp</label>
-                                    <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                                        type="text" v-model="auth.email" required />
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium mb-1" for="password">Kata sandi</label>
@@ -68,20 +82,20 @@ const login = async () => {
                                 <div>
                                     <label class="block text-sm font-medium mb-1" for="password">Konfirmasi kata sandi</label>
                                     <input class="bg-gray-100 border-0 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                                        required type="password" autoComplete="on" v-model="auth.password" />
+                                        required type="password" autoComplete="on" v-model="auth.confirmPassword" />
                                 </div>
                             </div>
                             <div class="flex items-center justify-between mt-6">
                                 <div class="mr-1">
                                     <label class="flex items-center">
-                                        <input type="checkbox" class="form-checkbox text-jobhunGreen"/>
+                                        <input type="checkbox" class="form-checkbox text-jobhunGreen" required/>
                                         <span class="text-sm ml-2">Dengan mendaftar, kamu telah menyetujui <a href="#" class="text-jobhunGreen hover:text-emerald-600"><b>Ketentuan Pengguna</b></a> dan <a href="#" class="text-jobhunGreen hover:text-emerald-600"><b>Kebijakan Privasi</b></a>.</span>
                                     </label>
                                 </div>
                             </div>
                             <div  class="justify-end flex mt-6">
-                                <a class="btn bg-jobhunGreen hover:bg-emerald-600 text-white ml-3">Sign Up
-                                </a>
+                                <button @click="signUp" class="btn bg-jobhunGreen hover:bg-emerald-600 text-white ml-3">Sign Up
+                                </button>
                             </div>
                         </form>
                         <!-- Footer -->
