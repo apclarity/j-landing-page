@@ -99,7 +99,7 @@ const searchInHomepage = ref({
                     <input id="action-search" placeholder="Bidang"
                         class="form-input shadow my-3 py-10 focus:outline-none focus:bg-white focus:border-emerald-500 md:w-72 sm:w-64 w-48 mr-5 h-10"
                         type="search" v-model="searchInHomepage.sector" />
-                    <button type="submit"
+                    <button type="submit" 
                         class="bg-jobhunGreen text-sm h-9 hover:bg-emerald-600 text-white px-5 w-24 rounded">
                         Cari
                     </button>

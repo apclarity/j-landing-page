@@ -33,22 +33,22 @@
         {
             title: 'Konsultasi',
             hidden: false,
-            to: '#'
+            to: '/layanan/konsultasi'
         },
         {
             title: 'Pelatihan',
             hidden: false,
-            to: '/dashboard/main'
+            to: '/layanan/pelatihan'
         },
         {
             title: 'Undang Expert',
             hidden: false,
-            to: '#'
+            to: '/layanan/undangexpert'
         },
         {
             title: 'Rekrut Expert',
             hidden: false,
-            to: '#'
+            to: '/layanan/rekrutexpert'
         }
     ]
 
