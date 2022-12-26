@@ -26,8 +26,16 @@ const isSessionEmpty = computed(() => isObjectEmpty(layoutStore.sessionFirstName
 
 const isUserLogin = ref(false)
 
-const openModalLogin = () => {
+const tempNextRoute = ref('')
+
+const openModalLogin = (nextRoute) => {
+    tempNextRoute.value = nextRoute
     isUserLogin.value = true
+}
+
+const closeLoginModal = ()=> {
+    isUserLogin.value = false
+    tempNextRoute.value = ''
 }
 
 const route = useRoute()
@@ -64,7 +72,7 @@ onMounted(() => {
                 </p>
             </div>
             <div>
-                <button v-if="isSessionEmpty" @click="openModalLogin"
+                <button v-if="isSessionEmpty" @click="openModalLogin('/experts/formkonsultasi/' + expertID)"
                 class="h-9 mt-5 bg-jobhunGreen hover:bg-emerald-600 text-white px-7 rounded text-sm">
                     <span >Daftar</span>
                 </button>
@@ -73,7 +81,7 @@ onMounted(() => {
                         <span>Daftar</span>
                     </button>
                 </router-link>
-                <ModalLogin :isUserLogin="isUserLogin" @close-modal="isUserLogin = false" />
+                <ModalLogin :isUserLogin="isUserLogin" @close-modal="closeLoginModal" :nextRoute="tempNextRoute" />
             </div>
         </div>
         <div class="shrink w-full" v-if="itemLayanan == 'training'">
@@ -87,7 +95,7 @@ onMounted(() => {
                 </p>
             </div>
             <div>
-                <button v-if="isSessionEmpty" @click="openModalLogin"
+                <button v-if="isSessionEmpty" @click="openModalLogin('/experts/formpelatihan/' + expertID)"
                     class="h-9 mt-5 bg-jobhunGreen hover:bg-emerald-600 text-white px-7 rounded text-sm">
                     <span>Daftar</span>
                 </button>
@@ -96,7 +104,7 @@ onMounted(() => {
                         <span>Daftar</span>
                     </button>
                 </router-link>
-                <ModalLogin :isUserLogin="isUserLogin" @close-modal="isUserLogin = false" />
+                <ModalLogin :isUserLogin="isUserLogin" @close-modal="closeLoginModal" :nextRoute="tempNextRoute" />
             </div>
         </div>
         <div class="shrink w-full" v-if="itemLayanan == 'invite-expert'">
@@ -110,7 +118,7 @@ onMounted(() => {
                 </p>
             </div>
             <div>
-                <button v-if="isSessionEmpty" @click="openModalLogin"
+                <button v-if="isSessionEmpty" @click="openModalLogin('/experts/formundangexpert/' + expertID)"
                     class="h-9 mt-5 bg-jobhunGreen hover:bg-emerald-600 text-white px-7 rounded text-sm">
                     <span>Daftar</span>
                 </button>
@@ -119,7 +127,7 @@ onMounted(() => {
                         <span>Daftar</span>
                     </button>
                 </router-link>
-                <ModalLogin :isUserLogin="isUserLogin" @close-modal="isUserLogin = false" />
+                <ModalLogin :isUserLogin="isUserLogin" @close-modal="closeLoginModal" :nextRoute="tempNextRoute" />
             </div>
         </div>
         <div class="shrink w-full" v-if="itemLayanan == 'recruit-expert'">
@@ -134,7 +142,7 @@ onMounted(() => {
                 </p>
             </div>
             <div>
-                <button v-if="isSessionEmpty" @click="openModalLogin"
+                <button v-if="isSessionEmpty" @click="openModalLogin('/experts/formrekrutexpert/' + expertID)"
                     class="h-9 mt-5 bg-jobhunGreen hover:bg-emerald-600 text-white px-7 rounded text-sm">
                     <span>Daftar</span>
                 </button>
@@ -143,7 +151,7 @@ onMounted(() => {
                         <span>Daftar</span>
                     </button>
                 </router-link>
-                <ModalLogin :isUserLogin="isUserLogin" @close-modal="isUserLogin = false" />
+                <ModalLogin :isUserLogin="isUserLogin" @close-modal="closeLoginModal" :nextRoute="tempNextRoute" />
             </div>
         </div>
     </div>

@@ -2,6 +2,7 @@
 import {ref} from 'vue'
 import Combobox from './Combobox.vue'
 import MultiSel from './MultipleSelHome.vue'
+import { computed } from 'vue';
 
 const itemsBidang = [
     {
@@ -79,6 +80,10 @@ const searchInHomepage = ref({
     profession: '',
     sector: ''
 })
+
+// const homepageSearch = ()=>{
+//     $router.push({path: '/experts/cariexpert', query: { keyword: '' }})
+// }
 </script>
 <template>
     <div class="justify-center px-4 sm:px-6 lg:mx-44 pt-8 lg:pt-20 flex">
@@ -103,7 +108,7 @@ const searchInHomepage = ref({
                 <form class="relative">
                     <input id="action-search" placeholder="Nama atau perusahaan"
                         class="form-input shadow py-2.5 my-3 focus:outline-none focus:bg-white focus:border-emerald-500 md:w-48 sm:w-48 xs:w-48 mr-3 h-10"
-                        type="search" v-model="searchInHomepage.company" />
+                        type="search" v-model="searchInHomepage.company"/>
                     <input id="action-search" placeholder="Profesi"
                         class="form-input shadow py-2.5 my-3 focus:outline-none focus:bg-white focus:border-emerald-500 md:w-48 sm:w-48 xs:w-48 mr-3 h-10"
                         type="search" v-model="searchInHomepage.profession" />
