@@ -3,6 +3,7 @@
   import {useSigninStore} from "./store"
   import {useRouter} from "vue-router"
   import { MSG_WELCOME } from "./constant"
+import { isVariableEmpty } from "../../utils/Helper"
 
   const router = useRouter()
   const signinStore = useSigninStore()
@@ -15,6 +16,12 @@
   const login = async () => {
     if(auth.value.email != "" && auth.value.password != ""){
       if(await signinStore.login(auth.value)){
+        let nextRoute = sessionStorage.getItem("nextRoute")
+        if(!isVariableEmpty(nextRoute)){
+          sessionStorage.removeItem("nextRoute")
+          router.push(nextRoute)
+          return
+        }
         router.push('/')
       }
     }

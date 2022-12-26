@@ -8,6 +8,7 @@ const router = useRouter()
 
 const props = defineProps({
     isUserLogin: Boolean,
+    nextRoute: String
 })
 
 const emit = defineEmits(['close-modal'])
@@ -17,6 +18,8 @@ const closeModal = ()=> {
 }
 
 const toSignIn = () => {
+    console.log(props.nextRoute)
+    sessionStorage.setItem('nextRoute', props.nextRoute)
     router.push({ path: '/signin'})
 }
 
