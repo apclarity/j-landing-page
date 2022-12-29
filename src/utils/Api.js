@@ -53,7 +53,10 @@ apiAxios.interceptors.response.use(
   (error) => {
     console.log(error);
     let message = error.response.data.message;
-    if (error.response.data.statusCode != 401) {
+    if (
+      error.response.data.statusCode != 401 &&
+      error.response.data.statusCode != 403
+    ) {
       const toast = useToast();
       toast.error(message, {
         timeout: 2000,

@@ -8,6 +8,10 @@
   import Help from '../components/DropdownHelp.vue'
   import UserMenu from '../components/DropdownProfile.vue'
   import MenuNavbar from '../pages/Homepage/MenuNavbar.vue'
+  import { useRouter, useRoute } from 'vue-router'
+
+  const router = useRouter()
+  const route = useRoute()
 
   const props = defineProps({
     sidebarOpen: Boolean,
@@ -53,6 +57,7 @@
   const session = computed(() => layoutStore.session)
 
   const isSessionEmpty = computed(() => isObjectEmpty(layoutStore.sessionFirstName))
+  // const keywordParams = computed(() => route.query.keyword)
 </script>
 
 <template>
@@ -72,6 +77,9 @@
             <router-link to="/" class="">
               <img src="/src/images/cropped-logo-jobhun-3.png" alt="Logo Jobhun" class="h-8 md:h-10" />
             </router-link>
+            <!-- <router-link :to="`/?keyword=${keywordParams}`" class="">
+              <img src="/src/images/cropped-logo-jobhun-3.png" alt="Logo Jobhun" class="h-8 md:h-10" />
+            </router-link> -->
           </div>
         </div>
         <div class="flex items-center space-x-3">

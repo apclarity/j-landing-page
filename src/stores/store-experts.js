@@ -18,7 +18,6 @@ export const useDataExpertDetailStore = defineStore({
     async getDataDetailExpert(id) {
       try {
         let res = await api.get(DETAIL_EXPERT_URL + id);
-        console.log(res);
         this.detailExpert = res;
       } catch (error) {
         console.log("error");
