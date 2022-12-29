@@ -1,11 +1,12 @@
 <script setup>
   import {ref} from "vue"
-  import {useSigninStore} from "./store"
-  import {useRouter} from "vue-router"
-  import { MSG_WELCOME } from "./constant"
-import { isVariableEmpty } from "../../utils/Helper"
+  import {useSigninStore} from "../store"
+  import {useRouter, useRoute} from "vue-router"
+  import { MSG_WELCOME } from "../constant"
+  import { isVariableEmpty } from "../../../utils/Helper"
 
   const router = useRouter()
+  const route = useRoute()
   const signinStore = useSigninStore()
 
   const auth = ref({
@@ -26,6 +27,17 @@ import { isVariableEmpty } from "../../utils/Helper"
       }
     }
   }
+
+  // =========== REGISTRATION VERIFICATION ================
+  {
+    const verificationCode = route.query.veriftoken
+
+    // if veriftoken query exist
+    if(!isVariableEmpty(verificationCode)){
+      await signinStore.verifyUserRegistration(verificationCode)
+    }
+  }
+  // =========== END OF REGISTRATION VERIFICATION =========
 </script>
 <template>
   <main class="bg-white">
@@ -70,8 +82,8 @@ import { isVariableEmpty } from "../../utils/Helper"
         </div>
       </div>
       <div class="hidden md:block absolute top-0 bottom-0 right-0 md:w-1/2" aria-hidden="true">
-        <img class="object-cover object-center w-full h-full" src="../../images/signin/banner-ilustrasi-04.png" width="760" height="1024" alt="Authentication" />
-        <img class="absolute top-1/4 left-0 -translate-x-1/2 hidden lg:block" src="../../images/signin/roket-02.png" width="218" height="224" alt="Authentication decoration" />
+        <img class="object-cover object-center w-full h-full" src="../../../images/signin/banner-ilustrasi-04.png" width="760" height="1024" alt="Authentication" />
+        <img class="absolute top-1/4 left-0 -translate-x-1/2 hidden lg:block" src="../../../images/signin/roket-02.png" width="218" height="224" alt="Authentication decoration" />
       </div>
     </div>
   </main>

@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import api from "../utils/Api";
+import api from "../utils/ApiStatic";
 import { PAGINATION_LIMIT } from "../utils/Constants";
 
 // const ADVANCE_SEARCH_URL = "/expert/search-expert";
