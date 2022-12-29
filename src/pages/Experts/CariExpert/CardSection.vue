@@ -1,17 +1,15 @@
 <script setup>
-import { ref, onMounted, onUnmounted, computed, reactive } from 'vue'
+import { ref, onMounted, reactive } from 'vue'
 import CardExpert from './CardExpert.vue'
 import { storeToRefs } from 'pinia'
 import Multiselect from '@vueform/multiselect'
 import PaginationNumeric from '../../../components/PaginationNumeric.vue'
-import Rating from '../../../components/Ratings.vue'
-import { useRouter, useRoute } from 'vue-router'
+import { useRoute } from 'vue-router'
 import { useAdvanceSearchStore } from '../../../stores/store-advance-search'
 import { PAGINATION_LIMIT_ADVANCE_SEARCH } from './Constant'
 import { isVariableEmpty } from '../../../utils/Helper'
 import { useOptionsStore } from '../../../stores/store-options'
 
-const router = useRouter()
 const route = useRoute()
 
 const advanceSearchStore = useAdvanceSearchStore()
@@ -55,7 +53,7 @@ const expertise = {
     PublicSpeaking: "Public Speaking"
 }
 
-const domisili = [
+const domiciles = [
     'Surabaya', 'Jakarta', 'Solo', 'Sidoarjo'
 ]
 
@@ -123,11 +121,11 @@ const deleteSectors = (sector)=>{
     advanceFilterCariExpert.value.sectors = selectedItems
 }
 
-const deleteExpertise = (expertise)=>{
+const deleteExpertise = (expertiseObj)=>{
     let selectedItems = advanceFilterCariExpert.value.expertise
     let index = -1
     for (let i = 0; i < selectedItems.length; i++) {
-        if (expertise == selectedItems[i]) {
+        if (expertiseObj == selectedItems[i]) {
             index = i
             break
         }
@@ -225,7 +223,7 @@ onMounted(() => {
                                         Domisili
                                     </span>
                                     <Multiselect v-model="advanceFilterCariExpert.domicile" class="form-input p-2 ring-0 shadow my-1 focus:outline-none focus:bg-white h-10 w-full ml-0 mr-5 mt-1"
-                                    :options="domisili" placeholder="Domisili expert" />
+                                    :options="domiciles" placeholder="Domisili expert" />
                                 </div>
                                 <div class="text-left mt-2">
                                     <span class="text-sm font-medium text-jobhunGreen">

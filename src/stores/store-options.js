@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import api from "../utils/Api";
+import apiStatic from "../utils/ApiStatic";
 
 const SECTORS_URL = "/sectors.json";
 
@@ -11,7 +11,7 @@ export const useOptionsStore = defineStore({
   actions: {
     async getSectors(payload) {
       try {
-        let res = await api.get(SECTORS_URL, payload);
+        let res = await apiStatic.get(SECTORS_URL, payload);
         this.listSector = res;
       } catch (error) {}
     },

@@ -1,28 +1,27 @@
 <script setup>
 import { computed, ref } from "vue"
-import { useSigninStore } from "./store"
+import { useSigninStore } from "../store"
 import { useRouter } from "vue-router"
-import { MSG_SIGNUP } from "./constant"
+import { MSG_SIGNUP } from "../constant"
 
 const router = useRouter()
 const signinStore = useSigninStore()
 
 const auth = ref({
-    firstName: "",
-    lastName: "",
+    first_name: "",
+    last_name: "",
     email: "",
     phone: "",
     password: "",
-    confirmPassword: ""
+    confirm_password: ""
 })
 
 const signUp = async () => {
-    if (auth.value.email != "" && auth.value.password != "" && auth.value.firstName != "" && auth.value.lastName != "" && auth.value.phone != "" && auth.value.confirmPassword != "" ) {
-        if(auth.value.confirmPassword != auth.value.password){
+    if (auth.value.email != "" && auth.value.password != "" && auth.value.first_name != "" && auth.value.last_name != "" && auth.value.phone != "" && auth.value.confirm_password != "" ) {
+        if(auth.value.confirm_password != auth.value.password){
             alert('Kata sandi tidak sesuai')
         }else {
-            await signinStore.login(auth.value)
-            router.push('/')
+            await signinStore.signup(auth.value)
         }
     }
 }
@@ -59,12 +58,12 @@ const onlyNumber = (evt)=> {
                                     <label class="block text-sm font-medium mb-1">Nama depan</label>
                                     <input
                                         class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                                        type="text" v-model="auth.firstName" required />
+                                        type="text" v-model="auth.first_name" required />
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium mb-1">Nama belakang</label>
                                     <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                                        type="text" v-model="auth.lastName" required />
+                                        type="text" v-model="auth.last_name" required />
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium mb-1">Nomor WhatsApp</label>
@@ -85,8 +84,8 @@ const onlyNumber = (evt)=> {
                                 <div>
                                     <label class="block text-sm font-medium mb-1" for="password">Konfirmasi kata sandi</label>
                                     <input class="bg-gray-100 border-0 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                                        required type="password" autoComplete="on" v-model="auth.confirmPassword" />
-                                    <span class="text-xs text-thin text-red-700" v-if="auth.confirmPassword != auth.password">Kata sandi tidak sesuai</span>                                </div>
+                                        required type="password" autoComplete="on" v-model="auth.confirm_password" />
+                                    <span class="text-xs text-thin text-red-700" v-if="auth.confirm_password != auth.password">Kata sandi tidak sesuai</span>                                </div>
                             </div>
                             <div class="flex items-center justify-between mt-6">
                                 <div class="mr-1">
@@ -129,10 +128,10 @@ const onlyNumber = (evt)=> {
 
             <!-- Image -->
             <div class="hidden md:block absolute top-0 bottom-0 right-0 md:w-1/2" aria-hidden="true">
-                <img class="object-cover object-center w-full h-full" src="../../images/signin/banner-ilustrasi-04.png"
+                <img class="object-cover object-center w-full h-full" src="../../../images/signin/banner-ilustrasi-04.png"
                     width="760" height="1024" alt="Authentication" />
                 <img class="absolute top-1/4 left-0 -translate-x-1/2 hidden lg:block"
-                    src="../../images/signin/roket-02.png" width="218" height="224" alt="Authentication decoration" />
+                    src="../../../images/signin/roket-02.png" width="218" height="224" alt="Authentication decoration" />
             </div>
         </div>
     </main>

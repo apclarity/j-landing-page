@@ -1,6 +1,4 @@
 <script setup>
-import { ref, computed } from 'vue'
-import SearchBar from './SearchBar.vue'
 import CardSection from './CardSection.vue'
 </script>
 <template>
