@@ -19,10 +19,15 @@ import { useLayoutStore } from './store'
 import Sidebar from '../../partials/Sidebar.vue'
 import Header from '../../partials/Header.vue'
 import Footer from '../../pages/layout/Footer.vue'
+import { useOptionsStore } from '../../stores/store-options'
 
 const sidebarOpen = ref(true)
 
 const layoutStore = useLayoutStore()
+
 const session = computed(() => layoutStore.session)
 layoutStore.getSession()
+
+const optionsStore = useOptionsStore()
+optionsStore.getSectors()
 </script>

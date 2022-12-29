@@ -1,0 +1,1 @@
+export const PAGINATION_LIMIT_ADVANCE_SEARCH = 15;
