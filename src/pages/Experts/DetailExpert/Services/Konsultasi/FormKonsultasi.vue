@@ -80,6 +80,15 @@ const isUserAjukan = ref(false)
 const openModalAjukanKonsultasi = () => {
     isUserAjukan.value = true
 }
+
+const formValidation = ()=>{
+    if (formExpertKonsultasi.value.date == '' && formExpertKonsultasi.value.startHour == '' && formExpertKonsultasi.value.startMinute == '' &&
+        formExpertKonsultasi.value.discussion == '' && formExpertKonsultasi.value.topic == '' && formExpertKonsultasi.value.total == '' &&
+        formExpertKonsultasi.value.duration == ''){
+    } else {
+        openModalAjukanKonsultasi()
+    }
+}
 </script>
 <template>
     <div class="relative h-96 bg-slate-200 -z-20 -mt-10 md:mt-0">
@@ -207,7 +216,7 @@ const openModalAjukanKonsultasi = () => {
                 </div>
             <hr class="my-10 border-gray-300 sm:mx-auto" />
         </header>
-        <form action="">
+        <form @submit.prevent="formValidation">
             <div>
                 <div>
                     <span class="text-lg font-bold text-black">
@@ -288,7 +297,7 @@ const openModalAjukanKonsultasi = () => {
             <div>
                 <div class="flex justify-end">
                     <div>
-                        <button @click="openModalAjukanKonsultasi" type="submit"
+                        <button type="submit"
                             class="h-9 mt-5 bg-jobhunGreen hover:bg-emerald-600 text-white px-7 rounded text-sm">
                             Ajukan
                         </button>

@@ -1,11 +1,11 @@
 <script setup>
 import { ref } from 'vue'
 import FormRekrutExpert from './FormRekrutExpert.vue'
-import { useDataExpertDetailStore } from '../../../../../stores/store-experts'
+import { useDataExpertStore } from '../../../../../stores/store-experts'
 import { storeToRefs } from 'pinia'
 import { useRoute } from 'vue-router'
 
-const dataExpertDetailStore = useDataExpertDetailStore()
+const dataExpertDetailStore = useDataExpertStore()
 
 const route = useRoute()
 const id = route.params.id

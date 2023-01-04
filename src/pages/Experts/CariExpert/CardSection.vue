@@ -5,17 +5,17 @@ import { storeToRefs } from 'pinia'
 import Multiselect from '@vueform/multiselect'
 import PaginationNumeric from '../../../components/PaginationNumeric.vue'
 import { useRoute } from 'vue-router'
-import { useAdvanceSearchStore } from '../../../stores/store-advance-search'
+import { useDataExpertStore } from '../../../stores/store-experts'
 import { PAGINATION_LIMIT_ADVANCE_SEARCH } from './Constant'
 import { isVariableEmpty } from '../../../utils/Helper'
 import { useOptionsStore } from '../../../stores/store-options'
 
 const route = useRoute()
 
-const advanceSearchStore = useAdvanceSearchStore()
+const advanceSearchStore = useDataExpertStore()
 const optionsStore = useOptionsStore()
 
-const { experts, expertPagination } = storeToRefs(advanceSearchStore)
+const { expertAdvanceSearch, expertPaginationAdvanceSearch } = storeToRefs(advanceSearchStore)
 const { listSector } = storeToRefs(optionsStore)
 
 const limit = 12
@@ -173,7 +173,7 @@ onMounted(() => {
             <div class="px-4 sm:px-6 pt-8 flex sm:py-0 mt-0 sm:-mt-10 md:-mt-20">
                 <div class="">
                     <div class="grid grid-flow-row md:flex">
-                        <div class="flex-none md:w-1/3 lg:w-1/5 mr-0 md:mr-5 sm:mt-10 md:mt-40 bg-white shadow-lg rounded-sm border border-slate-200 p-5">
+                        <div class="flex-none h-full md:w-1/3 lg:w-1/5 mr-0 md:mr-5 sm:mt-10 md:mt-40 bg-white shadow-lg rounded-sm border border-slate-200 p-5">
                             <form action="" class="">
                                 <div class="text-left">
                                     <span class="text-sm font-medium text-jobhunGreen">
@@ -257,7 +257,7 @@ onMounted(() => {
                                         Nama Lembaga
                                     </span>
                                     <input class="form-input align-middle shadow my-1 focus:outline-none focus:bg-white focus:border-emerald-500 w-full"
-                                        type="text" required placeholder="Nama expert" v-model="advanceFilterCariExpert.institution" />
+                                        type="text" required placeholder="Nama lembaga" v-model="advanceFilterCariExpert.institution" />
                                 </div>
                                 <div class="text-left mt-2">
                                     <span class="text-sm font-medium text-jobhunGreen">
@@ -479,7 +479,7 @@ onMounted(() => {
                                 </div>
                             </div>
                             <div class="grid grid-cols-2 xl:grid-cols-4 md:grid-cols-2 gap-6">
-                                <div v-for="(expert, index) in experts" :key="expert">
+                                <div v-for="(expert, index) in expertAdvanceSearch" :key="expert">
                                     <CardExpert :expert="expert" v-if="index < limit" />
                                 </div>
                             </div>
@@ -489,9 +489,9 @@ onMounted(() => {
             </div>
             <div class="text-end text-sm mt-10 px-28">
                 <PaginationNumeric 
-                :total="expertPagination.total"
-                :perPage="expertPagination.per_page"
-                :page="expertPagination.page"
+                :total="expertPaginationAdvanceSearch.total"
+                :perPage="expertPaginationAdvanceSearch.per_page"
+                :page="expertPaginationAdvanceSearch.page"
                 @clickNav="changePage" />
             </div>
         </div>

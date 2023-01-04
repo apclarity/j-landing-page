@@ -26,7 +26,7 @@ const formExpertPelatihan = ref({
     topic: "",
     startHour: "",
     startMinute: "",
-    days: null
+    days: []
 })
 
 const days = [
@@ -76,6 +76,15 @@ const openModalAjukanPelatihan = () => {
 }
 
 const dropdownDay = ref(false)
+
+const formValidation = () => {
+    if (formExpertPelatihan.value.typePelatihan == '' && formExpertPelatihan.value.totalPerson == '' && formExpertPelatihan.value.session == '' &&
+        formExpertPelatihan.value.topic == '' && formExpertPelatihan.value.startHour == '' && formExpertPelatihan.value.startMinute == '' &&
+        formExpertPelatihan.value.days == '') {
+    } else {
+        openModalAjukanPelatihan()
+    }
+}
 </script>
 <style src="@vueform/multiselect/themes/default.css">
 
@@ -177,7 +186,7 @@ const dropdownDay = ref(false)
             </div>
             <hr class="my-10 border-gray-300 sm:mx-auto" />
         </header>
-        <form action="">
+        <form @submit.prevent="formValidation">
             <div>
                 <div>
                     <span class="text-lg font-bold text-black">
@@ -244,10 +253,10 @@ const dropdownDay = ref(false)
                 <div class="flex justify-end">
                     <div>
                         <button class="h-9 mt-5 bg-jobhunGreen hover:bg-emerald-600 text-white px-7 rounded text-sm"
-                            @click="openModalAjukanPelatihan" type="submit">
+                            type="submit">
                             Ajukan
                         </button>
-                        <ModalAjukan :isUserAjukan="isUserAjukan" @close-modal="isUserAjukan = false" />
+                        <ModalAjukan :isUserAjukan="isUserAjukan"  />
                     </div>
                 </div>
             </div>

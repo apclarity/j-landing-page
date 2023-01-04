@@ -76,8 +76,18 @@ const dropdownOpen = ref(false)
 
 const isUserAjukan = ref(false)
 
-const openModalAjukanPelatihan = () => {
+const openModalAjukanRekrutExpert = () => {
     isUserAjukan.value = true
+}
+
+const formValidation = () => {
+    if (formRekrutExpert.value.company == '' && formRekrutExpert.value.website == '' && formRekrutExpert.value.linkedin == '' &&
+        formRekrutExpert.value.email == '' && formRekrutExpert.value.phone == '' && formRekrutExpert.value.projectDetail == '' &&
+        formRekrutExpert.value.jobDetail == '' && formRekrutExpert.value.termCondition == '' && formRekrutExpert.value.deadline == '' &&
+        formRekrutExpert.value.budget == '') {
+    } else {
+        openModalAjukanRekrutExpert()
+    }
 }
 </script>
 <template>
@@ -178,7 +188,7 @@ const openModalAjukanPelatihan = () => {
             </div>
             <hr class="my-10 border-gray-300 sm:mx-auto" />
         </header>
-        <form action="">
+        <form @submit.prevent="formValidation">
             <div>
                 <div>
                     <span class="text-lg font-bold text-black">
@@ -257,8 +267,7 @@ const openModalAjukanPelatihan = () => {
             <div class="mt-10">
                 <div class="flex justify-end">
                     <div>
-                        <button class="h-9 mt-5 bg-jobhunGreen hover:bg-emerald-600 text-white px-7 rounded text-sm"
-                            type="submit" @click="openModalAjukanPelatihan">
+                        <button class="h-9 mt-5 bg-jobhunGreen hover:bg-emerald-600 text-white px-7 rounded text-sm" type="submit">
                             Ajukan
                         </button>
                         <ModalAjukan :isUserAjukan="isUserAjukan" @close-modal="isUserAjukan = false" />

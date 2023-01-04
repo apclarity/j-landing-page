@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import api from "../utils/Api";
 
-const INDEX_EXPERT_URL = "/expert/expert-features";
+const INDEX_EXPERT_URL = "/expert-featured.json";
 
 export const useDataExpertsHomepageStore = defineStore({
   id: "dataExpertsHomepage",

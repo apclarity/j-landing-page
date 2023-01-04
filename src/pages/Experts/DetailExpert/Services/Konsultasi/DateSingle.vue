@@ -22,7 +22,10 @@ export default {
             date: null,
             config: {
                 wrap: true,
+                allowInput: true, // enable html5 validation 
                 required: true,
+                altInput: true, 
+                altFormat: "F j, Y",
                 static: true,
                 monthSelectorType: 'static',
                 dateFormat: 'M j, Y',

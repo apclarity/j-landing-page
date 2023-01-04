@@ -48,6 +48,108 @@
         ],
         "star": 3,
         "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIahyAV6FxD0OJtV9XIySHG8vej2ulIAcyrg&usqp=CAU"
+      },
+      {
+        "id": 4,
+        "name": "Sinambela",
+        "profession": "Student",
+        "sectors": [
+          "Design"
+        ],
+        "available_services": [
+          "consultation",
+          "recruit-expert"
+        ],
+        "star": 4,
+        "image": "https://freepngimg.com/thumb/donald_duck/80482-artwork-donald-carrier-duck-mail-font-cartoon-thumb.png"
+      },
+      {
+        "id": 5,
+        "name": "Rudi",
+        "profession": "Personal Trainer",
+        "sectors": [
+          "Design"
+        ],
+        "available_services": [
+          "consultation",
+          "recruit-expert",
+          "training"
+        ],
+        "star": 2.4,
+        "image": "https://freepngimg.com/thumb/donald_duck/80482-artwork-donald-carrier-duck-mail-font-cartoon-thumb.png"
+      },
+      {
+        "id": 6,
+        "name": "Zunedi",
+        "profession": "Digital Marketer",
+        "sectors": [
+          "marketing",
+          "sales"
+        ],
+        "available_services": [
+          "consultation",
+          "training",
+          "recruit-expert"
+        ],
+        "star": 1.7,
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1B5GlesOwjTRH0F-aYQg1tlOeOORVihbjmHnWJ7JxAq1zGOLbsVcIo5aQXM54GMRb6JY&usqp=CAU"
+      },
+      {
+        "id": 7,
+        "name": "Sinambela",
+        "profession": "Student",
+        "sectors": [
+          "Design"
+        ],
+        "available_services": [
+          "consultation",
+          "recruit-expert"
+        ],
+        "star": 5,
+        "image": "https://freepngimg.com/thumb/donald_duck/80482-artwork-donald-carrier-duck-mail-font-cartoon-thumb.png"
+      },
+      {
+        "id": 8,
+        "name": "Zunedi Sinambela",
+        "profession": "Staff",
+        "sectors": [
+          "writter"
+        ],
+        "available_services": [
+          "consultation",
+          "training"
+        ],
+        "star": 3,
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIahyAV6FxD0OJtV9XIySHG8vej2ulIAcyrg&usqp=CAU"
+      },
+      {
+        "id": 9,
+        "name": "Sinambela",
+        "profession": "Student",
+        "sectors": [
+          "Design"
+        ],
+        "available_services": [
+          "consultation",
+          "recruit-expert"
+        ],
+        "star": 4,
+        "image": "https://freepngimg.com/thumb/donald_duck/80482-artwork-donald-carrier-duck-mail-font-cartoon-thumb.png"
+      },
+      {
+        "id": 10,
+        "name": "Rudi",
+        "profession": "Personal Trainer",
+        "sectors": [
+          "Design"
+        ],
+        "available_services": [
+          "consultation",
+          "recruit-expert",
+          "training"
+        ],
+        "star": 2.4,
+        "image": "https://freepngimg.com/thumb/donald_duck/80482-artwork-donald-carrier-duck-mail-font-cartoon-thumb.png"
       }
     ],
     "pagination": {

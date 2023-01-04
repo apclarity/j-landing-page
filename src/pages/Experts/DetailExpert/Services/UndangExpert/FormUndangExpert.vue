@@ -64,8 +64,18 @@ const minutes = [
 
 const isUserAjukan = ref(false)
 
-const openModalAjukanPelatihan = () => {
+const openModalAjukanUndanganExpert = () => {
     isUserAjukan.value = true
+}
+
+const formValidation = () => {
+    if (formUndangExpert.value.from == '' && formUndangExpert.value.date == '' && formUndangExpert.value.budget == '' &&
+        formUndangExpert.value.description == '' && formUndangExpert.value.typePelatihan == '' && formUndangExpert.value.topic == '' &&
+        formUndangExpert.value.eventName == '' && formUndangExpert.value.target == '' &&
+        formUndangExpert.value.eventDescription == '') {
+    } else {
+        openModalAjukanUndanganExpert()
+    }
 }
 </script>
 <template>
@@ -165,7 +175,7 @@ const openModalAjukanPelatihan = () => {
             </div>
             <hr class="my-10 border-gray-300 sm:mx-auto" />
         </header>
-        <form action="">
+        <form @submit.prevent="formValidation">
             <div>
                 <div>
                     <span class="text-lg font-bold text-black">
@@ -246,8 +256,7 @@ const openModalAjukanPelatihan = () => {
             <div class="mt-10">
                 <div class="flex justify-end">
                     <div>
-                        <button class="h-9 mt-5 bg-jobhunGreen hover:bg-emerald-600 text-white px-7 rounded text-sm" type="submit"
-                            @click="openModalAjukanPelatihan">
+                        <button class="h-9 mt-5 bg-jobhunGreen hover:bg-emerald-600 text-white px-7 rounded text-sm" type="submit">
                             Ajukan
                         </button>
                         <ModalAjukan :isUserAjukan="isUserAjukan" @close-modal="isUserAjukan = false" />
