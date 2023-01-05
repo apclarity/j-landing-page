@@ -34,16 +34,20 @@ const changePage = (page) => {
 
 // ====== V-Model/Data ====================================================
 const advanceFilterCariExpert = ref({
+    services: [],
     sectors: [],
-    index: null,
-    expertName: '',
+    name: '',
     profession: '',
     domicile: '',
-    education: '',
-    institution: '',
-    company: '',
-    expertise: [],
-    rating: ''
+    education: {
+        degree: '',
+        school: ''
+    },
+    company_name: '',
+    recruit_expert: {
+        capabilities: []
+    },
+    star: null
 })
 
 const expertise = {
@@ -65,16 +69,20 @@ const searchCariExpert = reactive({
 
 const services = [
     {
-        title: 'Konsultasi'
+        title: 'Konsultasi',
+        value: 'consultation'
     },
     {
-        title: 'Pelatihan'
+        title: 'Pelatihan',
+        value: 'training'
     },
     {
-        title: 'Undang Expert'
+        title: 'Undang Expert',
+        value: 'invite-expert'
     },
     {
-        title: 'Rekrut Expert'
+        title: 'Rekrut Expert',
+        value: 'recruit-expert'
     }
 ]
 
@@ -83,7 +91,7 @@ const services = [
 const runAdvanceSearch = async () => {
     if (advanceFilterCariExpert.value.sectors != '' || advanceFilterCariExpert.value.expertName != '' || advanceFilterCariExpert.value.profession != ''
         || advanceFilterCariExpert.value.domicile != '' || advanceFilterCariExpert.value.education != '' || advanceFilterCariExpert.value.institution != ''
-        || advanceFilterCariExpert.value.company != '' || advanceFilterCariExpert.value.expertise != '' || advanceFilterCariExpert.value.rating != ''){
+        || advanceFilterCariExpert.value.company != '' || advanceFilterCariExpert.value.expertise != '' || advanceFilterCariExpert.value.star != ''){
             if(await advanceSearchStore.advanceSearch(advanceFilterCariExpert.value)){
                 return
             }
@@ -93,15 +101,15 @@ const runAdvanceSearch = async () => {
 const selectedRating = (btn, e)=>{
     e.preventDefault();
     if(btn===1){
-        advanceFilterCariExpert.value.rating = 1
+        advanceFilterCariExpert.value.star = 1
     } else if (btn === 2) {
-        advanceFilterCariExpert.value.rating = 2
+        advanceFilterCariExpert.value.star = 2
     } else if (btn === 3) {
-        advanceFilterCariExpert.value.rating = 3
+        advanceFilterCariExpert.value.star = 3
     } else if (btn === 4) {
-        advanceFilterCariExpert.value.rating = 4
+        advanceFilterCariExpert.value.star = 4
     } else if (btn === 5) {
-        advanceFilterCariExpert.value.rating = 5
+        advanceFilterCariExpert.value.star = 5
     }
 }
 
@@ -182,7 +190,7 @@ onMounted(() => {
                                     <ul class="my-1">
                                         <li class="mt-1" v-for="service in services" :key="service">
                                             <label class="flex items-center">
-                                                <input type="checkbox" class="w-3 h-3 text-jobhunGreen bg-gray-200 border-gray-200 focus:ring-jobhunGreen focus:ring-1 hover:ring-jobhunGreen hover:ring-1 rounded-sm" />
+                                                <input type="checkbox" :value="service.value" v-model="advanceFilterCariExpert.services" class="w-3 h-3 text-jobhunGreen bg-gray-200 border-gray-200 focus:ring-jobhunGreen focus:ring-1 hover:ring-jobhunGreen hover:ring-1 rounded-sm" />
                                                 <span class="text-sm ml-2 text-gray-500">{{ service.title }}</span>
                                             </label>
                                         </li>
@@ -193,7 +201,7 @@ onMounted(() => {
                                         Nama
                                     </span>
                                     <input class="form-input align-middle shadow my-1 focus:outline-none focus:bg-white focus:border-emerald-500 w-full"
-                                        type="text" required placeholder="Nama expert" v-model="advanceFilterCariExpert.expertName" />
+                                        type="text" required placeholder="Nama expert" v-model="advanceFilterCariExpert.name" />
                                 </div>
                                 <div class="text-left mt-2">
                                     <span class="text-sm font-medium text-jobhunGreen">
@@ -231,22 +239,22 @@ onMounted(() => {
                                     </span>
                                     <div class="mt-1">
                                         <div class="flex items-center">
-                                            <input type="radio" v-model="advanceFilterCariExpert.education" required value="S3"
+                                            <input type="radio" v-model="advanceFilterCariExpert.education.degree" required value="S3"
                                                 class="w-3 h-3 text-jobhunGreen bg-gray-200 border-gray-200 focus:ring-jobhunGreen focus:ring-1 hover:ring-jobhunGreen hover:ring-1">
                                             <span class="text-sm ml-2 text-gray-500">S3</span>
                                         </div>
                                         <div class="flex items-center mt-0.5">
-                                            <input type="radio" v-model="advanceFilterCariExpert.education" required value="S2"
+                                            <input type="radio" v-model="advanceFilterCariExpert.education.degree" required value="S2"
                                                 class="w-3 h-3 text-jobhunGreen bg-gray-200 border-gray-200 focus:ring-jobhunGreen focus:ring-1 hover:ring-jobhunGreen hover:ring-1">
                                             <span class="text-sm ml-2 text-gray-500">S2</span>
                                         </div>
                                         <div class="flex items-center mt-0.5">
-                                            <input type="radio" v-model="advanceFilterCariExpert.education" required value="S1"
+                                            <input type="radio" v-model="advanceFilterCariExpert.education.degree" required value="S1"
                                                 class="w-3 h-3 text-jobhunGreen bg-gray-200 border-gray-200 focus:ring-jobhunGreen focus:ring-1 hover:ring-jobhunGreen hover:ring-1">
                                             <span class="text-sm ml-2 text-gray-500">S1</span>
                                         </div>
                                         <div class="flex items-center mt-0.5">
-                                            <input type="radio" v-model="advanceFilterCariExpert.education" required value="SMA/K"
+                                            <input type="radio" v-model="advanceFilterCariExpert.education.degree" required value="SMA/K"
                                                 class="w-3 h-3 text-jobhunGreen bg-gray-200 border-gray-200 focus:ring-jobhunGreen focus:ring-1 hover:ring-jobhunGreen hover:ring-1">
                                             <span class="text-sm ml-2 text-gray-500">SMA/K</span>
                                         </div>
@@ -257,20 +265,20 @@ onMounted(() => {
                                         Nama Lembaga
                                     </span>
                                     <input class="form-input align-middle shadow my-1 focus:outline-none focus:bg-white focus:border-emerald-500 w-full"
-                                        type="text" required placeholder="Nama lembaga" v-model="advanceFilterCariExpert.institution" />
+                                        type="text" required placeholder="Nama lembaga" v-model="advanceFilterCariExpert.education.school" />
                                 </div>
                                 <div class="text-left mt-2">
                                     <span class="text-sm font-medium text-jobhunGreen">
                                         Nama Perusahaan
                                     </span>
                                     <input class="form-input align-middle shadow my-1 focus:outline-none focus:bg-white focus:border-emerald-500 w-full"
-                                        type="text" required placeholder="Nama perusahaan" v-model="advanceFilterCariExpert.company" />
+                                        type="text" required placeholder="Nama perusahaan" v-model="advanceFilterCariExpert.company_name" />
                                 </div>
                                 <div class="text-left mt-2">
                                     <span class="text-sm font-medium text-jobhunGreen">
                                         Keahlian
                                     </span>
-                                    <Multiselect v-model="advanceFilterCariExpert.expertise" :close-on-select="false" placeholder="Keahlian expert" mode="multiple"
+                                    <Multiselect v-model="advanceFilterCariExpert.recruit_expert.capabilities" :close-on-select="false" placeholder="Keahlian expert" mode="multiple"
                                         :searchable="true"
                                         class="form-input p-2 ms-ring shadow my-1 focus:outline-none focus:bg-white focus:border-emerald-500 h-10 w-full ml-0 mr-5 mt-1"
                                         :classes="{ containerActive: 'ring-0', search: 'w-full border-none absolute inset-0 outline-none focus:ring-0 appearance-none border-0 text-base font-sans bg-white rounded pl-3.5 rtl:pl-0 rtl:pr-3.5', }"
@@ -288,7 +296,7 @@ onMounted(() => {
                                         </span>
                                     <div>
                                         <button class="text-gray-900 mt-1 bg-white focus:outline-none rounded-xl p-1"
-                                        v-on:click="selectedRating(5, $event)" :class="{ 'bg-gray-100': advanceFilterCariExpert.rating === 5, 'bg-white' : advanceFilterCariExpert.rating != 5}">
+                                        v-on:click="selectedRating(5, $event)" :class="{ 'bg-gray-100': advanceFilterCariExpert.star === 5, 'bg-white': advanceFilterCariExpert.star != 5}">
                                             <div class="flex flex-wrap justify-between items-center">
                                                 <div class="flex items-center">
                                                     <div class="flex space-x-1">
@@ -315,7 +323,7 @@ onMounted(() => {
                                     </div>
                                     <div>
                                         <button class="text-gray-900 mt-1 bg-white focus:outline-none rounded-xl p-1"
-                                        v-on:click="selectedRating(4, $event)" :class="{ 'bg-gray-100': advanceFilterCariExpert.rating === 4, 'bg-white' : advanceFilterCariExpert.rating != 4}">
+                                        v-on:click="selectedRating(4, $event)" :class="{ 'bg-gray-100': advanceFilterCariExpert.star === 4, 'bg-white': advanceFilterCariExpert.star != 4}">
                                             <div class="flex flex-wrap justify-between items-center">
                                                 <div class="flex items-center">
                                                     <div class="flex space-x-1">
@@ -342,7 +350,7 @@ onMounted(() => {
                                     </div>
                                     <div>
                                         <button class="text-gray-900 mt-1 bg-white focus:outline-none rounded-xl p-1"
-                                        v-on:click="selectedRating(3, $event)" :class="{ 'bg-gray-100': advanceFilterCariExpert.rating === 3, 'bg-white' : advanceFilterCariExpert.rating != 3}">
+                                        v-on:click="selectedRating(3, $event)" :class="{ 'bg-gray-100': advanceFilterCariExpert.star === 3, 'bg-white': advanceFilterCariExpert.star != 3}">
                                             <div class="flex flex-wrap justify-between items-center">
                                                 <div class="flex items-center">
                                                     <div class="flex space-x-1">
@@ -369,7 +377,7 @@ onMounted(() => {
                                     </div>
                                     <div>
                                         <button class="text-gray-900 mt-1 bg-white focus:outline-none rounded-xl p-1"
-                                        v-on:click="selectedRating(2, $event)" :class="{ 'bg-gray-100': advanceFilterCariExpert.rating === 2, 'bg-white' : advanceFilterCariExpert.rating != 2}">
+                                        v-on:click="selectedRating(2, $event)" :class="{ 'bg-gray-100': advanceFilterCariExpert.star === 2, 'bg-white': advanceFilterCariExpert.star != 2}">
                                             <div class="flex flex-wrap justify-between items-center">
                                                 <div class="flex items-center">
                                                     <div class="flex space-x-1">
@@ -396,7 +404,7 @@ onMounted(() => {
                                     </div>
                                     <div>
                                         <button class="text-gray-900 mt-1 bg-white focus:outline-none rounded-xl p-1"
-                                        v-on:click="selectedRating(1, $event)" :class="{ 'bg-gray-100': advanceFilterCariExpert.rating === 1, 'bg-white' : advanceFilterCariExpert.rating != 1}">
+                                        v-on:click="selectedRating(1, $event)" :class="{ 'bg-gray-100': advanceFilterCariExpert.star === 1, 'bg-white': advanceFilterCariExpert.star != 1}">
                                             <div class="flex flex-wrap justify-between items-center">
                                                 <div class="flex items-center">
                                                     <div class="flex space-x-1">
@@ -456,12 +464,12 @@ onMounted(() => {
                                         </span>
                                     </div>
                                 </div>
-                                <div class="mb-2" v-if="advanceFilterCariExpert.expertise != ''">
+                                <div class="mb-2" v-if="advanceFilterCariExpert.recruit_expert.capabilities != ''">
                                     <div class="text-black text-xs">
                                         Keahlian
                                     </div>
                                     <div>
-                                        <span id="badge-dismiss-default" v-for="expertise in advanceFilterCariExpert.expertise" :key="expertise"
+                                        <span id="badge-dismiss-default" v-for="expertise in advanceFilterCariExpert.recruit_expert.capabilities" :key="expertise"
                                             class="inline-flex items-center py-1 px-2 mr-2 text-sm font-medium text-white bg-jobhunGreen rounded">
                                             {{ expertise }}
                                             <button type="button" @click="deleteExpertise(expertise)"

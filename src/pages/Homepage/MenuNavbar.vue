@@ -61,7 +61,7 @@
         {
             title: 'Jadi Expert',
             hidden: true,
-            to: '#'
+            to: '/jadiexpert'
         }
     ]
 </script>
@@ -74,7 +74,7 @@
                     Cari Expert</a>
             </li>
             <li class="hidden md:block">
-                <a href="#"
+                <a href="/jadiexpert"
                     class="block py-2 pr-4 pl-3 text-black rounded hover:text-jobhunGreen md:p-0 duration-300">
                     Jadi Expert</a>
             </li>
