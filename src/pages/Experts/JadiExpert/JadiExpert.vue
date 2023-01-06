@@ -1,8 +1,31 @@
 <script setup>
-import {  } from 'vue'
-import { useRouter } from "vue-router"
+import { computed, ref } from 'vue'
+import { useRouter, useRoute } from "vue-router"
+import { useLayoutStore } from '../../../pages/layout/store'
+import { isObjectEmpty } from '../../../utils/Helper'
+import ModalLogin from './ModalJadiExpert.vue'
 
 const router = useRouter()
+const route = useRoute()
+
+const layoutStore = useLayoutStore()
+const session = computed(() => layoutStore.session)
+
+const isSessionEmpty = computed(() => isObjectEmpty(layoutStore.sessionFirstName))
+
+const isUserLogin = ref(false)
+
+const tempNextRoute = ref('')
+
+const openModalLogin = (nextRoute) => {
+    tempNextRoute.value = nextRoute
+    isUserLogin.value = true
+}
+
+const closeLoginModal = () => {
+    isUserLogin.value = false
+    tempNextRoute.value = ''
+}
 
 const benefitJadiExpert = [
     {
@@ -34,8 +57,9 @@ const benefitJadiExpert = [
     },
     {
         desc: 'Berkesempatan mendapatkan <i>networking</i> yang luas',
-        image: new URL(`../../../images/jadi-expert/Networking-dengan-mentor-26.png`, import.meta.url).href,
+        image: new URL(`../../../images/jadi-expert/Networking-26.png`, import.meta.url).href,
         escape: true
+        // GAMBAR GAK MUNCULLLLLLL
     }
 ]
 
@@ -71,7 +95,7 @@ const termsJadiExpert = [
 ]
 
 const toFormulirJadiExpert = ()=>{
-    router.push('/')
+    router.push('/jadiexpert/formulir')
 }
 </script>
 <template>
@@ -122,9 +146,16 @@ const toFormulirJadiExpert = ()=>{
             </div>
             <div>
                 <div class="flex justify-center mx-auto mt-5">
-                    <button @click="toFormulirJadiExpert" class="h-12 mt-5 items-center bg-jobhunGreen hover:bg-emerald-600 text-white px-7 rounded text-sm my-auto" type="submit">
+                    <button @click="openModalLogin('/jadiexpert/formulir')" v-if="isSessionEmpty"
+                    class="h-12 mt-5 items-center bg-jobhunGreen hover:bg-emerald-600 text-white px-7 rounded text-sm my-auto" type="submit">
                         Daftar
                     </button>
+                    <button v-else @click="toFormulirJadiExpert"
+                        class="h-12 mt-5 items-center bg-jobhunGreen hover:bg-emerald-600 text-white px-7 rounded text-sm my-auto"
+                        type="submit">
+                        Daftar
+                    </button>
+                    <ModalLogin :isUserLogin="isUserLogin" @close-modal="closeLoginModal" :nextRoute="tempNextRoute" />
                 </div>
             </div>
         </div>

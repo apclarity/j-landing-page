@@ -52,7 +52,7 @@ const toggleTabs = (tabNumber) => (openTab.value = tabNumber)
         <header class="mb-6">
             <div class="grid grid-flow-row md:flex">
                 <div class="mb-2 flex-none md:w-1/4 mr-0 md:mr-5">
-                    <h1 class="text-2xl sm:text-left text-center text-slate-800 font-bold">{{ detailExpert.name }} ✨</h1>
+                    <h1 class="text-2xl sm:text-left text-center text-slate-800 font-bold">{{ detailExpert.name }}✨</h1>
                     <div class="sm:text-left text-center mt-3">
                         <span class="text-sm">
                             Jabatan

@@ -80,7 +80,8 @@ import LayananPelatihanNavbar from "./pages/Homepage/MenuLayananNavBar/Pelatihan
 import LayananUndangExpertNavbar from "./pages/Homepage/MenuLayananNavBar/UndangExpert/Index.vue";
 import LayananRekrutExpertNavbar from "./pages/Homepage/MenuLayananNavBar/RekrutExpert/Index.vue";
 import JadiExpert from "./pages/Experts/JadiExpert/Index.vue";
-import DashboardFormJadiExpert from "./pages/Formulir/Index.vue";
+import DashboardFormTambahExpert from "./pages/settings/SubMenuExperts/Index.vue";
+import FormJadiExpert from "./pages/Experts/JadiExpert/Formulir/Index.vue";
 
 const routerHistory = createWebHistory();
 
@@ -165,7 +166,11 @@ const router = createRouter({
         },
         {
           path: "/dashboard/formjadiexpert",
-          component: DashboardFormJadiExpert,
+          component: DashboardFormTambahExpert,
+        },
+        {
+          path: "/jadiexpert/formulir",
+          component: FormJadiExpert,
         },
       ],
     },

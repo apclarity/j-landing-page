@@ -8,8 +8,6 @@ import  Banner from './Banner.vue'
         <div class="relative flex flex-col overflow-y-auto overflow-x-hidden">
             <Banner />
             <JadiExpert />
-            <!-- <CardMentors /> -->
-
         </div>
     </div>
 </template>
