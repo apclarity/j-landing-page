@@ -5,6 +5,7 @@ import Tooltip from '../../../components/TooltipRed.vue'
 import { PrinterIcon } from '@heroicons/vue/20/solid'
 import Multiselect from '@vueform/multiselect'
 import { useLayoutStore } from '../../layout/store'
+import { validatePicture, getBase64Image } from '../../../utils/Helper'
 
 const layoutStore = useLayoutStore()
 
@@ -28,9 +29,33 @@ const dashboardFormTambahExpert = ref({
     reasonToApprove: ''
 })
 
+const file = ref('')
+const isImageChanged = ref(false)
+
 const availableServices = [
     'Pelatihan', 'Konsultasi', 'Undangan menjadi narasumber', 'Proyek lepas yang berkaitan dengan bidang pekerjaan'
 ]
+
+const choosePhoto = ()=>{
+    document.getElementById("fileUpload").click()
+}
+
+const validateImageRatio = async(e)=>{
+    var ratio = "1:1";
+    var maxSize = 1 * 1024 * 1024;
+    var validationRes = await validatePicture(e, ratio, maxSize);
+    if (!validationRes.isOk) {
+        alert(validationRes.message);
+        return;
+    }
+    isImageChanged.value = true;
+    let base64img = await getBase64Image(validationRes.theImage);
+    dashboardFormTambahExpert.value.photo = base64img;
+    console.log(base64img)
+    console.log(dashboardFormTambahExpert.photo)
+}
+
+console.log(dashboardFormTambahExpert.photo)
 
 const isNumberCurrency = (evt) => {
     evt = (evt) ? evt : window.event;
@@ -58,10 +83,6 @@ const formValidation = () => {
         openModalAjukanPelatihan()
     }
 }
-
-const submitPhotoProfile = ()=>{
-    this.$refs.uploader.click();
-}
 </script>
 <style src="@vueform/multiselect/themes/default.css">
 
@@ -74,29 +95,23 @@ const submitPhotoProfile = ()=>{
             </div>
         </div>
     </div>
-    <form >
+    <form @submit.prevent="submitTambahExpert">
         <div class="grid grid-flow-row md:flex sm:px-6 lg:px-8 px-6">
             <div class="flex-none md:w-1/1">
                 <div class="mb-4 sm:mb-0">
-                    <img class="border-2 w-48 h-48 rounded-lg"
-                        src="https://freepngimg.com/thumb/donald_duck/80482-artwork-donald-carrier-duck-mail-font-cartoon-thumb.png" />
+                    <img class="border-2 w-48 h-48 rounded-lg" v-if="dashboardFormTambahExpert.photo == null"
+                        src="../../../images/dummy/dummy-profile.png">
+                    <img class="border-2 w-48 h-48 rounded-lg" v-else
+                        :src="dashboardFormTambahExpert.photo" />
+                    <p class="mt-1 text-xs text-gray-500">*ukuran maksimal 1MB</p>
+                    <p class="mt-1 text-xs text-gray-500">*foto 1:1</p>
                 </div>
                 <div class="md:flex md:flex-col overflow-hidden">
-                    <!-- <button v-on:click.prevent="$refs.photo.click()" type="button"
+                    <input type="file" @change="validateImageRatio" ref="file" style="display: none"  id="fileUpload">
+                    <button @click.prevent="choosePhoto"
                         class="h-9 md:mt-5 sm:mt-4 mt-0 md:mb-0 sm:mb-0 mb-4 bg-gray-500 hover:bg-emerald-600 text-white px-5 rounded text-sm mx-auto">
                         Unggah foto
                     </button>
-                    <input type="file" class="hidden" ref="uploader" v-on:change="photoName = $refs.photo.files[0].name;
-                    const reader = new FileReader();
-                    reader.onload = (e) => {
-                        photoPreview = e.target.result;
-                    };
-                    reader.readAsDataURL($refs.photo.files[0]);"> -->
-                        <button v-on:click="submitPhotoProfile()"
-                            class="h-9 md:mt-5 sm:mt-4 mt-0 md:mb-0 sm:mb-0 mb-4 bg-gray-500 hover:bg-emerald-600 text-white px-5 rounded text-sm mx-auto">
-                            Unggah foto
-                        </button>
-                        <input type="file" class="hidden" ref="uploader" id="upload-photo-profile" v-on:change="onChangeFileUpload()">
                 </div>
             </div>
             <div class="grid md:grid-cols-1 md:w-2/5 md:ml-5 ml-0 sm:mt-4 md:mt-0">

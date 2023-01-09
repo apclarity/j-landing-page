@@ -3,6 +3,7 @@ import { onMounted, ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import Tooltip from '../../../../components/TooltipRed.vue'
 import Multiselect from '@vueform/multiselect'
+import { validatePicture, getBase64Image } from '../../../../utils/Helper'
 
 const formulirJadiExpert = ref({
     photo: null,
@@ -35,6 +36,28 @@ const availableServices = [
 const domiciles = [
     'Surabaya', 'Jakarta', 'Solo', 'Sidoarjo'
 ]
+
+const file = ref('')
+const isImageChanged = ref(false)
+
+const choosePhoto = () => {
+    document.getElementById("fileUpload").click()
+}
+
+const validateImageRatio = async (e) => {
+    var ratio = "1:1";
+    var maxSize = 1 * 1024 * 1024;
+    var validationRes = await validatePicture(e, ratio, maxSize);
+    if (!validationRes.isOk) {
+        alert(validationRes.message);
+        return;
+    }
+    isImageChanged.value = true;
+    let base64img = await getBase64Image(validationRes.theImage);
+    formulirJadiExpert.value.photo = base64img;
+    console.log(base64img)
+    console.log(formulirJadiExpert.photo)
+}
 
 const isNumberCurrency = (evt) => {
     evt = (evt) ? evt : window.event;
@@ -223,11 +246,13 @@ const submitPhotoProfile = () => {
                     <img class="border-2 w-48 h-48 rounded-lg" v-if="formulirJadiExpert.photo == null"
                         src="../../../../images/dummy/dummy-profile.png" />
                     <img class="border-2 w-48 h-48 rounded-lg" v-else :src="formulirJadiExpert.photo" />
-                    <button v-on:click="submitPhotoProfile()"
-                        class="h-9 mt-4 md:mb-0 sm:mb-0 mb-4 bg-gray-500 hover:bg-emerald-600 text-white px-5 rounded text-sm mx-auto">
+                    <p class="mt-1 text-xs text-gray-500">*ukuran maksimal 1MB</p>
+                    <p class="mt-1 text-xs text-gray-500">*foto 1:1</p>
+                    <input type="file" @change="validateImageRatio" ref="file" style="display: none" id="fileUpload">
+                    <button @click.prevent="choosePhoto"
+                        class="h-9 md:mt-5 sm:mt-4 mt-0 md:mb-0 sm:mb-0 mb-4 bg-gray-500 hover:bg-emerald-600 text-white px-5 rounded text-sm mx-auto">
                         Unggah foto
                     </button>
-                    <input type="file" class="hidden" ref="uploader" id="upload-photo-profile" v-on:change="onChangeFileUpload()">
                 </div>
                 <div class="">
                     
