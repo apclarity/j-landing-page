@@ -9,6 +9,8 @@ const DETAIL_EXPERT_URL = "/expert/expert-profile/";
 const INDEX_EXPERT_FEATURED_URL = "/expert/expert-features";
 // const ADVANCE_SEARCH_URL = "/data-advance-search.json";
 const ADVANCE_SEARCH_URL = "/expert/search-expert";
+const JADI_EXPERT_URL = "/expert/create-expert-form"
+const JADI_EXPERT_DASHBOARD_URL = "/expert/create-expert"
 
 export const useDataExpertStore = defineStore({
   id: "experts",
@@ -51,6 +53,22 @@ export const useDataExpertStore = defineStore({
       try {
         let res = await api.get(INDEX_EXPERT_FEATURED_URL);
         this.expertFeatured = res.data;
+      } catch (error) {}
+    },
+    async formJadiExpert(payload) {
+      let newAvailableServices = payload.available_services.map((obj)=> obj.value)
+      payload.available_services = newAvailableServices
+      try {
+        console.log(payload)
+        return
+        let res = await api.post(JADI_EXPERT_URL, payload);
+        this.formJadiExpert = res.data;
+      } catch (error) {}
+    },
+    async formJadiExpertDashboard(payload) {
+      try {
+        let res = await api.post(JADI_EXPERT_DASHBOARD_URL, payload);
+        this.formJadiExpertDashboard = res.data;
       } catch (error) {}
     },
   },

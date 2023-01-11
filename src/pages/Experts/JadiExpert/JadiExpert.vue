@@ -29,7 +29,7 @@ const closeLoginModal = () => {
 
 const benefitJadiExpert = [
     {
-        desc: 'Berpotensi mendapatkan penawaran mengajar, baik dari Jobhun maupun klien Jobhun',
+        desc: 'Berpotensi mendapatkan penawaran mengajar, baik dari Jobhun maupun klien Jobhun.',
         image: new URL(`../../../images/jadi-expert/ICON-45.png`, import.meta.url).href
     },
     {
@@ -69,7 +69,7 @@ const termsJadiExpert = [
         image: new URL(`../../../images/jadi-expert/ICON-36.png`, import.meta.url).href
     },
     {
-        desc: 'Suka berdiskusi, berbagi pengetahuan, dan mengajar',
+        desc: 'Suka berdiskusi, berbagi pengetahuan, dan mengajar.',
         image: new URL(`../../../images/jadi-expert/ICON-36.png`, import.meta.url).href
     },
     {
