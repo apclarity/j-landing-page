@@ -254,6 +254,11 @@ onMounted(() => {
                                             <span class="text-sm ml-2 text-gray-500">S1</span>
                                         </div>
                                         <div class="flex items-center mt-0.5">
+                                            <input type="radio" v-model="advanceFilterCariExpert.education.degree" required value="Diploma"
+                                                class="w-3 h-3 text-jobhunGreen bg-gray-200 border-gray-200 focus:ring-jobhunGreen focus:ring-1 hover:ring-jobhunGreen hover:ring-1">
+                                            <span class="text-sm ml-2 text-gray-500">Diploma</span>
+                                        </div>
+                                        <div class="flex items-center mt-0.5">
                                             <input type="radio" v-model="advanceFilterCariExpert.education.degree" required value="SMA/K"
                                                 class="w-3 h-3 text-jobhunGreen bg-gray-200 border-gray-200 focus:ring-jobhunGreen focus:ring-1 hover:ring-jobhunGreen hover:ring-1">
                                             <span class="text-sm ml-2 text-gray-500">SMA/K</span>
@@ -486,7 +491,7 @@ onMounted(() => {
                                     </div>
                                 </div>
                             </div>
-                            <div class="grid grid-cols-2 xl:grid-cols-4 md:grid-cols-2 gap-6">
+                            <div class="grid grid-cols-2 xl:grid-cols-4 md:grid-cols-2 gap-6 -mt-6">
                                 <div v-for="(expert, index) in expertAdvanceSearch" :key="expert">
                                     <CardExpert :expert="expert" v-if="index < limit" />
                                 </div>

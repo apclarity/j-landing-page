@@ -23,7 +23,7 @@ const openPreviewMentor = () => {
 }
 </script>
 <template>
-    <div class="col-span-full sm:col-span-6 xl:col-span-3 bg-white shadow-lg rounded-sm border border-slate-200">
+    <div class="col-span-full sm:col-span-6 xl:col-span-3 bg-white shadow-lg rounded-sm">
         <div class="flex flex-col h-full">
             <img class="w-full h-60" :src="expert.image" />
             <div class="p-5">

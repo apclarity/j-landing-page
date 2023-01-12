@@ -206,7 +206,7 @@ const deleteAvailableServices = (availableServices) => {
                 <label class="block text-sm font-medium mb-1 text-black">Pendidikan</label>
             </div>
             <div class="mt-4 items-center grid-flow-row md:flex">
-                <div class="flex-none md:w-28">
+                <div class="flex-none md:w-32">
                     <label class="block text-sm mb-1">Gelar</label>
                 </div>
                 <div class="grid md:grid-cols-1 md:w-2/5">
@@ -216,7 +216,7 @@ const deleteAvailableServices = (availableServices) => {
                 </div>
             </div>
             <div class="mt-4 items-center grid-flow-row md:flex">
-                <div class="flex-none md:w-28">
+                <div class="flex-none md:w-32">
                     <label class="block text-sm mb-1">Lembaga</label>
                 </div>
                 <div class="grid md:grid-cols-1 md:w-2/5">
@@ -226,18 +226,18 @@ const deleteAvailableServices = (availableServices) => {
                 </div>
             </div>
             <div class="mt-4 items-center grid-flow-row md:flex">
-                <div class="flex-none md:w-28">
+                <div class="flex-none md:w-32">
                     <label class="block text-sm mb-1">Tanggal mulai</label>
                 </div>
-                <d iv class="grid md:grid-cols-1 md:w-2/4">
+                <d iv class="grid md:grid-cols-1 md:w-2/5">
                     <DateSingle class="" v-model="dashboardFormTambahExpert.education.start_date" required />
                 </d>
             </div>
             <div class="mt-4 items-center grid-flow-row md:flex">
-                <div class="flex-none md:w-28">
+                <div class="flex-none md:w-32">
                     <label class="block text-sm mb-1">Tanggal berakhir</label>
                 </div>
-                <div class="grid md:grid-cols-1 md:w-2/4">
+                <div class="grid md:grid-cols-1 md:w-2/5">
                     <DateSingle v-model="dashboardFormTambahExpert.education.end_date" required />
                 </div>
             </div>
@@ -271,7 +271,7 @@ const deleteAvailableServices = (availableServices) => {
                 <label class="block text-sm font-medium mb-1 text-black">Pengalaman kerja</label>
             </div>
             <div class="mt-4 items-center grid-flow-row md:flex">
-                <div class="flex-none md:w-28">
+                <div class="flex-none md:w-32">
                     <label class="block text-sm mb-1">Posisi</label>
                 </div>
                 <div class="grid md:grid-cols-1 md:w-2/5">
@@ -281,7 +281,7 @@ const deleteAvailableServices = (availableServices) => {
                 </div>
             </div>
             <div class="mt-4 items-center grid-flow-row md:flex">
-                <div class="flex-none md:w-28">
+                <div class="flex-none md:w-32">
                     <label class="block text-sm mb-1">Lokasi</label>
                 </div>
                 <div class="grid md:grid-cols-1 md:w-2/5">
@@ -291,18 +291,19 @@ const deleteAvailableServices = (availableServices) => {
                 </div>
             </div>
             <div class="mt-4 items-center grid-flow-row md:flex">
-                <div class="flex-none md:w-28">
+                <div class="flex-none md:w-32">
                     <label class="block text-sm mb-1">Tanggal mulai</label>
                 </div>
-                <div class="grid md:grid-cols-1 md:w-1/3">
+                <div class="grid md:grid-cols-1 md:w-2/5">
                     <DateSingle v-model="dashboardFormTambahExpert.experiences.start_date" required />
                 </div>
             </div>
             <div class="mt-4 items-center grid-flow-row md:flex">
-                <div class="flex-none md:w-28">
-                    <label class="block text-sm mb-1">Tanggal berakhir</label>
+                <div class="flex-none md:w-32">
+                    <label 
+                    class="block text-sm mb-1">Tanggal berakhir</label>
                 </div>
-                <div class="grid md:grid-cols-1 md:w-1/3">
+                <div class="grid md:grid-cols-1 md:w-2/5">
                     <DateSingle v-model="dashboardFormTambahExpert.experiences.end_date" required />
                 </div>
             </div>
@@ -316,8 +317,9 @@ const deleteAvailableServices = (availableServices) => {
                 </span>
             </div>
             <div class="mt-4">
-                <label class="block text-sm font-medium mb-1 text-black">URL akun media sosial, website, atau halaman
-                    yang berisi portfolio</label>
+                <label class="block text-sm font-medium mb-1 text-black">
+                    Url akun Linkedin
+                </label>
                 <input
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm md:w-2/6 w-full"
                     required v-model="dashboardFormTambahExpert.social_media" />

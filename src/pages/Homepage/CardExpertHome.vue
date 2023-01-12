@@ -24,7 +24,7 @@ const openPreviewMentor = () => {
 </script>
 <template>
     <div
-        class="col-span-full sm:col-span-6 xl:col-span-3 bg-white shadow-lg rounded-sm border border-slate-200">
+        class="col-span-full sm:col-span-6 xl:col-span-3 bg-white shadow-lg rounded-sm">
         <div class="flex flex-col h-full">
             <img class="w-full h-60" :src="expertFeatured.image"/>
             <div class="grow flex flex-col p-5">
