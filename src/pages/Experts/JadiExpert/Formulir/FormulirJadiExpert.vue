@@ -143,6 +143,9 @@ const deleteAvailableServices = (available_services) => {
     formulirJadiExpert.value.available_services = selectedItems
 }
 
+onMounted(()=>{
+    jadiExpert()
+})
 </script>
 <style src="@vueform/multiselect/themes/default.css">
 
@@ -156,7 +159,7 @@ const deleteAvailableServices = (available_services) => {
         </div>
     </div>
     <div class="lg:px-10 px-4 mb-10">
-        <form @submit.prevent="formValidation">
+        <form @submit.prevent="jadiExpert">
             <div class="sm:px-6 lg:px-8 px-6">
                 <div class="">
                     <label class="block text-sm font-medium mb-1 text-black">Nama lengkap</label>

@@ -22,9 +22,9 @@ export default {
             date: null,
             config: {
                 wrap: true,
-                allowInput: true, // enable html5 validation 
+                allowInput: false, // enable html5 validation 
                 required: true,
-                altInput: true, 
+                altInput: false, 
                 altFormat: "F j, Y",
                 static: true,
                 monthSelectorType: 'static',
