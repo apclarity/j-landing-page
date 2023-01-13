@@ -7,7 +7,7 @@ import Multiselect from '@vueform/multiselect'
 import { validatePicture, getBase64Image } from '../../../../utils/Helper'
 import ModalJadiExpert from './ModalAjukanFormJadiExpert.vue'
 import { useDataExpertStore } from '../../../../stores/store-experts.js'
-import DateSingle from './DateSingle.vue'
+import flatPickr from 'vue-flatpickr-component'
 
 const route = useRoute()
 
@@ -25,17 +25,17 @@ const formulirJadiExpert = ref({
     education: {
         degree: '',
         school: '',
-        start_date: '',
-        end_date: ''
+        start_date: null,
+        end_date: null
     },
     description: '',
     company: '',
-    sectors: '',
+    sectors: [],
     experiences: {
         title: '',
         location: '',
-        start_date: '',
-        end_date: ''
+        start_date: null,
+        end_date: null
     },
     experience_yoe: '',
     social_media: '',
@@ -44,7 +44,6 @@ const formulirJadiExpert = ref({
     reason_join: '',
     reason_approve: ''
 })
-const object = true
 
 const availableServices = [
     { value: "training", label: "Pelatihan" },
@@ -53,9 +52,34 @@ const availableServices = [
     { value: "recruit-expert", label: "Proyek lepas yang berkaitan dengan bidang pekerjaan" }
 ]
 
+const listSector = [
+    { value: "coding", label: "Coding" },
+    { value: "marketing", label: "Marketing" },
+]
+
 const domiciles = [
     'Surabaya', 'Jakarta', 'Solo', 'Sidoarjo'
 ]
+
+const config = {
+    wrap: true,
+    required: true,
+    altInput: true,
+    altFormat: "F j, Y",
+    static: true,
+    monthSelectorType: 'static',
+    dateFormat: 'M j, Y',
+    prevArrow: '<svg class="fill-current" width="7" height="11" viewBox="0 0 7 11"><path d="M5.4 10.8l1.4-1.4-4-4 4-4L5.4 0 0 5.4z" /></svg>',
+    nextArrow: '<svg class="fill-current" width="7" height="11" viewBox="0 0 7 11"><path d="M1.4 10.8L0 9.4l4-4-4-4L1.4 0l5.4 5.4z" /></svg>',
+    // onReady: (selectedDates, dateStr, instance) => {
+    //     instance.element.value = dateStr.replace('to', '-');
+    //     const customClass = (props.align) ? props.align : '';
+    //     instance.calendarContainer.classList.add(`flatpickr-${customClass}`);
+    // },
+    // onChange: (selectedDates, dateStr, instance) => {
+    //     instance.element.value = dateStr.replace('to', '-');
+    // },
+}
 
 const jadiExpert = async ()=>{
     console.log(formulirJadiExpert.value)
@@ -68,13 +92,12 @@ const jadiExpert = async ()=>{
         formulirJadiExpert.value.available_services != '' && formulirJadiExpert.value.teaching_experience != '' && formulirJadiExpert.value.reason_join != '' &&
         formulirJadiExpert.value.reason_approve != '') {
         if (await formJadiExpertStore.formJadiExpert(formulirJadiExpert.value)) {
-            console.log(formulirJadiExpert.value)
             return
         }
+        openModalJadiExpert()
     }
 }
 
-const file = ref('')
 const isImageChanged = ref(false)
 
 const choosePhoto = () => {
@@ -109,24 +132,6 @@ const openModalJadiExpert = () => {
     isUserAjukan.value = true
 }
 
-const formValidation = () => {
-    if (formulirJadiExpert.value.image == '' && formulirJadiExpert.value.name == '' && formulirJadiExpert.value.email == '' && 
-        formulirJadiExpert.value.phone_number == '' && formulirJadiExpert.value.profession == '' && formulirJadiExpert.value.education.degree == '' &&
-        formulirJadiExpert.value.education.start_date == '' && formulirJadiExpert.value.education.end_date == '' && formulirJadiExpert.value.education.school == '' &&
-        formulirJadiExpert.value.domicile == '' && formulirJadiExpert.value.description == '' && formulirJadiExpert.value.company == '' &&
-        formulirJadiExpert.value.sectors == '' && formulirJadiExpert.value.experiences.title == '' && formulirJadiExpert.value.experiences.location == '' && 
-        formulirJadiExpert.value.experiences.start_date == '' && formulirJadiExpert.value.experiences.end_date == '' && formulirJadiExpert.value.experience_yoe == '' && formulirJadiExpert.value.social_media == '' &&
-        formulirJadiExpert.value.available_services == '' && formulirJadiExpert.value.teaching_experience == '' && formulirJadiExpert.value.reason_join == '' &&
-        formulirJadiExpert.value.reason_approve == '') {
-    } else {
-        openModalJadiExpert()
-    }
-}
-
-const submitPhotoProfile = () => {
-    this.$refs.uploader.click();
-}
-
 const deleteAvailableServices = (available_services) => {
     let selectedItems = formulirJadiExpert.value.available_services
     let index = -1
@@ -143,9 +148,21 @@ const deleteAvailableServices = (available_services) => {
     formulirJadiExpert.value.available_services = selectedItems
 }
 
-onMounted(()=>{
-    jadiExpert()
-})
+const deleteSelectedSector = (sectors) => {
+    let selectedItems = formulirJadiExpert.value.sectors
+    let index = -1
+    for (let i = 0; i < selectedItems.length; i++) {
+        if (sectors == selectedItems[i]) {
+            index = i
+            break
+        }
+    }
+    if (index < 0) {
+        return
+    }
+    selectedItems.splice(index, 1)
+    formulirJadiExpert.value.sectors = selectedItems
+}
 </script>
 <style src="@vueform/multiselect/themes/default.css">
 
@@ -159,12 +176,12 @@ onMounted(()=>{
         </div>
     </div>
     <div class="lg:px-10 px-4 mb-10">
-        <form @submit.prevent="jadiExpert">
+        <form @submit.prevent="jadiExpert()">
             <div class="sm:px-6 lg:px-8 px-6">
                 <div class="">
                     <label class="block text-sm font-medium mb-1 text-black">Nama lengkap</label>
                     <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm md:w-1/2 w-full lg:w-1/3"
-                        required v-model="formulirJadiExpert.name" />
+                        required v-model="formulirJadiExpert.name" type="text" />
                 </div>
                 <div class="mt-4">
                     <label class="block text-sm font-medium mb-1 text-black">Alamat email</label>
@@ -174,12 +191,12 @@ onMounted(()=>{
                 <div class="mt-4">
                     <label class="block text-sm font-medium mb-1 text-black">Nomor HP</label>
                     <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm md:w-1/2 w-full lg:w-1/3"
-                        required v-model="formulirJadiExpert.phone_number" @keypress="isInputNumber($event)" />
+                        required v-model="formulirJadiExpert.phone_number" @keypress="isInputNumber($event)" type="text" />
                 </div>
                 <div class="mt-4">
                     <label class="block text-sm font-medium mb-1 text-black">Jabatan</label>
                     <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm md:w-1/2 w-full lg:w-1/3"
-                        required v-model="formulirJadiExpert.profession" />
+                        required v-model="formulirJadiExpert.profession" type="text" />
                 </div>
                 <div class="mt-4">
                     <label class="block text-sm font-medium mb-1 text-black">Pendidikan</label>
@@ -190,8 +207,8 @@ onMounted(()=>{
                     </div>
                     <div class="grid md:grid-cols-1 md:w-2/5">
                         <input
-                            class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                            required v-model="formulirJadiExpert.education.degree" />
+                            class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm md:w-2/4 w-full"
+                            required v-model="formulirJadiExpert.education.degree" type="text" />
                     </div>
                 </div>
                 <div class="mt-4 items-center grid-flow-row md:flex">
@@ -200,8 +217,8 @@ onMounted(()=>{
                     </div>
                     <div class="grid md:grid-cols-1 md:w-2/5">
                         <input
-                            class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                            required v-model="formulirJadiExpert.education.school" />
+                            class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm md:w-2/4 w-full"
+                            required v-model="formulirJadiExpert.education.school" type="text" />
                     </div>
                 </div>
                 <div class="mt-4 items-center grid-flow-row md:flex">
@@ -209,10 +226,17 @@ onMounted(()=>{
                         <label class="block text-sm mb-1">Tanggal mulai</label>
                     </div>
                     <d iv class="grid md:grid-cols-1 md:w-2/5">
-                        <!-- <input
-                            class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                            required v-model="formulirJadiExpert.experience.startDate" /> -->
-                        <DateSingle class="" v-model="formulirJadiExpert.education.start_date" required />
+                        <div class="max-w-md">
+                            <flat-pickr
+                                class="form-input pl-9 border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm"
+                                :config="config" v-model="formulirJadiExpert.education.start_date" placeholder="Sesuaikan jadwal"></flat-pickr>
+                            <div class="absolute inset-0 right-auto flex items-center pointer-events-none">
+                                <svg class="w-4 h-4 fill-gray-700 ml-3" viewBox="0 0 16 16">
+                                    <path
+                                        d="M15 2h-2V0h-2v2H9V0H7v2H5V0H3v2H1a1 1 0 00-1 1v12a1 1 0 001 1h14a1 1 0 001-1V3a1 1 0 00-1-1zm-1 12H2V6h12v8z" />
+                                </svg>
+                            </div>
+                        </div>
                     </d>
                 </div>
                 <div class="mt-4 items-center grid-flow-row md:flex">
@@ -220,10 +244,17 @@ onMounted(()=>{
                         <label class="block text-sm mb-1">Tanggal berakhir</label>
                     </div>
                     <div class="grid md:grid-cols-1 md:w-2/5">
-                        <!-- <input
-                                            class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                                            required v-model="formulirJadiExpert.experience.startDate" /> -->
-                        <DateSingle v-model="formulirJadiExpert.education.end_date" required />
+                        <div class="max-w-md">
+                            <flat-pickr
+                                class="form-input pl-9 border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm"
+                                :config="config" v-model="formulirJadiExpert.education.end_date" placeholder="Sesuaikan jadwal"></flat-pickr>
+                            <div class="absolute inset-0 right-auto flex items-center pointer-events-none">
+                                <svg class="w-4 h-4 fill-gray-700 ml-3" viewBox="0 0 16 16">
+                                    <path
+                                        d="M15 2h-2V0h-2v2H9V0H7v2H5V0H3v2H1a1 1 0 00-1 1v12a1 1 0 001 1h14a1 1 0 001-1V3a1 1 0 00-1-1zm-1 12H2V6h12v8z" />
+                                </svg>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="mt-4">
@@ -240,18 +271,49 @@ onMounted(()=>{
                     </label>
                     <textarea rows="5"
                         class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm md:w-1/2 w-full lg:w-1/2"
-                        required v-model="formulirJadiExpert.description" />
+                        required v-model="formulirJadiExpert.description" type="text" />
                 </div>
                 <div class="mt-4">
                     <label class="block text-sm font-medium mb-1 text-black">Asal perusahaan</label>
                     <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm md:w-1/2 w-full lg:w-1/3"
-                        required v-model="formulirJadiExpert.company" />
+                        required v-model="formulirJadiExpert.company" type="text" />
                 </div>
                 <div class="mt-4">
                     <label class="block text-sm font-medium mb-1 text-black">Bidang yang dikuasai</label>
-                    <input
-                        class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-1/3"
-                        required v-model="formulirJadiExpert.sectors" />
+                    <Multiselect :close-on-select="false"
+                        class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen text-sm md:w-1/2 w-full lg:w-1/3 ml-0"
+                        :classes="{ containerActive: 'ring-0', search: 'w-full absolute inset-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen appearance-none border-0 text-base font-sans rounded pl-3.5 rtl:pl-0 rtl:pr-3.5', }"
+                        :create-option="true" 
+                        :options="listSector" 
+                        mode="multiple" 
+                        :searchable="true"
+                        :object="true" 
+                        v-model="formulirJadiExpert.sectors">
+                        <template v-slot:multiplelabel="{ values }">
+                            <div class="multiselect-multiple-label">
+                                {{ values.length }} bidang terpilih
+                            </div>
+                        </template>
+                    </Multiselect>
+                    <div class="mb-2" v-if="formulirJadiExpert.sectors != ''">
+                        <div>
+                            <span id="badge-dismiss-default" v-for="sectors in formulirJadiExpert.sectors"
+                                :key="sectors.label"
+                                class="inline-flex items-center py-1 px-2 mr-2 mt-2 text-sm font-medium text-white bg-jobhunGreen rounded">
+                                {{ sectors.label}}
+                                <button type="button" @click="deleteSelectedSector(sectors)"
+                                    class="inline-flex items-center p-0.5 ml-2 my-1 text-sm text-white bg-transparent rounded-sm hover:bg-gray-50 hover:text-black"
+                                    data-dismiss-target="#badge-dismiss-default" aria-label="Remove">
+                                    <svg class="w-3.5 h-3.5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
                 </div>
                 <div class="mt-4">
                     <label class="block text-sm font-medium mb-1 text-black">Pengalaman kerja</label>
@@ -261,8 +323,8 @@ onMounted(()=>{
                         <label class="block text-sm mb-1">Posisi</label>
                     </div>
                     <div class="grid md:grid-cols-1 md:w-2/5">
-                        <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                            required v-model="formulirJadiExpert.experiences.title" />
+                        <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm md:w-2/4 w-full"
+                            required v-model="formulirJadiExpert.experiences.title" type="text" />
                     </div>
                 </div>
                 <div class="mt-4 items-center grid-flow-row md:flex">
@@ -271,8 +333,8 @@ onMounted(()=>{
                     </div>
                     <div class="grid md:grid-cols-1 md:w-2/5">
                         <input
-                            class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                            required v-model="formulirJadiExpert.experiences.location" />
+                            class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm md:w-2/4 w-full"
+                            required v-model="formulirJadiExpert.experiences.location" type="text" />
                     </div>
                 </div>
                 <div class="mt-4 items-center grid-flow-row md:flex">
@@ -280,7 +342,18 @@ onMounted(()=>{
                         <label class="block text-sm mb-1">Tanggal mulai</label>
                     </div>
                     <div class="grid md:grid-cols-1 md:w-2/5">
-                        <DateSingle v-model="formulirJadiExpert.experiences.start_date" required />
+                        <div class="max-w-md">
+                            <flat-pickr
+                                class="form-input pl-9 border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm"
+                                :config="config" v-model="formulirJadiExpert.experiences.start_date" placeholder="Sesuaikan jadwal"></flat-pickr>
+                            <div class="absolute inset-0 right-auto flex items-center pointer-events-none">
+                                <svg class="w-4 h-4 fill-gray-700 ml-3" viewBox="0 0 16 16">
+                                    <path
+                                        d="M15 2h-2V0h-2v2H9V0H7v2H5V0H3v2H1a1 1 0 00-1 1v12a1 1 0 001 1h14a1 1 0 001-1V3a1 1 0 00-1-1zm-1 12H2V6h12v8z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <!-- <DateSingle v-model="formulirJadiExpert.experiences.start_date" required /> -->
                     </div>
                 </div>
                 <div class="mt-4 items-center grid-flow-row md:flex">
@@ -288,14 +361,25 @@ onMounted(()=>{
                         <label class="block text-sm mb-1">Tanggal berakhir</label>
                     </div>
                     <div class="grid md:grid-cols-1 md:w-2/5">
-                        <DateSingle v-model="formulirJadiExpert.experiences.end_date" required />
+                        <div class="max-w-md">
+                            <flat-pickr
+                                class="form-input pl-9 border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm"
+                                :config="config" v-model="formulirJadiExpert.experiences.end_date" placeholder="Sesuaikan jadwal"></flat-pickr>
+                            <div class="absolute inset-0 right-auto flex items-center pointer-events-none">
+                                <svg class="w-4 h-4 fill-gray-700 ml-3" viewBox="0 0 16 16">
+                                    <path
+                                        d="M15 2h-2V0h-2v2H9V0H7v2H5V0H3v2H1a1 1 0 00-1 1v12a1 1 0 001 1h14a1 1 0 001-1V3a1 1 0 00-1-1zm-1 12H2V6h12v8z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <!-- <DateSingle v-model="formulirJadiExpert.experiences.end_date" required /> -->
                     </div>
                 </div>
                 <div class="mt-4">
                     <label class="block text-sm font-medium mb-1 text-black">Durasi bekerja</label>
                     <input
                         class="border-0 inline-flex bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-12"
-                        required @keypress="isInputNumber($event)" v-model="formulirJadiExpert.experience_yoe" />
+                        required @keypress="isInputNumber($event)" v-model="formulirJadiExpert.experience_yoe" type="text" />
                     <span class="text-sm">
                         tahun
                     </span>
@@ -306,7 +390,7 @@ onMounted(()=>{
                     </label>
                     <input
                         class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm md:w-1/2 w-full lg:w-1/3"
-                        required v-model="formulirJadiExpert.social_media" />
+                        required v-model="formulirJadiExpert.social_media" type="text" />
                 </div>
 
                 <div class="mt-4 inline-flex items-center">
@@ -323,7 +407,7 @@ onMounted(()=>{
                         :classes="{ containerActive: 'ring-0', search: 'w-full absolute inset-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen appearance-none border-0 text-base font-sans rounded pl-3.5 rtl:pl-0 rtl:pr-3.5', }"
                         :create-option="true" 
                         :options="availableServices" 
-                        placeholder="Keahlian expert" mode="multiple"
+                        mode="multiple"
                         :searchable="true"
                         :object="true"
                         v-model="formulirJadiExpert.available_services">
@@ -358,21 +442,21 @@ onMounted(()=>{
                         sebelumnya?</label>
                     <textarea rows="5"
                         class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm md:w-1/2 w-full lg:w-1/2"
-                        required v-model="formulirJadiExpert.teaching_experience" />
+                        required v-model="formulirJadiExpert.teaching_experience" type="text" />
                 </div>
                 <div class="mt-4">
                     <label class="block text-sm font-medium mb-1 text-black">Mengapa kamu tertarik mendaftar menjadi expert
                         di Jobhun?</label>
                     <textarea rows="5"
                         class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm md:w-1/2 w-full lg:w-1/2"
-                        required v-model="formulirJadiExpert.reason_join" />
+                        required v-model="formulirJadiExpert.reason_join" type="text" />
                 </div>
                 <div class="mt-4">
                     <label class="block text-sm font-medium mb-1 text-black">Mengapa Jobhun harus memilih kamu sebagai
                         expert?</label>
                     <textarea rows="5"
                         class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm md:w-1/2 w-full lg:w-1/2"
-                        required v-model="formulirJadiExpert.reason_approve" />
+                        required v-model="formulirJadiExpert.reason_approve" type="text" />
                 </div>
                 <div class="mb-4 sm:mb-0 mt-4">
                     <img class="border-2 w-48 h-48 rounded-lg" v-if="formulirJadiExpert.image == null"
@@ -380,7 +464,7 @@ onMounted(()=>{
                     <img class="border-2 w-48 h-48 rounded-lg" v-else :src="formulirJadiExpert.image" />
                     <p class="mt-1 text-xs text-gray-500">*ukuran maksimal 1MB</p>
                     <p class="mt-1 text-xs text-gray-500">*foto 1:1</p>
-                    <input type="file" @change="validateImageRatio" ref="file" style="display: none" id="fileUpload">
+                    <input type="file" @change="validateImageRatio" style="display: none" id="fileUpload">
                     <button @click.prevent="choosePhoto"
                         class="h-9 md:mt-5 sm:mt-4 mt-0 md:mb-0 sm:mb-0 mb-4 bg-gray-500 hover:bg-emerald-600 text-white px-5 rounded text-sm mx-auto">
                         Unggah foto

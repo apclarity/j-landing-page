@@ -60,13 +60,13 @@ export const useDataExpertStore = defineStore({
       payload.available_services = newAvailableServices
       try {
         console.log(payload)
-        return
         let res = await api.post(JADI_EXPERT_URL, payload);
         this.formJadiExpert = res.data;
       } catch (error) {}
     },
     async formJadiExpertDashboard(payload) {
       try {
+        console.log(payload)
         let res = await api.post(JADI_EXPERT_DASHBOARD_URL, payload);
         this.formJadiExpertDashboard = res.data;
       } catch (error) {}
