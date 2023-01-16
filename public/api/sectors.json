@@ -1,7 +1,12 @@
 {
-    "data": {
-        "Marketing": "Marketing",
-        "Sales": "Sales",
-        "Football": "Football"
-    }
+    "data": [
+        {
+            "value": "Sales",
+            "label": "Sales"
+        },
+        {
+            "value": "Marketing",
+            "label": "Marketing"
+        }
+    ]
 }

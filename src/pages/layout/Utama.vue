@@ -2,7 +2,7 @@
   <div class="flex h-screen overflow-hidden">
     <Sidebar :sidebarOpen="sidebarOpen" @close-sidebar="sidebarOpen = false" v-show="session.first_name"/>
     <div class="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
-      <Header :sidebarOpen="sidebarOpen" :session="session" @toggle-sidebar="sidebarOpen = !sidebarOpen" />
+      <Header :sidebarOpen="sidebarOpen" :session="session" @open-burger-sidebar="sidebarOpen = true" />
       <main>
         <Suspense>
           <template #default><router-view /></template>
@@ -21,7 +21,11 @@ import Header from '../../partials/Header.vue'
 import Footer from '../../pages/layout/Footer.vue'
 import { useOptionsStore } from '../../stores/store-options'
 
-const sidebarOpen = ref(true)
+const sidebarOpen = ref(false)
+
+const openBurgerSidebar = ()=>{
+  sidebarOpen.value =true
+}
 
 const layoutStore = useLayoutStore()
 

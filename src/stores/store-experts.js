@@ -56,6 +56,8 @@ export const useDataExpertStore = defineStore({
       } catch (error) {}
     },
     async formJadiExpert(payload) {
+      let newSectors = payload.sectors.map((obj)=> obj.value)
+      payload.sectors = newSectors
       let newAvailableServices = payload.available_services.map((obj)=> obj.value)
       payload.available_services = newAvailableServices
       try {

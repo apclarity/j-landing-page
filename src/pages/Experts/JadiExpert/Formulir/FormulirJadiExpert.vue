@@ -8,12 +8,17 @@ import { validatePicture, getBase64Image } from '../../../../utils/Helper'
 import ModalJadiExpert from './ModalAjukanFormJadiExpert.vue'
 import { useDataExpertStore } from '../../../../stores/store-experts.js'
 import flatPickr from 'vue-flatpickr-component'
+import iconDelete from '../../../../images/icons/ICON-49.png'
+import iconAdd from '../../../../images/icons/ICON-48.png'
+import { useOptionsStore } from '../../../../stores/store-options'
 
 const route = useRoute()
 
 const formJadiExpertStore = useDataExpertStore()
+const optionStore = useOptionsStore()
 
 const { formJadiExpert } = storeToRefs(formJadiExpertStore)
+const { listSector } = storeToRefs(optionStore)
 
 const formulirJadiExpert = ref({
     image: null,
@@ -31,12 +36,14 @@ const formulirJadiExpert = ref({
     description: '',
     company: '',
     sectors: [],
-    experiences: {
-        title: '',
-        location: '',
-        start_date: null,
-        end_date: null
-    },
+    experiences: [
+        {
+            title: '',
+            location: '',
+            start_date: null,
+            end_date: null
+        }
+    ],
     experience_yoe: '',
     social_media: '',
     available_services: [],
@@ -45,16 +52,26 @@ const formulirJadiExpert = ref({
     reason_approve: ''
 })
 
+const activeTab = ref(0)
+
+const addExperiences = ()=>{
+    formulirJadiExpert.value.experiences.push({
+        title: '',
+        location: '',
+        start_date: null,
+        end_date: null
+    })
+}
+
+const deleteExperiences = (index)=>{
+    formulirJadiExpert.value.experiences.splice(index, 1)
+}
+
 const availableServices = [
     { value: "training", label: "Pelatihan" },
     { value: "consultation", label: "Konsultasi" },
     { value: "invite-expert", label: "Undangan menjadi narasumber" },
     { value: "recruit-expert", label: "Proyek lepas yang berkaitan dengan bidang pekerjaan" }
-]
-
-const listSector = [
-    { value: "coding", label: "Coding" },
-    { value: "marketing", label: "Marketing" },
 ]
 
 const domiciles = [
@@ -91,6 +108,7 @@ const jadiExpert = async ()=>{
         formulirJadiExpert.value.experiences.start_date != '' && formulirJadiExpert.value.experiences.end_date != '' && formulirJadiExpert.value.experience_yoe != '' && formulirJadiExpert.value.social_media != '' &&
         formulirJadiExpert.value.available_services != '' && formulirJadiExpert.value.teaching_experience != '' && formulirJadiExpert.value.reason_join != '' &&
         formulirJadiExpert.value.reason_approve != '') {
+        console.log(formulirJadiExpert.value)
         if (await formJadiExpertStore.formJadiExpert(formulirJadiExpert.value)) {
             return
         }
@@ -315,65 +333,88 @@ const deleteSelectedSector = (sectors) => {
                         </div>
                     </div>
                 </div>
-                <div class="mt-4">
-                    <label class="block text-sm font-medium mb-1 text-black">Pengalaman kerja</label>
-                </div>
-                <div class="mt-4 items-center grid-flow-row md:flex">
-                    <div class="flex-none md:w-32">
-                        <label class="block text-sm mb-1">Posisi</label>
+                <div v-for="experience, index in formulirJadiExpert.experiences" :key="index">
+                    <div class="mt-4" v-if="index == 0">
+                        <label class="block text-sm font-medium mb-1 text-black">Pengalaman kerja</label>
                     </div>
-                    <div class="grid md:grid-cols-1 md:w-2/5">
-                        <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm md:w-2/4 w-full"
-                            required v-model="formulirJadiExpert.experiences.title" type="text" />
+                    <div class="mt-4" v-if="index > 0">
+                        <label class="block text-sm font-medium mb-1 text-black">Pengalaman kerja {{ index + 1 }}</label>
                     </div>
-                </div>
-                <div class="mt-4 items-center grid-flow-row md:flex">
-                    <div class="flex-none md:w-32">
-                        <label class="block text-sm mb-1">Lokasi</label>
+                    <div class="mt-4 items-center grid-flow-row md:flex">
+                        <div class="flex-none md:w-32">
+                            <label class="block text-sm mb-1">Posisi</label>
+                        </div>
+                        <div class="grid md:grid-cols-1 md:w-2/5">
+                            <input
+                                class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm md:w-2/4 w-full"
+                                required v-model="formulirJadiExpert.experiences[index].title" type="text" />
+                        </div>
                     </div>
-                    <div class="grid md:grid-cols-1 md:w-2/5">
-                        <input
-                            class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm md:w-2/4 w-full"
-                            required v-model="formulirJadiExpert.experiences.location" type="text" />
+                    <div class="mt-4 items-center grid-flow-row md:flex">
+                        <div class="flex-none md:w-32">
+                            <label class="block text-sm mb-1">Lokasi</label>
+                        </div>
+                        <div class="grid md:grid-cols-1 md:w-2/5">
+                            <input
+                                class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm md:w-2/4 w-full"
+                                required v-model="formulirJadiExpert.experiences[index].location" type="text" />
+                        </div>
                     </div>
-                </div>
-                <div class="mt-4 items-center grid-flow-row md:flex">
-                    <div class="flex-none md:w-32">
-                        <label class="block text-sm mb-1">Tanggal mulai</label>
-                    </div>
-                    <div class="grid md:grid-cols-1 md:w-2/5">
-                        <div class="max-w-md">
-                            <flat-pickr
-                                class="form-input pl-9 border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm"
-                                :config="config" v-model="formulirJadiExpert.experiences.start_date" placeholder="Sesuaikan jadwal"></flat-pickr>
-                            <div class="absolute inset-0 right-auto flex items-center pointer-events-none">
-                                <svg class="w-4 h-4 fill-gray-700 ml-3" viewBox="0 0 16 16">
-                                    <path
-                                        d="M15 2h-2V0h-2v2H9V0H7v2H5V0H3v2H1a1 1 0 00-1 1v12a1 1 0 001 1h14a1 1 0 001-1V3a1 1 0 00-1-1zm-1 12H2V6h12v8z" />
-                                </svg>
+                    <div class="mt-4 items-center grid-flow-row md:flex">
+                        <div class="flex-none md:w-32">
+                            <label class="block text-sm mb-1">Tanggal mulai</label>
+                        </div>
+                        <div class="grid md:grid-cols-1 md:w-2/5">
+                            <div class="max-w-md">
+                                <flat-pickr
+                                    class="form-input pl-9 border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm"
+                                    :config="config" v-model="formulirJadiExpert.experiences[index].start_date"
+                                    placeholder="Sesuaikan jadwal"></flat-pickr>
+                                <div class="absolute inset-0 right-auto flex items-center pointer-events-none">
+                                    <svg class="w-4 h-4 fill-gray-700 ml-3" viewBox="0 0 16 16">
+                                        <path
+                                            d="M15 2h-2V0h-2v2H9V0H7v2H5V0H3v2H1a1 1 0 00-1 1v12a1 1 0 001 1h14a1 1 0 001-1V3a1 1 0 00-1-1zm-1 12H2V6h12v8z" />
+                                    </svg>
+                                </div>
                             </div>
                         </div>
-                        <!-- <DateSingle v-model="formulirJadiExpert.experiences.start_date" required /> -->
                     </div>
-                </div>
-                <div class="mt-4 items-center grid-flow-row md:flex">
-                    <div class="flex-none md:w-32">
-                        <label class="block text-sm mb-1">Tanggal berakhir</label>
-                    </div>
-                    <div class="grid md:grid-cols-1 md:w-2/5">
-                        <div class="max-w-md">
-                            <flat-pickr
-                                class="form-input pl-9 border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm"
-                                :config="config" v-model="formulirJadiExpert.experiences.end_date" placeholder="Sesuaikan jadwal"></flat-pickr>
-                            <div class="absolute inset-0 right-auto flex items-center pointer-events-none">
-                                <svg class="w-4 h-4 fill-gray-700 ml-3" viewBox="0 0 16 16">
-                                    <path
-                                        d="M15 2h-2V0h-2v2H9V0H7v2H5V0H3v2H1a1 1 0 00-1 1v12a1 1 0 001 1h14a1 1 0 001-1V3a1 1 0 00-1-1zm-1 12H2V6h12v8z" />
-                                </svg>
+                    <div class="mt-4 items-center grid-flow-row md:flex">
+                        <div class="flex-none md:w-32">
+                            <label class="block text-sm mb-1">Tanggal berakhir</label>
+                        </div>
+                        <div class="grid md:grid-cols-1 md:w-2/5">
+                            <div class="max-w-md">
+                                <flat-pickr
+                                    class="form-input pl-9 border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm"
+                                    :config="config" v-model="formulirJadiExpert.experiences[index].end_date"
+                                    placeholder="Sesuaikan jadwal"></flat-pickr>
+                                <div class="absolute inset-0 right-auto flex items-center pointer-events-none">
+                                    <svg class="w-4 h-4 fill-gray-700 ml-3" viewBox="0 0 16 16">
+                                        <path
+                                            d="M15 2h-2V0h-2v2H9V0H7v2H5V0H3v2H1a1 1 0 00-1 1v12a1 1 0 001 1h14a1 1 0 001-1V3a1 1 0 00-1-1zm-1 12H2V6h12v8z" />
+                                    </svg>
+                                </div>
                             </div>
                         </div>
-                        <!-- <DateSingle v-model="formulirJadiExpert.experiences.end_date" required /> -->
                     </div>
+                    <div class="mt-4 md:w-2/4" v-show="index != ''">
+                        <button
+                            class="transparent-background text-sm mx-auto flex flex-end"
+                            type="button" @click="deleteExperiences(index)" title="Hapus pengalaman kerja">
+                            <img :src="iconDelete" alt="Hapus pengalaman kerja" class="h-8">
+                        </button>
+                    </div>
+                </div>
+                <div class="mt-4 items-center">
+                    <button
+                        class="text-black background-transparent font-medium text-sm outline-none focus:outline-none ease-linear transition-all duration-150 items-center"
+                        type="button" @click="addExperiences" title="Tambah pengalaman kerja">
+                        <img :src="iconAdd" alt="Tambah pengalaman kerja" class="h-8 inline-flex items-center -mt-1"> 
+                        <span class="">
+                            Tambah Pengalaman Kerja
+                        </span>
+                    </button>
                 </div>
                 <div class="mt-4">
                     <label class="block text-sm font-medium mb-1 text-black">Durasi bekerja</label>
