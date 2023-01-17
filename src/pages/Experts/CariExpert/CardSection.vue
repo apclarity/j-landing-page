@@ -201,14 +201,14 @@ onMounted(() => {
                                         Nama
                                     </span>
                                     <input class="form-input align-middle shadow my-1 focus:outline-none focus:bg-white focus:border-emerald-500 w-full"
-                                        type="text" required placeholder="Nama expert" v-model="advanceFilterCariExpert.name" />
+                                        type="text" required v-model="advanceFilterCariExpert.name" />
                                 </div>
                                 <div class="text-left mt-2">
                                     <span class="text-sm font-medium text-jobhunGreen">
                                         Profesi
                                     </span>
                                     <input class="form-input align-middle shadow my-1 focus:outline-none focus:bg-white focus:border-emerald-500 w-full"
-                                        type="text" required placeholder="Profesi expert" v-model="advanceFilterCariExpert.profession" />
+                                        type="text" required v-model="advanceFilterCariExpert.profession" />
                                 </div>
                                 <div class="text-left mt-2">
                                     <span class="text-sm font-medium text-jobhunGreen">
@@ -231,7 +231,7 @@ onMounted(() => {
                                         Domisili
                                     </span>
                                     <Multiselect v-model="advanceFilterCariExpert.domicile" class="form-input p-2 ring-0 shadow my-1 focus:outline-none focus:bg-white h-10 w-full ml-0 mr-5 mt-1"
-                                    :options="domiciles" placeholder="Domisili expert" />
+                                    :options="domiciles" />
                                 </div>
                                 <div class="text-left mt-2">
                                     <span class="text-sm font-medium text-jobhunGreen">
@@ -267,23 +267,23 @@ onMounted(() => {
                                 </div>
                                 <div class="text-left mt-2">
                                     <span class="text-sm font-medium text-jobhunGreen">
-                                        Nama Lembaga
+                                        Asal Instansi Pendidikan
                                     </span>
                                     <input class="form-input align-middle shadow my-1 focus:outline-none focus:bg-white focus:border-emerald-500 w-full"
-                                        type="text" required placeholder="Nama lembaga" v-model="advanceFilterCariExpert.education.school" />
+                                        type="text" required v-model="advanceFilterCariExpert.education.school" />
                                 </div>
                                 <div class="text-left mt-2">
                                     <span class="text-sm font-medium text-jobhunGreen">
                                         Nama Perusahaan
                                     </span>
                                     <input class="form-input align-middle shadow my-1 focus:outline-none focus:bg-white focus:border-emerald-500 w-full"
-                                        type="text" required placeholder="Nama perusahaan" v-model="advanceFilterCariExpert.company_name" />
+                                        type="text" required v-model="advanceFilterCariExpert.company_name" />
                                 </div>
                                 <div class="text-left mt-2">
                                     <span class="text-sm font-medium text-jobhunGreen">
                                         Keahlian
                                     </span>
-                                    <Multiselect v-model="advanceFilterCariExpert.recruit_expert.capabilities" :close-on-select="false" placeholder="Keahlian expert" mode="multiple"
+                                    <Multiselect v-model="advanceFilterCariExpert.recruit_expert.capabilities" :close-on-select="false" mode="multiple"
                                         :searchable="true"
                                         class="form-input p-2 ms-ring shadow my-1 focus:outline-none focus:bg-white focus:border-emerald-500 h-10 w-full ml-0 mr-5 mt-1"
                                         :classes="{ containerActive: 'ring-0', search: 'w-full border-none absolute inset-0 outline-none focus:ring-0 appearance-none border-0 text-base font-sans bg-white rounded pl-3.5 rtl:pl-0 rtl:pr-3.5', }"

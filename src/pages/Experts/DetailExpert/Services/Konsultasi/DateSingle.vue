@@ -1,7 +1,7 @@
 <template>
     <div class="max-w-md">
         <flat-pickr class="form-input pl-9 border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm"
-            :config="config" v-model="date" placeholder="Sesuaikan jadwal"></flat-pickr>
+            :config="config" v-model="date"></flat-pickr>
         <div class="absolute inset-0 right-auto flex items-center pointer-events-none">
             <svg class="w-4 h-4 fill-gray-700 ml-3" viewBox="0 0 16 16">
                 <path

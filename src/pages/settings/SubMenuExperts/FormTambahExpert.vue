@@ -8,12 +8,17 @@ import { useLayoutStore } from '../../layout/store'
 import { validatePicture, getBase64Image } from '../../../utils/Helper'
 import { useDataExpertStore } from '../../../stores/store-experts'
 import flatPickr from 'vue-flatpickr-component'
+import iconDelete from '../../../images/icons/ICON-49.png'
+import iconAdd from '../../../images/icons/ICON-48.png'
+import { useOptionsStore } from '../../../stores/store-options'
 
 const route = useRoute()
 
 const formJadiExpertDashboardStore = useDataExpertStore()
+const optionStore = useOptionsStore()
 
 const { formJadiExpertDashboard } = storeToRefs(formJadiExpertDashboardStore)
+const { listSector } = storeToRefs(optionStore)
 
 const dashboardFormTambahExpert = ref({
     image: null,
@@ -31,12 +36,14 @@ const dashboardFormTambahExpert = ref({
     description: '',
     company: '',
     sectors: [],
-    experiences: {
-        title: '',
-        location: '',
-        start_date: null,
-        end_date: null
-    },
+    experiences: [
+        {
+            title: '',
+            location: '',
+            start_date: null,
+            end_date: null
+        }
+    ],
     experience_yoe: '',
     social_media: '',
     available_services: [],
@@ -45,16 +52,32 @@ const dashboardFormTambahExpert = ref({
     reason_approve: ''
 })
 
+const isUserStillWork = ref(false)
+
+const checkboxUserStillWork = () => {
+    isUserStillWork.value = true
+    dashboardFormTambahExpert.value.experiences[index].end_date = ''
+
+}
+
+const addExperiences = () => {
+    dashboardFormTambahExpert.value.experiences.push({
+        title: '',
+        location: '',
+        start_date: null,
+        end_date: null
+    })
+}
+
+const deleteExperiences = (index) => {
+    dashboardFormTambahExpert.value.experiences.splice(index, 1)
+}
+
 const availableServices = [
     { value: "training", label: "Pelatihan" },
     { value: "consultation", label: "Konsultasi" },
     { value: "invite-expert", label: "Undangan menjadi narasumber" },
     { value: "recruit-expert", label: "Proyek lepas yang berkaitan dengan bidang pekerjaan" }
-]
-
-const listSector = [
-    { value: "coding", label: "Coding" },
-    { value: "marketing", label: "Marketing" },
 ]
 
 const domiciles = [
@@ -71,14 +94,6 @@ const config = {
     dateFormat: 'M j, Y',
     prevArrow: '<svg class="fill-current" width="7" height="11" viewBox="0 0 7 11"><path d="M5.4 10.8l1.4-1.4-4-4 4-4L5.4 0 0 5.4z" /></svg>',
     nextArrow: '<svg class="fill-current" width="7" height="11" viewBox="0 0 7 11"><path d="M1.4 10.8L0 9.4l4-4-4-4L1.4 0l5.4 5.4z" /></svg>',
-    // onReady: (selectedDates, dateStr, instance) => {
-    //     instance.element.value = dateStr.replace('to', '-');
-    //     const customClass = (props.align) ? props.align : '';
-    //     instance.calendarContainer.classList.add(`flatpickr-${customClass}`);
-    // },
-    // onChange: (selectedDates, dateStr, instance) => {
-    //     instance.element.value = dateStr.replace('to', '-');
-    // },
 }
 
 const tambahExpert = async ()=> {
@@ -168,7 +183,7 @@ const deleteSelectedSector = (sectors) => {
 
 </style>
 <template>
-    <div class="px-4 sm:px-6 lg:px-8 py-3 md:py-8 w-full mx-auto">
+    <div class="flex-auto max-w-4xl min-w-0 mx-auto pt-6 lg:px-8 px-6 lg:pt-8 py-3 md:py-8">
         <div class="sm:flex sm:justify-between sm:items-center mb-5">
             <div class="">
                 <h1 class="text-2xl md:text-3xl text-slate-800 font-bold">Formulir Pengajuan Menjadi Expert✨</h1>
@@ -176,7 +191,7 @@ const deleteSelectedSector = (sectors) => {
         </div>
     </div>
     <form @submit.prevent="tambahExpert()">
-        <div class="grid grid-flow-row md:flex sm:px-6 lg:px-8 px-6">
+        <div class="grid grid-flow-row md:flex flex-auto max-w-4xl min-w-0 mx-auto pt-6 lg:px-8 px-6 lg:pt-8">
             <div class="flex-none md:w-1/1">
                 <div class="mb-4 sm:mb-0">
                     <img class="border-2 w-48 h-48 rounded-lg" v-if="dashboardFormTambahExpert.image == null"
@@ -194,7 +209,7 @@ const deleteSelectedSector = (sectors) => {
                     </button>
                 </div>
             </div>
-            <div class="grid md:grid-cols-1 md:w-2/5 md:ml-5 ml-0 sm:mt-4 md:mt-0">
+            <div class="grid md:grid-cols-1 md:flex-auto md:max-w-4xl md:min-w-0 md:mx-auto md:px-8 px-0 md:mt-0 mt-4">
                 <div class="">
                     <label class="block text-sm font-medium mb-1 text-black">Nama lengkap</label>
                     <input
@@ -221,7 +236,7 @@ const deleteSelectedSector = (sectors) => {
                 </div>
             </div>
         </div>
-        <div class="sm:px-6 lg:px-8 px-6">
+        <div class="flex-auto max-w-4xl min-w-0 mx-auto pt-6 lg:px-8 px-6 lg:pt-8 md:mt-0 -mt-4">
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">Pendidikan</label>
             </div>
@@ -229,19 +244,19 @@ const deleteSelectedSector = (sectors) => {
                 <div class="flex-none md:w-32">
                     <label class="block text-sm mb-1">Gelar</label>
                 </div>
-                <div class="grid md:grid-cols-1 md:w-2/5">
+                <div class="grid md:grid-cols-1 md:w-3/5">
                     <input
-                        class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm md:w-2/4 w-full"
+                        class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
                         required v-model="dashboardFormTambahExpert.education.degree" type="text" />
                 </div>
             </div>
             <div class="mt-4 items-center grid-flow-row md:flex">
                 <div class="flex-none md:w-32">
-                    <label class="block text-sm mb-1">Lembaga</label>
+                    <label class="block text-sm mb-1">Asal Instansi Pendidikan</label>
                 </div>
-                <div class="grid md:grid-cols-1 md:w-2/5">
+                <div class="grid md:grid-cols-1 md:w-3/5">
                     <input
-                        class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm md:w-2/4 w-full"
+                        class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
                         required v-model="dashboardFormTambahExpert.education.school" type="text" />
                 </div>
             </div>
@@ -286,7 +301,7 @@ const deleteSelectedSector = (sectors) => {
                     Domisili
                 </label>
                 <Multiselect v-model="dashboardFormTambahExpert.domicile"
-                    class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen text-sm md:w-2/6 w-full ml-0"
+                    class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen text-sm w-full ml-0"
                     :options="domiciles" />
             </div>
             <div class="mt-4">
@@ -294,18 +309,18 @@ const deleteSelectedSector = (sectors) => {
                     Deskripsi diri
                 </label>
                 <textarea rows="5"
-                    class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm md:w-1/2 w-full lg:w-1/2"
+                    class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
                     required v-model="dashboardFormTambahExpert.description" type="text" />
             </div>
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">Asal perusahaan</label>
-                <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm md:w-2/6 w-full"
+                <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
                     required v-model="dashboardFormTambahExpert.company" type="text" />
             </div>
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">Bidang yang dikuasai</label>
                 <Multiselect :close-on-select="false"
-                    class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen text-sm md:w-1/2 w-full lg:w-1/3 ml-0"
+                    class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen text-sm w-full ml-0"
                     :classes="{ containerActive: 'ring-0', search: 'w-full absolute inset-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen appearance-none border-0 text-base font-sans rounded pl-3.5 rtl:pl-0 rtl:pr-3.5', }"
                     :create-option="true" :options="listSector" mode="multiple" :searchable="true" :object="true"
                     v-model="dashboardFormTambahExpert.sectors">
@@ -334,71 +349,97 @@ const deleteSelectedSector = (sectors) => {
                     </div>
                 </div>
             </div>
-            <div class="mt-4">
-                <label class="block text-sm font-medium mb-1 text-black">Pengalaman kerja</label>
-            </div>
-            <div class="mt-4 items-center grid-flow-row md:flex">
-                <div class="flex-none md:w-32">
-                    <label class="block text-sm mb-1">Posisi</label>
+            <div v-for="experience, index in dashboardFormTambahExpert.experiences" :key="index">
+                <div class="mt-4" v-if="index == 0">
+                    <label class="block text-sm font-medium mb-1 text-black">Pengalaman kerja</label>
                 </div>
-                <div class="grid md:grid-cols-1 md:w-2/5">
-                    <input
-                        class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm md:w-2/4 w-full"
-                        required v-model="dashboardFormTambahExpert.experiences.title" type="text" />
+                <div class="mt-4" v-if="index > 0">
+                    <label class="block text-sm font-medium mb-1 text-black">Pengalaman kerja {{ index + 1 }}</label>
                 </div>
-            </div>
-            <div class="mt-4 items-center grid-flow-row md:flex">
-                <div class="flex-none md:w-32">
-                    <label class="block text-sm mb-1">Lokasi</label>
+                <div class="mt-4 items-center grid-flow-row md:flex">
+                    <div class="flex-none md:w-32">
+                        <label class="block text-sm mb-1">Posisi</label>
+                    </div>
+                    <div class="grid md:grid-cols-1 md:w-3/5">
+                        <input
+                            class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
+                            required v-model="dashboardFormTambahExpert.experiences[index].title" type="text" />
+                    </div>
                 </div>
-                <div class="grid md:grid-cols-1 md:w-2/5">
-                    <input
-                        class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm md:w-2/4 w-full"
-                        required v-model="dashboardFormTambahExpert.experiences.location" type="text" />
+                <div class="mt-4 items-center grid-flow-row md:flex">
+                    <div class="flex-none md:w-32">
+                        <label class="block text-sm mb-1">Lokasi</label>
+                    </div>
+                    <div class="grid md:grid-cols-1 md:w-3/5">
+                        <input
+                            class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
+                            required v-model="dashboardFormTambahExpert.experiences[index].location" type="text" />
+                    </div>
                 </div>
-            </div>
-            <div class="mt-4 items-center grid-flow-row md:flex">
-                <div class="flex-none md:w-32">
-                    <label class="block text-sm mb-1">Tanggal mulai</label>
-                </div>
-                <div class="grid md:grid-cols-1 md:w-2/5">
-                    <div class="max-w-md">
-                        <flat-pickr
-                            class="form-input pl-9 border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm"
-                            :config="config" v-model="dashboardFormTambahExpert.experiences.start_date"
-                            placeholder="Sesuaikan jadwal"></flat-pickr>
-                        <div class="absolute inset-0 right-auto flex items-center pointer-events-none">
-                            <svg class="w-4 h-4 fill-gray-700 ml-3" viewBox="0 0 16 16">
-                                <path
-                                    d="M15 2h-2V0h-2v2H9V0H7v2H5V0H3v2H1a1 1 0 00-1 1v12a1 1 0 001 1h14a1 1 0 001-1V3a1 1 0 00-1-1zm-1 12H2V6h12v8z" />
-                            </svg>
+                <div class="mt-4 items-center grid-flow-row md:flex">
+                    <div class="flex-none md:w-32">
+                        <label class="block text-sm mb-1">Tanggal mulai</label>
+                    </div>
+                    <div class="grid md:grid-cols-1 md:w-2/5">
+                        <div class="max-w-md">
+                            <flat-pickr
+                                class="form-input pl-9 border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm"
+                                :config="config" v-model="dashboardFormTambahExpert.experiences[index].start_date"
+                                placeholder="Sesuaikan jadwal"></flat-pickr>
+                            <div class="absolute inset-0 right-auto flex items-center pointer-events-none">
+                                <svg class="w-4 h-4 fill-gray-700 ml-3" viewBox="0 0 16 16">
+                                    <path
+                                        d="M15 2h-2V0h-2v2H9V0H7v2H5V0H3v2H1a1 1 0 00-1 1v12a1 1 0 001 1h14a1 1 0 001-1V3a1 1 0 00-1-1zm-1 12H2V6h12v8z" />
+                                </svg>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="mt-4 items-center grid-flow-row md:flex">
-                <div class="flex-none md:w-32">
-                    <label 
-                    class="block text-sm mb-1">Tanggal berakhir</label>
-                </div>
-                <div class="grid md:grid-cols-1 md:w-2/5">
-                    <div class="max-w-md">
-                        <flat-pickr
-                            class="form-input pl-9 border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm"
-                            :config="config" v-model="dashboardFormTambahExpert.experiences.end_date" placeholder="Sesuaikan jadwal"></flat-pickr>
-                        <div class="absolute inset-0 right-auto flex items-center pointer-events-none">
-                            <svg class="w-4 h-4 fill-gray-700 ml-3" viewBox="0 0 16 16">
-                                <path
-                                    d="M15 2h-2V0h-2v2H9V0H7v2H5V0H3v2H1a1 1 0 00-1 1v12a1 1 0 001 1h14a1 1 0 001-1V3a1 1 0 00-1-1zm-1 12H2V6h12v8z" />
-                            </svg>
+                <div class="mt-4 items-center grid-flow-row md:flex">
+                    <div class="flex-none md:w-32">
+                        <label 
+                        class="block text-sm mb-1">Tanggal berakhir</label>
+                    </div>
+                    <div class="grid md:grid-cols-2 md:w-3/5">
+                        <div class="">
+                            <flat-pickr :disabled="isUserStillWork == true"
+                                class="form-input pl-9 border-0 disabled:bg-slate-50 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm"
+                                :config="config" v-model="dashboardFormTambahExpert.experiences[index].end_date" placeholder="Sesuaikan jadwal"></flat-pickr>
+                            <div class="absolute inset-0 right-auto flex items-center pointer-events-none">
+                                <svg class="w-4 h-4 fill-gray-700 ml-3" viewBox="0 0 16 16">
+                                    <path
+                                        d="M15 2h-2V0h-2v2H9V0H7v2H5V0H3v2H1a1 1 0 00-1 1v12a1 1 0 001 1h14a1 1 0 001-1V3a1 1 0 00-1-1zm-1 12H2V6h12v8z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="mt-1">
+                            <input type="checkbox" value="" v-model="isUserStillWork" onclick="checkboxUserStillWork()"
+                                class="w-3 h-3 text-jobhunGreen bg-gray-200 border-gray-200 focus:ring-jobhunGreen focus:ring-1 hover:ring-jobhunGreen hover:ring-1 rounded-sm" />
+                            <span class="text-sm ml-2 text-gray-500">Masih bekerja disini</span>
                         </div>
                     </div>
                 </div>
+                <div class="mt-4 md:w-2/4" v-show="index != ''">
+                    <button class="transparent-background text-sm mx-auto" type="button" @click="deleteExperiences(index)"
+                        title="Hapus pengalaman kerja">
+                        <img :src="iconDelete" alt="Hapus pengalaman kerja" class="h-8">
+                    </button>
+                </div>
+            </div>
+            <div class="mt-4 items-center">
+                <button
+                    class="text-black background-transparent font-medium text-sm outline-none focus:outline-none ease-linear transition-all duration-150 items-center"
+                    type="button" @click="addExperiences" title="Tambah pengalaman kerja">
+                    <img :src="iconAdd" alt="Tambah pengalaman kerja" class="h-8 inline-flex items-center -mt-1">
+                    <span class="">
+                        Tambah Pengalaman Kerja
+                    </span>
+                </button>
             </div>
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">Durasi bekerja</label>
                 <input
-                    class="border-0 inline-flex bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-12"
+                    class="border-0 inline-flex bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-20"
                     required @keypress="isInputNumber($event)" v-model="dashboardFormTambahExpert.experience_yoe"  type="text" />
                 <span class="text-sm">
                     tahun
@@ -409,7 +450,7 @@ const deleteSelectedSector = (sectors) => {
                     Url akun Linkedin
                 </label>
                 <input
-                    class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm md:w-2/6 w-full"
+                    class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
                     required v-model="dashboardFormTambahExpert.social_media" type="text" />
             </div>
             
@@ -423,7 +464,7 @@ const deleteSelectedSector = (sectors) => {
             </div>
             <div class="mt-1">
                 <Multiselect :close-on-select="false"
-                    class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen text-sm md:w-2/6 w-full ml-0"
+                    class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen text-sm w-full ml-0"
                     :classes="{ containerActive: 'ring-0', search: 'w-full absolute inset-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen appearance-none border-0 text-base font-sans rounded pl-3.5 rtl:pl-0 rtl:pr-3.5', }"
                     :create-option="true" :options="availableServices" mode="multiple"
                     :searchable="true" :object="true" v-model="dashboardFormTambahExpert.available_services">
@@ -457,21 +498,21 @@ const deleteSelectedSector = (sectors) => {
                 <label class="block text-sm font-medium mb-1 text-black">Apakah kamu memiliki pengalaman mengajar
                     sebelumnya?</label>
                 <textarea rows="5"
-                    class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm md:w-1/2 w-full lg:w-1/2"
+                    class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
                     required v-model="dashboardFormTambahExpert.teaching_experience"  type="text" />
             </div>
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">Mengapa kamu tertarik mendaftar menjadi expert
                     di Jobhun?</label>
                 <textarea rows="5"
-                    class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm md:w-1/2 w-full lg:w-1/2"
+                    class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
                     required v-model="dashboardFormTambahExpert.reason_join"  type="text" />
             </div>
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">Mengapa Jobhun harus memilih kamu sebagai
                     expert?</label>
                 <textarea rows="5"
-                    class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm md:w-1/2 w-full lg:w-1/2"
+                    class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
                     required v-model="dashboardFormTambahExpert.reason_approve"  type="text" />
             </div>
             <div class="flex justify-end">

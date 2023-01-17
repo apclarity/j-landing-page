@@ -52,7 +52,23 @@ const formulirJadiExpert = ref({
     reason_approve: ''
 })
 
-const activeTab = ref(0)
+const isUserStillWork = formulirJadiExpert.value.experiences.map(el => false)
+
+const checkboxUserStillWork = (event, index)=> {
+    // if (event.target.checked) {
+    //     isUserStillWork.value = isUserStillWork.value.map((el, i) => index === i ? false : true)
+    // } else {
+    //     isUserStillWork.value = isUserStillWork.value.map((el, i) => index === i ? true : false)
+    // }
+    if (event.target.checked) {
+        isUserStillWork.value = isUserStillWork.value.map((el, i) => index === i ? false : true)
+    } else {
+        isUserStillWork.value = isUserStillWork.value.map((el, i) => index === i ? true : false)
+    }
+    // isUserStillWork.value = true
+    // formulirJadiExpert.value.experiences[index].end_date = ''
+
+}
 
 const addExperiences = ()=>{
     formulirJadiExpert.value.experiences.push({
@@ -88,14 +104,6 @@ const config = {
     dateFormat: 'M j, Y',
     prevArrow: '<svg class="fill-current" width="7" height="11" viewBox="0 0 7 11"><path d="M5.4 10.8l1.4-1.4-4-4 4-4L5.4 0 0 5.4z" /></svg>',
     nextArrow: '<svg class="fill-current" width="7" height="11" viewBox="0 0 7 11"><path d="M1.4 10.8L0 9.4l4-4-4-4L1.4 0l5.4 5.4z" /></svg>',
-    // onReady: (selectedDates, dateStr, instance) => {
-    //     instance.element.value = dateStr.replace('to', '-');
-    //     const customClass = (props.align) ? props.align : '';
-    //     instance.calendarContainer.classList.add(`flatpickr-${customClass}`);
-    // },
-    // onChange: (selectedDates, dateStr, instance) => {
-    //     instance.element.value = dateStr.replace('to', '-');
-    // },
 }
 
 const jadiExpert = async ()=>{
@@ -186,34 +194,34 @@ const deleteSelectedSector = (sectors) => {
 
 </style>
 <template>
-    <div class="px-10 lg:px-16 py-3 md:py-8 w-full">
+    <div class="flex-auto max-w-4xl min-w-0 mx-auto pt-6 lg:px-8 px-6 lg:pt-8 py-3 md:py-8">
         <div class="sm:flex sm:justify-between sm:items-center">
             <div class="">
                 <h1 class="text-2xl md:text-3xl text-slate-800 font-bold">Formulir Pengajuan Menjadi Expert</h1>
             </div>
         </div>
     </div>
-    <div class="lg:px-10 px-4 mb-10">
+    <div class="flex-auto max-w-4xl min-w-0 mx-auto pt-6 lg:px-8 px-6 lg:pt-8">
         <form @submit.prevent="jadiExpert()">
-            <div class="sm:px-6 lg:px-8 px-6">
+            <div class="">
                 <div class="">
                     <label class="block text-sm font-medium mb-1 text-black">Nama lengkap</label>
-                    <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm md:w-1/2 w-full lg:w-1/3"
+                    <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
                         required v-model="formulirJadiExpert.name" type="text" />
                 </div>
                 <div class="mt-4">
                     <label class="block text-sm font-medium mb-1 text-black">Alamat email</label>
-                    <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm md:w-1/2 w-full lg:w-1/3"
+                    <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
                         required v-model="formulirJadiExpert.email" type="email" />
                 </div>
                 <div class="mt-4">
                     <label class="block text-sm font-medium mb-1 text-black">Nomor HP</label>
-                    <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm md:w-1/2 w-full lg:w-1/3"
+                    <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
                         required v-model="formulirJadiExpert.phone_number" @keypress="isInputNumber($event)" type="text" />
                 </div>
                 <div class="mt-4">
                     <label class="block text-sm font-medium mb-1 text-black">Jabatan</label>
-                    <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm md:w-1/2 w-full lg:w-1/3"
+                    <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
                         required v-model="formulirJadiExpert.profession" type="text" />
                 </div>
                 <div class="mt-4">
@@ -223,19 +231,19 @@ const deleteSelectedSector = (sectors) => {
                     <div class="flex-none md:w-32">
                         <label class="block text-sm mb-1">Gelar</label>
                     </div>
-                    <div class="grid md:grid-cols-1 md:w-2/5">
+                    <div class="grid md:grid-cols-1 w-full md:w-3/5">
                         <input
-                            class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm md:w-2/4 w-full"
+                            class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
                             required v-model="formulirJadiExpert.education.degree" type="text" />
                     </div>
                 </div>
                 <div class="mt-4 items-center grid-flow-row md:flex">
                     <div class="flex-none md:w-32">
-                        <label class="block text-sm mb-1">Lembaga</label>
+                        <label class="block text-sm mb-1">Asal Instansi Pendidikan</label>
                     </div>
-                    <div class="grid md:grid-cols-1 md:w-2/5">
+                    <div class="grid md:grid-cols-1 w-full md:w-3/5">
                         <input
-                            class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm md:w-2/4 w-full"
+                            class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
                             required v-model="formulirJadiExpert.education.school" type="text" />
                     </div>
                 </div>
@@ -280,7 +288,7 @@ const deleteSelectedSector = (sectors) => {
                         Domisili
                     </label>
                     <Multiselect v-model="formulirJadiExpert.domicile"
-                        class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen text-sm md:w-1/2 w-full lg:w-1/3 ml-0"
+                        class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen text-sm w-full ml-0"
                         :options="domiciles" />
                 </div>
                 <div class="mt-4">
@@ -288,18 +296,18 @@ const deleteSelectedSector = (sectors) => {
                         Deskripsi diri
                     </label>
                     <textarea rows="5"
-                        class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm md:w-1/2 w-full lg:w-1/2"
+                        class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
                         required v-model="formulirJadiExpert.description" type="text" />
                 </div>
                 <div class="mt-4">
                     <label class="block text-sm font-medium mb-1 text-black">Asal perusahaan</label>
-                    <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm md:w-1/2 w-full lg:w-1/3"
+                    <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
                         required v-model="formulirJadiExpert.company" type="text" />
                 </div>
                 <div class="mt-4">
                     <label class="block text-sm font-medium mb-1 text-black">Bidang yang dikuasai</label>
                     <Multiselect :close-on-select="false"
-                        class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen text-sm md:w-1/2 w-full lg:w-1/3 ml-0"
+                        class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen text-sm w-full ml-0"
                         :classes="{ containerActive: 'ring-0', search: 'w-full absolute inset-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen appearance-none border-0 text-base font-sans rounded pl-3.5 rtl:pl-0 rtl:pr-3.5', }"
                         :create-option="true" 
                         :options="listSector" 
@@ -344,9 +352,9 @@ const deleteSelectedSector = (sectors) => {
                         <div class="flex-none md:w-32">
                             <label class="block text-sm mb-1">Posisi</label>
                         </div>
-                        <div class="grid md:grid-cols-1 md:w-2/5">
+                        <div class="grid md:grid-cols-1 w-full md:w-2/5">
                             <input
-                                class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm md:w-2/4 w-full"
+                                class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm"
                                 required v-model="formulirJadiExpert.experiences[index].title" type="text" />
                         </div>
                     </div>
@@ -354,9 +362,9 @@ const deleteSelectedSector = (sectors) => {
                         <div class="flex-none md:w-32">
                             <label class="block text-sm mb-1">Lokasi</label>
                         </div>
-                        <div class="grid md:grid-cols-1 md:w-2/5">
+                        <div class="grid md:grid-cols-1 w-full md:w-2/5">
                             <input
-                                class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm md:w-2/4 w-full"
+                                class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm"
                                 required v-model="formulirJadiExpert.experiences[index].location" type="text" />
                         </div>
                     </div>
@@ -383,12 +391,13 @@ const deleteSelectedSector = (sectors) => {
                         <div class="flex-none md:w-32">
                             <label class="block text-sm mb-1">Tanggal berakhir</label>
                         </div>
-                        <div class="grid md:grid-cols-1 md:w-2/5">
-                            <div class="max-w-md">
-                                <flat-pickr
-                                    class="form-input pl-9 border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm"
+                        <div class="grid md:grid-cols-2 md:w-3/5">
+                            <div class="">
+                                <flat-pickr :disabled="isUserStillWork[index]"
+                                    class="form-input pl-9 border-0 disabled:bg-slate-50 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm"
                                     :config="config" v-model="formulirJadiExpert.experiences[index].end_date"
-                                    placeholder="Sesuaikan jadwal"></flat-pickr>
+                                    placeholder="Sesuaikan jadwal">
+                                </flat-pickr>
                                 <div class="absolute inset-0 right-auto flex items-center pointer-events-none">
                                     <svg class="w-4 h-4 fill-gray-700 ml-3" viewBox="0 0 16 16">
                                         <path
@@ -396,11 +405,16 @@ const deleteSelectedSector = (sectors) => {
                                     </svg>
                                 </div>
                             </div>
+                            <div class="mt-1">
+                                <input type="checkbox" :id="formulirJadiExpert.experiences[index].end_date" v-model="isUserStillWork" @change="checkboxUserStillWork($event, index)"
+                                    class="w-3 h-3 text-jobhunGreen bg-gray-200 border-gray-200 focus:ring-jobhunGreen focus:ring-1 hover:ring-jobhunGreen hover:ring-1 rounded-sm" />
+                                <span class="text-sm ml-2 text-gray-500">Masih bekerja disini</span>
+                            </div>
                         </div>
                     </div>
                     <div class="mt-4 md:w-2/4" v-show="index != ''">
                         <button
-                            class="transparent-background text-sm mx-auto flex flex-end"
+                            class="transparent-background text-sm mx-auto"
                             type="button" @click="deleteExperiences(index)" title="Hapus pengalaman kerja">
                             <img :src="iconDelete" alt="Hapus pengalaman kerja" class="h-8">
                         </button>
@@ -419,7 +433,7 @@ const deleteSelectedSector = (sectors) => {
                 <div class="mt-4">
                     <label class="block text-sm font-medium mb-1 text-black">Durasi bekerja</label>
                     <input
-                        class="border-0 inline-flex bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-12"
+                        class="border-0 inline-flex bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-20"
                         required @keypress="isInputNumber($event)" v-model="formulirJadiExpert.experience_yoe" type="text" />
                     <span class="text-sm">
                         tahun
@@ -430,7 +444,7 @@ const deleteSelectedSector = (sectors) => {
                         Url akun Linkedin
                     </label>
                     <input
-                        class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm md:w-1/2 w-full lg:w-1/3"
+                        class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
                         required v-model="formulirJadiExpert.social_media" type="text" />
                 </div>
 
@@ -444,7 +458,7 @@ const deleteSelectedSector = (sectors) => {
                 </div>
                 <div class="mt-1">
                     <Multiselect :close-on-select="false"
-                        class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen text-sm md:w-1/2 w-full lg:w-1/3 ml-0"
+                        class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen text-sm w-full ml-0"
                         :classes="{ containerActive: 'ring-0', search: 'w-full absolute inset-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen appearance-none border-0 text-base font-sans rounded pl-3.5 rtl:pl-0 rtl:pr-3.5', }"
                         :create-option="true" 
                         :options="availableServices" 
@@ -482,21 +496,21 @@ const deleteSelectedSector = (sectors) => {
                     <label class="block text-sm font-medium mb-1 text-black">Apakah kamu memiliki pengalaman mengajar
                         sebelumnya?</label>
                     <textarea rows="5"
-                        class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm md:w-1/2 w-full lg:w-1/2"
+                        class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
                         required v-model="formulirJadiExpert.teaching_experience" type="text" />
                 </div>
                 <div class="mt-4">
                     <label class="block text-sm font-medium mb-1 text-black">Mengapa kamu tertarik mendaftar menjadi expert
                         di Jobhun?</label>
                     <textarea rows="5"
-                        class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm md:w-1/2 w-full lg:w-1/2"
+                        class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
                         required v-model="formulirJadiExpert.reason_join" type="text" />
                 </div>
                 <div class="mt-4">
                     <label class="block text-sm font-medium mb-1 text-black">Mengapa Jobhun harus memilih kamu sebagai
                         expert?</label>
                     <textarea rows="5"
-                        class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm md:w-1/2 w-full lg:w-1/2"
+                        class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
                         required v-model="formulirJadiExpert.reason_approve" type="text" />
                 </div>
                 <div class="mb-4 sm:mb-0 mt-4">

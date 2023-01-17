@@ -37,7 +37,7 @@ const homepageSearch = ()=>{
 }
 </script>
 <template>
-    <div class="justify-center px-4 sm:px-6 lg:mx-44 pt-8 lg:pt-20 flex">
+    <div class="justify-center px-4 sm:px-6 lg:mx-28 md:mx-20 pt-8 lg:pt-20 flex">
         <div class="lg:w-1/2 my-auto">
             <div class="w-full max-w-1xl mx-auto">
                 <div class="mb-5">
@@ -86,7 +86,7 @@ const homepageSearch = ()=>{
         </div>
         <div class="lg:block hidden w-1/2">
             <div class="mb-5">
-                <img src="../../images/banner-web-jobhun-35-copy.png" alt="" class="h-full w-full object-cover z-20">
+                <img src="../../images/BANNER-WEB-JOBHUN-35-min.png" alt="" class="h-full w-full object-cover z-20">
             </div>
         </div>
     </div>

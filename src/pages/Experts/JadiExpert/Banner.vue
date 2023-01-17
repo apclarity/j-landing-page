@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import { computed, onMounted } from 'vue';
 </script>
 <template>
-    <div class="justify-center px-4 sm:px-6 lg:mx-44 pt-8 lg:pt-20 flex">
+    <div class="justify-center px-4 sm:px-6 lg:mx-28 md:mx-20 pt-8 lg:pt-20 flex">
         <div class="lg:w-1/2 my-auto">
             <div class="w-full max-w-1xl mx-auto">
                 <div class="mb-5">
@@ -15,7 +15,7 @@ import { computed, onMounted } from 'vue';
         </div>
         <div class="lg:block hidden w-1/2">
             <div class="mb-5 ">
-                <img src="../../../images/jadi-expert/BANNER-WEB-JOBHUN-37.png" alt=""
+                <img src="../../../images/jadi-expert//BANNER-WEB-JOBHUN-36-min.png" alt=""
                     class="h-full w-full object-cover z-20">
             </div>
         </div>
