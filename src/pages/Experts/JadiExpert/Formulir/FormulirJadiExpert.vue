@@ -408,7 +408,7 @@ const deleteSelectedSector = (sectors) => {
                             <div class="mt-1">
                                 <input type="checkbox" :id="formulirJadiExpert.experiences[index].end_date" v-model="isUserStillWork" @change="checkboxUserStillWork($event, index)"
                                     class="w-3 h-3 text-jobhunGreen bg-gray-200 border-gray-200 focus:ring-jobhunGreen focus:ring-1 hover:ring-jobhunGreen hover:ring-1 rounded-sm" />
-                                <span class="text-sm ml-2 text-gray-500">Masih bekerja disini</span>
+                                <span class="text-sm ml-2 text-gray-500">Masih bekerja di sini</span>
                             </div>
                         </div>
                     </div>
