@@ -130,7 +130,7 @@ const deleteSectors = (sector)=>{
 }
 
 const deleteExpertise = (expertiseObj)=>{
-    let selectedItems = advanceFilterCariExpert.value.expertise
+    let selectedItems = advanceFilterCariExpert.value.recruit_expert.capabilities
     let index = -1
     for (let i = 0; i < selectedItems.length; i++) {
         if (expertiseObj == selectedItems[i]) {
@@ -142,7 +142,7 @@ const deleteExpertise = (expertiseObj)=>{
         return
     }
     selectedItems.splice(index, 1)
-    advanceFilterCariExpert.value.expertise = selectedItems
+    advanceFilterCariExpert.value.recruit_expert.capabilities = selectedItems
 }
 
 const deleteIndex = (event)=>{
@@ -214,7 +214,7 @@ onMounted(() => {
                                     <span class="text-sm font-medium text-jobhunGreen">
                                         Bidang
                                     </span>
-                                    <Multiselect v-model="advanceFilterCariExpert.sectors" :close-on-select="false" placeholder="Bidang" mode="multiple"
+                                    <Multiselect v-model="advanceFilterCariExpert.sectors" :close-on-select="false" mode="multiple"
                                         :searchable="true"
                                         class="form-input p-2 ms-ring shadow my-1 focus:outline-none focus:bg-white focus:border-emerald-500 h-10 w-full ml-0 mr-5 mt-1"
                                         :classes="{ containerActive: 'ring-0', search: 'w-full border-none absolute inset-0 outline-none focus:ring-0 appearance-none border-0 text-base font-sans bg-white rounded pl-3.5 rtl:pl-0 rtl:pr-3.5', }"
@@ -448,13 +448,13 @@ onMounted(() => {
                                     </button>
                             </div>
                             <div class="inline-flex" v-if="advanceFilterCariExpert.sectors != '' || advanceFilterCariExpert.expertise != ''">
-                                <div class="mb-2" v-if="advanceFilterCariExpert.sectors != ''">
+                                <div class="" v-if="advanceFilterCariExpert.sectors != ''">
                                     <div class="text-black text-xs">
                                         Bidang
                                     </div>
                                     <div>
                                         <span id="badge-dismiss-default" v-for="sector in advanceFilterCariExpert.sectors" :key="sector"
-                                            class="inline-flex items-center py-1 px-2 mr-2 text-sm font-medium text-white bg-jobhunGreen rounded">
+                                            class="inline-flex items-center py-1 px-2 mr-2 text-sm font-medium text-white bg-jobhunGreen rounded mb-8">
                                             {{ sector }}
                                             <button type="button" @click="deleteSectors(sector)"
                                                 class="inline-flex items-center p-0.5 ml-2 text-sm text-white bg-transparent rounded-sm hover:bg-gray-50 hover:text-black"
@@ -469,13 +469,13 @@ onMounted(() => {
                                         </span>
                                     </div>
                                 </div>
-                                <div class="mb-2" v-if="advanceFilterCariExpert.recruit_expert.capabilities != ''">
+                                <div class="" v-if="advanceFilterCariExpert.recruit_expert.capabilities != ''">
                                     <div class="text-black text-xs">
                                         Keahlian
                                     </div>
                                     <div>
                                         <span id="badge-dismiss-default" v-for="expertise in advanceFilterCariExpert.recruit_expert.capabilities" :key="expertise"
-                                            class="inline-flex items-center py-1 px-2 mr-2 text-sm font-medium text-white bg-jobhunGreen rounded">
+                                            class="inline-flex items-center py-1 px-2 mr-2 text-sm font-medium text-white bg-jobhunGreen rounded mb-8">
                                             {{ expertise }}
                                             <button type="button" @click="deleteExpertise(expertise)"
                                                 class="inline-flex items-center p-0.5 ml-2 text-sm text-white bg-transparent rounded-sm hover:bg-gray-50 hover:text-black"

@@ -212,19 +212,19 @@ const formValidation = () => {
                             pelatihan?</label>
                         <input
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-md"
-                            @keypress="isNumberCurrency($event)" required placeholder="Input angka" v-model="formExpertPelatihan.totalPerson" />
+                            @keypress="isNumberCurrency($event)" required placeholder="Input angka" v-model="formExpertPelatihan.totalPerson" type="text" />
                     </div>
                     <div class="mt-4">
                         <label class="block text-sm font-medium mb-1 text-black">Berapa sesi pertemuan yang diajukan?</label>
                         <input
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-md"
-                            @keypress="isNumberCurrency($event)" required placeholder="Input angka" v-model="formExpertPelatihan.session" />
+                            @keypress="isNumberCurrency($event)" required placeholder="Input angka" v-model="formExpertPelatihan.session" type="text" />
                     </div>
                     <div class="mt-4">
                         <label class="block text-sm font-medium mb-1 text-black">Jelaskan secara spesifik topik/pembahasan apa saja yang ingin kamu pelajari?</label>
                         <textarea rows="5"
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                            required v-model="formExpertPelatihan.topic" />
+                            required v-model="formExpertPelatihan.topic" type="text" />
                     </div>
                     <div class="mt-4">
                         <label class="block text-sm font-medium mb-1 text-black">Pengajuan hari kelas</label>

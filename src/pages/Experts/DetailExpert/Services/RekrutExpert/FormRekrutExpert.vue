@@ -80,6 +80,16 @@ const openModalAjukanRekrutExpert = () => {
     isUserAjukan.value = true
 }
 
+const isInputNumber = (evt) => {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+        evt.preventDefault();;
+    } else {
+        return true;
+    }
+}
+
 const formValidation = () => {
     if (formRekrutExpert.value.company == '' && formRekrutExpert.value.website == '' && formRekrutExpert.value.linkedin == '' &&
         formRekrutExpert.value.email == '' && formRekrutExpert.value.phone == '' && formRekrutExpert.value.projectDetail == '' &&
@@ -199,7 +209,7 @@ const formValidation = () => {
                     <div>
                         <label class="block text-sm font-medium mb-1 text-black">Nama perusahaan</label>
                         <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                            required v-model="formRekrutExpert.company" />
+                            required v-model="formRekrutExpert.company" type="text" />
                     </div>
                     <div class="mt-4">
                         <label class="block text-sm font-medium mb-1 text-black">Lokasi perusahaan</label>
@@ -215,12 +225,12 @@ const formValidation = () => {
                     <div class="mt-4">
                         <label class="block text-sm font-medium mb-1 text-black">Website perusahaan</label>
                         <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                            required v-model="formRekrutExpert.website" />
+                            required v-model="formRekrutExpert.website" type="text" />
                     </div>
                     <div class="mt-4">
                         <label class="block text-sm font-medium mb-1 text-black">LinkedIn perusahaan</label>
                         <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                            required v-model="formRekrutExpert.linkedin" />
+                            required v-model="formRekrutExpert.linkedin" type="text" />
                     </div>
                     <div class="mt-4">
                         <label class="block text-sm font-medium mb-1 text-black">Email perusahaan</label>
@@ -230,25 +240,25 @@ const formValidation = () => {
                     <div class="mt-4">
                         <label class="block text-sm font-medium mb-1 text-black">Nomor telepon perusahaan</label>
                         <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                            required v-model="formRekrutExpert.phone" />
+                            required v-model="formRekrutExpert.phone" @keypress="isInputNumber($event)" type="text" />
                     </div>
                     <div class="mt-4">
                         <label class="block text-sm font-medium mb-1 text-black">Detail proyek</label>
                         <textarea rows="5"
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                            required v-model="formRekrutExpert.projectDetail" />
+                            required v-model="formRekrutExpert.projectDetail" type="text" />
                     </div>
                     <div class="mt-4">
                         <label class="block text-sm font-medium mb-1 text-black">Detail pekerjaan expert</label>
                         <textarea rows="5"
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                            required v-model="formRekrutExpert.jobDetail" />
+                            required v-model="formRekrutExpert.jobDetail" type="text" />
                     </div>
                     <div class="mt-4">
                         <label class="block text-sm font-medium mb-1 text-black">Syarat dan kualifikasi</label>
                         <textarea rows="5"
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                            required v-model="formRekrutExpert.termCondition" />
+                            required v-model="formRekrutExpert.termCondition" type="text" />
                     </div>
                     <div class="mt-4">
                         <label class="block text-sm font-medium mb-1 text-black">Batas waktu pekerjaan</label>
@@ -260,7 +270,7 @@ const formValidation = () => {
                         <label class="block text-sm font-medium mb-1 text-black">Budget yang dimiliki</label>
                         <input
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-md"
-                            @input="formatBudget" placeholder="Rp" required v-model="formRekrutExpert.budget" />
+                            @input="formatBudget" placeholder="Rp" required v-model="formRekrutExpert.budget" type="text" />
                     </div>
                 </div>
             </div>

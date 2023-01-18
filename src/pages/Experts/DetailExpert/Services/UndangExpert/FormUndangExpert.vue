@@ -187,26 +187,26 @@ const formValidation = () => {
                         <label class="block text-sm font-medium mb-1 text-black">Asal perusahaan/organisasi/komunitas</label>
                         <input
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full    "
-                            required placeholder="Nama perusahaan" v-model="formUndangExpert.from" />
+                            required placeholder="Nama perusahaan" v-model="formUndangExpert.from" type="text" />
                     </div>
                     <div class="mt-4">
                         <label class="block text-sm font-medium mb-1 text-black">Penjelasan singkat tentang
                             perusahaan/organisasi/komunitas</label>
                         <textarea rows="5"
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                            required v-model="formUndangExpert.description" />
+                            required v-model="formUndangExpert.description" type="text" />
                     </div>
                     <div class="mt-4">
                         <label class="block text-sm font-medium mb-1 text-black">Nama acara/kegiatan</label>
                         <input
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                            v-model="formUndangExpert.eventName" required />
+                            v-model="formUndangExpert.eventName" required type="text" />
                     </div>
                     <div class="mt-4">
                         <label class="block text-sm font-medium mb-1 text-black">Penjelasan tentang acara/kegiatan</label>
                         <textarea rows="5"
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                            required v-model="formUndangExpert.eventDescription" />
+                            required v-model="formUndangExpert.eventDescription" type="text" />
                     </div>
                     <div class="mt-4">
                         <label class="block text-sm font-medium mb-1 text-black">Tanggal pelaksanaan acara</label>
@@ -236,20 +236,20 @@ const formValidation = () => {
                         <label class="block text-sm font-medium mb-1 text-black">Jumlah target peserta secara spesifik</label>
                         <input
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-md"
-                            @keypress="isNumberCurrency($event)" required v-model="formUndangExpert.target" placeholder="Input angka" />
+                            @keypress="isNumberCurrency($event)" required v-model="formUndangExpert.target" placeholder="Input angka" type="text" />
                     </div>
                     <div class="mt-4">
                         <label class="block text-sm font-medium mb-1 text-black">Berapa budget yang diajukan untuk fee
                             speaker?</label>
                         <input
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-md"
-                            @input="formatBudget" required v-model="formUndangExpert.budget" placeholder="Rp" />
+                            @input="formatBudget" required v-model="formUndangExpert.budget" placeholder="Rp" type="text" />
                     </div>
                     <div class="mt-4">
                         <label class="block text-sm font-medium mb-1 text-black">Apakah Jobhun bisa mendapatkan benefit promosi lainnya? Jika ada, sebutkan!</label>
                         <textarea rows="5"
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                            required v-model="formUndangExpert.topic" />
+                            required v-model="formUndangExpert.topic" type="text" />
                     </div>
                 </div>
             </div>
