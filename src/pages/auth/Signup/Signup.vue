@@ -128,7 +128,7 @@ const onlyNumber = (evt)=> {
 
             <!-- Image -->
             <div class="hidden md:block absolute top-0 bottom-0 right-0 md:w-1/2" aria-hidden="true">
-                <img class="object-cover object-center w-full h-full" src="../../../images/signin/banner ilustrasi-04-min.png"
+                <img class="object-cover object-center w-full h-full" src="../../../images/signin/banner-ilustrasi-04-min.png"
                     width="760" height="1024" alt="Authentication" />
                 <img class="absolute top-1/4 left-0 -translate-x-1/2 hidden lg:block"
                     src="../../../images/signin/roket-02.png" width="218" height="224" alt="Authentication decoration" />
