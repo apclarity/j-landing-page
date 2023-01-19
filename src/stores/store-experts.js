@@ -11,6 +11,7 @@ const INDEX_EXPERT_FEATURED_URL = "/expert/expert-features";
 const ADVANCE_SEARCH_URL = "/expert/search-expert";
 const JADI_EXPERT_URL = "/expert/create-expert-form"
 const JADI_EXPERT_DASHBOARD_URL = "/expert/create-expert"
+const SUBMISSION_EXPERT_TEMP = "/expert/submission-expert-temp"
 
 export const useDataExpertStore = defineStore({
   id: "experts",
@@ -26,6 +27,11 @@ export const useDataExpertStore = defineStore({
       total: 0,
     },
     expertFeatured: [],
+    submissionExpertTemp:{
+      education:{},
+      experiences:[]
+    },
+    tableSubmissionExpertTemp: {}
   }),
   actions: {
     setDetailDataExpert(payload = {}) {
@@ -71,6 +77,18 @@ export const useDataExpertStore = defineStore({
         console.log(payload)
         let res = await api.post(JADI_EXPERT_DASHBOARD_URL, payload);
         this.formJadiExpertDashboard = res.data;
+      } catch (error) {}
+    },
+    async getDataSubmissionExpertTemp(id) {
+      try {
+        let res = await api.get(SUBMISSION_EXPERT_TEMP + id);
+        this.submissionExpertTemp = res.data;
+      } catch (error) {}
+    },
+    async getDataTableSubmissionExpertTemp() {
+      try {
+        let res = await api.get(DETAIL_EXPERT_URL);
+        this.tableSubmissionExpertTemp = res.data;
       } catch (error) {}
     },
   },

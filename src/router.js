@@ -82,7 +82,8 @@ import LayananRekrutExpertNavbar from "./pages/Homepage/MenuLayananNavBar/Rekrut
 import JadiExpert from "./pages/Experts/JadiExpert/Index.vue";
 import DashboardFormTambahExpert from "./pages/settings/SubMenuExperts/Index.vue";
 import FormJadiExpert from "./pages/Experts/JadiExpert/Formulir/Index.vue";
-import DashboardFormPengajuanExpert from "./pages/settings/SubMenuExperts/PengajuanExpert/Index.vue";
+import DashboardFormPengajuanExpert from "./pages/settings/SubMenuExperts/PengajuanExpert/Form/Index.vue";
+import DashboardTablePengajuanExpert from "./pages/settings/SubMenuExperts/PengajuanExpert/Table/Index.vue";
 
 const routerHistory = createWebHistory();
 
@@ -174,8 +175,12 @@ const router = createRouter({
           component: FormJadiExpert,
         },
         {
-          path: "/pengajuanexpert/formulir",
+          path: "/pengajuanexpert/formulir/:id",
           component: DashboardFormPengajuanExpert,
+        },
+        {
+          path: "/pengajuanexpert/table",
+          component: DashboardTablePengajuanExpert,
         },
       ],
     },

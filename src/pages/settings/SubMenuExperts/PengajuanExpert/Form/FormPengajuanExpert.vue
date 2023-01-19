@@ -2,20 +2,21 @@
 import { onMounted, ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { storeToRefs } from 'pinia'
-import Tooltip from '../../../../components/TooltipRed.vue'
+import Tooltip from '../../../../../components/TooltipRed.vue'
 import Multiselect from '@vueform/multiselect'
-import { useLayoutStore } from '../../../layout/store'
-import { validatePicture, getBase64Image } from '../../../../utils/Helper'
-import { useDataExpertStore } from '../../../../stores/store-experts'
+import { useDataExpertStore } from '../../../../../stores/store-experts'
 import flatPickr from 'vue-flatpickr-component'
-import { useOptionsStore } from '../../../../stores/store-options'
+import { useOptionsStore } from '../../../../../stores/store-options'
 
 const route = useRoute()
+const id = route.params.id
 
-const formJadiExpertDashboardStore = useDataExpertStore()
+const formSubmissionExpertTempStore = useDataExpertStore()
 const optionStore = useOptionsStore()
 
-const { formJadiExpertDashboard } = storeToRefs(formJadiExpertDashboardStore)
+await formSubmissionExpertTempStore.getDataSubmissionExpertTemp(id)
+const { submissionExpertTemp } = storeToRefs(formSubmissionExpertTempStore)
+
 const { listSector } = storeToRefs(optionStore)
 
 const dashboardFormTambahExpert = ref({
@@ -40,12 +41,6 @@ const dashboardFormTambahExpert = ref({
             location: '',
             start_date: null,
             end_date: null
-        },
-        {
-            title: '',
-            location: '',
-            start_date: null,
-            end_date: null
         }
     ],
     experience_yoe: '',
@@ -55,27 +50,6 @@ const dashboardFormTambahExpert = ref({
     reason_join: '',
     reason_approve: ''
 })
-
-const isUserStillWork = ref(false)
-
-const checkboxUserStillWork = () => {
-    isUserStillWork.value = true
-    dashboardFormTambahExpert.value.experiences[index].end_date = ''
-
-}
-
-const addExperiences = () => {
-    dashboardFormTambahExpert.value.experiences.push({
-        title: '',
-        location: '',
-        start_date: null,
-        end_date: null
-    })
-}
-
-const deleteExperiences = (index) => {
-    dashboardFormTambahExpert.value.experiences.splice(index, 1)
-}
 
 const availableServices = [
     { value: "training", label: "Pelatihan" },
@@ -101,42 +75,6 @@ const config = {
     nextArrow: '<svg class="fill-current" width="7" height="11" viewBox="0 0 7 11"><path d="M1.4 10.8L0 9.4l4-4-4-4L1.4 0l5.4 5.4z" /></svg>',
 }
 
-const tambahExpert = async ()=> {
-    console.log(dashboardFormTambahExpert.value)
-    if (dashboardFormTambahExpert.value.image != '' && dashboardFormTambahExpert.value.name != '' && dashboardFormTambahExpert.value.email != '' &&
-        dashboardFormTambahExpert.value.phone_number != '' && dashboardFormTambahExpert.value.profession != '' && dashboardFormTambahExpert.value.education.degree != '' &&
-        dashboardFormTambahExpert.value.education.start_date != '' && dashboardFormTambahExpert.value.education.end_date != '' && dashboardFormTambahExpert.value.education.school != '' &&
-        dashboardFormTambahExpert.value.domicile != '' && dashboardFormTambahExpert.value.description != '' && dashboardFormTambahExpert.value.company != '' &&
-        dashboardFormTambahExpert.value.sectors != '' && dashboardFormTambahExpert.value.experiences.title != '' && dashboardFormTambahExpert.value.experiences.location != '' &&
-        dashboardFormTambahExpert.value.experiences.start_date != '' && dashboardFormTambahExpert.value.experiences.end_date != '' && dashboardFormTambahExpert.value.experience_yoe != '' && dashboardFormTambahExpert.value.social_media != '' &&
-        dashboardFormTambahExpert.value.available_services != '' && dashboardFormTambahExpert.value.teaching_experience != '' && dashboardFormTambahExpert.value.reason_join != '' &&
-        dashboardFormTambahExpert.value.reason_approve != '') {
-        console.log(dashboardFormTambahExpert.value)
-        if (await formJadiExpertDashboardStore.formJadiExpertDashboard(dashboardFormTambahExpert.value)) {
-            return
-        }
-    }
-}
-
-const isImageChanged = ref(false)
-
-const choosePhoto = ()=>{
-    document.getElementById("fileUpload").click()
-}
-
-const validateImageRatio = async(e)=>{
-    var ratio = "1:1";
-    var maxSize = 1 * 1024 * 1024;
-    var validationRes = await validatePicture(e, ratio, maxSize);
-    if (!validationRes.isOk) {
-        alert(validationRes.message);
-        return;
-    }
-    isImageChanged.value = true;
-    let base64img = await getBase64Image(validationRes.theImage);
-    dashboardFormTambahExpert.value.image = base64img;
-}
-
 const isInputNumber = (evt) => {
     evt = (evt) ? evt : window.event;
     var charCode = (evt.which) ? evt.which : evt.keyCode;
@@ -145,43 +83,6 @@ const isInputNumber = (evt) => {
     } else {
         return true;
     }
-}
-
-const isUserAjukan = ref(false)
-const openModalJadiExpertDashboard = () => {
-    isUserAjukan.value = true
-}
-
-const deleteAvailableServices = (availableServices) => {
-    let selectedItems = dashboardFormTambahExpert.value.availableServices
-    let index = -1
-    for (let i = 0; i < selectedItems.length; i++) {
-        if (availableServices == selectedItems[i]) {
-            index = i
-            break
-        }
-    }
-    if (index < 0) {
-        return
-    }
-    selectedItems.splice(index, 1)
-    dashboardFormTambahExpert.value.availableServices = selectedItems
-}
-
-const deleteSelectedSector = (sectors) => {
-    let selectedItems = dashboardFormTambahExpert.value.sectors
-    let index = -1
-    for (let i = 0; i < selectedItems.length; i++) {
-        if (sectors == selectedItems[i]) {
-            index = i
-            break
-        }
-    }
-    if (index < 0) {
-        return
-    }
-    selectedItems.splice(index, 1)
-    dashboardFormTambahExpert.value.sectors = selectedItems
 }
 </script>
 <style src="@vueform/multiselect/themes/default.css">
@@ -209,10 +110,10 @@ const deleteSelectedSector = (sectors) => {
         <div class="grid grid-flow-row md:flex flex-auto max-w-4xl min-w-0 mx-auto pt-6 lg:px-8 px-6 lg:pt-8">
             <div class="flex-none md:w-1/1">
                 <div class="mb-4 sm:mb-0">
-                    <img class="border-2 w-48 h-48 rounded-lg" v-if="dashboardFormTambahExpert.image == null"
-                        src="../../../../images/dummy/dummy-profile.png">
+                    <img class="border-2 w-48 h-48 rounded-lg" v-if="submissionExpertTemp.image == null"
+                        src="../../../../../images/dummy/dummy-profile.png">
                     <img class="border-2 w-48 h-48 rounded-lg" v-else
-                        :src="dashboardFormTambahExpert.image" />
+                        :src="submissionExpertTemp.image" />
                 </div>
             </div>
             <div class="grid md:grid-cols-1 md:flex-auto md:max-w-4xl md:min-w-0 md:mx-auto md:px-8 px-0 md:mt-0 mt-4">
@@ -220,25 +121,25 @@ const deleteSelectedSector = (sectors) => {
                     <label class="block text-sm font-medium mb-1 text-black">Nama lengkap</label>
                     <input
                         class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                        required v-model="dashboardFormTambahExpert.name" type="text" readonly />
+                        required v-model="submissionExpertTemp.name" type="text" readonly />
                 </div> 
                 <div class="mt-4">
                     <label class="block text-sm font-medium mb-1 text-black">Alamat email</label>
                     <input
                         class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                        required v-model="dashboardFormTambahExpert.email" type="text" readonly />
+                        required v-model="submissionExpertTemp.email" type="text" readonly />
                 </div>
                 <div class="mt-4">
                     <label class="block text-sm font-medium mb-1 text-black">Nomor HP</label>
                     <input
                         class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                        required v-model="dashboardFormTambahExpert.phone_number" @keypress="isInputNumber($event)" type="text" readonly />
+                        required v-model="submissionExpertTemp.phone_number" @keypress="isInputNumber($event)" type="text" readonly />
                 </div>
                 <div class="mt-4">
                     <label class="block text-sm font-medium mb-1 text-black">Jabatan</label>
                     <input
                         class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                        required v-model="dashboardFormTambahExpert.profession" type="text" readonly />
+                        required v-model="submissionExpertTemp.profession" type="text" readonly />
                 </div>
             </div>
         </div>
@@ -253,7 +154,7 @@ const deleteSelectedSector = (sectors) => {
                 <div class="grid md:grid-cols-1 md:w-3/5">
                     <input
                         class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                        required v-model="dashboardFormTambahExpert.education.degree" type="text" readonly />
+                        required v-model="submissionExpertTemp.education.degree" type="text" readonly />
                 </div>
             </div>
             <div class="mt-4 items-center grid-flow-row md:flex">
@@ -263,7 +164,7 @@ const deleteSelectedSector = (sectors) => {
                 <div class="grid md:grid-cols-1 md:w-3/5">
                     <input
                         class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                        required v-model="dashboardFormTambahExpert.education.school" type="text" readonly />
+                        required v-model="submissionExpertTemp.education.school" type="text" readonly />
                 </div>
             </div>
             <div class="mt-4 items-center grid-flow-row md:flex">
@@ -274,7 +175,7 @@ const deleteSelectedSector = (sectors) => {
                     <div class="max-w-md">
                         <flat-pickr disabled="true"
                             class="form-input pl-9 border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm"
-                            :config="config" v-model="dashboardFormTambahExpert.education.start_date" ></flat-pickr>
+                            :config="config" v-model="submissionExpertTemp.education.start_date" ></flat-pickr>
                         <div class="absolute inset-0 right-auto flex items-center pointer-events-none">
                             <svg class="w-4 h-4 fill-gray-700 ml-3" viewBox="0 0 16 16">
                                 <path
@@ -292,7 +193,7 @@ const deleteSelectedSector = (sectors) => {
                     <div class="max-w-md">
                         <flat-pickr disabled="true"
                             class="form-input pl-9 border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm"
-                            :config="config" v-model="dashboardFormTambahExpert.education.end_date"></flat-pickr>
+                            :config="config" v-model="submissionExpertTemp.education.end_date"></flat-pickr>
                         <div class="absolute inset-0 right-auto flex items-center pointer-events-none">
                             <svg class="w-4 h-4 fill-gray-700 ml-3" viewBox="0 0 16 16">
                                 <path
@@ -306,7 +207,7 @@ const deleteSelectedSector = (sectors) => {
                 <label class="block text-sm font-medium mb-1 text-black">
                     Domisili
                 </label>
-                <Multiselect v-model="dashboardFormTambahExpert.domicile"
+                <Multiselect v-model="submissionExpertTemp.domicile"
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen text-sm w-full ml-0"
                     :options="domiciles" disabled="true" />
             </div>
@@ -316,12 +217,12 @@ const deleteSelectedSector = (sectors) => {
                 </label>
                 <textarea rows="5"
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                    required v-model="dashboardFormTambahExpert.description" type="text" readonly />
+                    required v-model="submissionExpertTemp.description" type="text" readonly />
             </div>
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">Asal perusahaan</label>
                 <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                    required v-model="dashboardFormTambahExpert.company" type="text" readonly />
+                    required v-model="submissionExpertTemp.company" type="text" readonly />
             </div>
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">Bidang yang dikuasai</label>
@@ -329,16 +230,16 @@ const deleteSelectedSector = (sectors) => {
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen text-sm w-full ml-0"
                     :classes="{ containerActive: 'ring-0', search: 'w-full absolute inset-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen appearance-none border-0 text-base font-sans rounded pl-3.5 rtl:pl-0 rtl:pr-3.5', }"
                     :create-option="true" :options="listSector" mode="multiple" :object="true"
-                    v-model="dashboardFormTambahExpert.sectors">
+                    v-model="submissionExpertTemp.sectors">
                     <template v-slot:multiplelabel="{ values }">
                         <div class="multiselect-multiple-label">
                             {{ values.length }} bidang terpilih
                         </div>
                     </template>
                 </Multiselect>
-                <div class="mb-2" v-if="dashboardFormTambahExpert.sectors != ''">
+                <div class="mb-2" v-if="submissionExpertTemp.sectors != ''">
                     <div>
-                        <span id="badge-dismiss-default" v-for="sectors in dashboardFormTambahExpert.sectors" :key="sectors.label"
+                        <span id="badge-dismiss-default" v-for="sectors in submissionExpertTemp.sectors" :key="sectors.label"
                             class="inline-flex items-center py-1 px-2 mr-2 mt-2 text-sm font-medium text-white bg-jobhunGreen rounded">
                             {{ sectors.label}}
                             <button type="button" @click="deleteSelectedSector(sectors)"
@@ -355,7 +256,7 @@ const deleteSelectedSector = (sectors) => {
                     </div>
                 </div>
             </div>
-            <div v-for="experience, index in dashboardFormTambahExpert.experiences" :key="index">
+            <div v-for="experience, index in submissionExpertTemp.experiences" :key="index">
                 <div class="mt-4" v-if="index == 0">
                     <label class="block text-sm font-medium mb-1 text-black">Pengalaman kerja</label>
                 </div>
@@ -369,7 +270,7 @@ const deleteSelectedSector = (sectors) => {
                     <div class="grid md:grid-cols-1 md:w-3/5">
                         <input
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                            required v-model="dashboardFormTambahExpert.experiences[index].title" type="text" readonly />
+                            required v-model="submissionExpertTemp.experiences[index].title" type="text" readonly />
                     </div>
                 </div>
                 <div class="mt-4 items-center grid-flow-row md:flex">
@@ -379,7 +280,7 @@ const deleteSelectedSector = (sectors) => {
                     <div class="grid md:grid-cols-1 md:w-3/5">
                         <input
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                            required v-model="dashboardFormTambahExpert.experiences[index].location" type="text" readonly />
+                            required v-model="submissionExpertTemp.experiences[index].location" type="text" readonly />
                     </div>
                 </div>
                 <div class="mt-4 items-center grid-flow-row md:flex">
@@ -390,7 +291,7 @@ const deleteSelectedSector = (sectors) => {
                         <div class="max-w-md">
                             <flat-pickr disabled="true"
                                 class="form-input pl-9 border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm"
-                                :config="config" v-model="dashboardFormTambahExpert.experiences[index].start_date"></flat-pickr>
+                                :config="config" v-model="submissionExpertTemp.experiences[index].start_date"></flat-pickr>
                             <div class="absolute inset-0 right-auto flex items-center pointer-events-none">
                                 <svg class="w-4 h-4 fill-gray-700 ml-3" viewBox="0 0 16 16">
                                     <path
@@ -409,7 +310,7 @@ const deleteSelectedSector = (sectors) => {
                         <div class="">
                             <flat-pickr disabled="true"
                                 class="form-input pl-9 border-0 disabled:bg-slate-50 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm"
-                                :config="config" v-model="dashboardFormTambahExpert.experiences[index].end_date"></flat-pickr>
+                                :config="config" v-model="submissionExpertTemp.experiences[index].end_date"></flat-pickr>
                             <div class="absolute inset-0 right-auto flex items-center pointer-events-none">
                                 <svg class="w-4 h-4 fill-gray-700 ml-3" viewBox="0 0 16 16">
                                     <path
@@ -424,7 +325,7 @@ const deleteSelectedSector = (sectors) => {
                 <label class="block text-sm font-medium mb-1 text-black">Durasi bekerja</label>
                 <input
                     class="border-0 inline-flex bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-20"
-                    required @keypress="isInputNumber($event)" v-model="dashboardFormTambahExpert.experience_yoe" type="text" readonly />
+                    required @keypress="isInputNumber($event)" v-model="submissionExpertTemp.experience_yoe" type="text" readonly />
                 <span class="text-sm">
                     tahun
                 </span>
@@ -435,7 +336,7 @@ const deleteSelectedSector = (sectors) => {
                 </label>
                 <input
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                    required v-model="dashboardFormTambahExpert.social_media" type="text" readonly />
+                    required v-model="submissionExpertTemp.social_media" type="text" readonly />
             </div>
             
             <div class="mt-4 inline-flex items-center">
@@ -451,16 +352,16 @@ const deleteSelectedSector = (sectors) => {
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen text-sm w-full ml-0"
                     :classes="{ containerActive: 'ring-0', search: 'w-full absolute inset-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen appearance-none border-0 text-base font-sans rounded pl-3.5 rtl:pl-0 rtl:pr-3.5', }"
                     :create-option="true" :options="availableServices" mode="multiple"
-                    :object="true" v-model="dashboardFormTambahExpert.available_services">
+                    :object="true" v-model="submissionExpertTemp.available_services">
                     <template v-slot:multiplelabel="{ values }">
                         <div class="multiselect-multiple-label">
                             {{ values.length }} layanan terpilih
                         </div>
                     </template>
                 </Multiselect>
-                <div class="mb-2" v-if="dashboardFormTambahExpert.available_services != ''">
+                <div class="mb-2" v-if="submissionExpertTemp.available_services != ''">
                     <div>
-                        <span id="badge-dismiss-default" v-for="availableServices in dashboardFormTambahExpert.available_services"
+                        <span id="badge-dismiss-default" v-for="availableServices in submissionExpertTemp.available_services"
                             :key="availableServices.label"
                             class="inline-flex items-center py-1 px-2 mr-2 mt-2 text-sm font-medium text-white bg-jobhunGreen rounded">
                             {{availableServices.label}}
@@ -483,21 +384,21 @@ const deleteSelectedSector = (sectors) => {
                     sebelumnya?</label>
                 <textarea rows="5"
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                    required v-model="dashboardFormTambahExpert.teaching_experience"  type="text" readonly />
+                    required v-model="submissionExpertTemp.teaching_experience"  type="text" readonly />
             </div>
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">Mengapa kamu tertarik mendaftar menjadi expert
                     di Jobhun?</label>
                 <textarea rows="5"
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                    required v-model="dashboardFormTambahExpert.reason_join"  type="text" readonly />
+                    required v-model="submissionExpertTemp.reason_join"  type="text" readonly />
             </div>
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">Mengapa Jobhun harus memilih kamu sebagai
                     expert?</label>
                 <textarea rows="5"
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                    required v-model="dashboardFormTambahExpert.reason_approve"  type="text" readonly />
+                    required v-model="submissionExpertTemp.reason_approve"  type="text" readonly />
             </div>
         </div>
     </form>
