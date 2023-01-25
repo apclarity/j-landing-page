@@ -1,0 +1,48 @@
+{
+    "data": {
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1B5GlesOwjTRH0F-aYQg1tlOeOORVihbjmHnWJ7JxAq1zGOLbsVcIo5aQXM54GMRb6JY&usqp=CAU",
+        "name": "Zunedi",
+        "email": "zunedi@gmail.com",
+        "phone_number": "0856789101112",
+        "profession": "Guru",
+        "education": {
+            "degree": "S1",
+            "school": "Universitas Dr. Soetomo (Bachelor of Communications)",
+            "end_date": "2021-06-30T00:00:00Z",
+            "start_date": "2016-07-01T00:00:00Z"
+        },
+        "domicile": "Surabaya",
+        "description": "I am a Chief of Staff at WomenWorks, a women inspired start up focusing on supporting women grow into leadership positions. I like to surf in my free time!",
+        "company": "PT Jobhun Membangun Indonesia",
+        "sectors": [
+            "Sales",
+            "Marketing"
+        ],
+        "experiences": [
+            {
+                "title": "Founder of Sate Shincan",
+                "end_date": "2021-05-31T00:00:00Z",
+                "location": "Surabaya",
+                "start_date": "2007-04-01T00:00:00Z"
+            },
+            {
+                "title": "Supervisor in McDonald's",
+                "end_date": null,
+                "location": "Bali",
+                "start_date": "2020-12-31T00:00:00Z"
+            }
+        ],
+        "experience_yoe": 1,
+        "social_media": "http://linkedin.com/ghfghfhf",
+        "available_services": [
+            "consultation",
+            "training",
+            "invite-expert",
+            "recruit-expert"
+        ],
+        "teaching_experience": "saya pernah melakukan mentoring di smk",
+        "reason_join": "saya ingin membagikan pengalaman saya",
+        "reason_approve": "saya mempunyai sertifikat mengajar",
+        "id": 1
+    }
+}

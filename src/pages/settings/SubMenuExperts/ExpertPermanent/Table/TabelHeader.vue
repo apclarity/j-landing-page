@@ -9,20 +9,20 @@ import { storeToRefs } from 'pinia'
 // const route = useRoute()
 // const id = route.params.id
 
-// const tableSubmissionExpertTempStore = useDataExpertStore()
-// await tableSubmissionExpertTempStore.getDataTableSubmissionExpertTemp()
-// const { tableSubmissionExpertTemp } = storeToRefs(tableSubmissionExpertTempStore)
+// const tableExpertPermanentStore = useDataExpertStore()
+// await tableExpertPermanentStore.getDataTableExpertPermanent()
+// const { getDataTableExpertPermanent, pagination } = storeToRefs(tableExpertPermanentStore)
 
 const props = defineProps({
   page: Number,
   perPage: Number,
-  tableSubmissionExpertTemp: Array,
+  tableExpertPermanent: Array,
   total: Number
 })
 
-const { page, perPage, tableSubmissionExpertTemp, total } = toRefs(props)
+const { page, perPage, tableExpertPermanent, total } = toRefs(props)
 
-const adjustingIndex = computed(()=> perPage.value * (page.value-1))
+  const adjustingIndex = computed(()=> perPage.value * (page.value-1))
 </script>
 
 <template>
@@ -58,10 +58,10 @@ const adjustingIndex = computed(()=> perPage.value * (page.value-1))
           </thead>
           <tbody class="text-sm divide-y divide-slate-200">
             <TabelData
-              v-for="(expertTemp, index) in tableSubmissionExpertTemp"
-              :key="expertTemp.id"
-              :value="expertTemp.id"
-              :expertTemp="expertTemp"
+              v-for="(expertPermanent, index) in tableExpertPermanent"
+              :key="expertPermanent.id"
+              :value="expertPermanent.id"
+              :tableExpertPermanent="expertPermanent"
               :index="index + adjustingIndex"
             />
           </tbody>

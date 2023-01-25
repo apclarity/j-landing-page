@@ -15,7 +15,7 @@ const route = useRoute()
 const advanceSearchStore = useDataExpertStore()
 const optionsStore = useOptionsStore()
 
-const { expertAdvanceSearch, expertPaginationAdvanceSearch } = storeToRefs(advanceSearchStore)
+const { expertAdvanceSearch, expertPaginationAdvanceSearch, pagination } = storeToRefs(advanceSearchStore)
 const { listSector } = storeToRefs(optionsStore)
 
 const limit = 12

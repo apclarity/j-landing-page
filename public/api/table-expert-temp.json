@@ -1,0 +1,143 @@
+{
+    "process_time": 30,
+    "success": true,
+    "statusCode": 200,
+    "message": "success",
+    "data": {
+        "data": [
+            {
+                "id": 1,
+                "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1B5GlesOwjTRH0F-aYQg1tlOeOORVihbjmHnWJ7JxAq1zGOLbsVcIo5aQXM54GMRb6JY&usqp=CAU",
+                "name": "Cynthia Cecilia",
+                "profession": "Founder&CEO",
+                "company": "PT Perusahaan Penuh Tawa"
+            },
+            {
+                "id": 2,
+                "image": "https://freepngimg.com/thumb/donald_duck/80482-artwork-donald-carrier-duck-mail-font-cartoon-thumb.png",
+                "name": "Jerome Polin",
+                "profession": "Guru Matematika",
+                "company": "PT Ceria Bersama"
+            },
+            {
+                "id": 3,
+                "image": "https://cdn20.pamono.com/p/s/1/4/1400005_70ohcj4uee/andy-warhol-muhammad-ali-20th-century-art-print.jpg",
+                "name": "Maudy Ayunda",
+                "profession": "Seniman",
+                "company": "PT Indonesia Belajar"
+            },
+            {
+                "id": 4,
+                "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1B5GlesOwjTRH0F-aYQg1tlOeOORVihbjmHnWJ7JxAq1zGOLbsVcIo5aQXM54GMRb6JY&usqp=CAU",
+                "name": "Cynthia Cecilia",
+                "profession": "Founder&CEO",
+                "company": "PT Perusahaan Penuh Tawa"
+            },
+            {
+                "id": 5,
+                "image": "https://freepngimg.com/thumb/donald_duck/80482-artwork-donald-carrier-duck-mail-font-cartoon-thumb.png",
+                "name": "Jerome Polin",
+                "profession": "Guru Matematika",
+                "company": "PT Ceria Bersama"
+            },
+            {
+                "id": 6,
+                "image": "https://cdn20.pamono.com/p/s/1/4/1400005_70ohcj4uee/andy-warhol-muhammad-ali-20th-century-art-print.jpg",
+                "name": "Maudy Ayunda",
+                "profession": "Seniman",
+                "company": "PT Indonesia Belajar"
+            },
+            {
+                "id": 7,
+                "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1B5GlesOwjTRH0F-aYQg1tlOeOORVihbjmHnWJ7JxAq1zGOLbsVcIo5aQXM54GMRb6JY&usqp=CAU",
+                "name": "Cynthia Cecilia",
+                "profession": "Founder&CEO",
+                "company": "PT Perusahaan Penuh Tawa"
+            },
+            {
+                "id": 8,
+                "image": "https://freepngimg.com/thumb/donald_duck/80482-artwork-donald-carrier-duck-mail-font-cartoon-thumb.png",
+                "name": "Jerome Polin",
+                "profession": "Guru Matematika",
+                "company": "PT Ceria Bersama"
+            },
+            {
+                "id": 9,
+                "image": "https://cdn20.pamono.com/p/s/1/4/1400005_70ohcj4uee/andy-warhol-muhammad-ali-20th-century-art-print.jpg",
+                "name": "Maudy Ayunda",
+                "profession": "Seniman",
+                "company": "PT Indonesia Belajar"
+            },
+            {
+                "id": 10,
+                "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1B5GlesOwjTRH0F-aYQg1tlOeOORVihbjmHnWJ7JxAq1zGOLbsVcIo5aQXM54GMRb6JY&usqp=CAU",
+                "name": "Cynthia Cecilia",
+                "profession": "Founder&CEO",
+                "company": "PT Perusahaan Penuh Tawa"
+            },
+            {
+                "id": 11,
+                "image": "https://freepngimg.com/thumb/donald_duck/80482-artwork-donald-carrier-duck-mail-font-cartoon-thumb.png",
+                "name": "Jerome Polin",
+                "profession": "Guru Matematika",
+                "company": "PT Ceria Bersama"
+            },
+            {
+                "id": 12,
+                "image": "https://cdn20.pamono.com/p/s/1/4/1400005_70ohcj4uee/andy-warhol-muhammad-ali-20th-century-art-print.jpg",
+                "name": "Maudy Ayunda",
+                "profession": "Seniman",
+                "company": "PT Indonesia Belajar"
+            },
+            {
+                "id": 13,
+                "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1B5GlesOwjTRH0F-aYQg1tlOeOORVihbjmHnWJ7JxAq1zGOLbsVcIo5aQXM54GMRb6JY&usqp=CAU",
+                "name": "Cynthia Cecilia",
+                "profession": "Founder&CEO",
+                "company": "PT Perusahaan Penuh Tawa"
+            },
+            {
+                "id": 14,
+                "image": "https://freepngimg.com/thumb/donald_duck/80482-artwork-donald-carrier-duck-mail-font-cartoon-thumb.png",
+                "name": "Jerome Polin",
+                "profession": "Guru Matematika",
+                "company": "PT Ceria Bersama"
+            },
+            {
+                "id": 15,
+                "image": "https://cdn20.pamono.com/p/s/1/4/1400005_70ohcj4uee/andy-warhol-muhammad-ali-20th-century-art-print.jpg",
+                "name": "Maudy Ayunda",
+                "profession": "Seniman",
+                "company": "PT Indonesia Belajar"
+            },
+            {
+                "id": 16,
+                "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1B5GlesOwjTRH0F-aYQg1tlOeOORVihbjmHnWJ7JxAq1zGOLbsVcIo5aQXM54GMRb6JY&usqp=CAU",
+                "name": "Cynthia Cecilia",
+                "profession": "Founder&CEO",
+                "company": "PT Perusahaan Penuh Tawa"
+            },
+            {
+                "id": 17,
+                "image": "https://freepngimg.com/thumb/donald_duck/80482-artwork-donald-carrier-duck-mail-font-cartoon-thumb.png",
+                "name": "Jerome Polin",
+                "profession": "Guru Matematika",
+                "company": "PT Ceria Bersama"
+            },
+            {
+                "id": 18,
+                "image": "https://cdn20.pamono.com/p/s/1/4/1400005_70ohcj4uee/andy-warhol-muhammad-ali-20th-century-art-print.jpg",
+                "name": "Maudy Ayunda",
+                "profession": "Seniman",
+                "company": "PT Indonesia Belajar"
+            }
+        ],
+        "pagination": {
+            "offset": 0,
+            "page": 1,
+            "per_page": 15,
+            "sort": "",
+            "total": 2
+        }
+    }
+}

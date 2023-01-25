@@ -6,24 +6,29 @@ import { PAGINATION_LIMIT } from '../../../../../utils/Constants'
 import { useDataExpertStore } from '../../../../../stores/store-experts'
 import SearchForm from './SearchForm.vue'
 import TabelHeader from './TabelHeader.vue'
-import PaginationSubmissionExpertTemp from './PaginationNumeric.vue'
+import PaginationTableExpertPermanent from './PaginationNumeric.vue'
 
 const route = useRoute()
 const id = route.params.id
 
-const tableSubmissionExpertTempStore = useDataExpertStore()
-await tableSubmissionExpertTempStore.getDataTableSubmissionExpertTemp()
-const { tableSubmissionExpertTemp, pagination } = storeToRefs(tableSubmissionExpertTempStore)
+const tableExpertPermanentStore = useDataExpertStore()
+await tableExpertPermanentStore.getDataTableExpertPermanent()
+const { tableExpertPermanent, pagination } = storeToRefs(tableExpertPermanentStore)
 
 // const bidangStore = useBidangStore()
 // const { data, pagination } = storeToRefs(bidangStore)
 
+//===== Delete Expert ==================================================
+const confirmDeleteExpert = async () => {
+  await tableExpertPermanentStore.deleteDataTableExpertPermanent()
+}
+
 //===== Get Data =======================================================
 const getData = async (page=1, search="", perPage=PAGINATION_LIMIT) => {
-  tableSubmissionExpertTempStore.setPagination({
-    page, search, per_page: perPage,
+  tableExpertPermanentStore.setPagination({
+    page, search, per_page: perPage
   })
-  await tableSubmissionExpertTempStore.getDataTableSubmissionExpertTemp()
+  await tableExpertPermanentStore.getDataTableExpertPermanent()
 }
 
 //===== Search & Pagination ============================================
@@ -57,46 +62,37 @@ onMounted(() => {
             <li class="inline-flex items-center">
               <a href="#"
                 class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
-                <h1 class="text-2xl md:text-3xl text-slate-800 font-bold">Formulir</h1>
+                <h1 class="text-2xl md:text-3xl text-slate-800 font-bold">Expert ✨</h1>
               </a>
-            </li>
-            <li>
-              <div class="flex items-center">
-                <svg aria-hidden="true" class="h-8 text-gray-400" fill="currentColor" viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd"
-                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                    clip-rule="evenodd"></path>
-                </svg>
-                <a href="#"
-                  class="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-400 dark:hover:text-white">
-                  <h1 class="text-2xl md:text-3xl text-slate-800 font-bold">Pendaftaran Expert ✨</h1>
-                </a>
-              </div>
             </li>
           </ol>
         </div>
 
-        <!-- Right: Actions  -->
         <div class="grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2">
-          <!-- Search form -->
           <SearchForm placeholder="Cari expert" v-model="search" @searchClick="searchClick" />
+          <router-link to="/dashboard/formjadiexpert/" class="btn bg-emerald-500 hover:bg-emerald-600 text-white">
+            <svg class="w-4 h-4 fill-current opacity-50 shrink-0" viewBox="0 0 16 16">
+              <path
+                d="M15 7H9V1c0-.6-.4-1-1-1S7 .4 7 1v6H1c-.6 0-1 .4-1 1s.4 1 1 1h6v6c0 .6.4 1 1 1s1-.4 1-1V9h6c.6 0 1-.4 1-1s-.4-1-1-1z" />
+            </svg>
+            <span class="hidden xs:block ml-2">Tambah expert</span>
+          </router-link>
         </div>            
       </div>
 
       <!-- Table -->
       <div class="mt-8">
         <TabelHeader
-        :tableSubmissionExpertTemp="tableSubmissionExpertTemp"
-        :total="pagination.total"
-        :page="pagination.page"
-        :perPage="pagination.per_page"
+          :tableExpertPermanent="tableExpertPermanent"
+          :total="pagination.total"
+          :page="pagination.page"
+          :perPage="pagination.per_page"
         />
       </div>
 
       <!-- Pagination -->
       <div class="mt-8">
-        <PaginationSubmissionExpertTemp
+        <PaginationTableExpertPermanent
           :total="pagination.total"
           :perPage="pagination.per_page"
           :page="pagination.page"

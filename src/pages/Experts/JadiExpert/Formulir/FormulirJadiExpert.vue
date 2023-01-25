@@ -45,7 +45,9 @@ const formulirJadiExpert = ref({
         }
     ],
     experience_yoe: '',
-    social_media: '',
+    social_media: {
+        linkedin: ''
+    },
     available_services: [],
     teaching_experience: '',
     reason_join: '',
@@ -445,7 +447,7 @@ const deleteSelectedSector = (sectors) => {
                     </label>
                     <input
                         class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                        required v-model="formulirJadiExpert.social_media" type="text" />
+                        required v-model="formulirJadiExpert.social_media.linkedin" type="text" />
                 </div>
 
                 <div class="mt-4 inline-flex items-center">

@@ -80,7 +80,9 @@ import LayananPelatihanNavbar from "./pages/Homepage/MenuLayananNavBar/Pelatihan
 import LayananUndangExpertNavbar from "./pages/Homepage/MenuLayananNavBar/UndangExpert/Index.vue";
 import LayananRekrutExpertNavbar from "./pages/Homepage/MenuLayananNavBar/RekrutExpert/Index.vue";
 import JadiExpert from "./pages/Experts/JadiExpert/Index.vue";
-import DashboardFormTambahExpert from "./pages/settings/SubMenuExperts/Index.vue";
+import DashboardFormTambahExpert from "./pages/settings/SubMenuExperts/ExpertPermanent/Form/Index.vue";
+import DashboardFormEditExpert from "./pages/settings/SubMenuExperts/ExpertPermanent/Edit/Index.vue";
+import DashboardTableTambahExpert from "./pages/settings/SubMenuExperts/ExpertPermanent/Table/Index.vue";
 import FormJadiExpert from "./pages/Experts/JadiExpert/Formulir/Index.vue";
 import DashboardFormPengajuanExpert from "./pages/settings/SubMenuExperts/PengajuanExpert/Form/Index.vue";
 import DashboardTablePengajuanExpert from "./pages/settings/SubMenuExperts/PengajuanExpert/Table/Index.vue";
@@ -169,6 +171,14 @@ const router = createRouter({
         {
           path: "/dashboard/formjadiexpert",
           component: DashboardFormTambahExpert,
+        }, 
+        {
+          path: "/dashboard/formeditexpert/:id",
+          component: DashboardFormEditExpert,
+        },
+        {
+          path: "/dashboard/tablejadiexpert",
+          component: DashboardTableTambahExpert,
         },
         {
           path: "/jadiexpert/formulir",

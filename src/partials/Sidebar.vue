@@ -517,7 +517,7 @@
               </a>
               <div class="lg:hidden lg:sidebar-expanded:block 2xl:block">
                 <ul class="pl-9 mt-1" :class="!parentLink.expanded && 'hidden'">
-                  <router-link to="/dashboard/formjadiexpert" custom v-slot="{ href, navigate, isExactActive }">
+                  <router-link to="/dashboard/tablejadiexpert" custom v-slot="{ href, navigate, isExactActive }">
                     <li class="mb-1 last:mb-0">
                       <a class="block text-black hover:text-emerald-500 transition duration-150 truncate"
                         :class="isExactActive && '!text-emerald-500'" :href="href" @click="navigate">

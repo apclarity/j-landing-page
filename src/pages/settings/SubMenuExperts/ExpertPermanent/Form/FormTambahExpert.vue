@@ -2,15 +2,15 @@
 import { onMounted, ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { storeToRefs } from 'pinia'
-import Tooltip from '../../../components/TooltipRed.vue'
+import Tooltip from '../../../../../components/TooltipRed.vue'
 import Multiselect from '@vueform/multiselect'
-import { useLayoutStore } from '../../layout/store'
-import { validatePicture, getBase64Image } from '../../../utils/Helper'
-import { useDataExpertStore } from '../../../stores/store-experts'
+import { useLayoutStore } from '../../../../layout/store'
+import { validatePicture, getBase64Image } from '../../../../../utils/Helper'
+import { useDataExpertStore } from '../../../../../stores/store-experts'
 import flatPickr from 'vue-flatpickr-component'
-import iconDelete from '../../../images/icons/ICON-49.png'
-import iconAdd from '../../../images/icons/ICON-48.png'
-import { useOptionsStore } from '../../../stores/store-options'
+import iconDelete from '../../../../../images/icons/ICON-49.png'
+import iconAdd from '../../../../../images/icons/ICON-48.png'
+import { useOptionsStore } from '../../../../../stores/store-options'
 
 const route = useRoute()
 
@@ -45,7 +45,9 @@ const dashboardFormTambahExpert = ref({
         }
     ],
     experience_yoe: '',
-    social_media: '',
+    social_media: {
+        linkedin: ''
+    },
     available_services: [],
     teaching_experience: '',
     reason_join: '',
@@ -195,7 +197,7 @@ const deleteSelectedSector = (sectors) => {
             <div class="flex-none md:w-1/1">
                 <div class="mb-4 sm:mb-0">
                     <img class="border-2 w-48 h-48 rounded-lg" v-if="dashboardFormTambahExpert.image == null"
-                        src="../../../images/dummy/dummy-profile.png">
+                        src="../../../../../images/dummy/dummy-profile.png">
                     <img class="border-2 w-48 h-48 rounded-lg" v-else
                         :src="dashboardFormTambahExpert.image" />
                     <p class="mt-1 text-xs text-gray-500">*ukuran maksimal 1MB</p>
@@ -451,7 +453,7 @@ const deleteSelectedSector = (sectors) => {
                 </label>
                 <input
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                    required v-model="dashboardFormTambahExpert.social_media" type="text" />
+                    required v-model="dashboardFormTambahExpert.social_media.linkedin" type="text" />
             </div>
             
             <div class="mt-4 inline-flex items-center">
