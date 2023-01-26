@@ -86,6 +86,14 @@ const isInputNumber = (evt) => {
         return true;
     }
 }
+
+const acceptExpert = async()=>{
+    await formSubmissionExpertTempStore.acceptFormJadiExpertDashboard(id)
+}
+
+const rejectExpert = async()=>{
+    await formSubmissionExpertTempStore.rejectFormJadiExpertDashboard(id)
+}
 </script>
 <style src="@vueform/multiselect/themes/default.css">
 

@@ -37,12 +37,6 @@ const formulirJadiExpert = ref({
     company: '',
     sectors: [],
     experiences: [
-        {
-            title: '',
-            location: '',
-            start_date: null,
-            end_date: null
-        }
     ],
     experience_yoe: '',
     social_media: {
@@ -54,30 +48,34 @@ const formulirJadiExpert = ref({
     reason_approve: ''
 })
 
-const isUserStillWork = formulirJadiExpert.value.experiences.map(el => false)
+// const isUserStillWork = computed(() => formulirJadiExpert.value.experiences.map(el => { el.end_date = el.end_date != null} ))
 
-const checkboxUserStillWork = (event, index)=> {
+const checkboxUserStillWork = (index)=> {
     // if (event.target.checked) {
-    //     isUserStillWork.value = isUserStillWork.value.map((el, i) => index === i ? false : true)
+    //     // isUserStillWork.value = isUserStillWork.value.map((el, i) => index === i ? true : false)
+        
     // } else {
-    //     isUserStillWork.value = isUserStillWork.value.map((el, i) => index === i ? true : false)
+    //     isUserStillWork.value = isUserStillWork.value.map((el, i) => index === i ? false : true)
     // }
-    if (event.target.checked) {
-        isUserStillWork.value = isUserStillWork.value.map((el, i) => index === i ? false : true)
-    } else {
-        isUserStillWork.value = isUserStillWork.value.map((el, i) => index === i ? true : false)
-    }
-    // isUserStillWork.value = true
-    // formulirJadiExpert.value.experiences[index].end_date = ''
+    let checkedStatus = formulirJadiExpert.value.experiences[index].end_date
 
+    if(checkedStatus != null){
+        checkedStatus = null
+    } else {
+        const today = new Date()
+        checkedStatus = today.toISOString()
+    }
+    console.log(formulirJadiExpert.value.experiences[index].end_date)
+    formulirJadiExpert.value.experiences[index].end_date = checkedStatus
 }
 
 const addExperiences = ()=>{
+    const today = new Date()
     formulirJadiExpert.value.experiences.push({
         title: '',
         location: '',
-        start_date: null,
-        end_date: null
+        start_date: today.toISOString(),
+        end_date: today.toISOString()
     })
 }
 
@@ -103,7 +101,7 @@ const config = {
     altFormat: "F j, Y",
     static: true,
     monthSelectorType: 'static',
-    dateFormat: 'M j, Y',
+    dateFormat: 'Z',
     prevArrow: '<svg class="fill-current" width="7" height="11" viewBox="0 0 7 11"><path d="M5.4 10.8l1.4-1.4-4-4 4-4L5.4 0 0 5.4z" /></svg>',
     nextArrow: '<svg class="fill-current" width="7" height="11" viewBox="0 0 7 11"><path d="M1.4 10.8L0 9.4l4-4-4-4L1.4 0l5.4 5.4z" /></svg>',
 }
@@ -343,6 +341,7 @@ const deleteSelectedSector = (sectors) => {
                         </div>
                     </div>
                 </div>
+                <hr class="my-5">
                 <div v-for="experience, index in formulirJadiExpert.experiences" :key="index">
                     <div class="mt-4" v-if="index == 0">
                         <label class="block text-sm font-medium mb-1 text-black">Pengalaman kerja</label>
@@ -389,13 +388,19 @@ const deleteSelectedSector = (sectors) => {
                             </div>
                         </div>
                     </div>
-                    <div class="mt-4 items-center grid-flow-row md:flex">
+                    <div class="mt-5 items-center grid-flow-row md:flex">
                         <div class="flex-none md:w-32">
-                            <label class="block text-sm mb-1">Tanggal berakhir</label>
+                            <label class="block text-sm mb-1 mt-4">Tanggal berakhir</label>
                         </div>
-                        <div class="grid md:grid-cols-2 md:w-3/5">
+                        <div class="md:w-3/5 -mt-3">
+                            <div class="sm:mt-1 mb-1 mt-2">
+                                <input type="checkbox" :value="formulirJadiExpert.experiences[index].end_date == null"
+                                    @change="checkboxUserStillWork(index)"
+                                    class="w-3 h-3 text-jobhunGreen bg-gray-100 border-gray-200 focus:ring-jobhunGreen focus:ring-1 hover:ring-jobhunGreen hover:ring-1 rounded-sm ml-3.5" />
+                                <span class="text-sm ml-2 text-gray-600">Masih bekerja di sini</span>
+                            </div>
                             <div class="">
-                                <flat-pickr :disabled="isUserStillWork[index]"
+                                <flat-pickr :disabled="formulirJadiExpert.experiences[index].end_date == null"
                                     class="form-input pl-9 border-0 disabled:bg-slate-50 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm"
                                     :config="config" v-model="formulirJadiExpert.experiences[index].end_date"
                                     placeholder="Sesuaikan jadwal">
@@ -407,11 +412,7 @@ const deleteSelectedSector = (sectors) => {
                                     </svg>
                                 </div>
                             </div>
-                            <div class="mt-1">
-                                <input type="checkbox" :id="formulirJadiExpert.experiences[index].end_date" v-model="isUserStillWork" @change="checkboxUserStillWork($event, index)"
-                                    class="w-3 h-3 text-jobhunGreen bg-gray-200 border-gray-200 focus:ring-jobhunGreen focus:ring-1 hover:ring-jobhunGreen hover:ring-1 rounded-sm" />
-                                <span class="text-sm ml-2 text-gray-500">Masih bekerja di sini</span>
-                            </div>
+                            
                         </div>
                     </div>
                     <div class="mt-4 md:w-2/4" v-show="index != ''">
@@ -424,14 +425,15 @@ const deleteSelectedSector = (sectors) => {
                 </div>
                 <div class="mt-4 items-center">
                     <button
-                        class="text-black background-transparent font-medium text-sm outline-none focus:outline-none ease-linear transition-all duration-150 items-center"
+                        class="text-black bg-gray-200 hover:bg-gray-100 font-medium text-sm items-center rounded-lg h-10 px-3"
                         type="button" @click="addExperiences" title="Tambah pengalaman kerja">
-                        <img :src="iconAdd" alt="Tambah pengalaman kerja" class="h-8 inline-flex items-center -mt-1"> 
-                        <span class="">
+                        <img :src="iconAdd" alt="Tambah pengalaman kerja" class="h-8 inline-flex items-center -mt-1 -ml-1"> 
+                        <span class="-ml-1">
                             Tambah Pengalaman Kerja
                         </span>
                     </button>
                 </div>
+                <hr class="my-5">
                 <div class="mt-4">
                     <label class="block text-sm font-medium mb-1 text-black">Durasi bekerja</label>
                     <input

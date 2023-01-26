@@ -14,7 +14,6 @@ const INDEX_EXPERT_FEATURED_URL = "/expert/expert-features";
 const ADVANCE_SEARCH_URL = "/expert/search-expert";
 //------ url form expert -------------------------------------------
 const JADI_EXPERT_URL = "/expert/create-expert-form"
-const JADI_EXPERT_DASHBOARD_URL = "/expert/create-expert"
 //------ url data expert temporary ---------------------------------
 // const SUBMISSION_EXPERT_TEMP = "/expert/submission-expert-temp"
 const SUBMISSION_EXPERT_TEMP = "/submission-expert-temp.json"
@@ -24,11 +23,14 @@ const DELETE_SUBMISSION_TABLE_EXPERT_TEMP = "/expert/delete-expert-temp"
 const ACCEPT_SUBMISSION_TABLE_EXPERT_TEMP = "/expert/acc-expert-temp"
 const REJECT_SUBMISSION_TABLE_EXPERT_TEMP = "/expert/reject-expert-temp"
 //------ url data expert permanent ----------------------------------
+const JADI_EXPERT_DASHBOARD_URL = "/expert/create-expert"
 const DATA_DETAIL_EXPERT_PERMANENT = "/expert/submission-expert-temp"
 // const DATA_DETAIL_TABLE_EXPERT_PERMANENT = "/expert/table-expert-permanent"
 const DATA_DETAIL_TABLE_EXPERT_PERMANENT = "/table-expert-temp.json"
-const DELETE_TABLE_EXPERT_PERMANENT = "/expert/delete-expert-temp"
-// const ACCEPT_TABLE_EXPERT_PERMANENT = "/expert/acc-expert-temp"
+const DELETE_TABLE_EXPERT_PERMANENT = "/expert/delete-expert-perm"
+const EDIT_TABLE_EXPERT_PERMANENT = "/expert/edit-detail-expert"
+const ACCEPT_TABLE_EXPERT_PERMANENT = "/expert/acc-expert-temp"
+const PUBLISH_TABLE_EXPERT_PERMANENT = "/expert/publish-expert"
 
 
 export const useDataExpertStore = defineStore({
@@ -45,6 +47,10 @@ export const useDataExpertStore = defineStore({
       total: 0,
     },
     expertFeatured: [],
+    expertPermanent: {
+      education: {},
+      social_media: {},
+    },
     submissionExpertTemp: {
       education: {},
       social_media: {},
@@ -119,10 +125,10 @@ export const useDataExpertStore = defineStore({
         this.formJadiExpertDashboard = res.data;
       } catch (error) {}
     },
-    async getDataFormExpertPermanent(id) {
+    async getDataDetailFormExpertPermanent(id) {
       try {
         let res = await api.get(SUBMISSION_EXPERT_TEMP + id);
-        this.submissionExpertPermanent = res.data;
+        this.expertPermanent = res.data;
       } catch (error) {}
     },
     async getDataTableExpertPermanent() {
@@ -136,6 +142,16 @@ export const useDataExpertStore = defineStore({
     async deleteDataTableExpertPermanent(id) {
       try {
         await api.delete(DELETE_TABLE_EXPERT_PERMANENT + id);
+      } catch (error) {}
+    },
+    async editDataTableExpertPermanent(id) {
+      try {
+        await api.put(EDIT_TABLE_EXPERT_PERMANENT + id);
+      } catch (error) {}
+    },
+    async publishExpertPermanent(id) {
+      try {
+        await api.post(PUBLISH_TABLE_EXPERT_PERMANENT + id);
       } catch (error) {}
     },
     //------- Page Formulir Jadi Expert Temporary Dashboard -------

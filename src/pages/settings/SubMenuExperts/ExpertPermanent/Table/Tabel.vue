@@ -87,6 +87,7 @@ onMounted(() => {
           :total="pagination.total"
           :page="pagination.page"
           :perPage="pagination.per_page"
+          :deleteExpert="tableExpertPermanentStore"
         />
       </div>
 

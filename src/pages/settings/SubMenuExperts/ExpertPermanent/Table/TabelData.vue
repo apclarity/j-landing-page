@@ -7,7 +7,8 @@ const props = defineProps({
     default: {},
     type: Object
   },
-  index: Number
+  index: Number,
+  delete: Object
 })
 const { tableExpertPermanent, index } = toRefs(props)
 
@@ -18,7 +19,7 @@ const openModalDeleteExpert = () => {
 }
 
 const confirmDeleteExpert = async () => {
-  await tableExpertPermanentStore.deleteDataTableExpertPermanent()
+  await props.delete.deleteDataTableExpertPermanent()
 }
 </script>
 

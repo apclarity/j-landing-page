@@ -17,7 +17,8 @@ const props = defineProps({
   page: Number,
   perPage: Number,
   tableExpertPermanent: Array,
-  total: Number
+  total: Number,
+  deleteExpert: Object
 })
 
 const { page, perPage, tableExpertPermanent, total } = toRefs(props)
@@ -63,6 +64,7 @@ const { page, perPage, tableExpertPermanent, total } = toRefs(props)
               :value="expertPermanent.id"
               :tableExpertPermanent="expertPermanent"
               :index="index + adjustingIndex"
+              :delete="deleteExpert"
             />
           </tbody>
         </table>
