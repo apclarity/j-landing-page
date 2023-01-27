@@ -36,14 +36,7 @@ const dashboardFormTambahExpert = ref({
     description: '',
     company: '',
     sectors: [],
-    experiences: [
-        {
-            title: '',
-            location: '',
-            start_date: null,
-            end_date: null
-        }
-    ],
+    experiences: [],
     experience_yoe: '',
     social_media: {
         linkedin: ''
@@ -53,27 +46,6 @@ const dashboardFormTambahExpert = ref({
     reason_join: '',
     reason_approve: ''
 })
-
-const isUserStillWork = ref(false)
-
-const checkboxUserStillWork = () => {
-    isUserStillWork.value = true
-    dashboardFormTambahExpert.value.experiences[index].end_date = ''
-
-}
-
-const addExperiences = () => {
-    dashboardFormTambahExpert.value.experiences.push({
-        title: '',
-        location: '',
-        start_date: null,
-        end_date: null
-    })
-}
-
-const deleteExperiences = (index) => {
-    dashboardFormTambahExpert.value.experiences.splice(index, 1)
-}
 
 const availableServices = [
     { value: "training", label: "Pelatihan" },
@@ -93,9 +65,35 @@ const config = {
     altFormat: "F j, Y",
     static: true,
     monthSelectorType: 'static',
-    dateFormat: 'M j, Y',
+    dateFormat: 'Z',
     prevArrow: '<svg class="fill-current" width="7" height="11" viewBox="0 0 7 11"><path d="M5.4 10.8l1.4-1.4-4-4 4-4L5.4 0 0 5.4z" /></svg>',
     nextArrow: '<svg class="fill-current" width="7" height="11" viewBox="0 0 7 11"><path d="M1.4 10.8L0 9.4l4-4-4-4L1.4 0l5.4 5.4z" /></svg>',
+}
+
+const checkboxUserStillWork = (index) => {
+    let checkedStatus = dashboardFormTambahExpert.value.experiences[index].end_date
+
+    if (checkedStatus != null) {
+        checkedStatus = null
+    } else {
+        const today = new Date()
+        checkedStatus = today.toISOString()
+    }
+    dashboardFormTambahExpert.value.experiences[index].end_date = checkedStatus
+}
+
+const addExperiences = () => {
+    const today = new Date()
+    dashboardFormTambahExpert.value.experiences.push({
+        title: '',
+        location: '',
+        start_date: today.toISOString(),
+        end_date: today.toISOString()
+    })
+}
+
+const deleteExperiences = (index) => {
+    dashboardFormTambahExpert.value.experiences.splice(index, 1)
 }
 
 const tambahExpert = async ()=> {
@@ -351,6 +349,7 @@ const deleteSelectedSector = (sectors) => {
                     </div>
                 </div>
             </div>
+            <hr class="my-5">
             <div v-for="experience, index in dashboardFormTambahExpert.experiences" :key="index">
                 <div class="mt-4" v-if="index == 0">
                     <label class="block text-sm font-medium mb-1 text-black">Pengalaman kerja</label>
@@ -402,9 +401,15 @@ const deleteSelectedSector = (sectors) => {
                         <label 
                         class="block text-sm mb-1">Tanggal berakhir</label>
                     </div>
-                    <div class="grid md:grid-cols-2 md:w-3/5">
+                    <div class="-mt-3 md:w-3/5">
+                        <div class="sm:mt-1 mb-1 mt-2">
+                            <input type="checkbox" :value="dashboardFormTambahExpert.experiences[index].end_date == null"
+                                @change="checkboxUserStillWork(index)"
+                                class="w-3 h-3 text-jobhunGreen bg-gray-100 border-gray-200 focus:ring-jobhunGreen focus:ring-1 hover:ring-jobhunGreen hover:ring-1 rounded-sm ml-3.5" />
+                            <span class="text-sm ml-2 text-gray-600">Masih bekerja di sini</span>
+                        </div>
                         <div class="">
-                            <flat-pickr :disabled="isUserStillWork == true"
+                            <flat-pickr :disabled="dashboardFormTambahExpert.experiences[index].end_date == null"
                                 class="form-input pl-9 border-0 disabled:bg-slate-50 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm"
                                 :config="config" v-model="dashboardFormTambahExpert.experiences[index].end_date" placeholder="Sesuaikan jadwal"></flat-pickr>
                             <div class="absolute inset-0 right-auto flex items-center pointer-events-none">
@@ -413,11 +418,6 @@ const deleteSelectedSector = (sectors) => {
                                         d="M15 2h-2V0h-2v2H9V0H7v2H5V0H3v2H1a1 1 0 00-1 1v12a1 1 0 001 1h14a1 1 0 001-1V3a1 1 0 00-1-1zm-1 12H2V6h12v8z" />
                                 </svg>
                             </div>
-                        </div>
-                        <div class="mt-1">
-                            <input type="checkbox" value="" v-model="isUserStillWork" onclick="checkboxUserStillWork()"
-                                class="w-3 h-3 text-jobhunGreen bg-gray-200 border-gray-200 focus:ring-jobhunGreen focus:ring-1 hover:ring-jobhunGreen hover:ring-1 rounded-sm" />
-                            <span class="text-sm ml-2 text-gray-500">Masih bekerja di sini</span>
                         </div>
                     </div>
                 </div>
@@ -430,14 +430,15 @@ const deleteSelectedSector = (sectors) => {
             </div>
             <div class="mt-4 items-center">
                 <button
-                    class="text-black background-transparent font-medium text-sm outline-none focus:outline-none ease-linear transition-all duration-150 items-center"
+                    class="text-black bg-gray-200 hover:bg-gray-100 font-medium text-sm items-center rounded-lg h-10 px-3"
                     type="button" @click="addExperiences" title="Tambah pengalaman kerja">
-                    <img :src="iconAdd" alt="Tambah pengalaman kerja" class="h-8 inline-flex items-center -mt-1">
+                    <img :src="iconAdd" alt="Tambah pengalaman kerja" class="h-8 inline-flex items-center -mt-1 -ml-1">
                     <span class="">
                         Tambah Pengalaman Kerja
                     </span>
                 </button>
             </div>
+            <hr class="my-5">
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">Durasi bekerja</label>
                 <input

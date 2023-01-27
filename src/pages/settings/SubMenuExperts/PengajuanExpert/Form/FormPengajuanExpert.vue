@@ -35,14 +35,7 @@ const dashboardFormTambahExpert = ref({
     description: '',
     company: '',
     sectors: [],
-    experiences: [
-        {
-            title: '',
-            location: '',
-            start_date: null,
-            end_date: null
-        }
-    ],
+    experiences: [],
     experience_yoe: '',
     social_media: {
         linkedin: ''
@@ -72,7 +65,7 @@ const config = {
     static: true,
     readonly: true,
     monthSelectorType: 'static',
-    dateFormat: 'M j, Y',
+    dateFormat: 'Z',
     prevArrow: '<svg class="fill-current" width="7" height="11" viewBox="0 0 7 11"><path d="M5.4 10.8l1.4-1.4-4-4 4-4L5.4 0 0 5.4z" /></svg>',
     nextArrow: '<svg class="fill-current" width="7" height="11" viewBox="0 0 7 11"><path d="M1.4 10.8L0 9.4l4-4-4-4L1.4 0l5.4 5.4z" /></svg>',
 }
@@ -266,6 +259,7 @@ const rejectExpert = async()=>{
                     </div>
                 </div>
             </div>
+            <hr class="my-5">
             <div v-for="experience, index in submissionExpertTemp.experiences" :key="index">
                 <div class="mt-4" v-if="index == 0">
                     <label class="block text-sm font-medium mb-1 text-black">Pengalaman kerja</label>
@@ -331,6 +325,7 @@ const rejectExpert = async()=>{
                     </div>
                 </div>
             </div>
+            <hr class="my-5">
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">Durasi bekerja</label>
                 <input

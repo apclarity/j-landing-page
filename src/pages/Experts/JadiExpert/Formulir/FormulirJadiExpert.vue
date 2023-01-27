@@ -36,8 +36,7 @@ const formulirJadiExpert = ref({
     description: '',
     company: '',
     sectors: [],
-    experiences: [
-    ],
+    experiences: [],
     experience_yoe: '',
     social_media: {
         linkedin: ''
@@ -47,41 +46,6 @@ const formulirJadiExpert = ref({
     reason_join: '',
     reason_approve: ''
 })
-
-// const isUserStillWork = computed(() => formulirJadiExpert.value.experiences.map(el => { el.end_date = el.end_date != null} ))
-
-const checkboxUserStillWork = (index)=> {
-    // if (event.target.checked) {
-    //     // isUserStillWork.value = isUserStillWork.value.map((el, i) => index === i ? true : false)
-        
-    // } else {
-    //     isUserStillWork.value = isUserStillWork.value.map((el, i) => index === i ? false : true)
-    // }
-    let checkedStatus = formulirJadiExpert.value.experiences[index].end_date
-
-    if(checkedStatus != null){
-        checkedStatus = null
-    } else {
-        const today = new Date()
-        checkedStatus = today.toISOString()
-    }
-    console.log(formulirJadiExpert.value.experiences[index].end_date)
-    formulirJadiExpert.value.experiences[index].end_date = checkedStatus
-}
-
-const addExperiences = ()=>{
-    const today = new Date()
-    formulirJadiExpert.value.experiences.push({
-        title: '',
-        location: '',
-        start_date: today.toISOString(),
-        end_date: today.toISOString()
-    })
-}
-
-const deleteExperiences = (index)=>{
-    formulirJadiExpert.value.experiences.splice(index, 1)
-}
 
 const availableServices = [
     { value: "training", label: "Pelatihan" },
@@ -104,6 +68,33 @@ const config = {
     dateFormat: 'Z',
     prevArrow: '<svg class="fill-current" width="7" height="11" viewBox="0 0 7 11"><path d="M5.4 10.8l1.4-1.4-4-4 4-4L5.4 0 0 5.4z" /></svg>',
     nextArrow: '<svg class="fill-current" width="7" height="11" viewBox="0 0 7 11"><path d="M1.4 10.8L0 9.4l4-4-4-4L1.4 0l5.4 5.4z" /></svg>',
+}
+
+const checkboxUserStillWork = (index)=> {
+    let checkedStatus = formulirJadiExpert.value.experiences[index].end_date
+
+    if(checkedStatus != null){
+        checkedStatus = null
+    } else {
+        const today = new Date()
+        checkedStatus = today.toISOString()
+    }
+    console.log(formulirJadiExpert.value.experiences[index].end_date)
+    formulirJadiExpert.value.experiences[index].end_date = checkedStatus
+}
+
+const addExperiences = ()=>{
+    const today = new Date()
+    formulirJadiExpert.value.experiences.push({
+        title: '',
+        location: '',
+        start_date: today.toISOString(),
+        end_date: today.toISOString()
+    })
+}
+
+const deleteExperiences = (index) => {
+    formulirJadiExpert.value.experiences.splice(index, 1)
 }
 
 const jadiExpert = async ()=>{
@@ -412,7 +403,6 @@ const deleteSelectedSector = (sectors) => {
                                     </svg>
                                 </div>
                             </div>
-                            
                         </div>
                     </div>
                     <div class="mt-4 md:w-2/4" v-show="index != ''">
