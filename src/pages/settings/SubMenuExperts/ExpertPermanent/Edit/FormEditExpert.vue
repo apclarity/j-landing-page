@@ -407,7 +407,7 @@ const deleteSelectedSector = (sectors) => {
                 <div class="mt-4 items-center grid-flow-row md:flex">
                     <div class="flex-none md:w-32">
                         <label 
-                        class="block text-sm mb-1">Tanggal berakhir</label>
+                        class="block text-sm mb-1 mt-4">Tanggal berakhir</label>
                     </div>
                     <div class="-mt-3 md:w-3/5">
                         <div class="sm:mt-1 mb-1 mt-2">
