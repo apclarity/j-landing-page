@@ -69,7 +69,7 @@ onMounted(() => {
         </div>
 
         <div class="grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2">
-          <SearchForm placeholder="Cari expert" v-model="search" @searchClick="searchClick" />
+          <SearchForm placeholder="Cari pengguna" v-model="search" @searchClick="searchClick" />
           <router-link to="/pengguna/formtambahpengguna" class="btn bg-emerald-500 hover:bg-emerald-600 text-white">
             <svg class="w-4 h-4 fill-current opacity-50 shrink-0" viewBox="0 0 16 16">
               <path
