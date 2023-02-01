@@ -86,6 +86,7 @@ import DashboardTableTambahExpert from "./pages/settings/SubMenuExperts/ExpertPe
 import FormJadiExpert from "./pages/Experts/JadiExpert/Formulir/Index.vue";
 import DashboardFormPengajuanExpert from "./pages/settings/SubMenuExperts/PengajuanExpert/Form/Index.vue";
 import DashboardTablePengajuanExpert from "./pages/settings/SubMenuExperts/PengajuanExpert/Table/Index.vue";
+import DashboardTablePengguna from "./pages/settings/Pengguna/Table/Index.vue"
 
 const routerHistory = createWebHistory();
 
@@ -191,6 +192,10 @@ const router = createRouter({
         {
           path: "/pengajuanexpert/table",
           component: DashboardTablePengajuanExpert,
+        },
+        {
+          path: "/pengguna/table",
+          component: DashboardTablePengguna,
         },
       ],
     },

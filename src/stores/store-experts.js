@@ -42,6 +42,7 @@ export const useDataExpertStore = defineStore({
     },
     expertAdvanceSearch: [],
     expertPaginationAdvanceSearch: {
+      search: "",
       per_page: PAGINATION_LIMIT,
       page: 1,
       total: 0,
@@ -75,6 +76,12 @@ export const useDataExpertStore = defineStore({
       },
   }),
   actions: {
+    setPaginationCariExpert(payload) {
+      this.pagination.page = payload.page
+      this.pagination.per_page = payload.per_page
+      this.pagination.search = payload.search
+    },
+
     //---- Page Detail Expert -------------------------------
     setDetailDataExpert(payload = {}) {
       this.detailExpert = payload;
@@ -90,7 +97,7 @@ export const useDataExpertStore = defineStore({
     //------- Page Cari Expert ------------------------------
     async advanceSearch(payload) {
       try {
-        let res = await api.post(ADVANCE_SEARCH_URL, payload);
+        let res = await api.post(ADVANCE_SEARCH_URL + "?page=" + this.pagination.page + "&per_page=" + this.pagination.per_page + "&search=" + this.pagination.search, payload);
         this.expertAdvanceSearch = res.data;
         this.expertPaginationAdvanceSearch = res.data;
       } catch (error) {}

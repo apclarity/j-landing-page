@@ -21,19 +21,25 @@ const { listSector } = storeToRefs(optionsStore)
 const limit = 12
 
 // ====== Pagination ======================================================
-const getData = async (page = 1, perPage = PAGINATION_LIMIT_ADVANCE_SEARCH, total = 0 ) => {
+const getData = async (page = 1, perPage = PAGINATION_LIMIT_ADVANCE_SEARCH, search = '') => {
     advanceSearchStore.setPaginationCariExpert({
-        page, per_page: perPage, total
+        page, per_page: perPage, search
     })
-    await advanceSearchStore.advanceSearch()
+    await advanceSearchStore.advanceSearch(advanceFilterCariExpert.value)
 }
 
 const changePage = (page) => {
     getData(page)
 }
 
+// ====== Click Cari =======================================================
+const runAdvanceSearch = ()=>{
+    getData(1, PAGINATION_LIMIT_ADVANCE_SEARCH, advanceFilterCariExpert.value.search)
+}
+
 // ====== V-Model/Data ====================================================
 const advanceFilterCariExpert = ref({
+    search: '',
     services: [],
     sectors: [],
     name: '',
@@ -61,12 +67,6 @@ const domiciles = [
     'Surabaya', 'Jakarta', 'Solo', 'Sidoarjo'
 ]
 
-const searchCariExpert = reactive({
-    company: '',
-    profession: '',
-    sector: ''
-})
-
 const services = [
     {
         title: 'Konsultasi',
@@ -87,16 +87,6 @@ const services = [
 ]
 
 // ====== Search bar/Advance Search =======================================
-
-const runAdvanceSearch = async () => {
-    if (advanceFilterCariExpert.value.sectors != '' || advanceFilterCariExpert.value.expertName != '' || advanceFilterCariExpert.value.profession != ''
-        || advanceFilterCariExpert.value.domicile != '' || advanceFilterCariExpert.value.education != '' || advanceFilterCariExpert.value.institution != ''
-        || advanceFilterCariExpert.value.company != '' || advanceFilterCariExpert.value.expertise != '' || advanceFilterCariExpert.value.star != ''){
-            if(await advanceSearchStore.advanceSearch(advanceFilterCariExpert.value)){
-                return
-            }
-        }
-}
 
 const selectedRating = (btn, e)=>{
     e.preventDefault();
@@ -163,7 +153,6 @@ onMounted(() => {
     advanceFilterCariExpert.value.profession = route.query.keywordProffesion
     let sectorKeyword = route.query.keywordSector
     if(!isVariableEmpty(sectorKeyword)){
-        console.log(listSector)
         for(let key in listSector.value){
             if(key === sectorKeyword){
                 advanceFilterCariExpert.value.sectors.push(sectorKeyword)
@@ -171,8 +160,7 @@ onMounted(() => {
             }
         }
     }
-    runAdvanceSearch()
-    getData()
+    getData(1)
 })
 </script>
 <template>
@@ -182,7 +170,7 @@ onMounted(() => {
                 <div class="">
                     <div class="grid grid-flow-row md:flex">
                         <div class="flex-none h-full md:w-1/3 lg:w-1/5 mr-0 md:mr-5 sm:mt-10 md:mt-40 bg-white shadow-lg rounded-sm border border-slate-200 p-5">
-                            <form action="" class="">
+                            <form>
                                 <div class="text-left">
                                     <span class="text-sm font-medium text-jobhunGreen">
                                         Layanan
@@ -441,9 +429,9 @@ onMounted(() => {
                             <div>
                                 <input id="action-search" placeholder="Nama atau perusahaan"
                                     class="form-input align-middle shadow mb-8 focus:outline-none focus:bg-white focus:border-emerald-500 w-30 md:w-60 lg:w-96 mr-5 h-12 mt-10 sm:mt-5 md:mt-20 lg:mt-20"
-                                    type="text" v-model="searchCariExpert.company" />
+                                    type="text" v-model="advanceFilterCariExpert.search" />
                                     <button class="bg-jobhunGreen text-sm h-12 mb-8 hover:bg-emerald-600 text-white px-5 w-24 rounded align-middle mt-10 sm:mt-5 md:mt-20 lg:mt-20"
-                                    @click="runAdvanceSearch">
+                                    @click.prevent="runAdvanceSearch">
                                         Cari
                                     </button>
                             </div>
@@ -502,9 +490,9 @@ onMounted(() => {
             </div>
             <div class="text-end text-sm mt-10 px-28">
                 <PaginationNumeric 
-                :total="expertPaginationAdvanceSearch.total"
-                :perPage="expertPaginationAdvanceSearch.per_page"
-                :page="expertPaginationAdvanceSearch.page"
+                :total="pagination.total"
+                :perPage="pagination.per_page"
+                :page="pagination.page"
                 @clickNav="changePage" />
             </div>
         </div>

@@ -1,0 +1,20 @@
+{
+    "data": [
+        {
+            "value": "training",
+            "label": "Pelatihan"
+        },
+        {
+            "value": "consultation",
+            "label": "Konsultasi"
+        },
+        {
+            "value": "invite-expert",
+            "label": "Undangan menjadi narasumber"
+        },
+        {
+            "value": "recruit-expert",
+            "label": "Proyek lepas yang berkaitan dengan bidang pekerjaan"
+        }
+    ]
+}

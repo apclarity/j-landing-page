@@ -18,7 +18,7 @@ const formJadiExpertStore = useDataExpertStore()
 const optionStore = useOptionsStore()
 
 const { formJadiExpert } = storeToRefs(formJadiExpertStore)
-const { listSector } = storeToRefs(optionStore)
+const { listSector, listDomicile, listService, listTitle } = storeToRefs(optionStore)
 
 const formulirJadiExpert = ref({
     image: null,
@@ -47,16 +47,12 @@ const formulirJadiExpert = ref({
     reason_approve: ''
 })
 
-const availableServices = [
-    { value: "training", label: "Pelatihan" },
-    { value: "consultation", label: "Konsultasi" },
-    { value: "invite-expert", label: "Undangan menjadi narasumber" },
-    { value: "recruit-expert", label: "Proyek lepas yang berkaitan dengan bidang pekerjaan" }
-]
-
-const domiciles = [
-    'Surabaya', 'Jakarta', 'Solo', 'Sidoarjo'
-]
+// const availableServices = [
+//     { value: "training", label: "Pelatihan" },
+//     { value: "consultation", label: "Konsultasi" },
+//     { value: "invite-expert", label: "Undangan menjadi narasumber" },
+//     { value: "recruit-expert", label: "Proyek lepas yang berkaitan dengan bidang pekerjaan" }
+// ]
 
 const config = {
     wrap: true,
@@ -79,7 +75,6 @@ const checkboxUserStillWork = (index)=> {
         const today = new Date()
         checkedStatus = today.toISOString()
     }
-    console.log(formulirJadiExpert.value.experiences[index].end_date)
     formulirJadiExpert.value.experiences[index].end_date = checkedStatus
 }
 
@@ -98,7 +93,6 @@ const deleteExperiences = (index) => {
 }
 
 const jadiExpert = async ()=>{
-    console.log(formulirJadiExpert.value)
     if (formulirJadiExpert.value.image != '' && formulirJadiExpert.value.name != '' && formulirJadiExpert.value.email != '' &&
         formulirJadiExpert.value.phone_number != '' && formulirJadiExpert.value.profession != '' && formulirJadiExpert.value.education.degree != '' &&
         formulirJadiExpert.value.education.start_date != '' && formulirJadiExpert.value.education.end_date != '' && formulirJadiExpert.value.education.school != '' &&
@@ -107,7 +101,6 @@ const jadiExpert = async ()=>{
         formulirJadiExpert.value.experiences.start_date != '' && formulirJadiExpert.value.experiences.end_date != '' && formulirJadiExpert.value.experience_yoe != '' && formulirJadiExpert.value.social_media != '' &&
         formulirJadiExpert.value.available_services != '' && formulirJadiExpert.value.teaching_experience != '' && formulirJadiExpert.value.reason_join != '' &&
         formulirJadiExpert.value.reason_approve != '') {
-        console.log(formulirJadiExpert.value)
         if (await formJadiExpertStore.formJadiExpert(formulirJadiExpert.value)) {
             return
         }
@@ -223,9 +216,9 @@ const deleteSelectedSector = (sectors) => {
                         <label class="block text-sm mb-1">Gelar</label>
                     </div>
                     <div class="grid md:grid-cols-1 w-full md:w-3/5">
-                        <input
-                            class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                            required v-model="formulirJadiExpert.education.degree" type="text" />
+                        <Multiselect v-model="formulirJadiExpert.domicile"
+                            class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen text-sm w-full ml-0"
+                            :options="listTitle" :object="true" />
                     </div>
                 </div>
                 <div class="mt-4 items-center grid-flow-row md:flex">
@@ -280,7 +273,8 @@ const deleteSelectedSector = (sectors) => {
                     </label>
                     <Multiselect v-model="formulirJadiExpert.domicile"
                         class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen text-sm w-full ml-0"
-                        :options="domiciles" />
+                        :options="listDomicile" 
+                        />
                 </div>
                 <div class="mt-4">
                     <label class="block text-sm font-medium mb-1 text-black">
@@ -296,7 +290,13 @@ const deleteSelectedSector = (sectors) => {
                         required v-model="formulirJadiExpert.company" type="text" />
                 </div>
                 <div class="mt-4">
-                    <label class="block text-sm font-medium mb-1 text-black">Bidang yang dikuasai</label>
+                    <div class="inline-flex items-center">
+                        <label class="block text-sm font-medium mb-1 text-black">Bidang yang dikuasai</label>
+                        <Tooltip position="right" class="ml-2">
+                            <div class="text-xs whitespace-nowrap text-black">Bisa dipilih lebih dari 1</div>
+                        </Tooltip>
+                    </div>
+                    
                     <Multiselect :close-on-select="false"
                         class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen text-sm w-full ml-0"
                         :classes="{ containerActive: 'ring-0', search: 'w-full absolute inset-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen appearance-none border-0 text-base font-sans rounded pl-3.5 rtl:pl-0 rtl:pr-3.5', }"
@@ -446,7 +446,7 @@ const deleteSelectedSector = (sectors) => {
                     <label class="block text-sm font-medium mb-1 text-black">
                         Layanan yang bisa ditangani
                     </label>
-                    <Tooltip position="right" class="text-red-800 ml-2">
+                    <Tooltip position="right" class="ml-2">
                         <div class="text-xs whitespace-nowrap text-black">Bisa dipilih lebih dari 1</div>
                     </Tooltip>
                 </div>
@@ -455,7 +455,7 @@ const deleteSelectedSector = (sectors) => {
                         class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen text-sm w-full ml-0"
                         :classes="{ containerActive: 'ring-0', search: 'w-full absolute inset-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen appearance-none border-0 text-base font-sans rounded pl-3.5 rtl:pl-0 rtl:pr-3.5', }"
                         :create-option="true" 
-                        :options="availableServices" 
+                        :options="listService" 
                         mode="multiple"
                         :searchable="true"
                         :object="true"

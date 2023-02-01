@@ -34,4 +34,7 @@ layoutStore.getSession()
 
 const optionsStore = useOptionsStore()
 optionsStore.getSectors()
+optionsStore.getDomiciles()
+optionsStore.getServices()
+optionsStore.getTitle()
 </script>

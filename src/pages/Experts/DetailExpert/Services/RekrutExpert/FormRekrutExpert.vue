@@ -186,7 +186,7 @@ const formValidation = () => {
                                 Jenis pekerjaan yang bisa diterima
                             </div>
                             <div class="text-center">
-                                <div class="text-sm inline-flex" v-for="(typeOfWorks, index) in dataRekrutExpert.service.recruit_expert.acceptable_type_of_works" :key="index">
+                                <div class="text-sm inline-flex text-capitalize" v-for="(typeOfWorks, index) in dataRekrutExpert.service.recruit_expert.acceptable_type_of_works" :key="index">
                                     <div>
                                         <span v-if="index != 0">, </span>{{ typeOfWorks }}
                                     </div>
@@ -299,5 +299,9 @@ input[type='number']::-webkit-outer-spin-button {
 
 .custom-number-input button:focus {
     outline: none !important;
+}
+
+.text-capitalize{
+    text-transform: capitalize;
 }
 </style>

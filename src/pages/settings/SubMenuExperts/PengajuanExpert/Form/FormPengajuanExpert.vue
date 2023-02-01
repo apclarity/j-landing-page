@@ -17,7 +17,7 @@ const optionStore = useOptionsStore()
 await formSubmissionExpertTempStore.getDataSubmissionExpertTemp(id)
 const { submissionExpertTemp } = storeToRefs(formSubmissionExpertTempStore)
 
-const { listSector } = storeToRefs(optionStore)
+const { listSector, listDomicile, listService, listTitle } = storeToRefs(optionStore)
 
 const dashboardFormTambahExpert = ref({
     image: null,
@@ -155,9 +155,9 @@ const rejectExpert = async()=>{
                     <label class="block text-sm mb-1">Gelar</label>
                 </div>
                 <div class="grid md:grid-cols-1 md:w-3/5">
-                    <input
-                        class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                        required v-model="submissionExpertTemp.education.degree" type="text" readonly />
+                    <Multiselect v-model="submissionExpertTemp.education.degree"
+                        class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen text-sm w-full ml-0"
+                        :options="listTitle" :object="true" />
                 </div>
             </div>
             <div class="mt-4 items-center grid-flow-row md:flex">
@@ -212,7 +212,7 @@ const rejectExpert = async()=>{
                 </label>
                 <Multiselect v-model="submissionExpertTemp.domicile"
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen text-sm w-full ml-0"
-                    :options="domiciles" disabled="true" />
+                    :options="listDomicile" disabled="true" />
             </div>
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">
@@ -348,7 +348,7 @@ const rejectExpert = async()=>{
                 <label class="block text-sm font-medium mb-1 text-black">
                     Layanan yang bisa ditangani
                 </label>
-                <Tooltip position="right" class="text-red-800 ml-2">
+                <Tooltip position="right" class="ml-2">
                     <div class="text-xs whitespace-nowrap text-black">Bisa dipilih lebih dari 1</div>
                 </Tooltip>
             </div>
@@ -356,7 +356,7 @@ const rejectExpert = async()=>{
                 <Multiselect :close-on-select="false" disabled="true"
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen text-sm w-full ml-0"
                     :classes="{ containerActive: 'ring-0', search: 'w-full absolute inset-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen appearance-none border-0 text-base font-sans rounded pl-3.5 rtl:pl-0 rtl:pr-3.5', }"
-                    :create-option="true" :options="availableServices" mode="multiple"
+                    :create-option="true" :options="listService" mode="multiple"
                     :object="true" v-model="submissionExpertTemp.available_services">
                     <template v-slot:multiplelabel="{ values }">
                         <div class="multiselect-multiple-label">

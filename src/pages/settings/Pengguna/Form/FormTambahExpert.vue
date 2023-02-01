@@ -18,7 +18,7 @@ const formJadiExpertDashboardStore = useDataExpertStore()
 const optionStore = useOptionsStore()
 
 const { formJadiExpertDashboard } = storeToRefs(formJadiExpertDashboardStore)
-const { listSector, listDomicile, listService, listTitle } = storeToRefs(optionStore)
+const { listSector } = storeToRefs(optionStore)
 
 const dashboardFormTambahExpert = ref({
     image: null,
@@ -245,9 +245,9 @@ const deleteSelectedSector = (sectors) => {
                     <label class="block text-sm mb-1">Gelar</label>
                 </div>
                 <div class="grid md:grid-cols-1 md:w-3/5">
-                    <Multiselect v-model="dashboardFormTambahExpert.education.degree"
-                        class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen text-sm w-full ml-0"
-                        :options="listTitle" :object="true" />
+                    <input
+                        class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
+                        required v-model="dashboardFormTambahExpert.education.degree" type="text" />
                 </div>
             </div>
             <div class="mt-4 items-center grid-flow-row md:flex">
@@ -302,7 +302,7 @@ const deleteSelectedSector = (sectors) => {
                 </label>
                 <Multiselect v-model="dashboardFormTambahExpert.domicile"
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen text-sm w-full ml-0"
-                    :options="listDomicile" />
+                    :options="domiciles" />
             </div>
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">
@@ -469,7 +469,7 @@ const deleteSelectedSector = (sectors) => {
                 <Multiselect :close-on-select="false"
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen text-sm w-full ml-0"
                     :classes="{ containerActive: 'ring-0', search: 'w-full absolute inset-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen appearance-none border-0 text-base font-sans rounded pl-3.5 rtl:pl-0 rtl:pr-3.5', }"
-                    :create-option="true" :options="listService" mode="multiple"
+                    :create-option="true" :options="availableServices" mode="multiple"
                     :searchable="true" :object="true" v-model="dashboardFormTambahExpert.available_services">
                     <template v-slot:multiplelabel="{ values }">
                         <div class="multiselect-multiple-label">

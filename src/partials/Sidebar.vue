@@ -1,3 +1,9 @@
+<style>
+.logo-j{
+  opacity: 1;
+  animation: fade 3s linear;
+}
+</style>
 <template>
   <div>
     <!-- Sidebar backdrop (mobile only) -->
@@ -32,6 +38,9 @@
               alt="Logo Jobhun"
               class="h-10 sm:h-8"
             />
+        </a>
+        <a href="/" class="mx-auto" v-else>
+          <img src="/src/images/logo/Logo-J-Jobhun-04.png" alt="Logo Jobhun" class="h-10 sm:h-8 logo-j" />
         </a>
       </div>
 
@@ -536,7 +545,16 @@
                       </a>
                     </li>
                   </router-link>
-                  <router-link to="/settings/bidang/tabel" custom v-slot="{ href, navigate, isExactActive }">
+                  <router-link to="/pengguna/table" custom v-slot="{ href, navigate, isExactActive }">
+                    <li class="mb-1 last:mb-0">
+                      <a class="block text-black hover:text-emerald-500 transition duration-150 truncate"
+                        :class="isExactActive && '!text-emerald-500'" :href="href" @click="navigate">
+                        <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                          Pengguna</span>
+                      </a>
+                    </li>
+                  </router-link>
+                  <!-- <router-link to="/settings/bidang/tabel" custom v-slot="{ href, navigate, isExactActive }">
                     <li class="mb-1 last:mb-0">
                       <a class="block text-black hover:text-emerald-500 transition duration-150 truncate" :class="isExactActive && '!text-emerald-500'" :href="href" @click="navigate">
                         <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Bidang</span>
@@ -598,7 +616,7 @@
                         <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Give Feedback</span>
                       </a>
                     </li>
-                  </router-link>                                                                    
+                  </router-link>                                                                     -->
                 </ul>
               </div>
             </SidebarLinkGroup>
