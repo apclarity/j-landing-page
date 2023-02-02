@@ -14,10 +14,10 @@ import { useOptionsStore } from '../../../../stores/store-options'
 
 const route = useRoute()
 
-const formJadiExpertDashboardStore = useDataExpertStore()
+const formTambahUserStore = useDataExpertStore()
 const optionStore = useOptionsStore()
 
-const { formJadiExpertDashboard } = storeToRefs(formJadiExpertDashboardStore)
+const { createUser } = storeToRefs(formTambahUserStore)
 const { listSector } = storeToRefs(optionStore)
 
 const dashboardFormTambahPengguna = ref({
@@ -29,40 +29,13 @@ const dashboardFormTambahPengguna = ref({
     confirm_password: ''
 })
 
-const tambahExpert = async ()=> {
-    console.log(dashboardFormTambahExpert.value)
-    if (dashboardFormTambahExpert.value.image != '' && dashboardFormTambahExpert.value.name != '' && dashboardFormTambahExpert.value.email != '' &&
-        dashboardFormTambahExpert.value.phone_number != '' && dashboardFormTambahExpert.value.profession != '' && dashboardFormTambahExpert.value.education.degree != '' &&
-        dashboardFormTambahExpert.value.education.start_date != '' && dashboardFormTambahExpert.value.education.end_date != '' && dashboardFormTambahExpert.value.education.school != '' &&
-        dashboardFormTambahExpert.value.domicile != '' && dashboardFormTambahExpert.value.description != '' && dashboardFormTambahExpert.value.company != '' &&
-        dashboardFormTambahExpert.value.sectors != '' && dashboardFormTambahExpert.value.experiences.title != '' && dashboardFormTambahExpert.value.experiences.location != '' &&
-        dashboardFormTambahExpert.value.experiences.start_date != '' && dashboardFormTambahExpert.value.experiences.end_date != '' && dashboardFormTambahExpert.value.experience_yoe != '' && dashboardFormTambahExpert.value.social_media != '' &&
-        dashboardFormTambahExpert.value.available_services != '' && dashboardFormTambahExpert.value.teaching_experience != '' && dashboardFormTambahExpert.value.reason_join != '' &&
-        dashboardFormTambahExpert.value.reason_approve != '') {
-        console.log(dashboardFormTambahExpert.value)
-        if (await formJadiExpertDashboardStore.formJadiExpertDashboard(dashboardFormTambahExpert.value)) {
+const tambahPengguna = async ()=> {
+    if (dashboardFormTambahPengguna.value.first_name != '' && dashboardFormTambahPengguna.value.last_name != '' && dashboardFormTambahPengguna.value.email != '' &&
+        dashboardFormTambahPengguna.value.phone_number != '' && dashboardFormTambahPengguna.value.password != '' && dashboardFormTambahPengguna.value.confirm_password) {
+        if (await formTambahUserStore.createUser(dashboardFormTambahPengguna.value)) {
             return
         }
     }
-}
-
-const isImageChanged = ref(false)
-
-const choosePhoto = ()=>{
-    document.getElementById("fileUpload").click()
-}
-
-const validateImageRatio = async(e)=>{
-    var ratio = "1:1";
-    var maxSize = 1 * 1024 * 1024;
-    var validationRes = await validatePicture(e, ratio, maxSize);
-    if (!validationRes.isOk) {
-        alert(validationRes.message);
-        return;
-    }
-    isImageChanged.value = true;
-    let base64img = await getBase64Image(validationRes.theImage);
-    dashboardFormTambahPengguna.value.image = base64img;
 }
 
 const isInputNumber = (evt) => {
@@ -86,52 +59,7 @@ const isInputNumber = (evt) => {
             </div>
         </div>
     </div>
-    <form @submit.prevent="tambahExpert()">
-        <!-- <div class="grid grid-flow-row md:flex flex-auto max-w-4xl min-w-0 mx-auto pt-6 lg:px-8 px-6 lg:pt-8">
-            <div class="flex-none md:w-1/1">
-                <div class="mb-4 sm:mb-0">
-                    <img class="border-2 w-48 h-48 rounded-lg" v-if="dashboardFormTambahExpert.image == null"
-                        src="../../../../images/dummy/dummy-profile.png">
-                    <img class="border-2 w-48 h-48 rounded-lg" v-else
-                        :src="dashboardFormTambahExpert.image" />
-                    <p class="mt-1 text-xs text-gray-500">*ukuran maksimal 1MB</p>
-                    <p class="mt-1 text-xs text-gray-500">*foto 1:1</p>
-                </div>
-                <div class="md:flex md:flex-col overflow-hidden">
-                    <input type="file" @change="validateImageRatio" ref="file" style="display: none"  id="fileUpload">
-                    <button @click.prevent="choosePhoto"
-                        class="h-9 md:mt-5 sm:mt-4 mt-0 md:mb-0 sm:mb-0 mb-4 bg-gray-500 hover:bg-emerald-600 text-white px-5 rounded text-sm mx-auto">
-                        Unggah foto
-                    </button>
-                </div>
-            </div>
-            <div class="grid md:grid-cols-1 md:flex-auto md:max-w-4xl md:min-w-0 md:mx-auto md:px-8 px-0 md:mt-0 mt-4">
-                <div class="">
-                    <label class="block text-sm font-medium mb-1 text-black">Nama lengkap</label>
-                    <input
-                        class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                        required v-model="dashboardFormTambahExpert.name" type="text" />
-                </div> 
-                <div class="mt-4">
-                    <label class="block text-sm font-medium mb-1 text-black">Alamat email</label>
-                    <input
-                        class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                        required v-model="dashboardFormTambahExpert.email" type="text" />
-                </div>
-                <div class="mt-4">
-                    <label class="block text-sm font-medium mb-1 text-black">Nomor HP</label>
-                    <input
-                        class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                        required v-model="dashboardFormTambahExpert.phone_number" @keypress="isInputNumber($event)" type="text" />
-                </div>
-                <div class="mt-4">
-                    <label class="block text-sm font-medium mb-1 text-black">Jabatan</label>
-                    <input
-                        class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                        required v-model="dashboardFormTambahExpert.profession" type="text" />
-                </div>
-            </div>
-        </div> -->
+    <form @submit.prevent="tambahPengguna()">
         <div class="flex-auto max-w-4xl min-w-0 mx-auto pt-6 lg:px-8 px-6 lg:pt-8 md:mt-0 -mt-4">
             <div class="">
                 <label class="block text-sm font-medium mb-1 text-black">Nama depan*</label>

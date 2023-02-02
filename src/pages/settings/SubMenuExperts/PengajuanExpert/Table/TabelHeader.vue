@@ -22,7 +22,10 @@ const props = defineProps({
 
 const { page, perPage, tableSubmissionExpertTemp, total } = toRefs(props)
 
-const adjustingIndex = computed(()=> perPage.value * (page.value-1))
+const adjustingIndex = computed(()=> {
+  console.log(perPage.value * (page.value-1))
+  return perPage.value * (page.value - 1)
+})
 </script>
 
 <template>
@@ -62,6 +65,7 @@ const adjustingIndex = computed(()=> perPage.value * (page.value-1))
               :key="expertTemp.id"
               :value="expertTemp.id"
               :expertTemp="expertTemp"
+              :expertTempID="expertTemp.id"
               :index="index + adjustingIndex"
             />
           </tbody>

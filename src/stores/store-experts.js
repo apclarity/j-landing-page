@@ -15,10 +15,10 @@ const ADVANCE_SEARCH_URL = "/expert/search-expert";
 //------ url form expert -------------------------------------------
 const JADI_EXPERT_URL = "/expert/create-expert-form"
 //------ url data expert temporary ---------------------------------
-// const SUBMISSION_EXPERT_TEMP = "/expert/submission-expert-temp"
-const SUBMISSION_EXPERT_TEMP = "/submission-expert-temp.json"
-// const SUBMISSION_TABLE_EXPERT_TEMP = "/expert/submission-expert-temp"
-const SUBMISSION_TABLE_EXPERT_TEMP = "/table-expert-temp.json"
+const SUBMISSION_EXPERT_TEMP = "/expert/submission-expert-temp"
+// const SUBMISSION_EXPERT_TEMP = "/submission-expert-temp.json"
+const SUBMISSION_TABLE_EXPERT_TEMP = "/expert/submission-expert-temp"
+// const SUBMISSION_TABLE_EXPERT_TEMP = "/table-expert-temp.json"
 const DELETE_SUBMISSION_TABLE_EXPERT_TEMP = "/expert/delete-expert-temp"
 const ACCEPT_SUBMISSION_TABLE_EXPERT_TEMP = "/expert/acc-expert-temp"
 const REJECT_SUBMISSION_TABLE_EXPERT_TEMP = "/expert/reject-expert-temp"
@@ -31,6 +31,12 @@ const DELETE_TABLE_EXPERT_PERMANENT = "/expert/delete-expert-perm"
 const EDIT_TABLE_EXPERT_PERMANENT = "/expert/edit-detail-expert"
 const ACCEPT_TABLE_EXPERT_PERMANENT = "/expert/acc-expert-temp"
 const PUBLISH_TABLE_EXPERT_PERMANENT = "/expert/publish-expert"
+// ------ User ------------------------------------------------------
+const TABLE_USER = "/user/table-user"
+const EDIT_USER = "/user/edit-user"
+const DELETE_USER = "/user/delete-user"
+const CREATE_USER = "/user/create"
+const STATUS_USER = "/expert/publish-expert"
 
 
 export const useDataExpertStore = defineStore({
@@ -62,8 +68,9 @@ export const useDataExpertStore = defineStore({
         page: 1,
         total: 0,
     },
-    tableSubmissionExpertTemp: {
-        search: "",
+    tableSubmissionExpertTemp: [],
+    tableUser: {
+      search: "",
         per_page: PAGINATION_LIMIT,
         page: 1,
         total: 0,
@@ -76,12 +83,6 @@ export const useDataExpertStore = defineStore({
       },
   }),
   actions: {
-    setPaginationCariExpert(payload) {
-      this.pagination.page = payload.page
-      this.pagination.per_page = payload.per_page
-      this.pagination.search = payload.search
-    },
-
     //---- Page Detail Expert -------------------------------
     setDetailDataExpert(payload = {}) {
       this.detailExpert = payload;
@@ -101,6 +102,11 @@ export const useDataExpertStore = defineStore({
         this.expertAdvanceSearch = res.data;
         this.expertPaginationAdvanceSearch = res.data;
       } catch (error) {}
+    },
+    setPaginationCariExpert(payload) {
+      this.pagination.page = payload.page
+      this.pagination.per_page = payload.per_page
+      this.pagination.search = payload.search
     },
     //------- Expert Rekomendasi Homepage -------------------
     setDataExpertFeatured(payload = {}) {
@@ -168,10 +174,10 @@ export const useDataExpertStore = defineStore({
         this.submissionExpertTemp = res.data;
       } catch (error) {}
     },
-    async getDataTableSubmissionExpertTemp() {
+    async getDataTableSubmissionExpertTemp(payload) {
       try {
         // let res = await api.get(DETAIL_EXPERT_URL);
-        let res = await apiStatic.get(SUBMISSION_TABLE_EXPERT_TEMP + '?search=', this.pagination);
+        let res = await api.get(SUBMISSION_TABLE_EXPERT_TEMP + "?page=" + this.pagination.page + "&per_page=" + this.pagination.per_page + "&search=" + this.pagination.search, payload);
         this.tableSubmissionExpertTemp = res.data;
         this.pagination = res.pagination
       } catch (error) {}
@@ -193,6 +199,32 @@ export const useDataExpertStore = defineStore({
       try {
         await api.post(REJECT_SUBMISSION_TABLE_EXPERT_TEMP, payload);
       } catch (error) {}
+    },
+     //-------------------------- User -------------------------------
+    async getDataTableUser(){
+      let res = await apiStatic.get(DATA_DETAIL_TABLE_EXPERT_PERMANENT)
+      this.tableUser = res.data
+      this.pagination = res.pagination
+    },
+    async editUser(id){
+      try {
+        await api.put(EDIT_USER + id)
+      } catch (error) {}
+    },
+    async deleteUser(id){
+      try {
+        await api.delete(DELETE_USER + id)
+      } catch (error){}
+    },
+    async createUser(payload){
+      try {
+        await api.post(CREATE_USER, payload)
+      } catch (error){}
+    },
+    async statusUser(id){
+      try {
+        await api.put(STATUS_USER + id)
+      } catch (error){}
     },
   },
 });

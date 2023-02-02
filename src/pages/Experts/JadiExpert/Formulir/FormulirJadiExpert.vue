@@ -47,13 +47,6 @@ const formulirJadiExpert = ref({
     reason_approve: ''
 })
 
-// const availableServices = [
-//     { value: "training", label: "Pelatihan" },
-//     { value: "consultation", label: "Konsultasi" },
-//     { value: "invite-expert", label: "Undangan menjadi narasumber" },
-//     { value: "recruit-expert", label: "Proyek lepas yang berkaitan dengan bidang pekerjaan" }
-// ]
-
 const config = {
     wrap: true,
     required: true,

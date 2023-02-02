@@ -3,10 +3,7 @@ import { toRefs, ref } from "vue"
 import ModalDelete from './ModalDeleteExpert.vue'
 
 const props = defineProps({
-  expertTemp: {
-    default: {},
-    type: Object
-  },
+  expertTemp: Object,
   index: Number
 })
 const { expertTemp, index } = toRefs(props)

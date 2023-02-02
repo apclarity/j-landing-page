@@ -12,8 +12,8 @@ const route = useRoute()
 const id = route.params.id
 
 const tableSubmissionExpertTempStore = useDataExpertStore()
-await tableSubmissionExpertTempStore.getDataTableSubmissionExpertTemp()
-const { tableSubmissionExpertTemp, pagination } = storeToRefs(tableSubmissionExpertTempStore)
+await tableSubmissionExpertTempStore.getDataTableSubmissionExpertTemp(id)
+const { pagination, tableSubmissionExpertTemp } = storeToRefs(tableSubmissionExpertTempStore)
 
 // const bidangStore = useBidangStore()
 // const { data, pagination } = storeToRefs(bidangStore)
@@ -23,23 +23,23 @@ const getData = async (page=1, search="", perPage=PAGINATION_LIMIT) => {
   tableSubmissionExpertTempStore.setPagination({
     page, search, per_page: perPage,
   })
-  await tableSubmissionExpertTempStore.getDataTableSubmissionExpertTemp()
+  await tableSubmissionExpertTempStore.getDataTableSubmissionExpertTemp(search.value)
 }
 
 //===== Search & Pagination ============================================
 const search = ref("")
 
-const searchClick = (searchString) => {
-  getData(1, searchString)
+const searchClick = () => {
+  getData(1, PAGINATION_LIMIT, search.value )
 }
 
 const changePage = (page) => {
-  getData(page, search)
+  getData(page)
 }
 
 //===== Events ========================================================
 onMounted(() => {
-  getData()
+  getData(1)
 })
 </script>
 
@@ -80,7 +80,7 @@ onMounted(() => {
         <!-- Right: Actions  -->
         <div class="grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2">
           <!-- Search form -->
-          <SearchForm placeholder="Cari expert" v-model="search" @searchClick="searchClick" />
+          <SearchForm placeholder="Cari expert" v-model="search" @click.prevent="searchClick" />
         </div>            
       </div>
 

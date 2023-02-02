@@ -24,7 +24,6 @@ export const useOptionsStore = defineStore({
     async getDomiciles(payload) {
       try {
         let res = await apiStatic.get(DOMICILE_URL, payload);
-        console.log(res)
         this.listDomicile = res;
       } catch (error) {}
     },
