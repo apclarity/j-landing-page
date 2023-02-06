@@ -190,16 +190,17 @@ export const useDataExpertStore = defineStore({
         await api.delete(DELETE_SUBMISSION_TABLE_EXPERT_TEMP + id);
       } catch (error) {}
     },
-    async acceptFormJadiExpertDashboard(payload) {
-      try {
-        await api.post(ACCEPT_SUBMISSION_TABLE_EXPERT_TEMP, payload);
-      } catch (error) {}
-    },
-    async rejectFormJadiExpertDashboard(payload) {
-      try {
-        await api.post(REJECT_SUBMISSION_TABLE_EXPERT_TEMP, payload);
-      } catch (error) {}
-    },
+    //accept&reject digabung sama publish
+    // async acceptFormJadiExpertDashboard(payload) {
+    //   try {
+    //     await api.post(ACCEPT_SUBMISSION_TABLE_EXPERT_TEMP, payload);
+    //   } catch (error) {}
+    // },
+    // async rejectFormJadiExpertDashboard(payload) {
+    //   try {
+    //     await api.post(REJECT_SUBMISSION_TABLE_EXPERT_TEMP, payload);
+    //   } catch (error) {}
+    // },
      //-------------------------- User -------------------------------
     async getDataTableUser(){
       let res = await apiStatic.get(DATA_DETAIL_TABLE_EXPERT_PERMANENT)

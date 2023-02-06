@@ -86,7 +86,7 @@ const homepageSearch = ()=>{
         </div>
         <div class="lg:block hidden w-1/2">
             <div class="mb-5">
-                <img src="../../images/BANNER-WEB-JOBHUN-35-min.png" alt="" class="h-full w-full object-cover z-20">
+                <img src="../../images/BANNER-WEB-JOBHUN-34.png" alt="" class="h-full w-full object-cover z-20">
             </div>
         </div>
     </div>
