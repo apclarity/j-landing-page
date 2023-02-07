@@ -20,7 +20,7 @@ const limit = 8
                     <CardMentor :expertFeatured="expert" v-if="index<limit" />
                 </div>
             </div>
-            <div class="text-end text-sm px-28">
+            <div class="text-end text-sm px-28 mt-5">
                 <a href="/experts/cariexpert">Cari experts lainnya -&gt;</a>
             </div>
         </div>
