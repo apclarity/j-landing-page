@@ -233,7 +233,7 @@ const formValidation = () => {
                             :create-option="true" :options="days" />
                     </div>
                     <div class="mt-4">
-                        <label class="block text-sm font-medium mb-1 text-black">Pengajuan waktu mentoring</label>
+                        <label class="block text-sm font-medium mb-1 text-black">Pengajuan waktu pelatihan</label>
                         <div class="flex items-center space-x-2">
                             <select required v-model="formExpertPelatihan.startHour"
                                 class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-14"

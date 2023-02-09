@@ -24,14 +24,12 @@ const dashboardFormTambahPengguna = ref({
     first_name: '',
     last_name: '',  
     email: '',
-    phone_number: '',
-    password: '',
-    confirm_password: ''
+    phone_number: ''
 })
 
 const tambahPengguna = async ()=> {
     if (dashboardFormTambahPengguna.value.first_name != '' && dashboardFormTambahPengguna.value.last_name != '' && dashboardFormTambahPengguna.value.email != '' &&
-        dashboardFormTambahPengguna.value.phone_number != '' && dashboardFormTambahPengguna.value.password != '' && dashboardFormTambahPengguna.value.confirm_password) {
+        dashboardFormTambahPengguna.value.phone_number != '') {
         if (await formTambahUserStore.createUser(dashboardFormTambahPengguna.value)) {
             return
         }
@@ -62,36 +60,24 @@ const isInputNumber = (evt) => {
     <form @submit.prevent="tambahPengguna()">
         <div class="flex-auto max-w-4xl min-w-0 mx-auto pt-6 lg:px-8 px-6 lg:pt-8 md:mt-0 -mt-4">
             <div class="">
-                <label class="block text-sm font-medium mb-1 text-black">Nama depan*</label>
+                <label class="block text-sm font-medium mb-1 text-black">Nama depan</label>
                 <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
                     required v-model="dashboardFormTambahPengguna.name" type="text" />
             </div>
             <div class="mt-4">
-                <label class="block text-sm font-medium mb-1 text-black">Nama belakang*</label>
+                <label class="block text-sm font-medium mb-1 text-black">Nama belakang</label>
                 <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
                     required v-model="dashboardFormTambahPengguna.profession" type="text" />
             </div>
             <div class="mt-4">
-                <label class="block text-sm font-medium mb-1 text-black">Alamat email*</label>
+                <label class="block text-sm font-medium mb-1 text-black">Alamat email</label>
                 <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
                     required v-model="dashboardFormTambahPengguna.email" type="text" />
             </div>
             <div class="mt-4">
-                <label class="block text-sm font-medium mb-1 text-black">Nomor HP*</label>
+                <label class="block text-sm font-medium mb-1 text-black">Nomor HP</label>
                 <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
                     required v-model="dashboardFormTambahPengguna.phone_number" @keypress="isInputNumber($event)" type="text" />
-            </div>
-            <div>
-                <label class="block text-sm font-medium mb-1" for="password">Kata sandi*</label>
-                <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                    required type="password" autoComplete="on" v-model="dashboardFormTambahPengguna.password" />
-            </div>
-            <div>
-                <label class="block text-sm font-medium mb-1" for="password">Konfirmasi kata sandi*</label>
-                <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                    required type="password" autoComplete="on" v-model="dashboardFormTambahPengguna.confirm_password" />
-                <span class="text-xs text-thin text-red-700" v-if="dashboardFormTambahPengguna.confirm_password != dashboardFormTambahPengguna.password">Kata sandi tidak
-                    sesuai</span>
             </div>
             <div class="flex justify-end">
                 <button type="submit" class="h-9 mt-16 bg-jobhunGreen hover:bg-emerald-600 text-white px-7 rounded text-sm">

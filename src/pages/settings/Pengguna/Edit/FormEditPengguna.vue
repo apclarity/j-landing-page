@@ -24,14 +24,12 @@ const dashboardFormEditPengguna = ref({
     first_name: '',
     last_name: '',
     email: '',
-    phone_number: '',
-    password: '',
-    confirm_password: ''
+    phone_number: ''
 })
 
 const tambahExpert = async ()=> {
     if (dashboardFormEditPengguna.value.first_name != '' && dashboardFormEditPengguna.value.last_name != '' && dashboardFormEditPengguna.value.email != '' &&
-        dashboardFormEditPengguna.value.phone_number != '' && dashboardFormEditPengguna.value.password != '' && dashboardFormEditPengguna.value.confirm_password) {
+        dashboardFormEditPengguna.value.phone_number != '') {
         if (await formEditStore.editUser(dashboardFormEditPengguna.value)) {
             return
         }
@@ -69,43 +67,28 @@ const isInputNumber = (evt) => {
     <form @submit.prevent="editPengguna()">
         <div class="flex-auto max-w-4xl min-w-0 mx-auto pt-6 lg:px-8 px-6 lg:pt-8 md:mt-0 -mt-4">
             <div class="">
-                <label class="block text-sm font-medium mb-1 text-black">Nama depan*</label>
+                <label class="block text-sm font-medium mb-1 text-black">Nama depan</label>
                 <input
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
                     required v-model="dashboardFormEditPengguna.first_name" type="text" />
             </div>
             <div class="mt-4">
-                <label class="block text-sm font-medium mb-1 text-black">Nama belakang*</label>
+                <label class="block text-sm font-medium mb-1 text-black">Nama belakang</label>
                 <input
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
                     required v-model="dashboardFormEditPengguna.last_name" type="text" />
             </div>
             <div class="mt-4">
-                <label class="block text-sm font-medium mb-1 text-black">Alamat email*</label>
+                <label class="block text-sm font-medium mb-1 text-black">Alamat email</label>
                 <input
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
                     required v-model="dashboardFormEditPengguna.email" type="text" />
             </div>
             <div class="mt-4">
-                <label class="block text-sm font-medium mb-1 text-black">Nomor HP*</label>
+                <label class="block text-sm font-medium mb-1 text-black">Nomor HP</label>
                 <input
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
                     required v-model="dashboardFormEditPengguna.phone_number" @keypress="isInputNumber($event)" type="text" />
-            </div>
-            <div>
-                <label class="block text-sm font-medium mb-1" for="password">Kata sandi*</label>
-                <input
-                    class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                    required type="password" autoComplete="on" v-model="dashboardFormEditPengguna.password" />
-            </div>
-            <div>
-                <label class="block text-sm font-medium mb-1" for="password">Konfirmasi kata sandi*</label>
-                <input
-                    class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                    required type="password" autoComplete="on" v-model="dashboardFormEditPengguna.confirm_password" />
-                <span class="text-xs text-thin text-red-700"
-                    v-if="dashboardFormEditPengguna.confirm_password != dashboardFormEditPengguna.password">Kata sandi tidak
-                    sesuai</span>
             </div>
         </div>
     </form>

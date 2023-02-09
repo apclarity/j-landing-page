@@ -4,6 +4,7 @@ import { useSigninStore } from "../../store"
 import { useRouter, useRoute } from "vue-router"
 import { MSG_RESET_PASSWORD } from "../../constant"
 import { isVariableEmpty } from "../../../../utils/Helper"
+import ModalSetPassword from "./ModalSetNewPassword.vue"
 
 const router = useRouter()
 
@@ -12,12 +13,21 @@ const auth = ref({
     confirm_password: ""
 })
 
-const resetPassword = () => {
+const setPassword = () => {
     if (auth.value.password != "" && auth.value.confirm_password != "") {
-        if (auth.value.confirm_password != auth.value.password){
-            router.push('/signin')
+        if (auth.value.password != auth.value.confirm_password){
+            alert("Password tidak sama!")
+        } else {
+            openModalSetNewPassword()
         }
     }
+}
+
+// ============= Modal Set New Password ===============
+const setNewPassword = ref(false)
+
+const openModalSetNewPassword = () => {
+    setNewPassword.value = true
 }
 </script>
 <template>
@@ -35,10 +45,10 @@ const resetPassword = () => {
                     </div>
                     <div class="max-w-sm mx-auto px-4 py-8">
                         <h1 class="text-3xl text-black font-bold mb-6">{{ MSG_RESET_PASSWORD }} ✨</h1>
-                        <form @submit.prevent="resetPassword()">
+                        <form @submit.prevent="setPassword">
                             <div class="space-y-4">
                                 <div>
-                                    <label class="block text-sm font-medium mb-1" for="password">Kata sandi baru</label>
+                                    <label class="block text-sm font-medium mb-1">Kata sandi baru</label>
                                     <input class="bg-gray-100 border-0 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
                                         required type="password" autoComplete="on" v-model="auth.password" />
                                     <div class="text-sm">
@@ -46,7 +56,7 @@ const resetPassword = () => {
                                     </div>
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-medium mb-1" for="password">Ketik ulang kata sandi baru</label>
+                                    <label class="block text-sm font-medium mb-1">Ketik ulang kata sandi baru</label>
                                     <input class="bg-gray-100 border-0 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
                                         required type="password" autoComplete="on" v-model="auth.confirm_password" />
                                     <span class="text-xs text-thin text-red-700" v-if="auth.confirm_password != auth.password">Kata sandi tidak
@@ -57,7 +67,7 @@ const resetPassword = () => {
                                 <button class="btn bg-jobhunGreen hover:bg-emerald-600 text-white" type="submit">
                                     Perbarui kata sandi
                                 </button>
-                                <ResetPassword :resetPassword="emailResetPassword" @close-modal="emailResetPassword = false" :email="auth.email"/>
+                                <ModalSetPassword :setPassword="setNewPassword" @close-modal="setNewPassword = false"/>
                             </div>
                         </form>
                     </div>

@@ -225,7 +225,7 @@ const formValidation = ()=>{
                 </div>
                 <div class="max-w-xl mt-5">
                     <div>
-                        <label class="block text-sm font-medium mb-1 text-black">Pengajuan tanggal mentoring</label>
+                        <label class="block text-sm font-medium mb-1 text-black">Pengajuan tanggal konsultasi</label>
                         <div class="flex items-center space-x-2">
                             <DateSingle v-model="formExpertKonsultasi.date" required />
                             <Tooltip position="right" class="">
@@ -235,7 +235,7 @@ const formValidation = ()=>{
             
                     </div>
                     <div class="mt-4">
-                        <label class="block text-sm font-medium mb-1 text-black">Pengajuan waktu mentoring</label>
+                        <label class="block text-sm font-medium mb-1 text-black">Pengajuan waktu konsultasi</label>
                         <div class="flex items-center space-x-2">
                             <select required v-model="formExpertKonsultasi.startHour"
                                 class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-14"
@@ -253,7 +253,7 @@ const formValidation = ()=>{
                         </div>
                     </div>
                     <div class="mt-4">
-                        <label class="block text-sm font-medium mb-1 text-black">Durasi mentoring</label>
+                        <label class="block text-sm font-medium mb-1 text-black">Durasi konsultasi</label>
                         <div class="custom-number-input w-32">
                             <div class="flex flex-row h-8 w-full rounded-lg relative bg-transparent mt-1">
                                 <div @click="decrement()"

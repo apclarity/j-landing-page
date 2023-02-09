@@ -47,8 +47,7 @@ import KnowledgeBase from "./pages/utility/KnowledgeBase.vue";
 import Signin from "./pages/auth/Signin/Index.vue";
 import Signup from "./pages/auth/Signup/Index.vue";
 import ResetPassword from "./pages/auth/ResetPassword/Index.vue";
-import EnterNewPassword from "./pages/auth/ResetPassword/EnterNewPassword/Index.vue";
-// import EmailNewPassword from "./pages/auth/ResetPassword/EmailResetPassword/EmailResetPassword.html";
+import SetNewPassword from "./pages/auth/ResetPassword/EnterNewPassword/Index.vue";
 import Onboarding01 from "./pages/Onboarding01.vue";
 import Onboarding02 from "./pages/Onboarding02.vue";
 import Onboarding03 from "./pages/Onboarding03.vue";
@@ -396,13 +395,9 @@ const router = createRouter({
       component: ResetPassword,
     },
     {
-      path: "/enternewpassword",
-      component: EnterNewPassword,
+      path: "/setnewpassword",
+      component: SetNewPassword,
     },
-    // {
-    //   path: "/emailresetpassword",
-    //   component: EmailNewPassword,
-    // },
     {
       path: "/onboarding-01",
       component: Onboarding01,
