@@ -461,36 +461,37 @@
               </li>
             </router-link>    -->
             <!-- Konsultasi -->
-            <router-link to="/calendar" custom v-slot="{ href, navigate, isExactActive }">
-              <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0" :class="isExactActive && 'bg-slate-900'">
-                <a class="block text-slate-200 hover:text-white truncate transition duration-150"
-                  :class="isExactActive && 'hover:text-slate-200'" :href="href" @click="navigate">
-                  <div class="flex items-center">
-                    <!-- <svg class="shrink-0 h-6 w-6" viewBox="0 0 24 24">
-                      <path class="fill-current text-slate-600" :class="isExactActive && 'text-indigo-500'" d="M1 3h22v20H1z" />
-                      <path class="fill-current text-slate-400" :class="isExactActive && 'text-indigo-300'"
-                        d="M21 3h2v4H1V3h2V1h4v2h10V1h4v2Z" />
-                    </svg> -->
-                    <!-- <IconKonsultasi class="shrink h-6 w-6 fill-black text-black"/> -->
-                    <svg fill="#ffffff" viewBox="-3.2 -3.2 38.40 38.40" version="1.1" class="shrink-0 h-6 w-6" stroke="#ffffff"
-                      stroke-width="0.00032">
-                      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                      <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#000000" stroke-width="6">
-                        <title>chat</title>
-                        <path
-                          d="M25.042 18.672v-12.487c0-1.234-1-2.236-2.236-2.236h-19.571c-1.235-0.001-2.236 1.001-2.236 2.236v12.487c0 1.235 1.001 2.236 2.236 2.236h3.729v5.137l5.704-5.137h10.137c1.237 0 2.237-1.001 2.237-2.236zM28.765 8.858h-2.798c0 0 0 9.972 0 10.909s-1.216 2.142-2.153 2.142-10.945 0.055-10.945 0.055c0 1.235 1.001 1.986 2.236 1.986h4.309l5.622 5.102-0.007-5.102h3.736c1.236 0 2.236-0.751 2.236-1.986v-10.932c0-1.234-1-2.174-2.236-2.174z">
-                        </path>
-                      </g>
-                      <g id="SVGRepo_iconCarrier">
-                        <title>chat</title>
-                        <path
-                          d="M25.042 18.672v-12.487c0-1.234-1-2.236-2.236-2.236h-19.571c-1.235-0.001-2.236 1.001-2.236 2.236v12.487c0 1.235 1.001 2.236 2.236 2.236h3.729v5.137l5.704-5.137h10.137c1.237 0 2.237-1.001 2.237-2.236zM28.765 8.858h-2.798c0 0 0 9.972 0 10.909s-1.216 2.142-2.153 2.142-10.945 0.055-10.945 0.055c0 1.235 1.001 1.986 2.236 1.986h4.309l5.622 5.102-0.007-5.102h3.736c1.236 0 2.236-0.751 2.236-1.986v-10.932c0-1.234-1-2.174-2.236-2.174z">
-                        </path>
-                      </g>
-                    </svg>
-                    <span
-                      class="text-sm text-black font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Konsultasi</span>
-                  </div>
+            <router-link to="/konsultasi/table" custom v-slot="{ href, navigate, isExactActive }">
+              <li class="mb-1 last:mb-0 px-3 py-2">
+                <a class="block text-black hover:text-emerald-500 transition duration-150 truncate"
+                  :class="isExactActive && '!text-emerald-500'" :href="href" @click="navigate">
+                  
+                    <div class="flex items-center">
+                      <!-- <svg class="shrink-0 h-6 w-6" viewBox="0 0 24 24">
+                                          <path class="fill-current text-slate-600" :class="isExactActive && 'text-indigo-500'" d="M1 3h22v20H1z" />
+                                          <path class="fill-current text-slate-400" :class="isExactActive && 'text-indigo-300'"
+                                            d="M21 3h2v4H1V3h2V1h4v2h10V1h4v2Z" />
+                                        </svg> -->
+                      <!-- <IconKonsultasi class="shrink h-6 w-6 fill-black text-black"/> -->
+                      <svg fill="#ffffff" viewBox="-3.2 -3.2 38.40 38.40" version="1.1" class="shrink-0 h-6 w-6" stroke="#ffffff"
+                        stroke-width="0.00032">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#000000" stroke-width="6">
+                          <title>chat</title>
+                          <path
+                            d="M25.042 18.672v-12.487c0-1.234-1-2.236-2.236-2.236h-19.571c-1.235-0.001-2.236 1.001-2.236 2.236v12.487c0 1.235 1.001 2.236 2.236 2.236h3.729v5.137l5.704-5.137h10.137c1.237 0 2.237-1.001 2.237-2.236zM28.765 8.858h-2.798c0 0 0 9.972 0 10.909s-1.216 2.142-2.153 2.142-10.945 0.055-10.945 0.055c0 1.235 1.001 1.986 2.236 1.986h4.309l5.622 5.102-0.007-5.102h3.736c1.236 0 2.236-0.751 2.236-1.986v-10.932c0-1.234-1-2.174-2.236-2.174z">
+                          </path>
+                        </g>
+                        <g id="SVGRepo_iconCarrier">
+                          <title>chat</title>
+                          <path
+                            d="M25.042 18.672v-12.487c0-1.234-1-2.236-2.236-2.236h-19.571c-1.235-0.001-2.236 1.001-2.236 2.236v12.487c0 1.235 1.001 2.236 2.236 2.236h3.729v5.137l5.704-5.137h10.137c1.237 0 2.237-1.001 2.237-2.236zM28.765 8.858h-2.798c0 0 0 9.972 0 10.909s-1.216 2.142-2.153 2.142-10.945 0.055-10.945 0.055c0 1.235 1.001 1.986 2.236 1.986h4.309l5.622 5.102-0.007-5.102h3.736c1.236 0 2.236-0.751 2.236-1.986v-10.932c0-1.234-1-2.174-2.236-2.174z">
+                          </path>
+                        </g>
+                      </svg>
+                      <span class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                        Konsultasi</span>
+                    </div>
                 </a>
               </li>
             </router-link>

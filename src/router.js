@@ -90,6 +90,7 @@ import DashboardTablePengajuanExpert from "./pages/settings/SubMenuExperts/Penga
 import DashboardTablePengguna from "./pages/settings/Pengguna/Table/Index.vue"
 import DashboardFormTambahPengguna from "./pages/settings/Pengguna/Form/Index.vue"
 import DashboardFormEditPengguna from "./pages/settings/Pengguna/Edit/Index.vue"
+import DashboardKonsultasi from "./pages/konsultasi/Table/Index.vue"
 
 const routerHistory = createWebHistory();
 
@@ -207,6 +208,10 @@ const router = createRouter({
         {
           path: "/pengguna/formeditpengguna/:id",
           component: DashboardFormEditPengguna,
+        },
+        {
+          path: "/konsultasi/table",
+          component: DashboardKonsultasi,
         },
       ],
     },
