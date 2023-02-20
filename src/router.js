@@ -48,6 +48,8 @@ import Signin from "./pages/auth/Signin/Index.vue";
 import Signup from "./pages/auth/Signup/Index.vue";
 import ResetPassword from "./pages/auth/ResetPassword/Index.vue";
 import SetNewPassword from "./pages/auth/ResetPassword/EnterNewPassword/Index.vue";
+import AccountVerification from "./pages/auth/VerifikasiEmail/Index.vue"
+import AccountVerificationSuccess from "./pages/auth/ResponVerifikasiEmail/Index.vue"
 import Onboarding01 from "./pages/Onboarding01.vue";
 import Onboarding02 from "./pages/Onboarding02.vue";
 import Onboarding03 from "./pages/Onboarding03.vue";
@@ -91,6 +93,7 @@ import DashboardTablePengguna from "./pages/settings/Pengguna/Table/Index.vue"
 import DashboardFormTambahPengguna from "./pages/settings/Pengguna/Form/Index.vue"
 import DashboardFormEditPengguna from "./pages/settings/Pengguna/Edit/Index.vue"
 import DashboardKonsultasi from "./pages/konsultasi/Table/Index.vue"
+import ProfilPengguna from "./pages/ProfilPengguna/Index.vue"
 
 const routerHistory = createWebHistory();
 
@@ -212,6 +215,10 @@ const router = createRouter({
         {
           path: "/konsultasi/table",
           component: DashboardKonsultasi,
+        },
+        {
+          path: "/profilpengguna",
+          component: ProfilPengguna,
         },
       ],
     },
@@ -394,6 +401,14 @@ const router = createRouter({
     {
       path: "/signup",
       component: Signup,
+    },
+    {
+      path: "/verifikasiakun",
+      component: AccountVerification,
+    },
+    {
+      path: "/responseverifikasi",
+      component: AccountVerificationSuccess,
     },
     {
       path: "/resetpassword",

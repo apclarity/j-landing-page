@@ -3,6 +3,7 @@ import { computed, ref } from "vue"
 import { useSigninStore } from "../store"
 import { useRouter } from "vue-router"
 import { MSG_SIGNUP } from "../constant"
+import VerfikasiAkun from "../VerifikasiEmail/Index.vue"
 
 const router = useRouter()
 const signinStore = useSigninStore()
@@ -10,7 +11,7 @@ const signinStore = useSigninStore()
 const auth = ref({
     first_name: "",
     last_name: "",
-    email: "",
+    email: "apapapap",
     phone: "",
     password: "",
     confirm_password: ""
@@ -22,6 +23,7 @@ const signUp = async () => {
             alert('Kata sandi tidak sesuai')
         }else {
             await signinStore.signup(auth.value)
+            router.push({ path: '/verifikasiakun' })
         }
     }
 }
@@ -37,6 +39,7 @@ const onlyNumber = (evt)=> {
 }
 </script>
 <template>
+    <VerfikasiAkun :email="test" class="sr-only"/>
     <main class="bg-white">
         <div class="relative flex">
             <div class="w-full md:w-1/2">

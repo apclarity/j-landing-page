@@ -465,14 +465,7 @@
               <li class="mb-1 last:mb-0 px-3 py-2">
                 <a class="block text-black hover:text-emerald-500 transition duration-150 truncate"
                   :class="isExactActive && '!text-emerald-500'" :href="href" @click="navigate">
-                  
                     <div class="flex items-center">
-                      <!-- <svg class="shrink-0 h-6 w-6" viewBox="0 0 24 24">
-                                          <path class="fill-current text-slate-600" :class="isExactActive && 'text-indigo-500'" d="M1 3h22v20H1z" />
-                                          <path class="fill-current text-slate-400" :class="isExactActive && 'text-indigo-300'"
-                                            d="M21 3h2v4H1V3h2V1h4v2h10V1h4v2Z" />
-                                        </svg> -->
-                      <!-- <IconKonsultasi class="shrink h-6 w-6 fill-black text-black"/> -->
                       <svg fill="#ffffff" viewBox="-3.2 -3.2 38.40 38.40" version="1.1" class="shrink-0 h-6 w-6" stroke="#ffffff"
                         stroke-width="0.00032">
                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -735,10 +728,10 @@
             </SidebarLinkGroup>
             <hr class="h-px my-3 bg-gray-300 border-0">
             <!-- Profil Pengguna -->
-            <router-link to="/calendar" custom v-slot="{ href, navigate, isExactActive }">
-              <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0" :class="isExactActive && 'bg-slate-900'">
-                <a class="block text-slate-200 hover:text-white truncate transition duration-150"
-                  :class="isExactActive && 'hover:text-slate-200'" :href="href" @click="navigate">
+            <router-link to="/profilpengguna" custom v-slot="{ href, navigate, isExactActive }">
+              <li class="mb-1 last:mb-0 px-3 py-2">
+                <a class="block text-black hover:text-emerald-500 transition duration-150 truncate"
+                  :class="isExactActive && '!text-emerald-500'" :href="href" @click="navigate">
                   <div class="flex items-center">
                     <svg viewBox="0 0 24 24" fill="none" class="shrink w-6 h-6">
                       <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -756,7 +749,8 @@
                       </g>
                     </svg>
                     <span
-                      class="text-sm text-black font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Profil Pengguna</span>
+                      class="text-sm text-black font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Profil
+                      Pengguna</span>
                   </div>
                 </a>
               </li>

@@ -7,3 +7,6 @@ export const USER_REGISTRATION_VERIFICATION_URL = "/user/user-verify"
 export const MSG_WELCOME = "Selamat datang, Jobhuners!";
 export const MSG_SIGNUP = "Buat akunmu blabla";
 export const MSG_RESET_PASSWORD = "Perbarui Kata Sandi"
+export const MSG_ACCOUNT_VERIFICATION = "Verifikasi Akun"
+export const MSG_ACCOUNT_VERIFICATION_SUCCESS = "Verifikasi berhasil"
+export const MSG_ACCOUNT_VERIFICATION_FAILED = "Verifikasi gagal"

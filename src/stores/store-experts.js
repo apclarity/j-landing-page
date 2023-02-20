@@ -37,6 +37,18 @@ const EDIT_USER = "/user/edit-user"
 const DELETE_USER = "/user/delete-user"
 const CREATE_USER = "/user/create"
 const STATUS_USER = "/expert/publish-expert"
+const EMAIL_VERIFICATION = "/user/email-verification"
+// ------ Konsultasi ------------------------------------------------
+const DATA_TABLE_CONSULTATION = "/consultation/table-consultation"
+const DATA_DETAIL_CONSULTATION = "/consultation/detail-consultation"
+// ------ Recruit Expert --------------------------------------------
+const DATA_TABLE_RECRUIT_EXPERT = "/recruit-expert/table-recruit-expert"
+// ------ Recruit Expert --------------------------------------------
+const DATA_TABLE_INVITE_EXPERT = "/invite-expert/table-invite-expert"
+// ------ Pelatihan -------------------------------------------------
+const DATA_DETAIL_TRAINING = "/training/detail-training"
+const DATA_TABLE_TRAINING = "/training/table-training"
+
 
 
 export const useDataExpertStore = defineStore({
@@ -76,11 +88,39 @@ export const useDataExpertStore = defineStore({
         total: 0,
     },
     pagination: {
-        search: "",
-        per_page: PAGINATION_LIMIT,
-        page: 1,
-        total: 0,
-      },
+      search: "",
+      per_page: PAGINATION_LIMIT,
+      page: 1,
+      total: 0,
+    },
+    tableConsultation: {
+      search: "",
+      per_page: PAGINATION_LIMIT,
+      page: 1,
+      total: 0,
+    },
+    tableRecruitExpert: {
+      search: "",
+      per_page: PAGINATION_LIMIT,
+      page: 1,
+      total: 0,
+    },
+    tableInviteExpert: {
+      search: "",
+      per_page: PAGINATION_LIMIT,
+      page: 1,
+      total: 0,
+    },
+    tablePelatihan: {
+      search: "",
+      per_page: PAGINATION_LIMIT,
+      page: 1,
+      total: 0,
+    },
+    detailPelatihan: {
+      education: {},
+      social_media: {},
+    }
   }),
   actions: {
     //---- Page Detail Expert -------------------------------
@@ -226,6 +266,63 @@ export const useDataExpertStore = defineStore({
       try {
         await api.put(STATUS_USER + id)
       } catch (error){}
+    },
+    async verifEmailUser() {
+      try {
+        await api.post(EMAIL_VERIFICATION, payload)
+      } catch (error){}
+    },
+    async detailProfileUser(id) {
+      try {
+        let res = await api.get(EMAIL_VERIFICATION + id);
+        this.detailExpert = res;
+      } catch (error) {
+        console.log("error");
+      }
+    },
+    // ------------------------ Konsultasi -------------------------
+    async getDataTableConsultation(payload) {
+      try {
+        let res = await api.get(DATA_TABLE_CONSULTATION + "?page=" + this.pagination.page + "&per_page=" + this.pagination.per_page + "&search=" + this.pagination.search, payload);
+        this.tableConsultation = res.data;
+        this.pagination = res.pagination
+      } catch (error) {}
+    },
+    async getDataDetailPelatihan(id) {
+      try {
+        let res = await api.get(DATA_DETAIL_CONSULTATION + id);
+        this.detailConsultation = res.data;
+      } catch (error) {}
+    },
+    // ------------------------ Recruit Expert -------------------------
+    async getDataTableRecruitExpert(payload) {
+      try {
+        let res = await api.get(DATA_TABLE_RECRUIT_EXPERT + "?page=" + this.pagination.page + "&per_page=" + this.pagination.per_page + "&search=" + this.pagination.search, payload);
+        this.tableRecruitExpert = res.data;
+        this.pagination = res.pagination
+      } catch (error) {}
+    },
+    // ------------------------ Undang Expert -------------------------
+    async getDataTableInviteExpert(payload) {
+      try {
+        let res = await api.get(DATA_TABLE_INVITE_EXPERT + "?page=" + this.pagination.page + "&per_page=" + this.pagination.per_page + "&search=" + this.pagination.search, payload);
+        this.tableInviteExpert = res.data;
+        this.pagination = res.pagination
+      } catch (error) {}
+    },
+    // ------------------------ Pelatihan -----------------------------
+    async getDataTablePelatihan(payload) {
+      try {
+        let res = await api.get(DATA_TABLE_TRAINING + "?page=" + this.pagination.page + "&per_page=" + this.pagination.per_page + "&search=" + this.pagination.search, payload);
+        this.tablePelatihan = res.data;
+        this.pagination = res.pagination
+      } catch (error) {}
+    },
+    async getDataDetailPelatihan(id) {
+      try {
+        let res = await api.get(DATA_DETAIL_TRAINING + id);
+        this.detailPelatihan = res.data;
+      } catch (error) {}
     },
   },
 });
