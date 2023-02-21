@@ -1,50 +1,31 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
-import PinLocation from '../../partials/icons/icon-pin-location.vue'
-import ProfileOverview from './ProfileOverview.vue'
-import OrderingHistory from './OrderingHistory.vue'
-import { convertToWebDate, convertToWebDateMonthName } from '../../utils/Helper'
+import PinLocation from '../../../partials/icons/icon-pin-location.vue'
+import ProfileOverview from './EditDataUtama.vue'
+import { convertToWebDate, convertToWebDateMonthName } from '../../../utils/Helper'
 
 const props = defineProps({
     dataProfile: {
         default: {},
         type: Object
     },
-    orderingHistory: Object
 })
 
-const { dataProfile, orderingHistory } = props
-
-const route = useRoute()
-
-onMounted(()=>{
-    let querySection = route.query.section
-    if(querySection == null){
-        return
-    }
-    let sectionID = document.getElementById(querySection)
-    if(sectionID == null){
-        return
-    }
-    document.getElementById(querySection).scrollIntoView({
-        block: 'center'
-    })
-})
+const { dataProfile } = props
 
 const openTab = ref(1)
-const toggleTabs = (tabNumber) => (openTab.value = tabNumber)
 </script>
 <template>
     <div class="flex h-96 bg-slate-200 -z-20 -mt-10 md:mt-0">
-        <img class="object-cover h-full w-full object-top" src="../../images/jobhun-ilustration-background/banner-ilustrasi-01-min.png"
+        <img class="object-cover h-full w-full object-top" src="../../../images/jobhun-ilustration-background/banner-ilustrasi-01-min.png"
             alt="Profile background" />
     </div>
     <div class="lg:px-60 px-10 mb-10">
         <div class="mb-6 sm:mb-3 md:flex">
             <div class="flex flex-col -mt-10 items-center md:w-1/4 sm:flex-row sm:justify-between sm:items-end">
                 <div class="flex flex-row -mt-1 mb-4 sm:mb-0">
-                    <img class="rounded-full ring-8 ring-white" src="../../images/dummy/dummy-profile.png" width="200" height="200"/>
+                    <img class="rounded-full ring-8 ring-white" src="../../../images/dummy/dummy-profile.png" width="200" height="200"/>
                 </div>
             </div>
             <div class="text-sm mt-5 ml-5 shrink w-full">
@@ -72,29 +53,15 @@ const toggleTabs = (tabNumber) => (openTab.value = tabNumber)
             <ul class="flex flex-wrap -mb-px text-sm font-medium text-center">
                 <li class="mr-2">
                     <button class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-jobhunGreen " 
-                        @click="toggleTabs(1)"
                         v-bind:class="{ 'text-black': openTab !== 1, 'text-jobhunGreen border-jobhunGreen': openTab === 1}"
                         >Overview
-                    </button>
-                </li>
-                <li class="mr-2">
-                    <button
-                        class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-jobhunGreen"
-                        @click="toggleTabs(2)"
-                        v-bind:class="{ 'text-black': openTab !== 2, 'text-jobhunGreen border-jobhunGreen': openTab === 2}"
-                        >Ordering History
                     </button>
                 </li>
             </ul>
         </div>
         <div class="shrink w-full">
-            <div class="rounded-lg" v-if="openTab === 1">
-                    <ProfileOverview :dataProfile="dataProfile" :expertID="dataProfile.id" />
-            </div>
-            <div class="rounded-lg" v-if="openTab === 2">
-                <div>
-                    <OrderingHistory :orderingHistory="orderingHistory" />
-                </div>
+            <div class="rounded-lg">
+                <ProfileOverview :dataProfile="dataProfile" />
             </div>
         </div>
     </div>

@@ -12,6 +12,22 @@ const props = defineProps({
 
 const { itemLayanan, expertID } = props
 
+const previewDataUtama = ref({
+    first_name: "",
+    last_name: "",
+    email: "",
+    phone: "",
+    password: ""
+})
+
+const previewDataTambahan = ref({
+    first_name: "",
+    last_name: "",
+    email: "",
+    phone: "",
+    password: ""
+})
+
 const isImageChanged = ref(false)
 
 const choosePhoto = () => {
@@ -48,55 +64,44 @@ const isInputNumber = (evt) => {
                 <div class="font-bold text-xl text-black">
                     Data Utama
                 </div>
-                <button class="h-9 bg-jobhunGreen hover:bg-emerald-600 text-white px-7 rounded text-sm flex justify-end items-center">
+                <router-link to="/suntingprofil" class="h-9 bg-jobhunGreen hover:bg-emerald-600 text-white px-7 rounded text-sm flex justify-end items-center">
                     Sunting
-                </button>
+                </router-link>
             </div>
             <div class="grid grid-flow-row md:flex flex-auto max-w-4xl min-w-0 mx-auto pt-6 lg:px-8 px-6 lg:pt-8">
                 <div class="flex-none md:w-1/1">
                     <div class="mb-4 sm:mb-0">
-                        <!-- <img class="border-2 w-48 h-48 rounded-lg" v-if="dashboardFormTambahExpert.image == null"
-                            src="../../images/dummy/dummy-profile.png"> -->
-                        <img class="border-2 w-32 h-32 rounded-lg" src="../../images/dummy/dummy-profile.png" />
-                        <p class="mt-1 text-xs text-gray-500">*ukuran maksimal 1MB</p>
-                        <p class="mt-1 text-xs text-gray-500">*foto 1:1</p>
-                    </div>
-                    <div class="md:flex md:flex-col overflow-hidden">
-                        <input type="file" @change="validateImageRatio" ref="file" style="display: none" id="fileUpload">
-                        <button @click.prevent="choosePhoto"
-                            class="h-7 w-full md:mt-5 sm:mt-4 mt-0 md:mb-0 sm:mb-0 mb-4 bg-gray-500 hover:bg-emerald-600 text-white px-5 rounded text-sm mx-auto">
-                            Unggah foto
-                        </button>
+                        <img class="border-2 w-32 h-32 rounded-full" src="../../images/dummy/dummy-profile.png" />
                     </div>
                 </div>
                 <div class="grid md:grid-cols-1 md:flex-auto md:max-w-4xl md:min-w-0 md:mx-auto md:px-8 px-0 md:mt-0 mt-4">
                     <div class="">
                         <label class="block text-sm font-medium mb-1 text-black">Nama depan</label>
-                        <input
+                        <input 
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                            required type="text" />
+                            readonly type="text" v-model="previewDataUtama.first_name" />
                     </div>
                     <div class="mt-4">
                         <label class="block text-sm font-medium mb-1 text-black">Nama belakang</label>
                         <input
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                            required type="text" />
+                            readonly type="text" v-model="previewDataUtama.last_name" />
                     </div>
                     <div class="mt-4">
                         <label class="block text-sm font-medium mb-1 text-black">Email</label>
                         <input
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                            required type="email" />
+                            readonly type="email" v-model="previewDataUtama.email" />
                     </div>
                     <div class="mt-4">
                         <label class="block text-sm font-medium mb-1 text-black">Nomor Whatsapp</label>
                         <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                            required  @keypress="isInputNumber($event)" type="text" />
+                            readonly  @keypress="isInputNumber($event)" type="text" v-model="previewDataUtama.phone" />
                     </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-1" for="password">Kata sandi</label>
+                    <div class="mt-4">
+                        <label class="block text-sm font-medium mb-1 text-black" for="password">Kata sandi</label>
                         <input class="bg-gray-100 border-0 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                            required type="password" autoComplete="on"  />
+                            readonly type="password" autoComplete="on" v-model="previewDataUtama.password" />
                     </div>
                 </div>
             </div>
@@ -106,24 +111,48 @@ const isInputNumber = (evt) => {
                 <div class="font-bold text-xl text-black">
                     Data Tambahan
                 </div>
-                <button
+                <router-link to="/suntingdatatambahan"
                     class="h-9 bg-jobhunGreen hover:bg-emerald-600 text-white px-7 rounded text-sm flex justify-end items-center">
-                    Daftar
-                </button>
+                    Sunting
+                </router-link>
             </div>
             <div class="flex-auto max-w-4xl min-w-0 mx-auto pt-6 lg:px-8 px-6 lg:pt-8">
                 <div class="">
                     <div class="">
-                        <label class="block text-sm font-medium mb-1 text-black">Nama lengkap</label>
+                        <label class="block text-sm font-medium mb-1 text-black">Profesi</label>
                         <input
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                            required type="text" />
+                            readonly type="text" />
                     </div>
                     <div class="mt-4">
-                        <label class="block text-sm font-medium mb-1 text-black">Alamat email</label>
+                        <label class="block text-sm font-medium mb-1 text-black">Perusahaan</label>
                         <input
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                            required type="email" />
+                            readonly type="text" />
+                    </div>
+                    <div class="mt-4">
+                        <label class="block text-sm font-medium mb-1 text-black">Lokasi</label>
+                        <input
+                            class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
+                            readonly type="text" />
+                    </div>
+                    <div class="mt-4">
+                        <label class="block text-sm font-medium mb-1 text-black">Pendidikan</label>
+                        <input
+                            class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
+                            readonly type="text" />
+                    </div>
+                    <div class="mt-4">
+                        <label class="block text-sm font-medium mb-1 text-black">Kemampuan yang dikuasai</label>
+                        <input
+                            class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
+                            readonly type="text" />
+                    </div>
+                    <div class="mt-4">
+                        <label class="block text-sm font-medium mb-1 text-black">LinkedIn</label>
+                        <input
+                            class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
+                            readonly type="text" />
                     </div>
                 </div>
             </div>

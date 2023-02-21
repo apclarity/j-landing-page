@@ -94,6 +94,8 @@ import DashboardFormTambahPengguna from "./pages/settings/Pengguna/Form/Index.vu
 import DashboardFormEditPengguna from "./pages/settings/Pengguna/Edit/Index.vue"
 import DashboardKonsultasi from "./pages/konsultasi/Table/Index.vue"
 import ProfilPengguna from "./pages/ProfilPengguna/Index.vue"
+import EditDataUtamaProfilPengguna from "./pages/ProfilPengguna/EditDataUtama/Index.vue"
+import EditDataTambahanProfilPengguna from "./pages/ProfilPengguna/EditDataTambahan/Index.vue"
 
 const routerHistory = createWebHistory();
 
@@ -219,6 +221,14 @@ const router = createRouter({
         {
           path: "/profilpengguna",
           component: ProfilPengguna,
+        },
+        {
+          path: "/suntingprofil",
+          component: EditDataUtamaProfilPengguna,
+        }, 
+        {
+          path: "/suntingdatatambahan",
+          component: EditDataTambahanProfilPengguna,
         },
       ],
     },
