@@ -99,6 +99,8 @@ import EditDataUtamaProfilPengguna from "./pages/ProfilPengguna/EditDataUtama/In
 import EditDataTambahanProfilPengguna from "./pages/ProfilPengguna/EditDataTambahan/Index.vue"
 import DashboardUndangExpert from "./pages/undang-expert/Table/Index.vue"
 import DashboardDetailUndangExpert from "./pages/undang-expert/detail/Index.vue"
+import DashboardDetailRekrutExpert from "./pages/rekrut-expert/detail/Index.vue"
+import DashboardRekrutExpert from "./pages/rekrut-expert/Table/Index.vue"
 
 
 const routerHistory = createWebHistory();
@@ -245,6 +247,14 @@ const router = createRouter({
         {
           path: "/undangexpert/detail/:id",
           component: DashboardDetailUndangExpert,
+        },
+        {
+          path: "/rekrutexpert/table",
+          component: DashboardRekrutExpert,
+        },
+        {
+          path: "/rekrutexpert/detail/:id",
+          component: DashboardDetailRekrutExpert,
         },
       ],
     },

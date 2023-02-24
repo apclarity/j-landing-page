@@ -583,34 +583,36 @@
                 </li>
             </router-link>
             <!-- Rekrut Expert -->
-            <router-link to="/calendar" custom v-slot="{ href, navigate, isExactActive }">
-              <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0" :class="isExactActive && 'bg-slate-900'">
-                <a class="block text-slate-200 hover:text-white truncate transition duration-150" :class="isExactActive && 'hover:text-slate-200'" :href="href" @click="navigate">
-                  <div class="flex items-center">
-
-                    <svg fill="#000000" version="1.1" id="Capa_1" class="shrink h-6 w-6"
-                    viewBox="0 0 383.235 383.235" xml:space="preserve">
-                      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                      <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                      <g id="SVGRepo_iconCarrier">
-                        <g>
+            <router-link to="/rekrutexpert/table" custom v-slot="{ href, navigate, isExactActive }">
+              <li class="mb-1 last:mb-0 px-3 py-2">
+                  <a class="block text-black hover:text-emerald-500 transition duration-150 truncate"
+                    :class="isExactActive && '!text-emerald-500'" :href="href" @click="navigate">
+                      <div class="flex items-center">
+                        <svg fill="#000000" version="1.1" id="Capa_1" class="shrink h-6 w-6"
+                      viewBox="0 0 383.235 383.235" xml:space="preserve">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
                           <g>
                             <g>
-                              <path
-                                d="M322.618,73.735h-38V55.096C284.618,24.716,259.902,0,229.521,0h-75.808c-30.38,0-55.096,24.716-55.096,55.096v18.639 h-38c-27.614,0-50,22.386-50,50v62.883h362v-62.883C372.618,96.12,350.232,73.735,322.618,73.735z M244.618,73.735h-106V55.096 c0-8.324,6.771-15.096,15.096-15.096h75.809c8.324,0,15.096,6.772,15.096,15.096L244.618,73.735L244.618,73.735z">
-                              </path>
-                              <path
-                                d="M323.284,244.333c0,6.425-5.207,11.632-11.631,11.632h-41.404c-6.424,0-11.631-5.207-11.631-11.632v-20.702h-134v20.702 c0,6.425-5.207,11.632-11.631,11.632H71.581c-6.422,0-11.629-5.207-11.629-11.632v-20.702H10.618v109.604 c0,27.613,22.386,50,50,50h262c27.614,0,50-22.387,50-50V223.631h-49.334V244.333L323.284,244.333z">
-                              </path>
+                              <g>
+                                <path
+                                  d="M322.618,73.735h-38V55.096C284.618,24.716,259.902,0,229.521,0h-75.808c-30.38,0-55.096,24.716-55.096,55.096v18.639 h-38c-27.614,0-50,22.386-50,50v62.883h362v-62.883C372.618,96.12,350.232,73.735,322.618,73.735z M244.618,73.735h-106V55.096 c0-8.324,6.771-15.096,15.096-15.096h75.809c8.324,0,15.096,6.772,15.096,15.096L244.618,73.735L244.618,73.735z">
+                                </path>
+                                <path
+                                  d="M323.284,244.333c0,6.425-5.207,11.632-11.631,11.632h-41.404c-6.424,0-11.631-5.207-11.631-11.632v-20.702h-134v20.702 c0,6.425-5.207,11.632-11.631,11.632H71.581c-6.422,0-11.629-5.207-11.629-11.632v-20.702H10.618v109.604 c0,27.613,22.386,50,50,50h262c27.614,0,50-22.387,50-50V223.631h-49.334V244.333L323.284,244.333z">
+                                </path>
+                              </g>
                             </g>
                           </g>
                         </g>
-                      </g>
-                    </svg>
-                    <span class="text-sm text-black font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Rekrut Expert</span>
-                  </div>
-                </a>
-              </li>
+                      </svg>
+                      <span
+                        class="text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Rekrut
+                        Expert</span>
+                      </div>
+                  </a>
+                </li>
             </router-link>
             <hr class="h-px my-3 bg-gray-300 border-0">
             <!-- Settings -->
