@@ -39,7 +39,7 @@ const confirmDeleteExpert = async () => {
     </td>
     <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap w-px">
       <div class="space-x-1 inline-flex">
-        <router-link :to="'/konsultasi/detail/' + tableExpertPermanent.id"
+        <router-link :to="'/undangexpert/detail/' + tableExpertPermanent.id"
           class=" my-auto pl-1">
           <button class="h-8 w-20 bg-gray-300 hover:bg-gray-400 rounded-sm">
             <span class="text-black font-normal">

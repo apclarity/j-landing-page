@@ -93,9 +93,13 @@ import DashboardTablePengguna from "./pages/settings/Pengguna/Table/Index.vue"
 import DashboardFormTambahPengguna from "./pages/settings/Pengguna/Form/Index.vue"
 import DashboardFormEditPengguna from "./pages/settings/Pengguna/Edit/Index.vue"
 import DashboardKonsultasi from "./pages/konsultasi/Table/Index.vue"
+import DashboardDetailKonsultasi from "./pages/konsultasi/detail/Index.vue"
 import ProfilPengguna from "./pages/ProfilPengguna/Index.vue"
 import EditDataUtamaProfilPengguna from "./pages/ProfilPengguna/EditDataUtama/Index.vue"
 import EditDataTambahanProfilPengguna from "./pages/ProfilPengguna/EditDataTambahan/Index.vue"
+import DashboardUndangExpert from "./pages/undang-expert/Table/Index.vue"
+import DashboardDetailUndangExpert from "./pages/undang-expert/detail/Index.vue"
+
 
 const routerHistory = createWebHistory();
 
@@ -219,6 +223,10 @@ const router = createRouter({
           component: DashboardKonsultasi,
         },
         {
+          path: "/konsultasi/detail/:id",
+          component: DashboardDetailKonsultasi,
+        },
+        {
           path: "/profilpengguna",
           component: ProfilPengguna,
         },
@@ -229,6 +237,14 @@ const router = createRouter({
         {
           path: "/suntingdatatambahan",
           component: EditDataTambahanProfilPengguna,
+        },
+        {
+          path: "/undangexpert/table",
+          component: DashboardUndangExpert,
+        },
+        {
+          path: "/undangexpert/detail/:id",
+          component: DashboardDetailUndangExpert,
         },
       ],
     },

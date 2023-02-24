@@ -43,8 +43,10 @@ const DATA_TABLE_CONSULTATION = "/consultation/table-consultation"
 const DATA_DETAIL_CONSULTATION = "/consultation/detail-consultation"
 // ------ Recruit Expert --------------------------------------------
 const DATA_TABLE_RECRUIT_EXPERT = "/recruit-expert/table-recruit-expert"
-// ------ Recruit Expert --------------------------------------------
-const DATA_TABLE_INVITE_EXPERT = "/invite-expert/table-invite-expert"
+const DATA_DETAIL_RECRUIT_EXPERT = "/recruit-expert/detail-recruit-expert"
+// ------ Undang Expert --------------------------------------------
+const DATA_TABLE_INVITE_EXPERT = "/invite-expert/table-invite-expert" 
+const DATA_DETAIL_INVITE_EXPERT = "/invite-expert/detail-invite-expert"
 // ------ Pelatihan -------------------------------------------------
 const DATA_DETAIL_TRAINING = "/training/detail-training"
 const DATA_TABLE_TRAINING = "/training/table-training"
@@ -118,6 +120,14 @@ export const useDataExpertStore = defineStore({
       total: 0,
     },
     detailPelatihan: {
+      education: {},
+      social_media: {},
+    },
+    detailRecruitExpert: {
+      education: {},
+      social_media: {},
+    },
+    detailUndangExpert: {
       education: {},
       social_media: {},
     }
@@ -272,7 +282,7 @@ export const useDataExpertStore = defineStore({
         await api.post(EMAIL_VERIFICATION, payload)
       } catch (error){}
     },
-    async detailProfileUser(id) {
+    async getDataDetailProfileUser(id) {
       try {
         let res = await api.get(EMAIL_VERIFICATION + id);
         this.detailExpert = res;
@@ -302,12 +312,24 @@ export const useDataExpertStore = defineStore({
         this.pagination = res.pagination
       } catch (error) {}
     },
+    async getDataDetailRecruitExpert(id) {
+      try {
+        let res = await api.get(DATA_DETAIL_RECRUIT_EXPERT + id);
+        this.detailRecruitExpert = res.data;
+      } catch (error) {}
+    },
     // ------------------------ Undang Expert -------------------------
     async getDataTableInviteExpert(payload) {
       try {
         let res = await api.get(DATA_TABLE_INVITE_EXPERT + "?page=" + this.pagination.page + "&per_page=" + this.pagination.per_page + "&search=" + this.pagination.search, payload);
         this.tableInviteExpert = res.data;
         this.pagination = res.pagination
+      } catch (error) {}
+    },
+    async getDataDetailUndangExpert(id) {
+      try {
+        let res = await api.get(DATA_DETAIL_INVITE_EXPERT + id);
+        this.detailUndangExpert = res.data;
       } catch (error) {}
     },
     // ------------------------ Pelatihan -----------------------------

@@ -62,7 +62,7 @@ onMounted(() => {
             <li class="inline-flex items-center">
               <a href="#"
                 class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
-                <h1 class="text-2xl md:text-3xl text-slate-800 font-bold">Konsultasi ✨</h1>
+                <h1 class="text-2xl md:text-3xl text-slate-800 font-bold">Undang Expert ✨</h1>
               </a>
             </li>
           </ol>
