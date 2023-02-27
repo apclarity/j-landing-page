@@ -23,9 +23,9 @@ const formRekrutExpert = ref({
     linkedin: "",
     email: "",
     phone: "",
-    projectDetail: "",
-    jobDetail: "",
-    termCondition: "",
+    project_detail: "",
+    job_detail: "",
+    description: "",
     deadline: "",
     budget: ""
 })
@@ -246,19 +246,19 @@ const formValidation = () => {
                         <label class="block text-sm font-medium mb-1 text-black">Detail proyek</label>
                         <textarea rows="5"
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                            required v-model="formRekrutExpert.projectDetail" type="text" />
+                            required v-model="formRekrutExpert.project_detail" type="text" />
                     </div>
                     <div class="mt-4">
                         <label class="block text-sm font-medium mb-1 text-black">Detail pekerjaan expert</label>
                         <textarea rows="5"
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                            required v-model="formRekrutExpert.jobDetail" type="text" />
+                            required v-model="formRekrutExpert.job_detail" type="text" />
                     </div>
                     <div class="mt-4">
                         <label class="block text-sm font-medium mb-1 text-black">Syarat dan kualifikasi</label>
                         <textarea rows="5"
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                            required v-model="formRekrutExpert.termCondition" type="text" />
+                            required v-model="formRekrutExpert.description" type="text" />
                     </div>
                     <div class="mt-4">
                         <label class="block text-sm font-medium mb-1 text-black">Batas waktu pekerjaan</label>

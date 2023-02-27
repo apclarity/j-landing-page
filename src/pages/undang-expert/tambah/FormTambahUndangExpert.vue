@@ -7,19 +7,40 @@ import { useDataExpertStore } from '../../../stores/store-experts'
 import flatPickr from 'vue-flatpickr-component'
 import { useOptionsStore } from '../../../stores/store-options'
 import DateSingle from './DateSingle.vue'
+import { convertRawIntToRupiah } from '../../../utils/Helper'
 
-// const route = useRoute()
-// const id = route.params.id
+const route = useRoute()
+const id = route.params.id
 
-// const formSubmissionExpertTempStore = useDataExpertStore()
-// const optionStore = useOptionsStore()
+const formTambahTransaksiUndangExpert = useDataExpertStore()
+const optionStore = useOptionsStore()
+const { formTambahTransaksiUndangExpertDashboard } = storeToRefs(formTambahTransaksiUndangExpert)
 
-// await formSubmissionExpertTempStore.getDataSubmissionExpertTemp(id)
-// const { submissionExpertTemp } = storeToRefs(formSubmissionExpertTempStore)
+const duration = ref(1)
+const price = ref(200000)
 
-// const { listSector, listDomicile, listService, listTitle } = storeToRefs(optionStore)
+const increment = () => {
+    duration.value += 1
+}
 
-const formDetailDashboardUndangExpert = ref({
+const decrement = () => {
+    if (duration.value === 1) return
+    duration.value -= 1
+}
+
+const pricePerHour = computed(() => {
+    var pricePerHour = price.value
+    return "Rp" + pricePerHour.toString().replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1\.")
+    return pricePerHour
+})
+
+const total = computed(() => {
+    var total = duration.value * price.value
+    return "Rp" + total.toString().replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1\.")
+    return total
+})
+
+const formTambahDashboardUndangExpert = ref({
     company: "",
     company_description: "",
     event: "",
@@ -31,9 +52,9 @@ const formDetailDashboardUndangExpert = ref({
     benefit: ""
 })
 
-const formatBudget = () => {
-    formDetailDashboardUndangExpert.value.budget = convertRawIntToRupiah(formDetailDashboardUndangExpert.value.budget)
-}
+const discussions = [
+    'Teori', 'Praktik', 'Tools', 'Soft Skill'
+]
 
 const hours = [
     { text: '00' }, { text: '01' }, { text: '02' }, { text: '03' }, { text: '04' }, { text: '05' }, { text: '06' }, { text: '07' }, { text: '08' },
@@ -58,20 +79,33 @@ const config = {
     altInput: true,
     altFormat: "F j, Y",
     static: true,
-    readonly: true,
     monthSelectorType: 'static',
     dateFormat: 'Z',
     prevArrow: '<svg class="fill-current" width="7" height="11" viewBox="0 0 7 11"><path d="M5.4 10.8l1.4-1.4-4-4 4-4L5.4 0 0 5.4z" /></svg>',
     nextArrow: '<svg class="fill-current" width="7" height="11" viewBox="0 0 7 11"><path d="M1.4 10.8L0 9.4l4-4-4-4L1.4 0l5.4 5.4z" /></svg>',
 }
 
-const isInputNumber = (evt) => {
+const isNumberCurrency = (evt) => {
     evt = (evt) ? evt : window.event;
     var charCode = (evt.which) ? evt.which : evt.keyCode;
     if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
         evt.preventDefault();;
     } else {
         return true;
+    }
+}
+
+const formatBudget = () => {
+    formTambahDashboardUndangExpert.value.fee = convertRawIntToRupiah(formTambahDashboardUndangExpert.value.fee)
+}
+
+const formValidation = async () => {
+    if (formTambahDashboardUndangExpert.value.start_date != '' && formTambahDashboardUndangExpert.value.start_hour != '' && formTambahDashboardUndangExpert.value.start_minute != '' &&
+        formTambahDashboardUndangExpert.value.discussion != '' && formTambahDashboardUndangExpert.value.description != '' && formTambahDashboardUndangExpert.value.total != '' &&
+        formTambahDashboardUndangExpert.value.duration != '') {
+            if(await formTambahTransaksiUndangExpert.formTambahTransaksiUndangExpertDashboard(formTambahDashboardUndangExpert.value)){
+            return
+        }
     }
 }
 </script>
@@ -86,53 +120,53 @@ const isInputNumber = (evt) => {
             </div>
         </div>
     </div>
-    <form >
+    <form @submit.prevent="formValidation()">
         <div class="flex-auto max-w-4xl min-w-0 mx-auto pt-6 lg:px-8 px-6 lg:pt-4 md:mt-0">
             <div>
                 <label class="block text-sm font-medium mb-1 text-black">Asal perusahaan/organisasi/komunitas</label>
                 <input
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full    "
-                    readonly v-model="formDetailDashboardUndangExpert.company" type="text" />
+                    require v-model="formTambahDashboardUndangExpert.company" type="text" />
             </div>
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">Penjelasan singkat tentang
                     perusahaan/organisasi/komunitas</label>
                 <textarea rows="5"
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                    readonly v-model="formDetailDashboardUndangExpert.company_description" type="text" />
+                    require v-model="formTambahDashboardUndangExpert.company_description" type="text" />
             </div>
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">Nama acara/kegiatan</label>
                 <input
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                    v-model="formDetailDashboardUndangExpert.event" readonly type="text" />
+                    v-model="formTambahDashboardUndangExpert.event" require type="text" />
             </div>
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">Penjelasan tentang acara/kegiatan</label>
                 <textarea rows="5"
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                    readonly v-model="formDetailDashboardUndangExpert.event_description" type="text" />
+                    require v-model="formTambahDashboardUndangExpert.event_description" type="text" />
             </div>
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">Tanggal pelaksanaan acara</label>
                 <div class="flex items-center space-x-2">
-                    <DateSingle v-model="formDetailDashboardUndangExpert.start_date" />
+                    <DateSingle v-model="formTambahDashboardUndangExpert.start_date" />
                 </div>
             </div>
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">Format acara</label>
                 <div class="flex items-center">
-                    <input type="radio" v-model="formDetailDashboardUndangExpert.format_event" readonly value="Talkshow"
+                    <input type="radio" v-model="formTambahDashboardUndangExpert.format_event" require value="Talkshow"
                         class="w-4 h-4 text-jobhunGreen bg-gray-200 border-gray-200 focus:ring-jobhunGreen focus:ring-1 hover:ring-jobhunGreen hover:ring-1">
                     <span class="text-sm ml-1 text-black">Talkshow</span>
                 </div>
                 <div class="flex items-center">
-                    <input type="radio" v-model="formDetailDashboardUndangExpert.format_event" readonly value="Workshop"
+                    <input type="radio" v-model="formTambahDashboardUndangExpert.format_event" require value="Workshop"
                         class="w-4 h-4 text-jobhunGreen bg-gray-200 border-gray-200 focus:ring-jobhunGreen focus:ring-1 hover:ring-jobhunGreen hover:ring-1">
                     <span class="text-sm ml-1 text-black">Workshop</span>
                 </div>
                 <div class="flex items-center">
-                    <input type="radio" v-model="formDetailDashboardUndangExpert.format_event" readonly value="Lainnya"
+                    <input type="radio" v-model="formTambahDashboardUndangExpert.format_event" require value="Lainnya"
                         class="w-4 h-4 text-jobhunGreen bg-gray-200 border-gray-200 focus:ring-jobhunGreen focus:ring-1 hover:ring-jobhunGreen hover:ring-1">
                     <span class="text-sm ml-1 text-black">Lainnya</span>
                 </div>
@@ -141,20 +175,30 @@ const isInputNumber = (evt) => {
                 <label class="block text-sm font-medium mb-1 text-black">Jumlah target peserta secara spesifik</label>
                 <input
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-md"
-                    @keypress="isNumberCurrency($event)" readonly v-model="formDetailDashboardUndangExpert.target" type="text" />
+                    @keypress="isNumberCurrency($event)" require v-model="formTambahDashboardUndangExpert.target" type="text" />
             </div>
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">Berapa budget yang diajukan untuk fee
                     speaker?</label>
                 <input
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-md"
-                    @input="formatBudget" readonly v-model="formDetailDashboardUndangExpert.fee" type="text" />
+                    @input="formatBudget" require v-model="formTambahDashboardUndangExpert.fee" type="text" />
             </div>
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">Apakah Jobhun bisa mendapatkan benefit promosi lainnya? Jika ada, sebutkan!</label>
                 <textarea rows="5"
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                    readonly v-model="formDetailDashboardUndangExpert.benefit" type="text" />
+                    require v-model="formTambahDashboardUndangExpert.benefit" type="text" />
+            </div>
+            <div>
+                <div class="flex justify-end">
+                    <div>
+                        <button type="submit"
+                            class="h-9 mt-5 bg-jobhunGreen hover:bg-emerald-600 text-white px-7 rounded text-sm">
+                            Tambah
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </form>

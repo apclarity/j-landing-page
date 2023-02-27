@@ -20,15 +20,15 @@ const props = defineProps({
 const { dataUndangExpert } = props
 
 const formUndangExpert = ref({
-    from: "",
-    description: "",
-    eventName: "",
-    eventDescription: "",
-    date: "",
-    typePelatihan: "",
+    company: "",
+    company_description: "",
+    event: "",
+    event_description: "",
+    start_date: "",
+    format_event: "",
     target: "",
-    budget: "",
-    topic: ""
+    fee: "",
+    benefit: ""
 })
 
 const isNumberCurrency = (evt) => {
@@ -42,7 +42,7 @@ const isNumberCurrency = (evt) => {
 }
 
 const formatBudget = () => {
-    formUndangExpert.value.budget = convertRawIntToRupiah(formUndangExpert.value.budget)
+    formUndangExpert.value.fee = convertRawIntToRupiah(formUndangExpert.value.fee)
 }
 
 const hours = [
@@ -187,47 +187,47 @@ const formValidation = () => {
                         <label class="block text-sm font-medium mb-1 text-black">Asal perusahaan/organisasi/komunitas</label>
                         <input
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full    "
-                            required placeholder="Nama perusahaan" v-model="formUndangExpert.from" type="text" />
+                            required placeholder="Nama perusahaan" v-model="formUndangExpert.company" type="text" />
                     </div>
                     <div class="mt-4">
                         <label class="block text-sm font-medium mb-1 text-black">Penjelasan singkat tentang
                             perusahaan/organisasi/komunitas</label>
                         <textarea rows="5"
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                            required v-model="formUndangExpert.description" type="text" />
+                            required v-model="formUndangExpert.company_description" type="text" />
                     </div>
                     <div class="mt-4">
                         <label class="block text-sm font-medium mb-1 text-black">Nama acara/kegiatan</label>
                         <input
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                            v-model="formUndangExpert.eventName" required type="text" />
+                            v-model="formUndangExpert.event" required type="text" />
                     </div>
                     <div class="mt-4">
                         <label class="block text-sm font-medium mb-1 text-black">Penjelasan tentang acara/kegiatan</label>
                         <textarea rows="5"
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                            required v-model="formUndangExpert.eventDescription" type="text" />
+                            required v-model="formUndangExpert.event_description" type="text" />
                     </div>
                     <div class="mt-4">
                         <label class="block text-sm font-medium mb-1 text-black">Tanggal pelaksanaan acara</label>
                         <div class="flex items-center space-x-2">
-                            <DateSingle v-model="formUndangExpert.date" />
+                            <DateSingle v-model="formUndangExpert.start_date" />
                         </div>
                     </div>
                     <div class="mt-4">
                         <label class="block text-sm font-medium mb-1 text-black">Format acara</label>
                         <div class="flex items-center">
-                            <input type="radio" v-model="formUndangExpert.typePelatihan" required value="Talkshow"
+                            <input type="radio" v-model="formUndangExpert.format_event" required value="Talkshow"
                                 class="w-4 h-4 text-jobhunGreen bg-gray-200 border-gray-200 focus:ring-jobhunGreen focus:ring-1 hover:ring-jobhunGreen hover:ring-1">
                             <span class="text-sm ml-1 text-black">Talkshow</span>
                         </div>
                         <div class="flex items-center">
-                            <input type="radio" v-model="formUndangExpert.typePelatihan" required value="Workshop"
+                            <input type="radio" v-model="formUndangExpert.format_event" required value="Workshop"
                                 class="w-4 h-4 text-jobhunGreen bg-gray-200 border-gray-200 focus:ring-jobhunGreen focus:ring-1 hover:ring-jobhunGreen hover:ring-1">
                             <span class="text-sm ml-1 text-black">Workshop</span>
                         </div>
                         <div class="flex items-center">
-                            <input type="radio" v-model="formUndangExpert.typePelatihan" required value="Lainnya"
+                            <input type="radio" v-model="formUndangExpert.format_event" required value="Lainnya"
                                 class="w-4 h-4 text-jobhunGreen bg-gray-200 border-gray-200 focus:ring-jobhunGreen focus:ring-1 hover:ring-jobhunGreen hover:ring-1">
                             <span class="text-sm ml-1 text-black">Lainnya</span>
                         </div>
@@ -243,13 +243,13 @@ const formValidation = () => {
                             speaker?</label>
                         <input
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-md"
-                            @input="formatBudget" required v-model="formUndangExpert.budget" placeholder="Rp" type="text" />
+                            @input="formatBudget" required v-model="formUndangExpert.fee" placeholder="Rp" type="text" />
                     </div>
                     <div class="mt-4">
                         <label class="block text-sm font-medium mb-1 text-black">Apakah Jobhun bisa mendapatkan benefit promosi lainnya? Jika ada, sebutkan!</label>
                         <textarea rows="5"
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                            required v-model="formUndangExpert.topic" type="text" />
+                            required v-model="formUndangExpert.benefit" type="text" />
                     </div>
                 </div>
             </div>

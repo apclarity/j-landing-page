@@ -94,12 +94,15 @@ import DashboardFormTambahPengguna from "./pages/settings/Pengguna/Form/Index.vu
 import DashboardFormEditPengguna from "./pages/settings/Pengguna/Edit/Index.vue"
 import DashboardKonsultasi from "./pages/konsultasi/Table/Index.vue"
 import DashboardDetailKonsultasi from "./pages/konsultasi/detail/Index.vue"
+import DashboardTambahKonsultasi from "./pages/konsultasi/tambah/Index.vue"
 import ProfilPengguna from "./pages/ProfilPengguna/Index.vue"
 import EditDataUtamaProfilPengguna from "./pages/ProfilPengguna/EditDataUtama/Index.vue"
 import EditDataTambahanProfilPengguna from "./pages/ProfilPengguna/EditDataTambahan/Index.vue"
 import DashboardUndangExpert from "./pages/undang-expert/Table/Index.vue"
 import DashboardDetailUndangExpert from "./pages/undang-expert/detail/Index.vue"
+import DashboardTambahUndangExpert from "./pages/undang-expert/tambah/Index.vue"
 import DashboardDetailRekrutExpert from "./pages/rekrut-expert/detail/Index.vue"
+import DashboardTambahRekrutExpert from "./pages/rekrut-expert/tambah/Index.vue"
 import DashboardRekrutExpert from "./pages/rekrut-expert/Table/Index.vue"
 
 
@@ -229,6 +232,10 @@ const router = createRouter({
           component: DashboardDetailKonsultasi,
         },
         {
+          path: "/konsultasi/tambahkonsultasi",
+          component: DashboardTambahKonsultasi,
+        },
+        {
           path: "/profilpengguna",
           component: ProfilPengguna,
         },
@@ -249,12 +256,20 @@ const router = createRouter({
           component: DashboardDetailUndangExpert,
         },
         {
+          path: "/undangexpert/tambahundangexpert",
+          component: DashboardTambahUndangExpert,
+        },
+        {
           path: "/rekrutexpert/table",
           component: DashboardRekrutExpert,
         },
         {
           path: "/rekrutexpert/detail/:id",
           component: DashboardDetailRekrutExpert,
+        },
+        {
+          path: "/rekrutexpert/tambahrekrutexpert",
+          component: DashboardTambahRekrutExpert,
         },
       ],
     },

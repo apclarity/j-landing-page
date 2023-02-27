@@ -23,7 +23,7 @@ const signUp = async () => {
             alert('Kata sandi tidak sesuai')
         }else {
             await signinStore.signup(auth.value)
-            router.push({ path: '/verifikasiakun' })
+            // router.push({ path: '/verifikasiakun' })
         }
     }
 }
@@ -39,7 +39,7 @@ const onlyNumber = (evt)=> {
 }
 </script>
 <template>
-    <VerfikasiAkun :email="test" class="sr-only"/>
+    <!-- <VerfikasiAkun :email="test" class="sr-only"/> -->
     <main class="bg-white">
         <div class="relative flex">
             <div class="w-full md:w-1/2">
