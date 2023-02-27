@@ -110,7 +110,7 @@ const formValidation = async () => {
     <div class="flex-auto max-w-4xl min-w-0 mx-auto pt-6 lg:px-8 px-6 lg:pt-8 py-3 md:py-8">
         <div class="sm:flex sm:justify-between sm:items-center mb-5 grid grid-flow-row md:flex">
             <div class="">
-                <h1 class="text-2xl md:text-3xl text-slate-800 font-bold">Konsultasi ✨</h1>
+                <h1 class="text-2xl md:text-3xl text-slate-800 font-bold">Tambah Transaksi Konsultasi ✨</h1>
             </div>
         </div>
     </div>
