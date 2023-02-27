@@ -3,7 +3,8 @@ import { computed, ref } from "vue"
 import { useSigninStore } from "../store"
 import { useRouter } from "vue-router"
 import { MSG_SIGNUP } from "../constant"
-import VerfikasiAkun from "../VerifikasiEmail/Index.vue"
+// import VerfikasiAkun from "../VerifikasiEmail/Index.vue"
+import VerifikasiAkun from './ModalVerifikasiAkun.vue'
 
 const router = useRouter()
 const signinStore = useSigninStore()
@@ -11,7 +12,7 @@ const signinStore = useSigninStore()
 const auth = ref({
     first_name: "",
     last_name: "",
-    email: "apapapap",
+    email: "",
     phone: "",
     password: "",
     confirm_password: ""
@@ -23,7 +24,7 @@ const signUp = async () => {
             alert('Kata sandi tidak sesuai')
         }else {
             await signinStore.signup(auth.value)
-            // router.push({ path: '/verifikasiakun' })
+            openModalEmailVerifikasiAkun()
         }
     }
 }
@@ -36,6 +37,13 @@ const onlyNumber = (evt)=> {
     } else {
         return true;
     }
+}
+
+// ============= Modal Verifikasi Akun ===============
+const verifikasiAkun = ref(false)
+
+const openModalEmailVerifikasiAkun = () => {
+    verifikasiAkun.value = true
 }
 </script>
 <template>
@@ -102,6 +110,7 @@ const onlyNumber = (evt)=> {
                             <div  class="justify-end flex mt-6">
                                 <button @click="signUp" class="btn bg-jobhunGreen hover:bg-emerald-600 text-white ml-3">Sign Up
                                 </button>
+                                <VerifikasiAkun :verifikasiAkun="verifikasiAkun" @close-modal="verifikasiAkun = false" :email="auth.email" />
                             </div>
                         </form>
                         <!-- Footer -->
