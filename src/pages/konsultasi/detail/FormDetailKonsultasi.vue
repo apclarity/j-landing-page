@@ -19,7 +19,7 @@ const { submissionExpertTemp } = storeToRefs(formSubmissionExpertTempStore)
 
 const { listSector, listDomicile, listService, listTitle } = storeToRefs(optionStore)
 
-const duration = ref(1)
+const duration = ref(120)
 const price = ref(200000)
 
 const increment = () => {
@@ -45,8 +45,8 @@ const total = computed(() => {
 
 const formDetailDashboardExpertKonsultasi = ref({
     date: "",
-    startHour: "",
-    startMinute: "",
+    start_hour: "",
+    start_minute: "",
     discussion: [],
     topic: "",
     total: "",
@@ -113,19 +113,19 @@ const isInputNumber = (evt) => {
             <div>
                 <label class="block text-sm font-medium mb-1 text-black">Pengajuan tanggal konsultasi</label>
                 <div class="flex items-center space-x-2">
-                    <DateSingle v-model="formDetailDashboardExpertKonsultasi.date" />
+                    <DateSingle v-model="formDetailDashboardExpertKonsultasi.date" disabled />
                 </div>
             </div>
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">Pengajuan waktu konsultasi</label>
                 <div class="flex items-center space-x-2">
-                    <select v-model="formDetailDashboardExpertKonsultasi.startHour"
+                    <select v-model="formDetailDashboardExpertKonsultasi.startHour" disabled
                         class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-14"
                         @click.prevent="dropdownOpen = !dropdownOpen">
                         <option v-for="hour in hours" :key="hour.text">{{ hour.text }}</option>
                     </select>
                     <span class="px-1">:</span>
-                    <select v-model="formDetailDashboardExpertKonsultasi.endMinute"
+                    <select v-model="formDetailDashboardExpertKonsultasi.endMinute" disabled
                         class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-14">
                         <option v-for="minute in minutes" :key="minute.text">{{ minute.text }}</option>
                     </select>
@@ -135,18 +135,18 @@ const isInputNumber = (evt) => {
                 <label class="block text-sm font-medium mb-1 text-black">Durasi konsultasi</label>
                 <div class="custom-number-input w-32">
                     <div class="flex flex-row h-8 w-full rounded-lg relative bg-transparent mt-1">
-                        <div @click="decrement()"
+                        <!-- <div @click="decrement()"
                             class=" border-0 bg-gray-100 hover:bg-gray-300 hover:ring-emerald-500 focus:ring-jobhunGreen h-full w-20 rounded-l cursor-pointer outline-none">
                             <span class="text-2xl ml-2 font-thin">−</span>
-                        </div>
+                        </div> -->
                         <div type="number"
-                            class="border-0 bg-gray-100 hover:ring-emerald-500 focus:ring-jobhunGreen p-1.5 text-sm w-full text-center flex items-center text-gray-700">
+                            class="border-0 bg-gray-100 hover:ring-emerald-500 focus:ring-jobhunGreen p-1.5 text-sm w-15 text-center flex items-center text-gray-700 rounded-lg">
                             {{ duration }} jam
                         </div>
-                        <div @click="increment()"
+                        <!-- <div @click="increment()"
                             class="border-0 bg-gray-100 hover:bg-gray-300 hover:ring-emerald-500 focus:ring-jobhunGreen h-full w-20 rounded-r cursor-pointer">
                             <span class="ml-2 text-2xl font-thin">+</span>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -154,7 +154,7 @@ const isInputNumber = (evt) => {
                 <label class="block text-sm font-medium mb-1 text-black">Jenis pembahasan</label>
                 <Multiselect v-model="formDetailDashboardExpertKonsultasi.discussion" mode="tags" :close-on-select="false"
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen text-sm w-full"
-                    :create-option="true" readonly :options="discussions" />
+                    :create-option="true" readonly disabled :options="discussions" />
             </div>
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">Jelaskan secara spesifik topik/pembahasan apa saja

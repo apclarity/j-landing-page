@@ -20,13 +20,13 @@ const props = defineProps({
 const { dataExpertPelatihan } = props
 
 const formExpertPelatihan = ref({
-    typePelatihan: "",
-    totalPerson: "",
+    type: "",
+    ifgroup: "",
     session: "",
-    topic: "",
-    startHour: "",
-    startMinute: "",
-    days: []
+    description: "",
+    start_hour: "",
+    start_minute: "",
+    day: []
 })
 
 const days = [
@@ -197,12 +197,12 @@ const formValidation = () => {
                     <div>
                         <label class="block text-sm font-medium mb-1 text-black">Jenis pelatihan</label>
                         <div class="flex items-center">
-                            <input type="radio" v-model="formExpertPelatihan.typePelatihan" required value="Privat"
+                            <input type="radio" v-model="formExpertPelatihan.type" required value="Privat"
                                 class="w-4 h-4 text-jobhunGreen bg-gray-200 border-gray-200 focus:ring-jobhunGreen focus:ring-1 hover:ring-jobhunGreen hover:ring-1">
                                 <span class="text-sm ml-1 text-black">Privat</span>
                         </div>
                         <div class="flex items-center">
-                            <input type="radio" v-model="formExpertPelatihan.typePelatihan" required value="Grup"
+                            <input type="radio" v-model="formExpertPelatihan.type" required value="Grup"
                                 class="w-4 h-4 text-jobhunGreen bg-gray-200 border-gray-200 focus:ring-jobhunGreen focus:ring-1 hover:ring-jobhunGreen hover:ring-1">
                             <span class="text-sm ml-1 text-black">Grup</span>
                         </div>
@@ -212,7 +212,7 @@ const formValidation = () => {
                             pelatihan?</label>
                         <input
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-md"
-                            @keypress="isNumberCurrency($event)" required placeholder="Input angka" v-model="formExpertPelatihan.totalPerson" type="text" />
+                            @keypress="isNumberCurrency($event)" required placeholder="Input angka" v-model="formExpertPelatihan.ifgroup" type="text" />
                     </div>
                     <div class="mt-4">
                         <label class="block text-sm font-medium mb-1 text-black">Berapa sesi pertemuan yang diajukan?</label>
@@ -224,7 +224,7 @@ const formValidation = () => {
                         <label class="block text-sm font-medium mb-1 text-black">Jelaskan secara spesifik topik/pembahasan apa saja yang ingin kamu pelajari?</label>
                         <textarea rows="5"
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                            required v-model="formExpertPelatihan.topic" type="text" />
+                            required v-model="formExpertPelatihan.description" type="text" />
                     </div>
                     <div class="mt-4">
                         <label class="block text-sm font-medium mb-1 text-black">Pengajuan hari kelas</label>
@@ -235,13 +235,13 @@ const formValidation = () => {
                     <div class="mt-4">
                         <label class="block text-sm font-medium mb-1 text-black">Pengajuan waktu pelatihan</label>
                         <div class="flex items-center space-x-2">
-                            <select required v-model="formExpertPelatihan.startHour"
+                            <select required v-model="formExpertPelatihan.start_hour"
                                 class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-14"
                                 @click.prevent="dropdownOpen = !dropdownOpen">
                                 <option v-for="hour in hours" :key="hour.text">{{hour.text}}</option>
                             </select>
                             <span class="px-1">:</span>
-                            <select required v-model="formExpertPelatihan.startMinute"
+                            <select required v-model="formExpertPelatihan.start_minute"
                                 class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-14">
                                 <option v-for="minute in minutes" :key="minute.text">{{minute.text}}</option>
                             </select>

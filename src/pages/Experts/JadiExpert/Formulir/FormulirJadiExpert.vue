@@ -209,7 +209,7 @@ const deleteSelectedSector = (sectors) => {
                         <label class="block text-sm mb-1">Gelar</label>
                     </div>
                     <div class="grid md:grid-cols-1 w-full md:w-3/5">
-                        <Multiselect v-model="formulirJadiExpert.domicile"
+                        <Multiselect v-model="formulirJadiExpert.degree"
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen text-sm w-full ml-0"
                             :options="listTitle" :object="true" />
                     </div>

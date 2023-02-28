@@ -122,17 +122,17 @@ const isInputNumber = (evt) => {
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">Format acara</label>
                 <div class="flex items-center">
-                    <input type="radio" v-model="formDetailDashboardUndangExpert.format_event" readonly value="Talkshow"
+                    <input type="radio" v-model="formDetailDashboardUndangExpert.format_event" value="Talkshow" disabled
                         class="w-4 h-4 text-jobhunGreen bg-gray-200 border-gray-200 focus:ring-jobhunGreen focus:ring-1 hover:ring-jobhunGreen hover:ring-1">
                     <span class="text-sm ml-1 text-black">Talkshow</span>
                 </div>
                 <div class="flex items-center">
-                    <input type="radio" v-model="formDetailDashboardUndangExpert.format_event" readonly value="Workshop"
+                    <input type="radio" v-model="formDetailDashboardUndangExpert.format_event" value="Workshop" disabled
                         class="w-4 h-4 text-jobhunGreen bg-gray-200 border-gray-200 focus:ring-jobhunGreen focus:ring-1 hover:ring-jobhunGreen hover:ring-1">
                     <span class="text-sm ml-1 text-black">Workshop</span>
                 </div>
                 <div class="flex items-center">
-                    <input type="radio" v-model="formDetailDashboardUndangExpert.format_event" readonly value="Lainnya"
+                    <input type="radio" v-model="formDetailDashboardUndangExpert.format_event" value="Lainnya" disabled
                         class="w-4 h-4 text-jobhunGreen bg-gray-200 border-gray-200 focus:ring-jobhunGreen focus:ring-1 hover:ring-jobhunGreen hover:ring-1">
                     <span class="text-sm ml-1 text-black">Lainnya</span>
                 </div>
