@@ -371,5 +371,11 @@ export const useDataExpertStore = defineStore({
         this.detailPelatihan = res.data;
       } catch (error) {}
     },
+    async formTambahTransaksiPelatihanDashboard(payload) {
+      try {
+        let res = await api.post(DAHSBOARD_NEW_TRANSACTION_TRAINING, payload);
+        this.formTambahTransaksiPelatihanDashboard = res.data;
+      } catch (error) {}
+    },
   },
 });

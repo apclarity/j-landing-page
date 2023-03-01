@@ -78,7 +78,7 @@ const openModalAjukanPelatihan = () => {
 const dropdownDay = ref(false)
 
 const formValidation = () => {
-    if (formExpertPelatihan.value.typePelatihan == '' && formExpertPelatihan.value.totalPerson == '' && formExpertPelatihan.value.session == '' &&
+    if (formExpertPelatihan.value.type == '' && formExpertPelatihan.value.totalPerson == '' && formExpertPelatihan.value.session == '' &&
         formExpertPelatihan.value.topic == '' && formExpertPelatihan.value.startHour == '' && formExpertPelatihan.value.startMinute == '' &&
         formExpertPelatihan.value.days == '') {
     } else {

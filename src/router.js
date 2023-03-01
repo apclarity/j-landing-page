@@ -104,6 +104,9 @@ import DashboardTambahUndangExpert from "./pages/undang-expert/tambah/Index.vue"
 import DashboardDetailRekrutExpert from "./pages/rekrut-expert/detail/Index.vue"
 import DashboardTambahRekrutExpert from "./pages/rekrut-expert/tambah/Index.vue"
 import DashboardRekrutExpert from "./pages/rekrut-expert/Table/Index.vue"
+import DashboardPelatihan from "./pages/pelatihan/pengajuan/Table/Index.vue"
+import DashboardDetailPelatihan from "./pages/pelatihan/pengajuan/detail/Index.vue"
+import DashboardTambahPelatihan from "./pages/pelatihan/pengajuan/tambah/Index.vue"
 
 
 const routerHistory = createWebHistory();
@@ -270,6 +273,18 @@ const router = createRouter({
         {
           path: "/rekrutexpert/tambahrekrutexpert",
           component: DashboardTambahRekrutExpert,
+        },
+        {
+          path: "/pelatihan/table",
+          component: DashboardPelatihan,
+        },
+        {
+          path: "/pelatihan/detail/:id",
+          component: DashboardDetailPelatihan,
+        },
+        {
+          path: "/pelatihan/tambahpelatihan",
+          component: DashboardTambahPelatihan,
         },
       ],
     },
