@@ -74,7 +74,7 @@ const toggleTabs = (tabNumber) => (openTab.value = tabNumber)
                     <button class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-jobhunGreen " 
                         @click="toggleTabs(1)"
                         v-bind:class="{ 'text-black': openTab !== 1, 'text-jobhunGreen border-jobhunGreen': openTab === 1}"
-                        >Overview
+                        >Profil Pengguna
                     </button>
                 </li>
                 <li class="mr-2">
@@ -82,7 +82,7 @@ const toggleTabs = (tabNumber) => (openTab.value = tabNumber)
                         class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-jobhunGreen"
                         @click="toggleTabs(2)"
                         v-bind:class="{ 'text-black': openTab !== 2, 'text-jobhunGreen border-jobhunGreen': openTab === 2}"
-                        >Ordering History
+                        >Riwayat Transaksi
                     </button>
                 </li>
             </ul>

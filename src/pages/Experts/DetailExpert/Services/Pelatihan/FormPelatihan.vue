@@ -2,16 +2,21 @@
 import { onMounted, ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import IconCalendar from '../../../../../partials/icons/icon-calendar.vue'
-import IconClock from '../../../../../partials/icons/icon-clock.vue'
-import IconMateri from '../../../../../partials/icons/icon-materi.vue'
-import IconLinkedin from '../../../../../partials/icons/icon-linkedin.vue'
-import IconTarif from '../../../../../partials/icons/icon-rupiah.vue'
 import Tooltip from '../../../../../components/TooltipRed.vue'
 import MultiSel from './MultipleSelectFormPelatihan.vue'
 import DropdownCheckbox from './DropdownCheckbox.vue'
 import { PrinterIcon } from '@heroicons/vue/20/solid'
 import ModalAjukan from './ModalAjukanPelatihan.vue'
 import Multiselect from '@vueform/multiselect'
+import { useOptionsStore } from '../../../../../stores/store-options'
+
+const route = useRoute()
+
+const formDashboardPelatihan = useDataExpertStore()
+const optionStore = useOptionsStore()
+
+const { formJadiExpert } = storeToRefs(formDashboardPelatihan)
+const { listSector, listDomicile, listService} = storeToRefs(optionStore)
 
 const props = defineProps({
     dataExpertPelatihan: Object

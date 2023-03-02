@@ -94,7 +94,7 @@ const isInputNumber = (evt) => {
                             readonly type="email" v-model="previewDataUtama.email" />
                     </div>
                     <div class="mt-4">
-                        <label class="block text-sm font-medium mb-1 text-black">Nomor Whatsapp</label>
+                        <label class="block text-sm font-medium mb-1 text-black">Nomor WhatsApp</label>
                         <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
                             readonly  @keypress="isInputNumber($event)" type="text" v-model="previewDataUtama.phone" />
                     </div>
