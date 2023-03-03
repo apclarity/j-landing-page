@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted, ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
+import { storeToRefs } from 'pinia'
 import IconCalendar from '../../../../../partials/icons/icon-calendar.vue'
 import Tooltip from '../../../../../components/TooltipRed.vue'
 import MultiSel from './MultipleSelectFormPelatihan.vue'
@@ -9,6 +10,7 @@ import { PrinterIcon } from '@heroicons/vue/20/solid'
 import ModalAjukan from './ModalAjukanPelatihan.vue'
 import Multiselect from '@vueform/multiselect'
 import { useOptionsStore } from '../../../../../stores/store-options'
+import { useDataExpertStore } from '../../../../../stores/store-experts.js'
 
 const route = useRoute()
 
