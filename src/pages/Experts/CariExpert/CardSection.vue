@@ -169,7 +169,7 @@ onMounted(() => {
             <div class="px-4 sm:px-6 pt-8 flex sm:py-0 mt-0 sm:-mt-10 md:-mt-20">
                 <div class="">
                     <div class="grid grid-flow-row md:flex">
-                        <div class="flex-none h-full md:w-1/3 lg:w-1/5 mr-0 md:mr-5 sm:mt-10 md:mt-40 bg-white shadow-lg rounded-sm border border-slate-200 p-5">
+                        <div class="flex-none h-full md:w-1/3 lg:w-1/5 mr-0 md:mr-5 sm:mt-10 md:mt-44 bg-white shadow-lg rounded-sm border border-slate-200 p-5">
                             <form>
                                 <div class="text-left">
                                     <span class="text-sm font-medium text-jobhunGreen">
@@ -426,14 +426,17 @@ onMounted(() => {
                             </form>
                         </div>
                         <div class="shrink w-full">
-                            <div>
+                            <div class="">
                                 <input id="action-search" placeholder="Nama atau perusahaan"
-                                    class="form-input align-middle shadow mb-8 focus:outline-none focus:bg-white focus:border-emerald-500 w-30 md:w-60 lg:w-96 mr-5 h-12 mt-10 sm:mt-5 md:mt-20 lg:mt-20"
+                                    class="form-input align-middle shadow focus:outline-none focus:bg-white focus:border-emerald-500 w-30 md:w-60 lg:w-2/3 mr-5 h-12 mt-10 sm:mt-5 md:mt-20 lg:mt-20"
                                     type="text" v-model="advanceFilterCariExpert.search" />
-                                    <button class="bg-jobhunGreen text-sm h-12 mb-8 hover:bg-emerald-600 text-white px-5 w-24 rounded align-middle mt-10 sm:mt-5 md:mt-20 lg:mt-20"
+                                    <button class="bg-jobhunGreen text-sm h-12 hover:bg-emerald-600 text-white px-5 w-24 rounded align-middle mt-10 sm:mt-5 md:mt-20 lg:mt-20"
                                     @click.prevent="runAdvanceSearch">
                                         Cari
                                     </button>
+                                    <div>
+                                    <span class="text-sm">Masih belum menentukan experts yang sesuai? Ajukan <router-link class="text-jobhunGreen" to="/cariexpert/ajukanexpert/">di sini!</router-link></span>
+                                </div>
                             </div>
                             <div class="inline-flex" v-if="advanceFilterCariExpert.sectors != '' || advanceFilterCariExpert.expertise != ''">
                                 <div class="" v-if="advanceFilterCariExpert.sectors != ''">
@@ -479,7 +482,7 @@ onMounted(() => {
                                     </div>
                                 </div>
                             </div>
-                            <div class="grid grid-cols-2 xl:grid-cols-4 md:grid-cols-2 gap-6 -mt-6">
+                            <div class="grid grid-cols-2 xl:grid-cols-4 md:grid-cols-2 gap-6">
                                 <div v-for="(expert, index) in expertAdvanceSearch" :key="expert">
                                     <CardExpert :expert="expert" v-if="index < limit" />
                                 </div>

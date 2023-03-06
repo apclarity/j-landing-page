@@ -107,6 +107,7 @@ import DashboardRekrutExpert from "./pages/rekrut-expert/Table/Index.vue"
 import DashboardPelatihan from "./pages/pelatihan/pengajuan/Table/Index.vue"
 import DashboardDetailPelatihan from "./pages/pelatihan/pengajuan/detail/Index.vue"
 import DashboardTambahPelatihan from "./pages/pelatihan/pengajuan/tambah/Index.vue"
+import TombolAjukanExpert from "./pages/Experts/CariExpert/ajukan-experts/Index.vue"
 
 
 const routerHistory = createWebHistory();
@@ -285,6 +286,10 @@ const router = createRouter({
         {
           path: "/pelatihan/tambahpelatihan",
           component: DashboardTambahPelatihan,
+        },
+        {
+          path: "/cariexpert/ajukanexpert",
+          component: TombolAjukanExpert,
         },
       ],
     },
