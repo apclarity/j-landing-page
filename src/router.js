@@ -109,7 +109,6 @@ import DashboardDetailPelatihan from "./pages/pelatihan/pengajuan/detail/Index.v
 import DashboardTambahPelatihan from "./pages/pelatihan/pengajuan/tambah/Index.vue"
 import TombolAjukanExpert from "./pages/Experts/CariExpert/ajukan-experts/Index.vue"
 import DashboardPengajuanKebutuhanExpert from "./pages/pengajuan-kebutuhan-expert/Table/Index.vue"
-import DashboardTambahPengajuanKebutuhanExpert from "./pages/pengajuan-kebutuhan-expert/tambah/FormTambahPengajuanKebutuhanExpert.vue"
 import DashboardDetailPengajuanKebutuhanExpert from "./pages/pengajuan-kebutuhan-expert/detail/FormDetailPengajuanKebutuhanExpert.vue"
 
 
@@ -297,10 +296,6 @@ const router = createRouter({
         {
           path: "/kebutuhnexpert/table",
           component: DashboardPengajuanKebutuhanExpert
-        },
-        {
-          path: "/kebutuhnexpert/tambahpengajuanexpert",
-          component: DashboardTambahPengajuanKebutuhanExpert
         },
         {
           path: "/kebutuhnexpert/detail/:id",
