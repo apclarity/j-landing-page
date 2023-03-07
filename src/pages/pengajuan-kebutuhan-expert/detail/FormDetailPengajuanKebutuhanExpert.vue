@@ -3,42 +3,35 @@ import { onMounted, ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import Multiselect from '@vueform/multiselect'
-import { useDataExpertStore } from '../../../../stores/store-experts'
-import { useOptionsStore } from '../../../../stores/store-options'
-import ModalAjukanExpert from './ModalAjukanExpert.vue'
+import { useDataExpertStore } from '../../../stores/store-experts'
+import { useOptionsStore } from '../../../stores/store-options'
+import router from '../../../router'
 
 const route = useRoute()
 const id = route.params.id
 
-const formTambahTransaksiPelatihan = useDataExpertStore()
+const formSubmissionExpertTempStore = useDataExpertStore()
 const optionStore = useOptionsStore()
-const { formTambahTransaksiPelatihanDashboard } = storeToRefs(formTambahTransaksiPelatihan)
 
-const FormPengajuanExpertCariExp = ref({
+await formSubmissionExpertTempStore.getDataSubmissionExpertTemp(id)
+const { submissionExpertTemp } = storeToRefs(formSubmissionExpertTempStore)
+
+const { listService } = storeToRefs(optionStore)
+
+const formDetailDashboardPengajuanKebutuhanExpert = ref({
     description: "",
     service: []
 })
 
-const services = [
-    'Pelatihan', 'Konsultasi', 'Undang Expert', 'Invite Expert'
-]
-
 const formValidation = async () => {
-    if (FormPengajuanExpertCariExp.value.description != '' && FormPengajuanExpertCariExp.value.service != '') {
+    if (formDetailDashboardPengajuanKebutuhanExpert.value.description != '' && formDetailDashboardPengajuanKebutuhanExpert.value.service != '') {
         // if(await formTambahTransaksiPelatihan.formTambahTransaksiPelatihanDashboard(FormPengajuanExpertCariExp.value)){
         //     openModalAjukanExpert()
         //     return
         // }
-        openModalAjukanExpert()
+            router.push('/kebutuhnexpert/table')
     }
 }
-
-const isUserAjukan = ref(false)
-
-const openModalAjukanExpert = () => {
-    isUserAjukan.value = true
-}
-
 </script>
 <style src="@vueform/multiselect/themes/default.css">
 
@@ -47,7 +40,7 @@ const openModalAjukanExpert = () => {
     <div class="flex-auto max-w-4xl min-w-0 mx-auto pt-6 lg:px-8 px-6 lg:pt-8 py-3 md:py-8">
         <div class="sm:flex sm:justify-between sm:items-center mb-5 grid grid-flow-row md:flex">
             <div class="">
-                <h1 class="text-2xl md:text-3xl text-slate-800 font-bold">Formulir Pengajuan Kebutuhan Expert</h1>
+                <h1 class="text-2xl md:text-3xl text-slate-800 font-bold">Pengajuan Kebutuhan Expert ✨</h1>
             </div>
         </div>
     </div>
@@ -55,26 +48,15 @@ const openModalAjukanExpert = () => {
         <div class="flex-auto max-w-4xl min-w-0 mx-auto pt-6 lg:px-8 px-6 lg:pt-4 md:mt-0">
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">Jenis layanan</label>
-                <Multiselect v-model="FormPengajuanExpertCariExp.service" mode="tags"
+                <Multiselect v-model="formDetailDashboardPengajuanKebutuhanExpert.service" mode="tags" disabled
                     :close-on-select="false" class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen text-sm w-full"
-                    :create-option="true" :options="services" />
+                    :create-option="true" :options="listService" />
             </div>
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">Jelaskan secara spesifik topik/pembahasan apa saja yang ingin kamu pelajari?</label>
                 <textarea rows="5"
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                    required v-model="FormPengajuanExpertCariExp.description" type="text" />
-            </div>
-            <div>
-                <div class="flex justify-end">
-                    <div>
-                        <button type="submit"
-                            class="h-9 mt-5 bg-jobhunGreen hover:bg-emerald-600 text-white px-7 rounded text-sm">
-                            Ajukan
-                        </button>
-                        <ModalAjukanExpert :isUserAjukan="isUserAjukan"/>
-                    </div>
-                </div>
+                    v-model="formDetailDashboardPengajuanKebutuhanExpert.description" type="text" readonly />
             </div>
         </div>
     </form>
