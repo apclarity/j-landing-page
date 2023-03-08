@@ -531,7 +531,7 @@
                     <li class="mb-1 last:mb-0">
                       <a class="block text-black hover:text-emerald-500 transition duration-150 truncate"
                         :class="isExactActive && '!text-emerald-500'" :href="href" @click="navigate">
-                        <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                        <span class="text-sm font-light lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
                           Pengajuan</span>
                       </a>
                     </li>
@@ -549,7 +549,7 @@
                     <li class="mb-1 last:mb-0">
                       <a class="block text-black hover:text-emerald-500 transition duration-150 truncate"
                         :class="isExactActive && '!text-emerald-500'" :href="href" @click="navigate">
-                        <span class="text-sm text-black font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                        <span class="text-sm font-light lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
                           Pelatihan reguler</span>
                       </a>
                     </li>
@@ -659,7 +659,7 @@
                       <a class="block text-black hover:text-emerald-500 transition duration-150 truncate"
                         :class="isExactActive && '!text-emerald-500'" :href="href" @click="navigate">
                         <span
-                          class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                          class="text-sm font-light lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
                           Experts</span>
                       </a>
                     </li>
@@ -668,7 +668,7 @@
                     <li class="mb-1 last:mb-0">
                       <a class="block text-black hover:text-emerald-500 transition duration-150 truncate"
                         :class="isExactActive && '!text-emerald-500'" :href="href" @click="navigate">
-                        <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                        <span class="text-sm font-light lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
                           Pengajuan Expert</span>
                       </a>
                     </li>
@@ -691,7 +691,7 @@
                     <li class="mb-1 last:mb-0">
                       <a class="block text-black hover:text-emerald-500 transition duration-150 truncate"
                         :class="isExactActive && '!text-emerald-500'" :href="href" @click="navigate">
-                        <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                        <span class="text-sm font-light lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
                           Pengguna</span>
                       </a>
                     </li>

@@ -44,7 +44,7 @@ const { page, perPage, tableExpertPermanent, total } = toRefs(props)
                 <div class="font-semibold text-left">Nama Pengguna</div>
               </th>
               <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                <div class="font-semibold text-left">Experts yang diajukan</div>
+                <div class="font-semibold text-left">Layanan yang dipilih</div>
               </th>
               <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
                 <div class="font-semibold text-left">Tanggal pengajuan</div>
