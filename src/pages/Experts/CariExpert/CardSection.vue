@@ -6,7 +6,7 @@ import Multiselect from '@vueform/multiselect'
 import PaginationNumeric from '../../../components/PaginationNumeric.vue'
 import { useRoute } from 'vue-router'
 import { useDataExpertStore } from '../../../stores/store-experts'
-import { PAGINATION_LIMIT_ADVANCE_SEARCH } from './Constant'
+import { PAGINATION_LIMIT_ADVANCE_SEARCH } from './Constant.js'
 import { isVariableEmpty } from '../../../utils/Helper'
 import { useOptionsStore } from '../../../stores/store-options'
 
@@ -18,7 +18,7 @@ const optionsStore = useOptionsStore()
 const { expertAdvanceSearch, expertPaginationAdvanceSearch, pagination } = storeToRefs(advanceSearchStore)
 const { listSector } = storeToRefs(optionsStore)
 
-const limit = 12
+const limit = 3
 
 // ====== Pagination ======================================================
 const getData = async (page = 1, perPage = PAGINATION_LIMIT_ADVANCE_SEARCH, search = '') => {
@@ -484,7 +484,7 @@ onMounted(() => {
                             </div>
                             <div class="grid grid-cols-2 xl:grid-cols-4 md:grid-cols-2 gap-6">
                                 <div v-for="(expert, index) in expertAdvanceSearch" :key="expert">
-                                    <CardExpert :expert="expert" v-if="index < limit" />
+                                    <CardExpert :expert="expert" v-if="index < PAGINATION_LIMIT_ADVANCE_SEARCH" />
                                 </div>
                             </div>
                         </div>
@@ -494,7 +494,7 @@ onMounted(() => {
             <div class="text-end text-sm mt-10 px-28">
                 <PaginationNumeric 
                 :total="pagination.total"
-                :perPage="pagination.per_page"
+                :perPage="PAGINATION_LIMIT_ADVANCE_SEARCH"
                 :page="pagination.page"
                 @clickNav="changePage" />
             </div>

@@ -71,7 +71,7 @@ export const useDataExpertStore = defineStore({
     expertAdvanceSearch: [],
     expertPaginationAdvanceSearch: {
       search: "",
-      per_page: PAGINATION_LIMIT,
+      per_page: 3,
       page: 1,
       total: 0,
     },

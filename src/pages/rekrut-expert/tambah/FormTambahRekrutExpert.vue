@@ -32,7 +32,8 @@ const formTambahDashboardRekrutExpert = ref({
     job_detail: "",
     description: "",
     deadline: "",
-    budget: ""
+    budget: "",
+    expert: ""
 })
 
 const jsonCity = [
@@ -77,6 +78,19 @@ const minutes = [
     { text: '43' }, { text: '44' }, { text: '45' }, { text: '46' }, { text: '47' }, { text: '48' }, { text: '49' },
     { text: '50' }, { text: '51' }, { text: '52' }, { text: '53' }, { text: '54' }, { text: '55' }, { text: '56' }, { text: '57' }, { text: '58' },
     { text: '59' }
+]
+
+const experts = [
+    {
+        value: 'bondangprakoso',
+        name: 'Bondan Prakoso',
+        proffession: 'Musisi'
+    },
+    {
+        value: 'saykoji',
+        name: 'Saykoji',
+        proffession: 'Rapper'
+    }
 ]
 
 const config = {
@@ -190,6 +204,22 @@ const formValidation = async () => {
                 <input
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-md"
                     @input="formatBudget" placeholder="Rp" required v-model="formTambahDashboardRekrutExpert.budget" type="text" />
+            </div>
+            <div class="mt-4">
+                <label class="block text-sm font-medium mb-1 text-black">Cari expert</label>
+                <Multiselect v-model="formTambahDashboardRekrutExpert.expert" :close-on-select="true" :searchable="true"
+                    class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen text-sm w-full ml-0"
+                        :classes="{ containerActive: 'ring-0', search: 'w-full absolute inset-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen appearance-none border-0 text-base font-sans rounded pl-3.5 rtl:pl-0 rtl:pr-3.5', }"
+                    required :options="experts">
+                            <template v-slot:singlelabel="{ value }">
+                                <div class="multiselect-single-label">
+                                    <span>{{ value.name }} - {{ value.proffession }}</span>
+                                </div>
+                            </template>
+                            <template v-slot:option="{ option }">
+                                <span>{{ option.name }} - {{ option.proffession }}</span>
+                        </template>
+                </Multiselect>
             </div>
             <div>
                 <div class="flex justify-end">

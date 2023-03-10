@@ -46,11 +46,25 @@ const formTambahDashboardExpertKonsultasi = ref({
     discussion: [],
     description: "",
     total: "",
-    duration: ""
+    duration: "",
+    expert: ""
 })
 
 const discussions = [
     'Teori', 'Praktik', 'Tools', 'Soft Skill'
+]
+
+const experts = [
+    {
+        value: 'bondangprakoso',
+        name: 'Bondan Prakoso',
+        proffession: 'Musisi'
+    },
+    {
+        value: 'saykoji',
+        name: 'Saykoji',
+        proffession: 'Rapper'
+    }
 ]
 
 const hours = [
@@ -168,6 +182,22 @@ const formValidation = async () => {
                 <textarea rows="5"
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
                     required v-model="formTambahDashboardExpertKonsultasi.topic" />
+            </div>
+            <div class="mt-4">
+                <label class="block text-sm font-medium mb-1 text-black">Cari expert</label>
+                <Multiselect v-model="formTambahDashboardExpertKonsultasi.expert" :close-on-select="true" :searchable="true"
+                    class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen text-sm w-full ml-0"
+                        :classes="{ containerActive: 'ring-0', search: 'w-full absolute inset-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen appearance-none border-0 text-base font-sans rounded pl-3.5 rtl:pl-0 rtl:pr-3.5', }"
+                    required :options="experts">
+                            <template v-slot:singlelabel="{ value }">
+                                <div class="multiselect-single-label">
+                                    <span>{{ value.name }} - {{ value.proffession  }}</span>
+                                </div>
+                            </template>
+                            <template v-slot:option="{ option }">
+                                <span>{{ option.name }} - {{ option.proffession }}</span>
+                        </template>
+                </Multiselect>
             </div>
             <hr class="my-10 border-gray-300 sm:mx-auto" />
             <div>
