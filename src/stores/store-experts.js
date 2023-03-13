@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import api from "../utils/Api";
 import apiStatic from "../utils/ApiStatic";
 import { PAGINATION_LIMIT } from "../utils/Constants";
+import {PAGINATION_LIMIT_ADVANCE_SEARCH} from "../pages/Experts/CariExpert/Constant"
 
 //------ url data detail expert -----------------------------------
 // const DETAIL_EXPERT_URL = "/detail-experts.json";
@@ -71,7 +72,7 @@ export const useDataExpertStore = defineStore({
     expertAdvanceSearch: [],
     expertPaginationAdvanceSearch: {
       search: "",
-      per_page: 3,
+      per_page: PAGINATION_LIMIT_ADVANCE_SEARCH,
       page: 1,
       total: 0,
     },
@@ -156,15 +157,17 @@ export const useDataExpertStore = defineStore({
     //------- Page Cari Expert ------------------------------
     async advanceSearch(payload) {
       try {
-        let res = await api.post(ADVANCE_SEARCH_URL + "?page=" + this.pagination.page + "&per_page=" + this.pagination.per_page + "&search=" + this.pagination.search, payload);
+        let res = await api.post(ADVANCE_SEARCH_URL + "?page=" + this.expertPaginationAdvanceSearch.page + "&per_page=" + this.expertPaginationAdvanceSearch.per_page + "&search=" + this.expertPaginationAdvanceSearch.search, payload);
         this.expertAdvanceSearch = res.data;
-        this.expertPaginationAdvanceSearch = res.data;
+        this.setPaginationCariExpert(res.pagination)
+        //this.expertPaginationAdvanceSearch = res.pagination;
       } catch (error) {}
     },
     setPaginationCariExpert(payload) {
-      this.pagination.page = payload.page
-      this.pagination.per_page = payload.per_page
-      this.pagination.search = payload.search
+      this.expertPaginationAdvanceSearch.page = payload.page
+      this.expertPaginationAdvanceSearch.per_page = payload.per_page
+      this.expertPaginationAdvanceSearch.search = payload.search
+      this.expertPaginationAdvanceSearch.total = payload.total
     },
     //------- Expert Rekomendasi Homepage -------------------
     setDataExpertFeatured(payload = {}) {

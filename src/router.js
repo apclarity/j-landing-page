@@ -116,6 +116,8 @@ const routerHistory = createWebHistory();
 
 const router = createRouter({
   history: routerHistory,
+  linkActiveClass: 'active-link',
+  linkExactActiveClass: 'exact-active-link',
   routes: [
     {
       path: "/",

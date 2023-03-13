@@ -15,10 +15,8 @@ const route = useRoute()
 const advanceSearchStore = useDataExpertStore()
 const optionsStore = useOptionsStore()
 
-const { expertAdvanceSearch, expertPaginationAdvanceSearch, pagination } = storeToRefs(advanceSearchStore)
+const { expertAdvanceSearch, expertPaginationAdvanceSearch } = storeToRefs(advanceSearchStore)
 const { listSector } = storeToRefs(optionsStore)
-
-const limit = 3
 
 // ====== Pagination ======================================================
 const getData = async (page = 1, perPage = PAGINATION_LIMIT_ADVANCE_SEARCH, search = '') => {
@@ -26,6 +24,7 @@ const getData = async (page = 1, perPage = PAGINATION_LIMIT_ADVANCE_SEARCH, sear
         page, per_page: perPage, search
     })
     await advanceSearchStore.advanceSearch(advanceFilterCariExpert.value)
+    console.log(expertPaginationAdvanceSearch.value)
 }
 
 const changePage = (page) => {
@@ -484,7 +483,7 @@ onMounted(() => {
                             </div>
                             <div class="grid grid-cols-2 xl:grid-cols-4 md:grid-cols-2 gap-6">
                                 <div v-for="(expert, index) in expertAdvanceSearch" :key="expert">
-                                    <CardExpert :expert="expert" v-if="index < PAGINATION_LIMIT_ADVANCE_SEARCH" />
+                                    <CardExpert :expert="expert" v-if="index < expertPaginationAdvanceSearch.per_page" />
                                 </div>
                             </div>
                         </div>
@@ -493,9 +492,9 @@ onMounted(() => {
             </div>
             <div class="text-end text-sm mt-10 px-28">
                 <PaginationNumeric 
-                :total="pagination.total"
-                :perPage="PAGINATION_LIMIT_ADVANCE_SEARCH"
-                :page="pagination.page"
+                :total="expertPaginationAdvanceSearch.total"
+                :perPage="expertPaginationAdvanceSearch.per_page"
+                :page="expertPaginationAdvanceSearch.page"
                 @clickNav="changePage" />
             </div>
         </div>

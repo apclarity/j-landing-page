@@ -1,9 +1,18 @@
 <script setup>
 import { computed } from 'vue'
 const props = defineProps({
-  total: Number,
-  perPage: Number,
-  page: Number,
+  total: {
+    type: Number,
+    default: 0
+  },
+  perPage: {
+    type: Number,
+    default: 1
+  },
+  page: {
+    type: Number,
+    default: 1
+  },
 })
 
 const from = computed(() => {
@@ -25,18 +34,25 @@ const emit = defineEmits(['clickNav'])
 
 const clickNav = (page) => emit('clickNav', page)
 
-// const isPageActive = (page)=>{
-  
-// }
+const totalPage = computed(()=>{
+  let tp = Math.ceil(props.total / props.perPage)
+  if(tp <= 0){
+    return 1
+  }
+  return tp
+})
 
+const isPageActive = ((page)=>{
+  return props.page === page
+})
 const isFromOne = props.page == 1
 const isToEqualTotal = to == props.total
 </script>
-<template>
+<template >
   <div class="flex justify-center">
     <nav class="flex" role="navigation" aria-label="Navigation">
       <div class="mr-2">
-        <button class="inline-flex items-center justify-center rounded leading-5 px-2.5 py-2 bg-white border border-slate-200 text-slate-300"
+        <button class="inline-flex items-center justify-center rounded leading-5 px-2.5 py-2 bg-white hover:bg-jobhunGreen border border-slate-200 text-slate-300 hover:text-white shadow-sm"
         :class="{
           'cursor-not-allowed border-slate-200 text-slate-300': props.page == 1,
         }" 
@@ -48,17 +64,20 @@ const isToEqualTotal = to == props.total
           </svg>
         </button>
       </div>
-      <ul class="inline-flex text-sm font-medium -space-x-px shadow-sm" >
-        <li v-for="page in props.page" :key="page">
-          <div class="inline-flex items-center justify-center rounded-l leading-5 px-3.5 py-2 bg-white border border-slate-200 text-indigo-500">
-            <a href="#">
-              {{ page }}
-            </a>
-          </div>
-        </li>
-      </ul>
+        <ul class="inline-flex text-sm font-medium space-x-px rounded shadow-sm" >
+          <li v-for="page in totalPage" :key="page" >
+            <div class="inline-flex items-center justify-center leading-5 px-3.5 py-2 bg-white border border-slate-200 text-black hover:text-white hover:bg-jobhunGreen rounded"
+            :class="[isPageActive(page) && '!bg-jobhunGreen']"
+            >
+              <button href="#" @click="clickNav(page)" :class="{ active: isPageActive(page) }">
+                {{ page }}
+              </button>
+            </div>
+          </li>
+        </ul>
+      
       <div class="ml-2">
-        <button class="inline-flex items-center justify-center rounded leading-5 px-2.5 py-2 bg-white hover:bg-indigo-500 border border-slate-200 text-slate-600 hover:text-white shadow-sm"
+        <button class="inline-flex items-center justify-center rounded leading-5 px-2.5 py-2 bg-white hover:bg-jobhunGreen border border-slate-200 text-slate-600 hover:text-white shadow-sm"
         :class="{
           'cursor-not-allowed border-slate-200 text-slate-300': to == props.total,
         }" 
@@ -77,3 +96,10 @@ const isToEqualTotal = to == props.total
       class="inline-flex items-center justify-center leading-5 px-3.5 py-2 bg-white border border-slate-200 text-slate-400">…</span>
   </li> -->
 </template>
+<style>
+.active {
+    color: white;
+    background-color: #48b391;
+    fill: #48b391;
+}
+</style>
