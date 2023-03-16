@@ -16,12 +16,12 @@ import { storeToRefs } from 'pinia'
 const props = defineProps({
   page: Number,
   perPage: Number,
-  tableExpertPermanent: Array,
+  tableInviteExpert: Array,
   total: Number,
   deleteExpert: Object
 })
 
-const { page, perPage, tableExpertPermanent, total } = toRefs(props)
+const { page, perPage, tableInviteExpert, total } = toRefs(props)
 
   const adjustingIndex = computed(()=> perPage.value * (page.value-1))
 </script>
@@ -52,14 +52,20 @@ const { page, perPage, tableExpertPermanent, total } = toRefs(props)
               <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
                 <div class="font-semibold text-left"></div>
               </th>
+              <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
+                <div class="font-semibold text-left"></div>
+              </th>
+              <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
+                <div class="font-semibold text-left"></div>
+              </th>
             </tr>
           </thead>
           <tbody class="text-sm divide-y divide-slate-200">
             <TabelData
-              v-for="(expertPermanent, index) in tableExpertPermanent"
-              :key="expertPermanent.id"
-              :value="expertPermanent.id"
-              :tableExpertPermanent="expertPermanent"
+              v-for="(expertInviteExpert, index) in tableInviteExpert"
+              :key="expertInviteExpert.id"
+              :value="expertInviteExpert.id"
+              :tableExpertInviteExpert="expertInviteExpert"
               :index="index + adjustingIndex"
               :delete="deleteExpert"
             />

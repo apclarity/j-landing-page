@@ -12,8 +12,8 @@ const route = useRoute()
 const id = route.params.id
 
 const tableExpertPermanentStore = useDataExpertStore()
-await tableExpertPermanentStore.getDataTableExpertPermanent()
-const { tableExpertPermanent, pagination } = storeToRefs(tableExpertPermanentStore)
+await tableExpertPermanentStore.getDataTableConsultation()
+const { tableConsultation, pagination } = storeToRefs(tableExpertPermanentStore)
 
 // const bidangStore = useBidangStore()
 // const { data, pagination } = storeToRefs(bidangStore)
@@ -28,7 +28,7 @@ const getData = async (page=1, search="", perPage=PAGINATION_LIMIT) => {
   tableExpertPermanentStore.setPagination({
     page, search, per_page: perPage
   })
-  await tableExpertPermanentStore.getDataTableExpertPermanent()
+  await tableExpertPermanentStore.getDataTableConsultation()
 }
 
 //===== Search & Pagination ============================================
@@ -83,7 +83,7 @@ onMounted(() => {
       <!-- Table -->
       <div class="mt-8">
         <TabelHeader
-          :tableExpertPermanent="tableExpertPermanent"
+          :tableConsultation="tableConsultation"
           :total="pagination.total"
           :page="pagination.page"
           :perPage="pagination.per_page"

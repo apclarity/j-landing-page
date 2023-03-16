@@ -40,23 +40,27 @@ const CREATE_USER = "/user/create"
 const STATUS_USER = "/expert/publish-expert"
 const EMAIL_VERIFICATION = "/user/email-verification"
 // ------ Konsultasi ------------------------------------------------
-const DATA_TABLE_CONSULTATION = "/consultation/table-consultation"
+// const DATA_TABLE_CONSULTATION = "/consultation/table-consultation"
+const DATA_TABLE_CONSULTATION = "/table-expert-dummy.json"
 const DATA_DETAIL_CONSULTATION = "/consultation/detail-consultation"
 const SUBMISSION_CONSULTATION = "/expert/create-consul"
 const DASHBOARD_NEW_TRANSACTION_CONSULTATION = "/dashboard/add-create-consul"
 // ------ Recruit Expert --------------------------------------------
-const DATA_TABLE_RECRUIT_EXPERT = "/recruit-expert/table-recruit-expert"
+// const DATA_TABLE_RECRUIT_EXPERT = "/recruit-expert/table-recruit-expert"
+const DATA_TABLE_RECRUIT_EXPERT = "/table-expert-dummy.json"
 const DATA_DETAIL_RECRUIT_EXPERT = "/recruit-expert/detail-recruit-expert"
 const SUBMISSION_RECRUIT_EXPERT = "/expert/create-recruit"
 const DAHSBOARD_NEW_TRANSACTION_RECRUIT_EXPERT = "/dashboard/create-recruit"
 // ------ Undang Expert --------------------------------------------
-const DATA_TABLE_INVITE_EXPERT = "/invite-expert/table-invite-expert" 
+// const DATA_TABLE_INVITE_EXPERT = "/invite-expert/table-invite-expert" 
+const DATA_TABLE_INVITE_EXPERT = "/table-expert-dummy.json"
 const DATA_DETAIL_INVITE_EXPERT = "/invite-expert/detail-invite-expert"
 const SUBMISSION_INVITE_EXPERT = "/expert/create-invite"
 const DAHSBOARD_NEW_TRANSACTION_INVITE_EXPERT = "/dashboard/create-invite"
 // ------ Pelatihan -------------------------------------------------
 const DATA_DETAIL_TRAINING = "/training/detail-training"
-const DATA_TABLE_TRAINING = "/training/table-training"
+// const DATA_TABLE_TRAINING = "/training/table-training"
+const DATA_TABLE_TRAINING = "/table-expert-dummy.json"
 const SUBMISSION_TRAINING = "/expert/create-train"
 const DAHSBOARD_NEW_TRANSACTION_TRAINING = "/dashboard/add-create-train"
 
@@ -303,7 +307,7 @@ export const useDataExpertStore = defineStore({
     // ------------------------ Konsultasi -------------------------
     async getDataTableConsultation(payload) {
       try {
-        let res = await api.get(DATA_TABLE_CONSULTATION + "?page=" + this.pagination.page + "&per_page=" + this.pagination.per_page + "&search=" + this.pagination.search, payload);
+        let res = await apiStatic.get(DATA_TABLE_CONSULTATION + "?page=" + this.pagination.page + "&per_page=" + this.pagination.per_page + "&search=" + this.pagination.search, payload);
         this.tableConsultation = res.data;
         this.pagination = res.pagination
       } catch (error) {}
@@ -323,7 +327,7 @@ export const useDataExpertStore = defineStore({
     // ------------------------ Recruit Expert -------------------------
     async getDataTableRecruitExpert(payload) {
       try {
-        let res = await api.get(DATA_TABLE_RECRUIT_EXPERT + "?page=" + this.pagination.page + "&per_page=" + this.pagination.per_page + "&search=" + this.pagination.search, payload);
+        let res = await apiStatic.get(DATA_TABLE_RECRUIT_EXPERT + "?page=" + this.pagination.page + "&per_page=" + this.pagination.per_page + "&search=" + this.pagination.search, payload);
         this.tableRecruitExpert = res.data;
         this.pagination = res.pagination
       } catch (error) {}
@@ -343,7 +347,7 @@ export const useDataExpertStore = defineStore({
     // ------------------------ Undang Expert -------------------------
     async getDataTableInviteExpert(payload) {
       try {
-        let res = await api.get(DATA_TABLE_INVITE_EXPERT + "?page=" + this.pagination.page + "&per_page=" + this.pagination.per_page + "&search=" + this.pagination.search, payload);
+        let res = await apiStatic.get(DATA_TABLE_INVITE_EXPERT + "?page=" + this.pagination.page + "&per_page=" + this.pagination.per_page + "&search=" + this.pagination.search, payload);
         this.tableInviteExpert = res.data;
         this.pagination = res.pagination
       } catch (error) {}
@@ -363,7 +367,7 @@ export const useDataExpertStore = defineStore({
     // ------------------------ Pelatihan -----------------------------
     async getDataTablePelatihan(payload) {
       try {
-        let res = await api.get(DATA_TABLE_TRAINING + "?page=" + this.pagination.page + "&per_page=" + this.pagination.per_page + "&search=" + this.pagination.search, payload);
+        let res = await apiStatic.get(DATA_TABLE_TRAINING + "?page=" + this.pagination.page + "&per_page=" + this.pagination.per_page + "&search=" + this.pagination.search, payload);
         this.tablePelatihan = res.data;
         this.pagination = res.pagination
       } catch (error) {}

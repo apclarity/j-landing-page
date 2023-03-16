@@ -3,14 +3,14 @@ import { toRefs, ref } from "vue"
 import ModalDelete from './ModalDeleteExpert.vue'
 
 const props = defineProps({
-  tableExpertPermanent: {
+  tableExpertRecruitExpert: {
     default: {},
     type: Object
   },
   index: Number,
   delete: Object
 })
-const { tableExpertPermanent, index } = toRefs(props)
+const { tableExpertRecruitExpert, index } = toRefs(props)
 
 const deleteExpert = ref(false)
 
@@ -19,7 +19,25 @@ const openModalDeleteExpert = () => {
 }
 
 const confirmDeleteExpert = async () => {
-  await props.delete.deleteDataTableExpertPermanent()
+  await props.delete.deleteDataTableExpertRecruitExpert()
+}
+
+const colorButtonServiceStatus = () => {
+  if (tableExpertRecruitExpert.value.service_status == "Belum dimulai") {
+    return "bg-gray-300 text-black"
+  } else if (tableExpertRecruitExpert.value.service_status == "Sedang berjalan") {
+    return "bg-jobhunYellow text-black"
+  } else if (tableExpertRecruitExpert.value.service_status == "Selesai") {
+    return "bg-jobhunGreen text-white"
+  }
+}
+
+const colorButtonPaymentStatus = () => {
+  if (tableExpertRecruitExpert.value.payment_status == "Belum dibayar") {
+    return "bg-gray-300 text-black"
+  } else if (tableExpertRecruitExpert.value.payment_status == "Lunas") {
+    return "bg-jobhunGreen text-white"
+  }
 }
 </script>
 
@@ -29,17 +47,31 @@ const confirmDeleteExpert = async () => {
       <div class="font-medium text-black">{{index+1}}</div>
     </td> 
     <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-      <div class="font-medium text-black">{{ tableExpertPermanent.name}}</div>
+      <div class="font-medium text-black">{{ tableExpertRecruitExpert.name}}</div>
     </td>
     <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-      <div class="font-medium text-black">{{ tableExpertPermanent.profession }}</div>
+      <div class="font-medium text-black">{{ tableExpertRecruitExpert.profession }}</div>
     </td>
     <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-      <div class="font-medium text-black">{{ tableExpertPermanent.company }}</div>
+      <div class="font-medium text-black">{{ tableExpertRecruitExpert.date }}</div>
+    </td>
+    <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
+        <button class="h-6 w-28 rounded-sm" :class="colorButtonPaymentStatus()">
+          <span class="text-xs">
+              <div>{{ tableExpertRecruitExpert.payment_status }}</div>
+            </span>
+        </button>
+      </td>
+    <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
+      <button class="h-6 w-28 rounded-sm" :class="colorButtonServiceStatus()">
+        <span class="text-xs">
+            <div>{{ tableExpertRecruitExpert.service_status }}</div>
+          </span>
+      </button>
     </td>
     <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap w-px">
       <div class="space-x-1 inline-flex">
-        <router-link :to="'/rekrutexpert/detail/' + tableExpertPermanent.id"
+        <router-link :to="'/rekrutexpert/detail/' + tableExpertRecruitExpert.id"
           class=" my-auto pl-1">
           <button class="h-8 w-20 bg-gray-300 hover:bg-gray-400 rounded-sm">
             <span class="text-black font-normal">
@@ -54,7 +86,7 @@ const confirmDeleteExpert = async () => {
               <path d="M20 9c0-.6-.4-1-1-1h-6c-.6 0-1 .4-1 1v2H8v2h1v10c0 .6.4 1 1 1h12c.6 0 1-.4 1-1V13h1v-2h-4V9zm-6 1h4v1h-4v-1zm7 3v9H11v-9h10z" />
           </svg>
         </button>
-        <ModalDelete :deleteExpert="deleteExpert" @close-modal="deleteExpert = false" :name="tableExpertPermanent.name" />
+        <ModalDelete :deleteExpert="deleteExpert" @close-modal="deleteExpert = false" :name="tableExpertRecruitExpert.name" />
       </div>
     </td>
   </tr>  
