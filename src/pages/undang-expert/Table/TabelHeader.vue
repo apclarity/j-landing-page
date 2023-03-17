@@ -50,10 +50,10 @@ const { page, perPage, tableInviteExpert, total } = toRefs(props)
                 <div class="font-semibold text-left">Tanggal pengajuan</div>
               </th>
               <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                <div class="font-semibold text-left"></div>
+                <div class="font-semibold text-left">Pembayaran</div>
               </th>
               <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-                <div class="font-semibold text-left"></div>
+                <div class="font-semibold text-left">Status</div>
               </th>
               <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
                 <div class="font-semibold text-left"></div>

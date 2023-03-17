@@ -8,7 +8,7 @@
                 "profession": "Founder&CEO",
                 "company": "PT Perusahaan Penuh Tawa",
                 "date": "14 Februari 2023",
-                "service_status": "Belum dimulai",
+                "service_status": "Pengajuan",
                 "payment_status": "Lunas"
             },
             {
@@ -18,7 +18,7 @@
                 "profession": "Guru Matematika",
                 "company": "PT Ceria Bersama",
                 "date": "9 Februari 2023",
-                "service_status": "Belum dimulai",
+                "service_status": "Pengajuan",
                 "payment_status": "Lunas"
             },
             {
@@ -28,8 +28,8 @@
                 "profession": "Seniman",
                 "company": "PT Indonesia Belajar",
                 "date": "14 Februari 2023",
-                "service_status": "Sedang berjalan",
-                "payment_status": "Belum dibayar"
+                "service_status": "Berjalan",
+                "payment_status": "Belum lunas"
             },
             {
                 "id": 4,
@@ -48,8 +48,8 @@
                 "profession": "Guru Matematika",
                 "company": "PT Ceria Bersama",
                 "date": "20 Maret 2023",
-                "service_status": "Sedang berjalan",
-                "payment_status": "Belum dibayar"
+                "service_status": "Berjalan",
+                "payment_status": "Belum lunas"
             },
             {
                 "id": 6,
@@ -58,7 +58,7 @@
                 "profession": "Seniman",
                 "company": "PT Indonesia Belajar",
                 "date": "9 Februari 2023",
-                "service_status": "Belum dimulai",
+                "service_status": "Pengajuan",
                 "payment_status": "Lunas"
             },
             {
@@ -68,8 +68,8 @@
                 "profession": "Founder&CEO",
                 "company": "PT Perusahaan Penuh Tawa",
                 "date": "20 Maret 2023",
-                "service_status": "Sedang berjalan",
-                "payment_status": "Belum dibayar"
+                "service_status": "Berjalan",
+                "payment_status": "Belum lunas"
             },
             {
                 "id": 8,
@@ -78,7 +78,7 @@
                 "profession": "Guru Matematika",
                 "company": "PT Ceria Bersama",
                 "date": "14 Februari 2023",
-                "service_status": "Belum dimulai",
+                "service_status": "Pengajuan",
                 "payment_status": "Lunas"
             },
             {
@@ -88,7 +88,7 @@
                 "profession": "Seniman",
                 "company": "PT Indonesia Belajar",
                 "date": "14 Februari 2023",
-                "service_status": "Belum dimulai",
+                "service_status": "Pengajuan",
                 "payment_status": "Lunas"
             },
             {
@@ -99,7 +99,7 @@
                 "company": "PT Perusahaan Penuh Tawa",
                 "date": "8 Mei 2022",
                 "service_status": "Selesai",
-                "payment_status": "Belum dibayar"
+                "payment_status": "Belum lunas"
             },
             {
                 "id": 11,
@@ -108,8 +108,8 @@
                 "profession": "Guru Matematika",
                 "company": "PT Ceria Bersama",
                 "date": "20 Maret 2023",
-                "service_status": "Sedang berjalan",
-                "payment_status": "Belum dibayar"
+                "service_status": "Berjalan",
+                "payment_status": "Belum lunas"
             },
             {
                 "id": 12,
@@ -119,7 +119,7 @@
                 "company": "PT Indonesia Belajar",
                 "date": "8 Mei 2022",
                 "service_status": "Selesai",
-                "payment_status": "Belum dibayar"
+                "payment_status": "Belum lunas"
             },
             {
                 "id": 13,
@@ -128,8 +128,8 @@
                 "profession": "Founder&CEO",
                 "company": "PT Perusahaan Penuh Tawa",
                 "date": "20 Maret 2023",
-                "service_status": "Sedang berjalan",
-                "payment_status": "Belum dibayar"
+                "service_status": "Berjalan",
+                "payment_status": "Belum lunas"
             },
             {
                 "id": 14,
@@ -138,7 +138,7 @@
                 "profession": "Guru Matematika",
                 "company": "PT Ceria Bersama",
                 "date": "4 September 2021",
-                "service_status": "Sedang berjalan",
+                "service_status": "Berjalan",
                 "payment_status": "Lunas"
             },
             {
@@ -148,7 +148,7 @@
                 "profession": "Seniman",
                 "company": "PT Indonesia Belajar",
                 "date": "4 September 2021",
-                "service_status": "Sedang berjalan",
+                "service_status": "Berjalan",
                 "payment_status": "Lunas"
             },
             {
@@ -158,7 +158,7 @@
                 "profession": "Founder&CEO",
                 "company": "PT Perusahaan Penuh Tawa",
                 "date": "4 September 2021",
-                "service_status": "Sedang berjalan",
+                "service_status": "Berjalan",
                 "payment_status": "Lunas"
             },
             {
@@ -168,7 +168,7 @@
                 "profession": "Guru Matematika",
                 "company": "PT Ceria Bersama",
                 "date": "4 September 2021",
-                "service_status": "Sedang berjalan",
+                "service_status": "Berjalan",
                 "payment_status": "Lunas"
             },
             {
@@ -178,7 +178,7 @@
                 "profession": "Seniman",
                 "company": "PT Indonesia Belajar",
                 "date": "4 September 2021",
-                "service_status": "Sedang berjalan",
+                "service_status": "Berjalan",
                 "payment_status": "Lunas"
             }
         ],

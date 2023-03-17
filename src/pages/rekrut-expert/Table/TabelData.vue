@@ -23,9 +23,9 @@ const confirmDeleteExpert = async () => {
 }
 
 const colorButtonServiceStatus = () => {
-  if (tableExpertRecruitExpert.value.service_status == "Belum dimulai") {
+  if (tableExpertRecruitExpert.value.service_status == "Pengajuan") {
     return "bg-gray-300 text-black"
-  } else if (tableExpertRecruitExpert.value.service_status == "Sedang berjalan") {
+  } else if (tableExpertRecruitExpert.value.service_status == "Berjalan") {
     return "bg-jobhunYellow text-black"
   } else if (tableExpertRecruitExpert.value.service_status == "Selesai") {
     return "bg-jobhunGreen text-white"
@@ -33,7 +33,7 @@ const colorButtonServiceStatus = () => {
 }
 
 const colorButtonPaymentStatus = () => {
-  if (tableExpertRecruitExpert.value.payment_status == "Belum dibayar") {
+  if (tableExpertRecruitExpert.value.payment_status == "Belum lunas") {
     return "bg-gray-300 text-black"
   } else if (tableExpertRecruitExpert.value.payment_status == "Lunas") {
     return "bg-jobhunGreen text-white"
