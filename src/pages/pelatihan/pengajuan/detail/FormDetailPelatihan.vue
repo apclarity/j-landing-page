@@ -26,7 +26,12 @@ const formDetailDashboardPelatihan = ref({
     description: "",
     start_hour: "",
     start_minute: "",
-    day: []
+    day: [],
+    payment: "",
+    status: "",
+    invoice: "",
+    star: "",
+    review: ""
 })
 
 const hours = [
@@ -44,6 +49,27 @@ const minutes = [
     { text: '43' }, { text: '44' }, { text: '45' }, { text: '46' }, { text: '47' }, { text: '48' }, { text: '49' },
     { text: '50' }, { text: '51' }, { text: '52' }, { text: '53' }, { text: '54' }, { text: '55' }, { text: '56' }, { text: '57' }, { text: '58' },
     { text: '59' }
+]
+
+const status = [
+    {
+        text: 'Belum dimulai'
+    },
+    {
+        text: 'Sedang berjalan'
+    },
+    {
+        text: 'Selesai'
+    }
+]
+
+const payments = [
+    {
+        text: 'Lunas'
+    },
+    {
+        text: 'Belum dibayar'
+    }
 ]
 
 const days = [
@@ -87,12 +113,12 @@ const isNumberCurrency = (evt) => {
             <div>
                 <label class="block text-sm font-medium mb-1 text-black">Jenis pelatihan</label>
                 <div class="flex items-center">
-                    <input type="radio" v-model="formDetailDashboardPelatihan.type" disabled value="Privat"
+                    <input type="radio" v-model="formDetailDashboardPelatihan.type" value="Privat"
                         class="w-4 h-4 text-jobhunGreen bg-gray-200 border-gray-200 focus:ring-jobhunGreen focus:ring-1 hover:ring-jobhunGreen hover:ring-1">
                         <span class="text-sm ml-1 text-black">Privat</span>
                 </div>
                 <div class="flex items-center">
-                    <input type="radio" v-model="formDetailDashboardPelatihan.type" disabled value="Grup"
+                    <input type="radio" v-model="formDetailDashboardPelatihan.type" value="Grup"
                         class="w-4 h-4 text-jobhunGreen bg-gray-200 border-gray-200 focus:ring-jobhunGreen focus:ring-1 hover:ring-jobhunGreen hover:ring-1">
                     <span class="text-sm ml-1 text-black">Grup</span>
                 </div>
@@ -102,39 +128,76 @@ const isNumberCurrency = (evt) => {
                     pelatihan?</label>
                 <input
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-md"
-                    @keypress="isNumberCurrency($event)" readonly placeholder="Input angka" v-model="formDetailDashboardPelatihan.ifgroup" type="text" />
+                    @keypress="isNumberCurrency($event)" required placeholder="Input angka" v-model="formDetailDashboardPelatihan.ifgroup" type="text" />
             </div>
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">Berapa sesi pertemuan yang diajukan?</label>
                 <input
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-md"
-                    @keypress="isNumberCurrency($event)" readonly placeholder="Input angka" v-model="formDetailDashboardPelatihan.session" type="text" />
+                    @keypress="isNumberCurrency($event)" required placeholder="Input angka" v-model="formDetailDashboardPelatihan.session" type="text" />
             </div>
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">Jelaskan secara spesifik topik/pembahasan apa saja yang ingin kamu pelajari?</label>
                 <textarea rows="5"
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                    readonly v-model="formDetailDashboardPelatihan.description" type="text" />
+                    required v-model="formDetailDashboardPelatihan.description" type="text" />
             </div>
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">Pengajuan hari kelas</label>
-                <Multiselect v-model="formDetailDashboardPelatihan.days" mode="tags" disabled
+                <Multiselect v-model="formDetailDashboardPelatihan.days" mode="tags" 
                     :close-on-select="false" class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen text-sm w-full"
                     :create-option="true" :options="days" />
             </div>
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">Pengajuan waktu pelatihan</label>
                 <div class="flex items-center space-x-2">
-                    <select disabled v-model="formDetailDashboardPelatihan.start_hour"
+                    <select  v-model="formDetailDashboardPelatihan.start_hour"
                         class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-14"
                         @click.prevent="dropdownOpen = !dropdownOpen">
                         <option v-for="hour in hours" :key="hour.text">{{ hour.text }}</option>
                     </select>
                     <span class="px-1">:</span>
-                    <select disabled v-model="formDetailDashboardPelatihan.start_minute"
+                    <select  v-model="formDetailDashboardPelatihan.start_minute"
                         class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-14">
                         <option v-for="minute in minutes" :key="minute.text">{{ minute.text }}</option>
                     </select>
+                </div>
+            </div>
+            <hr class="my-10 border-gray-300 sm:mx-auto" />
+            <div class="mt-4">
+                <label class="block text-sm font-medium mb-1 text-black">Status pembayaran</label>
+                <div class="flex items-center space-x-2">
+                    <select v-model="formDetailDashboardPelatihan.payment"
+                        class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-44"
+                        @click.prevent="dropdownOpen = !dropdownOpen">
+                        <option v-for="payment in payments" :key="payment.text">{{ payment.text }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mt-4">
+                <label class="block text-sm font-medium mb-1 text-black">Status</label>
+                <div class="flex items-center space-x-2">
+                    <select v-model="formDetailDashboardPelatihan.status"
+                        class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-44"
+                        @click.prevent="dropdownOpen = !dropdownOpen">
+                        <option v-for="status in status" :key="status.text">{{ status.text }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mt-4">
+                <label class="block text-sm font-medium mb-1 text-black">Status invoice</label>
+                <input
+                    class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-2/3"
+                    v-model="formDetailDashboardPelatihan.invoice" required type="text" />
+            </div>
+            <div>
+                <div class="flex justify-end">
+                    <div>
+                        <button type="submit"
+                            class="h-9 mt-10 bg-jobhunGreen hover:bg-emerald-600 text-white px-7 rounded text-sm">
+                            Simpan
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

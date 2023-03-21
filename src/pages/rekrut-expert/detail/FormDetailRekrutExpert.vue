@@ -6,18 +6,19 @@ import Multiselect from '@vueform/multiselect'
 import { useDataExpertStore } from '../../../stores/store-experts'
 import flatPickr from 'vue-flatpickr-component'
 import { useOptionsStore } from '../../../stores/store-options'
+import RegionJSON from '../../../utils/json/regencies.json'
 import DateSingle from './DateSingle.vue'
 
-// const route = useRoute()
-// const id = route.params.id
+const route = useRoute()
+const id = route.params.id
 
-// const formSubmissionExpertTempStore = useDataExpertStore()
-// const optionStore = useOptionsStore()
+const formSubmissionExpertTempStore = useDataExpertStore()
+const optionStore = useOptionsStore()
 
-// await formSubmissionExpertTempStore.getDataSubmissionExpertTemp(id)
-// const { submissionExpertTemp } = storeToRefs(formSubmissionExpertTempStore)
+await formSubmissionExpertTempStore.getDataSubmissionExpertTemp(id)
+const { submissionExpertTemp } = storeToRefs(formSubmissionExpertTempStore)
 
-// const { listSector, listDomicile, listService, listTitle } = storeToRefs(optionStore)
+const { listSector, listDomicile, listService, listTitle } = storeToRefs(optionStore)
 
 const formDetailDashboardRekrutExpert = ref({
     company: "",
@@ -31,7 +32,12 @@ const formDetailDashboardRekrutExpert = ref({
     job_detail: "",
     description: "",
     deadline: "",
-    budget: ""
+    budget: "",
+    payment: "",
+    status: "",
+    invoice: "",
+    star: "",
+    review: ""
 })
 
 const formatBudget = () => {
@@ -55,13 +61,34 @@ const minutes = [
     { text: '59' }
 ]
 
+const status = [
+    {
+        text: 'Belum dimulai'
+    },
+    {
+        text: 'Sedang berjalan'
+    },
+    {
+        text: 'Selesai'
+    }
+]
+
+const payments = [
+    {
+        text: 'Lunas'
+    },
+    {
+        text: 'Belum dibayar'
+    }
+]
+
 const config = {
     wrap: true,
     required: true,
     altInput: true,
     altFormat: "F j, Y",
     static: true,
-    readonly: true,
+    required: true,
     monthSelectorType: 'static',
     dateFormat: 'Z',
     prevArrow: '<svg class="fill-current" width="7" height="11" viewBox="0 0 7 11"><path d="M5.4 10.8l1.4-1.4-4-4 4-4L5.4 0 0 5.4z" /></svg>',
@@ -94,56 +121,59 @@ const isInputNumber = (evt) => {
             <div>
                 <label class="block text-sm font-medium mb-1 text-black">Nama perusahaan</label>
                 <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                    readonly v-model="formDetailDashboardRekrutExpert.company" type="text" />
+                    required v-model="formDetailDashboardRekrutExpert.company" type="text" />
             </div>
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">Lokasi perusahaan</label>
                 <div class="flex items-center">
-                    <select v-model="formDetailDashboardRekrutExpert.location" disabled
+                    <!-- <select v-model="formDetailDashboardRekrutExpert.location"
                         class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
                         @click.prevent="dropdownOpen = !dropdownOpen">
                         <option v-for="city in jsonCity" :key="city">{{ city.name }}</option>
-                    </select>
-                    
+                    </select> -->
+                    <Multiselect v-model="formDetailDashboardRekrutExpert.location"
+                        class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen text-sm w-full ml-0"
+                        :options="listDomicile" 
+                        />
                 </div>
             </div>
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">Website perusahaan</label>
                 <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                    readonly v-model="formDetailDashboardRekrutExpert.website" type="text" />
+                    required v-model="formDetailDashboardRekrutExpert.website" type="text" />
             </div>
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">LinkedIn perusahaan</label>
                 <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                    readonly v-model="formDetailDashboardRekrutExpert.linkedin" type="text" />
+                    required v-model="formDetailDashboardRekrutExpert.linkedin" type="text" />
             </div>
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">Email perusahaan</label>
                 <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                    readonly v-model="formDetailDashboardRekrutExpert.email" type="email" />
+                    required v-model="formDetailDashboardRekrutExpert.email" type="email" />
             </div>
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">Nomor telepon perusahaan</label>
                 <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                    readonly v-model="formDetailDashboardRekrutExpert.phone" @keypress="isInputNumber($event)" type="text" />
+                    required v-model="formDetailDashboardRekrutExpert.phone" @keypress="isInputNumber($event)" type="text" />
             </div>
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">Detail proyek</label>
                 <textarea rows="5"
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                    readonly v-model="formDetailDashboardRekrutExpert.project_detail" type="text" />
+                    required v-model="formDetailDashboardRekrutExpert.project_detail" type="text" />
             </div>
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">Detail pekerjaan expert</label>
                 <textarea rows="5"
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                    readonly v-model="formDetailDashboardRekrutExpert.job_detail" type="text" />
+                    required v-model="formDetailDashboardRekrutExpert.job_detail" type="text" />
             </div>
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">Syarat dan kualifikasi</label>
                 <textarea rows="5"
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                    readonly v-model="formDetailDashboardRekrutExpert.description" type="text" />
+                    required v-model="formDetailDashboardRekrutExpert.description" type="text" />
             </div>
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">Batas waktu pekerjaan</label>
@@ -155,7 +185,44 @@ const isInputNumber = (evt) => {
                 <label class="block text-sm font-medium mb-1 text-black">Budget yang dimiliki</label>
                 <input
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-md"
-                    @input="formatBudget" placeholder="Rp" readonly v-model="formDetailDashboardRekrutExpert.budget" type="text" />
+                    @input="formatBudget" placeholder="Rp" required v-model="formDetailDashboardRekrutExpert.budget" type="text" />
+            </div>
+            <hr class="my-10 border-gray-300 sm:mx-auto" />
+            <div class="mt-4">
+                <label class="block text-sm font-medium mb-1 text-black">Status pembayaran</label>
+                <div class="flex items-center space-x-2">
+                    <select v-model="formDetailDashboardRekrutExpert.payment"
+                        class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-44"
+                        @click.prevent="dropdownOpen = !dropdownOpen">
+                        <option v-for="payment in payments" :key="payment.text">{{ payment.text }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mt-4">
+                <label class="block text-sm font-medium mb-1 text-black">Status</label>
+                <div class="flex items-center space-x-2">
+                    <select v-model="formDetailDashboardRekrutExpert.status"
+                        class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-44"
+                        @click.prevent="dropdownOpen = !dropdownOpen">
+                        <option v-for="status in status" :key="status.text">{{ status.text }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mt-4">
+                <label class="block text-sm font-medium mb-1 text-black">Status invoice</label>
+                <input
+                    class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-2/3"
+                    v-model="formDetailDashboardRekrutExpert.invoice" required type="text" />
+            </div>
+            <div>
+                <div class="flex justify-end">
+                    <div>
+                        <button type="submit"
+                            class="h-9 mt-10 bg-jobhunGreen hover:bg-emerald-600 text-white px-7 rounded text-sm">
+                            Simpan
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </form>

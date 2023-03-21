@@ -219,7 +219,7 @@ const formValidation = () => {
                             pelatihan?</label>
                         <input
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-md"
-                            @keypress="isNumberCurrency($event)" required placeholder="Input angka" v-model="formExpertPelatihan.ifgroup" type="text" />
+                            @keypress="isNumberCurrency($event)" placeholder="Input angka" v-model="formExpertPelatihan.ifgroup" type="text" />
                     </div>
                     <div class="mt-4">
                         <label class="block text-sm font-medium mb-1 text-black">Berapa sesi pertemuan yang diajukan?</label>

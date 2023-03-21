@@ -28,7 +28,12 @@ const formDetailDashboardUndangExpert = ref({
     format_event: "",
     target: "",
     fee: "",
-    benefit: ""
+    benefit: "",
+    payment: "",
+    status: "",
+    invoice: "",
+    star: "",
+    review: ""
 })
 
 const formatBudget = () => {
@@ -50,6 +55,27 @@ const minutes = [
     { text: '43' }, { text: '44' }, { text: '45' }, { text: '46' }, { text: '47' }, { text: '48' }, { text: '49' },
     { text: '50' }, { text: '51' }, { text: '52' }, { text: '53' }, { text: '54' }, { text: '55' }, { text: '56' }, { text: '57' }, { text: '58' },
     { text: '59' }
+]
+
+const status = [
+    {
+        text: 'Belum dimulai'
+    },
+    {
+        text: 'Sedang berjalan'
+    },
+    {
+        text: 'Selesai'
+    }
+]
+
+const payments = [
+    {
+        text: 'Lunas'
+    },
+    {
+        text: 'Belum dibayar'
+    }
 ]
 
 const config = {
@@ -92,26 +118,26 @@ const isInputNumber = (evt) => {
                 <label class="block text-sm font-medium mb-1 text-black">Asal perusahaan/organisasi/komunitas</label>
                 <input
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full    "
-                    readonly v-model="formDetailDashboardUndangExpert.company" type="text" />
+                    required v-model="formDetailDashboardUndangExpert.company" type="text" />
             </div>
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">Penjelasan singkat tentang
                     perusahaan/organisasi/komunitas</label>
                 <textarea rows="5"
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                    readonly v-model="formDetailDashboardUndangExpert.company_description" type="text" />
+                    required v-model="formDetailDashboardUndangExpert.company_description" type="text" />
             </div>
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">Nama acara/kegiatan</label>
                 <input
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                    v-model="formDetailDashboardUndangExpert.event" readonly type="text" />
+                    v-model="formDetailDashboardUndangExpert.event" required type="text" />
             </div>
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">Penjelasan tentang acara/kegiatan</label>
                 <textarea rows="5"
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                    readonly v-model="formDetailDashboardUndangExpert.event_description" type="text" />
+                    required v-model="formDetailDashboardUndangExpert.event_description" type="text" />
             </div>
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">Tanggal pelaksanaan acara</label>
@@ -122,17 +148,17 @@ const isInputNumber = (evt) => {
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">Format acara</label>
                 <div class="flex items-center">
-                    <input type="radio" v-model="formDetailDashboardUndangExpert.format_event" value="Talkshow" disabled
+                    <input type="radio" v-model="formDetailDashboardUndangExpert.format_event" value="Talkshow" 
                         class="w-4 h-4 text-jobhunGreen bg-gray-200 border-gray-200 focus:ring-jobhunGreen focus:ring-1 hover:ring-jobhunGreen hover:ring-1">
                     <span class="text-sm ml-1 text-black">Talkshow</span>
                 </div>
                 <div class="flex items-center">
-                    <input type="radio" v-model="formDetailDashboardUndangExpert.format_event" value="Workshop" disabled
+                    <input type="radio" v-model="formDetailDashboardUndangExpert.format_event" value="Workshop" 
                         class="w-4 h-4 text-jobhunGreen bg-gray-200 border-gray-200 focus:ring-jobhunGreen focus:ring-1 hover:ring-jobhunGreen hover:ring-1">
                     <span class="text-sm ml-1 text-black">Workshop</span>
                 </div>
                 <div class="flex items-center">
-                    <input type="radio" v-model="formDetailDashboardUndangExpert.format_event" value="Lainnya" disabled
+                    <input type="radio" v-model="formDetailDashboardUndangExpert.format_event" value="Lainnya" 
                         class="w-4 h-4 text-jobhunGreen bg-gray-200 border-gray-200 focus:ring-jobhunGreen focus:ring-1 hover:ring-jobhunGreen hover:ring-1">
                     <span class="text-sm ml-1 text-black">Lainnya</span>
                 </div>
@@ -141,20 +167,57 @@ const isInputNumber = (evt) => {
                 <label class="block text-sm font-medium mb-1 text-black">Jumlah target peserta secara spesifik</label>
                 <input
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-md"
-                    @keypress="isNumberCurrency($event)" readonly v-model="formDetailDashboardUndangExpert.target" type="text" />
+                    @keypress="isNumberCurrency($event)" required v-model="formDetailDashboardUndangExpert.target" type="text" />
             </div>
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">Berapa budget yang diajukan untuk fee
                     speaker?</label>
                 <input
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-md"
-                    @input="formatBudget" readonly v-model="formDetailDashboardUndangExpert.fee" type="text" />
+                    @input="formatBudget" required v-model="formDetailDashboardUndangExpert.fee" type="text" />
             </div>
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">Apakah Jobhun bisa mendapatkan benefit promosi lainnya? Jika ada, sebutkan!</label>
                 <textarea rows="5"
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
                     readonly v-model="formDetailDashboardUndangExpert.benefit" type="text" />
+            </div>
+            <hr class="my-10 border-gray-300 sm:mx-auto" />
+            <div class="mt-4">
+                <label class="block text-sm font-medium mb-1 text-black">Status pembayaran</label>
+                <div class="flex items-center space-x-2">
+                    <select v-model="formDetailDashboardUndangExpert.payment"
+                        class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-44"
+                        @click.prevent="dropdownOpen = !dropdownOpen">
+                        <option v-for="payment in payments" :key="payment.text">{{ payment.text }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mt-4">
+                <label class="block text-sm font-medium mb-1 text-black">Status</label>
+                <div class="flex items-center space-x-2">
+                    <select v-model="formDetailDashboardUndangExpert.status"
+                        class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-44"
+                        @click.prevent="dropdownOpen = !dropdownOpen">
+                        <option v-for="status in status" :key="status.text">{{ status.text }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mt-4">
+                <label class="block text-sm font-medium mb-1 text-black">Status invoice</label>
+                <input
+                    class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-2/3"
+                    v-model="formDetailDashboardUndangExpert.invoice" required type="text" />
+            </div>
+            <div>
+                <div class="flex justify-end">
+                    <div>
+                        <button type="submit"
+                            class="h-9 mt-10 bg-jobhunGreen hover:bg-emerald-600 text-white px-7 rounded text-sm">
+                            Simpan
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </form>

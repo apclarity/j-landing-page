@@ -7,7 +7,7 @@
 <template>
   <div>
     <!-- Sidebar backdrop (mobile only) -->
-    <div class="fixed inset-0 bg-gray-100 bg-opacity-30 z-40 lg:hidden lg:z-auto transition-opacity duration-200" :class="sidebarOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'" aria-hidden="true"></div>
+    <div class="fixed inset-0 bg-gray-100 bg-opacity-30 z-40 lg:hidden lg:z-auto transition-opacity duration-200" :class="sidebarOpen ? 'opacity-100' : 'opacity-100 pointer-events-none'" aria-hidden="true"></div>
 
     <!-- Sidebar -->
     <div
@@ -36,11 +36,11 @@
           <img
               src="/src/images/cropped-logo-jobhun-3.png" 
               alt="Logo Jobhun"
-              class="h-10 sm:h-8"
+              class="h-10 sm:h-8 transition-all duration-200 ease-in-out"
             />
         </a>
         <a href="/" class="mx-auto" v-else>
-          <img src="/src/images/logo/Logo-J-Jobhun-04.png" alt="Logo Jobhun" class="h-10 sm:h-8 logo-j" />
+          <img src="/src/images/logo/Logo-J-Jobhun-04.png" alt="Logo Jobhun" class="h-10 sm:h-8 logo-j transition-all duration-200 ease-in-out" />
         </a>
       </div>
 
@@ -563,7 +563,7 @@
                   <a class="block text-black hover:text-emerald-500 transition duration-150 truncate"
                     :class="isExactActive && '!text-emerald-500'" :href="href" @click="navigate">
                       <div class="flex items-center">
-                        <svg fill="#000000" height="200px" width="200px" version="1.1" class="shrink h-6 w-6"
+                        <svg fill="#000000" version="1.1" class="shrink h-6 w-6"
                         xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" xml:space="preserve">
                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
