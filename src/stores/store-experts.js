@@ -18,8 +18,8 @@ const JADI_EXPERT_URL = "/expert/create-expert-form"
 //------ url data expert temporary ---------------------------------
 const SUBMISSION_EXPERT_TEMP = "/expert/submission-expert-temp"
 // const SUBMISSION_EXPERT_TEMP = "/submission-expert-temp.json"
-const SUBMISSION_TABLE_EXPERT_TEMP = "/expert/submission-expert-temp"
-// const SUBMISSION_TABLE_EXPERT_TEMP = "/table-expert-temp.json"
+// const SUBMISSION_TABLE_EXPERT_TEMP = "/expert/submission-expert-temp"
+const SUBMISSION_TABLE_EXPERT_TEMP = "/table-expert-temp.json"
 const DELETE_SUBMISSION_TABLE_EXPERT_TEMP = "/expert/delete-expert-temp"
 const ACCEPT_SUBMISSION_TABLE_EXPERT_TEMP = "/expert/acc-expert-temp"
 const REJECT_SUBMISSION_TABLE_EXPERT_TEMP = "/expert/reject-expert-temp"
@@ -241,7 +241,7 @@ export const useDataExpertStore = defineStore({
     async getDataTableSubmissionExpertTemp(payload) {
       try {
         // let res = await api.get(DETAIL_EXPERT_URL);
-        let res = await api.get(SUBMISSION_TABLE_EXPERT_TEMP + "?page=" + this.pagination.page + "&per_page=" + this.pagination.per_page + "&search=" + this.pagination.search, payload);
+        let res = await apiStatic.get(SUBMISSION_TABLE_EXPERT_TEMP + "?page=" + this.pagination.page + "&per_page=" + this.pagination.per_page + "&search=" + this.pagination.search, payload);
         this.tableSubmissionExpertTemp = res.data;
         this.pagination = res.pagination
       } catch (error) {}

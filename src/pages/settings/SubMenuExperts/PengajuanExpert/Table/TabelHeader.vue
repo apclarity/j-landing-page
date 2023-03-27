@@ -23,7 +23,7 @@ const props = defineProps({
 const { page, perPage, tableSubmissionExpertTemp, total } = toRefs(props)
 
 const adjustingIndex = computed(()=> {
-  console.log(perPage.value * (page.value-1))
+  // console.log(perPage.value * (page.value-1))
   return perPage.value * (page.value - 1)
 })
 </script>

@@ -87,6 +87,8 @@ const acceptExpert = async()=>{
 const rejectExpert = async()=>{
     await formSubmissionExpertTempStore.rejectFormJadiExpertDashboard(id)
 }
+
+const status = 'ditolak'
 </script>
 <style src="@vueform/multiselect/themes/default.css">
 
@@ -99,10 +101,12 @@ const rejectExpert = async()=>{
             </div>
             <div>
                 <div class="md:flex md:justify-end sm:flex sm:justify-start sm:mt-0 mt-4 space-x-4">
-                    <button type="submit" class="h-8 bg-jobhunGreen hover:bg-emerald-600 text-white px-6 rounded text-sm">
+                    <button type="submit" class="h-8 bg-jobhunGreen hover:bg-emerald-600 text-white px-6 rounded text-sm"
+                    v-if="status == 'diterima'"
+                    >
                         Diterima
                     </button>
-                    <button type="submit" class="h-8 bg-red-700 hover:bg-red-800 text-white px-6 rounded text-sm">
+                    <button v-else type="submit" class="h-8 bg-red-700 hover:bg-red-800 text-white px-6 rounded text-sm">
                         Ditolak
                     </button>
                 </div>
@@ -167,7 +171,7 @@ const rejectExpert = async()=>{
                 <div class="grid md:grid-cols-1 md:w-3/5">
                     <input
                         class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                        required v-model="submissionExpertTemp.education.school" type="text" readonly />
+                        v-model="submissionExpertTemp.education.school" type="text" readonly />
                 </div>
             </div>
             <div class="mt-4 items-center grid-flow-row md:flex">
@@ -212,7 +216,7 @@ const rejectExpert = async()=>{
                 </label>
                 <Multiselect v-model="submissionExpertTemp.domicile"
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen text-sm w-full ml-0"
-                    :options="listDomicile" disabled="true" />
+                    :options="listDomicile" disabled />
             </div>
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">
@@ -220,16 +224,16 @@ const rejectExpert = async()=>{
                 </label>
                 <textarea rows="5"
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                    required v-model="submissionExpertTemp.description" type="text" readonly />
+                    v-model="submissionExpertTemp.description" type="text" readonly />
             </div>
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">Asal perusahaan</label>
                 <input class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                    required v-model="submissionExpertTemp.company" type="text" readonly />
+                    v-model="submissionExpertTemp.company" type="text" readonly />
             </div>
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">Bidang yang dikuasai</label>
-                <Multiselect :close-on-select="false" disabled="true"
+                <Multiselect :close-on-select="false" :disabled="true"
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen text-sm w-full ml-0"
                     :classes="{ containerActive: 'ring-0', search: 'w-full absolute inset-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen appearance-none border-0 text-base font-sans rounded pl-3.5 rtl:pl-0 rtl:pr-3.5', }"
                     :create-option="true" :options="listSector" mode="multiple" :object="true"
@@ -274,7 +278,7 @@ const rejectExpert = async()=>{
                     <div class="grid md:grid-cols-1 md:w-3/5">
                         <input
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                            required v-model="submissionExpertTemp.experiences[index].title" type="text" readonly />
+                            v-model="submissionExpertTemp.experiences[index].title" type="text" readonly />
                     </div>
                 </div>
                 <div class="mt-4 items-center grid-flow-row md:flex">
@@ -284,7 +288,7 @@ const rejectExpert = async()=>{
                     <div class="grid md:grid-cols-1 md:w-3/5">
                         <input
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                            required v-model="submissionExpertTemp.experiences[index].location" type="text" readonly />
+                            v-model="submissionExpertTemp.experiences[index].location" type="text" readonly />
                     </div>
                 </div>
                 <div class="mt-4 items-center grid-flow-row md:flex">
@@ -293,7 +297,7 @@ const rejectExpert = async()=>{
                     </div>
                     <div class="grid md:grid-cols-1 md:w-2/5">
                         <div class="max-w-md">
-                            <flat-pickr disabled="true"
+                            <flat-pickr :disabled="true"
                                 class="form-input pl-9 border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm"
                                 :config="config" v-model="submissionExpertTemp.experiences[index].start_date"></flat-pickr>
                             <div class="absolute inset-0 right-auto flex items-center pointer-events-none">
@@ -312,7 +316,7 @@ const rejectExpert = async()=>{
                     </div>
                     <div class="grid md:grid-cols-2 md:w-3/5">
                         <div class="">
-                            <flat-pickr disabled="true"
+                            <flat-pickr :disabled="true"
                                 class="form-input pl-9 border-0 disabled:bg-slate-50 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm"
                                 :config="config" v-model="submissionExpertTemp.experiences[index].end_date"></flat-pickr>
                             <div class="absolute inset-0 right-auto flex items-center pointer-events-none">
@@ -330,7 +334,7 @@ const rejectExpert = async()=>{
                 <label class="block text-sm font-medium mb-1 text-black">Durasi bekerja</label>
                 <input
                     class="border-0 inline-flex bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-20"
-                    required @keypress="isInputNumber($event)" v-model="submissionExpertTemp.experience_yoe" type="text" readonly />
+                    @keypress="isInputNumber($event)" v-model="submissionExpertTemp.experience_yoe" type="text" readonly />
                 <span class="text-sm">
                     tahun
                 </span>
@@ -341,7 +345,7 @@ const rejectExpert = async()=>{
                 </label>
                 <input
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                    required v-model="submissionExpertTemp.social_media.linkedin" type="text" readonly />
+                    v-model="submissionExpertTemp.social_media.linkedin" type="text" readonly />
             </div>
             
             <div class="mt-4 inline-flex items-center">
@@ -353,7 +357,7 @@ const rejectExpert = async()=>{
                 </Tooltip>
             </div>
             <div class="mt-1">
-                <Multiselect :close-on-select="false" disabled="true"
+                <Multiselect :close-on-select="false" :disabled="true"
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen text-sm w-full ml-0"
                     :classes="{ containerActive: 'ring-0', search: 'w-full absolute inset-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen appearance-none border-0 text-base font-sans rounded pl-3.5 rtl:pl-0 rtl:pr-3.5', }"
                     :create-option="true" :options="listService" mode="multiple"
@@ -389,21 +393,21 @@ const rejectExpert = async()=>{
                     sebelumnya?</label>
                 <textarea rows="5"
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                    required v-model="submissionExpertTemp.teaching_experience"  type="text" readonly />
+                    v-model="submissionExpertTemp.teaching_experience"  type="text" readonly />
             </div>
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">Mengapa kamu tertarik mendaftar menjadi expert
                     di Jobhun?</label>
                 <textarea rows="5"
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                    required v-model="submissionExpertTemp.reason_join"  type="text" readonly />
+                    v-model="submissionExpertTemp.reason_join"  type="text" readonly />
             </div>
             <div class="mt-4">
                 <label class="block text-sm font-medium mb-1 text-black">Mengapa Jobhun harus memilih kamu sebagai
                     expert?</label>
                 <textarea rows="5"
                     class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                    required v-model="submissionExpertTemp.reason_approve"  type="text" readonly />
+                    v-model="submissionExpertTemp.reason_approve"  type="text" readonly />
             </div>
         </div>
     </form>
