@@ -57,7 +57,7 @@ import IconInstagram from '../../partials/icons/icon-instagram.vue'
             <ul class="flex flex-wrap items-center text-sm mb-6 text-gray-500 sm:mb-0 md:text-right text-left md:justify-end justify-start py-3 ml-4 md:ml-0 mt-5 md:mt-0">
                 <li>
                     <p class="mr-4 md:mr-6 font-bold text-gray-600">
-                        Jobhun - PT Jobhun Membangun Indonesia
+                        Jobhun – PT Jobhun Membangun Indonesia
                     </p>
                 </li>
                 <li>
@@ -69,7 +69,7 @@ import IconInstagram from '../../partials/icons/icon-instagram.vue'
                 <br>
                 <li>
                     <p class="mr-4 md:mr-6">
-                        HQ: IndigoSpace Surabaya, Jl. Bendul Merisi Selatan Airdas 55, Bendul Merisi, Wonocolo, Surabaya 60238
+                        HQ: Maspion Square, M.IT 3 Blok F.08, Jl. Ahmad Yani 73, Margorejo, Wonocolo, Surabaya, Jawa Timur, Indonesia 60238
                     </p>
                     <p class="mr-4 md:mr-6">
                         E-mail: info@jobhun.id; partnership@jobhun.id | Phone: 081332905635
