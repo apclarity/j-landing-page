@@ -4,17 +4,21 @@ import { useRoute } from 'vue-router'
 import IconStar from '../../../../../partials/icons/icon-star.vue'
 import IconBriefcase from '../../../../../partials/icons/icon-briefcase.vue'
 import IconLinkedin from '../../../../../partials/icons/icon-linkedin.vue'
-import DateSingle from './DateSingleRekrutExpert.vue'
+import DateSingle from './DateSingle.vue'
 import { PrinterIcon } from '@heroicons/vue/20/solid'
 import ModalAjukan from './ModalAjukanRekrutExpert.vue'
 import RegionJSON from '../../../../../utils/json/regencies.json'
 import { convertRawIntToRupiah } from '../../../../../utils/Helper'
+import { useDataExpertStore } from '../../../../../stores/store-experts'
 
 const props = defineProps({
-    dataRekrutExpert: Object
+    dataRekrutExpert: Object,
+    idExpert: Number
 })
 
-const { dataRekrutExpert } = props
+const expertStore = useDataExpertStore()
+
+const { dataRekrutExpert, idExpert } = props
 
 const formRekrutExpert = ref({
     company: "",
@@ -27,7 +31,8 @@ const formRekrutExpert = ref({
     job_detail: "",
     description: "",
     deadline: "",
-    budget: ""
+    budget: "",
+    expert_id: idExpert
 })
 
 const formatBudget = ()=>{
@@ -90,12 +95,13 @@ const isInputNumber = (evt) => {
     }
 }
 
-const formValidation = () => {
+const formValidation = async () => {
     if (formRekrutExpert.value.company == '' && formRekrutExpert.value.website == '' && formRekrutExpert.value.linkedin == '' &&
         formRekrutExpert.value.email == '' && formRekrutExpert.value.phone == '' && formRekrutExpert.value.projectDetail == '' &&
         formRekrutExpert.value.jobDetail == '' && formRekrutExpert.value.termCondition == '' && formRekrutExpert.value.deadline == '' &&
         formRekrutExpert.value.budget == '') {
     } else {
+        await expertStore.formPengajuanRekrutExpert(formRekrutExpert.value)
         openModalAjukanRekrutExpert()
     }
 }

@@ -80,15 +80,10 @@ const isInputNumber = (evt) => {
     }
 }
 
-const acceptExpert = async()=>{
-    await formSubmissionExpertTempStore.acceptFormJadiExpertDashboard(id)
+const acceptRejectExpert = async()=>{
+    await formSubmissionExpertTempStore.acceptRejectFormJadiExpertDashboard(id)
+    
 }
-
-const rejectExpert = async()=>{
-    await formSubmissionExpertTempStore.rejectFormJadiExpertDashboard(id)
-}
-
-const status = 'ditolak'
 </script>
 <style src="@vueform/multiselect/themes/default.css">
 
@@ -101,12 +96,11 @@ const status = 'ditolak'
             </div>
             <div>
                 <div class="md:flex md:justify-end sm:flex sm:justify-start sm:mt-0 mt-4 space-x-4">
-                    <button type="submit" class="h-8 bg-jobhunGreen hover:bg-emerald-600 text-white px-6 rounded text-sm"
-                    v-if="status == 'diterima'"
+                    <button type="submit" class="h-8 bg-jobhunGreen hover:bg-emerald-600 text-white px-6 rounded text-sm" @click="acceptRejectExpert('accept')"
                     >
                         Diterima
                     </button>
-                    <button v-else type="submit" class="h-8 bg-red-700 hover:bg-red-800 text-white px-6 rounded text-sm">
+                    <button type="submit" class="h-8 bg-red-700 hover:bg-red-800 text-white px-6 rounded text-sm" @click="acceptRejectExpert('reject')">
                         Ditolak
                     </button>
                 </div>

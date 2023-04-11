@@ -37,4 +37,5 @@ optionsStore.getSectors()
 optionsStore.getDomiciles()
 optionsStore.getServices()
 optionsStore.getTitle()
+optionsStore.getAccorConsul()
 </script>

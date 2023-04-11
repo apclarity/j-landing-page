@@ -7,28 +7,34 @@ import IconMateri from '../../../../../partials/icons/icon-materi.vue'
 import IconLinkedin from '../../../../../partials/icons/icon-linkedin.vue'
 import IconTarif from '../../../../../partials/icons/icon-rupiah.vue'
 import Tooltip from '../../../../../components/TooltipRed.vue'
-import DateSingle from '../Konsultasi/DateSingle.vue'
+import DateSingle from './DateSingle.vue'
 import DropdownCheckbox from './DropdownCheckbox.vue'
 import { PrinterIcon } from '@heroicons/vue/20/solid'
 import ModalAjukan from './ModalAjukanUndangExpert.vue'
 import { convertRawIntToRupiah } from '../../../../../utils/Helper'
+import { useDataExpertStore } from '../../../../../stores/store-experts'
 
 const props = defineProps({
-    dataUndangExpert: Object
+    dataUndangExpert: Object,
+    idExpert: Number
 })
 
-const { dataUndangExpert } = props
+const { dataUndangExpert, idExpert } = props
+
+const expertStore = useDataExpertStore()
 
 const formUndangExpert = ref({
     company: "",
     company_description: "",
     event: "",
     event_description: "",
-    start_date: "",
-    format_event: "",
-    target: "",
+    start_date: "", 
+    format_event: null,
+    participants: "",
     fee: "",
-    benefit: ""
+    benefit: "",
+    expert_id: idExpert,
+    duration: 1
 })
 
 const isNumberCurrency = (evt) => {
@@ -39,6 +45,10 @@ const isNumberCurrency = (evt) => {
     } else {
         return true;
     }
+}
+
+const parseValue = (event) => {
+    formUndangExpert.value.format_event = parseInt(event.target.value)
 }
 
 const formatBudget = () => {
@@ -68,12 +78,12 @@ const openModalAjukanUndanganExpert = () => {
     isUserAjukan.value = true
 }
 
-const formValidation = () => {
-    if (formUndangExpert.value.from == '' && formUndangExpert.value.date == '' && formUndangExpert.value.budget == '' &&
-        formUndangExpert.value.description == '' && formUndangExpert.value.typePelatihan == '' && formUndangExpert.value.topic == '' &&
-        formUndangExpert.value.eventName == '' && formUndangExpert.value.target == '' &&
-        formUndangExpert.value.eventDescription == '') {
+const formValidation = async () => {
+    if (formUndangExpert.value.company == '' && formUndangExpert.value.company_description == '' && formUndangExpert.value.fee == '' &&
+        formUndangExpert.value.event_description == '' && formUndangExpert.value.event == '' && formUndangExpert.value.start_date == '' &&
+        formUndangExpert.value.format_event == '' && formUndangExpert.value.participants == '' && formUndangExpert.value.benefit == '') {
     } else {
+        await expertStore.formPengajuanUndangExpert(formUndangExpert.value)
         openModalAjukanUndanganExpert()
     }
 }
@@ -217,17 +227,17 @@ const formValidation = () => {
                     <div class="mt-4">
                         <label class="block text-sm font-medium mb-1 text-black">Format acara</label>
                         <div class="flex items-center">
-                            <input type="radio" v-model="formUndangExpert.format_event" required value="Talkshow"
+                            <input type="radio" v-model="formUndangExpert.format_event" required value="1" @change="parseValue"
                                 class="w-4 h-4 text-jobhunGreen bg-gray-200 border-gray-200 focus:ring-jobhunGreen focus:ring-1 hover:ring-jobhunGreen hover:ring-1">
                             <span class="text-sm ml-1 text-black">Talkshow</span>
                         </div>
                         <div class="flex items-center">
-                            <input type="radio" v-model="formUndangExpert.format_event" required value="Workshop"
+                            <input type="radio" v-model="formUndangExpert.format_event" required value="2" @change="parseValue"
                                 class="w-4 h-4 text-jobhunGreen bg-gray-200 border-gray-200 focus:ring-jobhunGreen focus:ring-1 hover:ring-jobhunGreen hover:ring-1">
                             <span class="text-sm ml-1 text-black">Workshop</span>
                         </div>
                         <div class="flex items-center">
-                            <input type="radio" v-model="formUndangExpert.format_event" required value="Lainnya"
+                            <input type="radio" v-model="formUndangExpert.format_event" required value="3" @change="parseValue"
                                 class="w-4 h-4 text-jobhunGreen bg-gray-200 border-gray-200 focus:ring-jobhunGreen focus:ring-1 hover:ring-jobhunGreen hover:ring-1">
                             <span class="text-sm ml-1 text-black">Lainnya</span>
                         </div>
@@ -236,7 +246,7 @@ const formValidation = () => {
                         <label class="block text-sm font-medium mb-1 text-black">Jumlah target peserta secara spesifik</label>
                         <input
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-md"
-                            @keypress="isNumberCurrency($event)" required v-model="formUndangExpert.target" placeholder="Input angka" type="text" />
+                            @keypress="isNumberCurrency($event)" required v-model="formUndangExpert.participants" placeholder="Input angka" type="number" />
                     </div>
                     <div class="mt-4">
                         <label class="block text-sm font-medium mb-1 text-black">Berapa budget yang diajukan untuk fee

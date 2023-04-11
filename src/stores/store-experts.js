@@ -21,8 +21,7 @@ const SUBMISSION_EXPERT_TEMP = "/expert/submission-expert-temp"
 // const SUBMISSION_TABLE_EXPERT_TEMP = "/expert/submission-expert-temp"
 const SUBMISSION_TABLE_EXPERT_TEMP = "/table-expert-temp.json"
 const DELETE_SUBMISSION_TABLE_EXPERT_TEMP = "/expert/delete-expert-temp"
-const ACCEPT_SUBMISSION_TABLE_EXPERT_TEMP = "/expert/acc-expert-temp"
-const REJECT_SUBMISSION_TABLE_EXPERT_TEMP = "/expert/reject-expert-temp"
+const ACCEPT_REJECT_SUBMISSION_TABLE_EXPERT_TEMP = "/expert/status-expert-temp"
 //------ url data expert permanent ----------------------------------
 const JADI_EXPERT_DASHBOARD_URL = "/expert/create-expert"
 const DATA_DETAIL_EXPERT_PERMANENT = "/expert/submission-expert-temp"
@@ -255,11 +254,13 @@ export const useDataExpertStore = defineStore({
       } catch (error) {}
     },
     //accept&reject digabung sama publish
-    // async acceptFormJadiExpertDashboard(payload) {
-    //   try {
-    //     await api.post(ACCEPT_SUBMISSION_TABLE_EXPERT_TEMP, payload);
-    //   } catch (error) {}
-    // },
+    async acceptRejectFormJadiExpertDashboard(payload) {
+      try {
+        const result = await api.post(ACCEPT_REJECT_SUBMISSION_TABLE_EXPERT_TEMP, payload);
+        return result 
+        console.log(result)
+      } catch (error) {}
+    },
     // async rejectFormJadiExpertDashboard(payload) {
     //   try {
     //     await api.post(REJECT_SUBMISSION_TABLE_EXPERT_TEMP, payload);
@@ -324,6 +325,15 @@ export const useDataExpertStore = defineStore({
         this.formTambahTransaksiKonsultasiDashboard = res.data;
       } catch (error) {}
     },
+    async formPengajuanKonsultasi(payload) {
+      try {
+        let newPayload = {
+          "service":{"consultation":payload},
+          "expert_id":payload.expert_id
+        }
+        await api.post(SUBMISSION_CONSULTATION, newPayload);
+      } catch (error) {}
+    },
     // ------------------------ Recruit Expert -------------------------
     async getDataTableRecruitExpert(payload) {
       try {
@@ -342,6 +352,15 @@ export const useDataExpertStore = defineStore({
       try {
         let res = await api.post(DAHSBOARD_NEW_TRANSACTION_RECRUIT_EXPERT, payload);
         this.formTambahTransaksiRekrutExpertDashboard = res.data;
+      } catch (error) {}
+    },
+    async formPengajuanRekrutExpert(payload) {
+      try {
+        let newPayload = {
+          "service":{"recruit_expert":payload},
+          "expert_id":payload.expert_id
+        }
+        await api.post(SUBMISSION_RECRUIT_EXPERT, newPayload);
       } catch (error) {}
     },
     // ------------------------ Undang Expert -------------------------
@@ -364,6 +383,15 @@ export const useDataExpertStore = defineStore({
         this.formTambahTransaksiUndangExpertDashboard = res.data;
       } catch (error) {}
     },
+    async formPengajuanUndangExpert(payload) {
+      try {
+        let newPayload = {
+          "service":{"invite_expert":payload},
+          "expert_id":payload.expert_id
+        }
+        await api.post(SUBMISSION_INVITE_EXPERT, newPayload);
+      } catch (error) {}
+    },
     // ------------------------ Pelatihan -----------------------------
     async getDataTablePelatihan(payload) {
       try {
@@ -382,6 +410,15 @@ export const useDataExpertStore = defineStore({
       try {
         let res = await api.post(DAHSBOARD_NEW_TRANSACTION_TRAINING, payload);
         this.formTambahTransaksiPelatihanDashboard = res.data;
+      } catch (error) {}
+    },
+    async formPengajuanPelatihan(payload) {
+      try {
+        let newPayload = {
+          "service":{"training":payload},
+          "expert_id":payload.expert_id
+        }
+        await api.post(SUBMISSION_TRAINING, newPayload);
       } catch (error) {}
     },
   },

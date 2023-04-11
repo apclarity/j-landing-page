@@ -17,6 +17,6 @@ const { detailExpert } = storeToRefs(dataExpertDetailStore)
 </script>
 <template>
     <div class="py-8 md:py-0 mx-auto mb-10">
-        <FormKonsultasi :layananExpertKonsultasi="detailExpert" />
+        <FormKonsultasi :layananExpertKonsultasi="detailExpert" :idExpert="parseInt(id)" />
     </div>
 </template>

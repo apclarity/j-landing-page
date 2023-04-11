@@ -3,6 +3,8 @@ import { onMounted, ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import IconCalendar from '../../../../../partials/icons/icon-calendar.vue'
+import IconClock from '../../../../../partials/icons/icon-clock.vue'
+import IconLinkedin from '../../../../../partials/icons/icon-linkedin.vue'
 import Tooltip from '../../../../../components/TooltipRed.vue'
 import MultiSel from './MultipleSelectFormPelatihan.vue'
 import DropdownCheckbox from './DropdownCheckbox.vue'
@@ -12,6 +14,11 @@ import Multiselect from '@vueform/multiselect'
 import { useOptionsStore } from '../../../../../stores/store-options'
 import { useDataExpertStore } from '../../../../../stores/store-experts.js'
 
+const props = defineProps({
+    dataExpertPelatihan: Object,
+    idExpert: Number
+})
+
 const route = useRoute()
 
 const formDashboardPelatihan = useDataExpertStore()
@@ -20,21 +27,23 @@ const optionStore = useOptionsStore()
 const { formJadiExpert } = storeToRefs(formDashboardPelatihan)
 const { listSector, listDomicile, listService} = storeToRefs(optionStore)
 
-const props = defineProps({
-    dataExpertPelatihan: Object
-})
-
-const { dataExpertPelatihan } = props
+const { dataExpertPelatihan, idExpert } = props
 
 const formExpertPelatihan = ref({
-    type: "",
-    ifgroup: "",
+    type: null,
+    participants: "",
     session: "",
     description: "",
     start_hour: "",
     start_minute: "",
-    day: []
+    days: [],
+    expert_id: idExpert,
+    duration: 1
 })
+
+const parseValue = (event)=>{
+    formExpertPelatihan.value.type = parseInt(event.target.value)
+}
 
 const days = [
     'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'
@@ -44,7 +53,7 @@ const isNumberCurrency = (evt) => {
     evt = (evt) ? evt : window.event;
     var charCode = (evt.which) ? evt.which : evt.keyCode;
     if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
-        evt.preventDefault();;
+        parseInt(evt.preventDefault())
     } else {
         return true;
     }
@@ -67,15 +76,6 @@ const minutes = [
     { text: '59' }
 ]
 
-const radioPelatihan = [
-    {
-        text: 'Privat'
-    },
-    {
-        text: 'Grup'
-    }
-]
-
 const isUserAjukan = ref(false)
 
 const openModalAjukanPelatihan = () => {
@@ -84,12 +84,25 @@ const openModalAjukanPelatihan = () => {
 
 const dropdownDay = ref(false)
 
-const formValidation = () => {
-    if (formExpertPelatihan.value.type == '' && formExpertPelatihan.value.totalPerson == '' && formExpertPelatihan.value.session == '' &&
-        formExpertPelatihan.value.topic == '' && formExpertPelatihan.value.startHour == '' && formExpertPelatihan.value.startMinute == '' &&
+const formValidation = async () => {
+    if (formExpertPelatihan.value.type == '' && formExpertPelatihan.value.participants == '' && formExpertPelatihan.value.session == '' &&
+        formExpertPelatihan.value.description == '' && formExpertPelatihan.value.start_hour == '' && formExpertPelatihan.value.start_minute == '' &&
         formExpertPelatihan.value.days == '') {
     } else {
-        openModalAjukanPelatihan()
+        console.log('val 1')
+        try {
+            const response = await formDashboardPelatihan.formPengajuanPelatihan(
+                formExpertPelatihan.value
+            );
+            console.log(response)
+            if (response.statusCode === 200) {
+                console.log('200')
+                openModalAjukanPelatihan();
+            } else {
+                router.push({ path: '/' })
+            }
+        } catch (error) {
+        }
     }
 }
 </script>
@@ -204,12 +217,12 @@ const formValidation = () => {
                     <div>
                         <label class="block text-sm font-medium mb-1 text-black">Jenis pelatihan</label>
                         <div class="flex items-center">
-                            <input type="radio" v-model="formExpertPelatihan.type" required value="Privat"
+                            <input type="radio" v-model="formExpertPelatihan.type" required value="1" @change="parseValue"
                                 class="w-4 h-4 text-jobhunGreen bg-gray-200 border-gray-200 focus:ring-jobhunGreen focus:ring-1 hover:ring-jobhunGreen hover:ring-1">
                                 <span class="text-sm ml-1 text-black">Privat</span>
                         </div>
                         <div class="flex items-center">
-                            <input type="radio" v-model="formExpertPelatihan.type" required value="Grup"
+                            <input type="radio" v-model="formExpertPelatihan.type" required value="2" @change="parseValue"
                                 class="w-4 h-4 text-jobhunGreen bg-gray-200 border-gray-200 focus:ring-jobhunGreen focus:ring-1 hover:ring-jobhunGreen hover:ring-1">
                             <span class="text-sm ml-1 text-black">Grup</span>
                         </div>
@@ -219,13 +232,13 @@ const formValidation = () => {
                             pelatihan?</label>
                         <input
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-md"
-                            @keypress="isNumberCurrency($event)" placeholder="Input angka" v-model="formExpertPelatihan.ifgroup" type="text" />
+                            @keypress="isNumberCurrency($event)" placeholder="Input angka" v-model="formExpertPelatihan.participants" type="number" />
                     </div>
                     <div class="mt-4">
                         <label class="block text-sm font-medium mb-1 text-black">Berapa sesi pertemuan yang diajukan?</label>
                         <input
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-md"
-                            @keypress="isNumberCurrency($event)" required placeholder="Input angka" v-model="formExpertPelatihan.session" type="text" />
+                            @keypress="isNumberCurrency($event)" required placeholder="Input angka" v-model="formExpertPelatihan.session" type="number" />
                     </div>
                     <div class="mt-4">
                         <label class="block text-sm font-medium mb-1 text-black">Jelaskan secara spesifik topik/pembahasan apa saja yang ingin kamu pelajari?</label>

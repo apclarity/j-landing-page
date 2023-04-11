@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted, ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
+import { useDataExpertStore } from '../../../../../stores/store-experts'
 import IconCalendar from '../../../../../partials/icons/icon-calendar.vue'
 import IconClock from '../../../../../partials/icons/icon-clock.vue'
 import IconMateri from '../../../../../partials/icons/icon-materi.vue'
@@ -13,21 +14,23 @@ import ModalAjukan from './ModalAjukanKonsultasi.vue'
 import Multiselect from '@vueform/multiselect'
 
 const props = defineProps({
-    layananExpertKonsultasi: Object
+    layananExpertKonsultasi: Object,
+    idExpert: Number
 })
+
+const expertStore = useDataExpertStore()
 
 const { layananExpertKonsultasi } = props
 
-const duration = ref(1)
 const price = ref(layananExpertKonsultasi.service.consultation.fee)
 
 const increment = ()=>{
-    duration.value += 1
+    formExpertKonsultasi.value.duration += 1
 }
 
 const decrement = ()=>{
-    if(duration.value === 1) return
-    duration.value -= 1
+    if(formExpertKonsultasi.value.duration === 1) return
+    formExpertKonsultasi.value.duration -= 1
 }
 
 const pricePerHour = computed(()=>{
@@ -37,19 +40,19 @@ const pricePerHour = computed(()=>{
 })
 
 const total = computed(()=> {
-    var total = duration.value * price.value
+    var total = formExpertKonsultasi.value.duration * price.value
     return "Rp" + total.toString().replace(/(\d)(?=(\d{3})+(?:\.\d+)?$)/g, "$1\.")
     return total
 })
 
 const formExpertKonsultasi = ref({
-    date: "",
-    startHour: "",
-    startMinute: "",
+    start_date: "",
+    start_hour: "",
+    start_minute: "",
     discussion: [],
-    topic: "",
-    total: "",
-    duration: ""
+    description: "",
+    duration: 1,
+    expert_id: props.idExpert
 })
 
 const discussions = [
@@ -81,12 +84,17 @@ const openModalAjukanKonsultasi = () => {
     isUserAjukan.value = true
 }
 
-const formValidation = ()=>{
-    if (formExpertKonsultasi.value.date == '' && formExpertKonsultasi.value.startHour == '' && formExpertKonsultasi.value.startMinute == '' &&
-        formExpertKonsultasi.value.discussion == '' && formExpertKonsultasi.value.topic == '' && formExpertKonsultasi.value.total == '' &&
-        formExpertKonsultasi.value.duration == ''){
+const formValidation = async ()=>{
+    if (formExpertKonsultasi.value.start_date == '' && formExpertKonsultasi.value.start_hour == '' && formExpertKonsultasi.value.start_minute == '' &&
+        formExpertKonsultasi.value.discussion == '' && formExpertKonsultasi.value.description == '' && formExpertKonsultasi.value.duration == ''){
+            alert('silakan diisi')
     } else {
-        openModalAjukanKonsultasi()
+        try{
+            await expertStore.formPengajuanKonsultasi(formExpertKonsultasi.value)
+            openModalAjukanKonsultasi()
+        } catch (error){
+
+        }
     }
 }
 </script>
@@ -227,7 +235,7 @@ const formValidation = ()=>{
                     <div>
                         <label class="block text-sm font-medium mb-1 text-black">Pengajuan tanggal konsultasi</label>
                         <div class="flex items-center space-x-2">
-                            <DateSingle v-model="formExpertKonsultasi.date" required />
+                            <DateSingle v-model="formExpertKonsultasi.start_date" required />
                             <Tooltip position="right" class="">
                                 <div class="text-xs whitespace-nowrap">Silakan sesuaikan dengan jadwal expert yang tersedia</div>
                             </Tooltip>
@@ -237,13 +245,13 @@ const formValidation = ()=>{
                     <div class="mt-4">
                         <label class="block text-sm font-medium mb-1 text-black">Pengajuan waktu konsultasi</label>
                         <div class="flex items-center space-x-2">
-                            <select required v-model="formExpertKonsultasi.startHour"
+                            <select required v-model="formExpertKonsultasi.start_hour"
                                 class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-14"
                                 @click.prevent="dropdownOpen = !dropdownOpen">
                                 <option v-for="hour in hours" :key="hour.text">{{hour.text}}</option>
                             </select>
                             <span class="px-1">:</span>
-                            <select required v-model="formExpertKonsultasi.endMinute"
+                            <select required v-model="formExpertKonsultasi.start_minute"
                                 class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-14">
                                 <option v-for="minute in minutes" :key="minute.text">{{minute.text}}</option>
                             </select>
@@ -262,7 +270,7 @@ const formValidation = ()=>{
                                 </div>
                                 <div type="number"
                                     class="border-0 bg-gray-100 hover:ring-emerald-500 focus:ring-jobhunGreen p-1.5 text-sm w-full text-center flex items-center text-gray-700">
-                                    {{duration}} jam
+                                    {{ formExpertKonsultasi.duration}} jam
                                 </div>
                                 <div @click="increment()"
                                     class="border-0 bg-gray-100 hover:bg-gray-300 hover:ring-emerald-500 focus:ring-jobhunGreen h-full w-20 rounded-r cursor-pointer">
@@ -282,7 +290,7 @@ const formValidation = ()=>{
                             yang ingin kamu pelajari dari expert!</label>
                         <textarea rows="5"
                             class="border-0 bg-gray-100 hover:ring-emerald-500 rounded-lg focus:ring-jobhunGreen p-1.5 text-sm w-full"
-                            required v-model="formExpertKonsultasi.topic" />
+                            required v-model="formExpertKonsultasi.description" />
                     </div>
                 </div>
             </div>

@@ -110,6 +110,7 @@ import DashboardTambahPelatihan from "./pages/pelatihan/pengajuan/tambah/Index.v
 import TombolAjukanExpert from "./pages/Experts/CariExpert/ajukan-experts/Index.vue"
 import DashboardPengajuanKebutuhanExpert from "./pages/pengajuan-kebutuhan-expert/Table/Index.vue"
 import DashboardDetailPengajuanKebutuhanExpert from "./pages/pengajuan-kebutuhan-expert/detail/FormDetailPengajuanKebutuhanExpert.vue"
+import MenuKonsultasi from "./pages/Homepage/MenuLayananNavBar/Konsultasi/Index.vue"
 
 
 const routerHistory = createWebHistory();
