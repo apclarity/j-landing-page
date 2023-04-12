@@ -38,9 +38,7 @@ const toSignIn = () => {
                 </div>
                 <div class="mx-auto text-center px-8">
                     <span class="text-sm text-black">
-                        Untuk melanjutkan pendaftaran,
-                        kamu harus mendaftar atau masuk ke dalam
-                        akun terlebih dahulu.
+                        Kamu harus mendaftar atau masuk ke dalam akun terlebih dahulu.
                     </span>
                 </div>
                 <div class="mx-auto text-center px-8 mt-3">

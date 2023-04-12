@@ -41,3 +41,6 @@ const toggleAccordion = ()=>{
         </div>
       </div>
 </template>
+<style>
+
+</style>
