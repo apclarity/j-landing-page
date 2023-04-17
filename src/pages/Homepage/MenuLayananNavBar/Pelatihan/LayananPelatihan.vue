@@ -2,7 +2,7 @@
 import { computed, ref } from 'vue'
 import { useRouter, useRoute } from "vue-router"
 import { storeToRefs } from 'pinia'
-import { useLayoutStore } from '../../../../pages/layout/store'
+import { useLayoutStore } from '../../../layout/store'
 import { isObjectEmpty } from '../../../../utils/Helper'
 import CardExpert from './CardExpert.vue'
 import { useDataExpertStore } from '../../../../stores/store-experts'
