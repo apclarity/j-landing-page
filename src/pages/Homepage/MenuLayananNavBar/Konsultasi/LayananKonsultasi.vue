@@ -356,7 +356,7 @@ const toFormulirJadiExpert = ()=>{
                         </div>
                     </div>
                 </div>
-                <div class="justify-center grid grid-cols-2 xl:grid-cols-3 md:grid-cols-2 gap-6 items-center content-center mt-10 mx-24">
+                <div class="justify-center grid grid-cols-2 xl:grid-cols-3 md:grid-cols-2 gap-6 items-center content-center mt-10 mx-44">
                     <div class="border-gray-300 border-2 bg-transparent w-full h-full text-center p-3 rounded-md" style="position: relative;" 
                     v-for="(alur2, i) in alurLayananKonsultasi2" :key="i">
                         <div class="my-2">
