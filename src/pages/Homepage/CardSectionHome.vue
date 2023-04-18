@@ -15,7 +15,7 @@ const limit = 8
     <div class="">
         <div class="px-0 lg:px-8 py-8 w-full max-w-9xl mx-auto">
             <h1 class="text-2xl md:text-3xl text-slate-800 text-center font-bold">Rekomendasi experts unggulan</h1>
-            <div class="grid grid-cols-1 xl:grid-cols-4 md:grid-cols-2 gap-6 mt-10 px-28">
+            <div class="grid grid-cols-1 xl:grid-cols-4 md:grid-cols-2 gap-6 mt-10 px-14 lg:px-28 md:px-28">
                 <div v-for="(expert, index) in expertFeatured" :key="index">
                     <CardMentor :expertFeatured="expert" v-if="index<limit" />
                 </div>

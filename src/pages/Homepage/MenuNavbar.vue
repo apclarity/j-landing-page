@@ -79,7 +79,7 @@
                     Jadi Expert</a>
             </li>
             <li>
-                <div class="relative inline-flex md:hidden mx-7">
+                <div class="relative inline-flex md:hidden">
                     <button ref="trigger" class="inline-flex justify-center items-center group" aria-haspopup="true"
                         @click.prevent="showMenu = !showMenu" :aria-expanded="showMenu">
                         <div class="flex items-center truncate">
