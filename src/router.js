@@ -122,7 +122,13 @@ const router = createRouter({
   routes: [
     {
       path: "/",
-      component: Dashboard,
+      component: LayoutUtama,
+      children: [
+        {
+          path: "/",
+          component: Homepage,
+        }
+      ],
     }
   ],
 });
