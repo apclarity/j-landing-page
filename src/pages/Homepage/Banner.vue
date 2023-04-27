@@ -1,40 +1,4 @@
 <script setup>
-import {ref, reactive} from 'vue'
-import Combobox from './Combobox.vue'
-import { computed, onMounted } from 'vue';
-import { useRouter, useRoute } from 'vue-router'
-import Multiselect from '@vueform/multiselect'
-
-const router = useRouter()
-const route = useRoute()
-
-const sectors = {
-    Marketing: 'Marketing',
-    Sales: 'Sales'
-}
-
-const searchInHomepage = reactive({
-    company: '',
-    profession: '',
-    sector: ''
-})
-
-onMounted(() => {
-    searchInHomepage.company = route.query.keywordCompany
-    searchInHomepage.profession = route.query.keywordProffesion
-    searchInHomepage.sector = route.query.keywordSector
-})
-
-const homepageSearch = ()=>{
-    router.push({
-        path: '/experts/cariexpert',
-        query: {
-            keywordCompany: searchInHomepage.company,
-            keywordProffesion: searchInHomepage.profession,
-            keywordSector: searchInHomepage.sector
-        },
-      })
-}
 </script>
 <template>
     <div class="justify-center px-6 sm:px-6 lg:mx-28 md:mx-20 flex">
@@ -60,9 +24,22 @@ const homepageSearch = ()=>{
             </div>
         </div>
         <div class="lg:block hidden w-1/2">
-            <div class="mb-5">
-                <img src="../../images/banner/BANNER-WEB-JOBHUN-34-min.png" alt="" class="h-full w-full object-cover z-20">
+            <div class="mb-5 image-container">
+                <img src="../../images/banner/BANNER-WEB-JOBHUN-34-min.png" alt="" class="responsive-image">
             </div>
         </div>
     </div>
 </template>
+<style>
+.image-container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.responsive-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+</style>

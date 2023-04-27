@@ -1,16 +1,4 @@
 <script setup>
-import { ref, onMounted, onUnmounted, computed } from 'vue'
-import CardMentor from './CardExpertHome.vue'
-import { useDataExpertStore } from '../../stores/store-experts'
-import { storeToRefs } from 'pinia'
-
-const dataExpertsHomepageStore = useDataExpertStore()
-
-const { expertFeatured } = storeToRefs(dataExpertsHomepageStore)
-
-dataExpertsHomepageStore.getDataExpertFeatured()
-const limit = 8
-
 const kebutuhan = [
     {
         title: 'Profil Jobhun',

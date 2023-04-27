@@ -14,8 +14,8 @@
   </div>
 </template>
 <script setup>
-import { ref, computed } from 'vue'
-import { useLayoutStore } from './store'
+// import { ref, computed } from 'vue'
+// import { useLayoutStore } from './store'
 // import Sidebar from '../../partials/Sidebar.vue'
 // import Header from '../../partials/Header.vue'
 import Footer from '../../pages/layout/Footer.vue'
