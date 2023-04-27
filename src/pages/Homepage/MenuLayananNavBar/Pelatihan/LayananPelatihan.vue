@@ -175,29 +175,35 @@ const alurLayananKonsultasi2 = [
     }
 ]
 
-const detaiLayananKonsultasi = [
+const detaiLayananPelatihan = [
     {
-        title: 'Konsultasi <i>1-on-1</i> Eksklusif Tanpa Batas',
-        desc: 'Kamu bebas melakukan konsultasi secara pribadi dengan <i>expert</i> pilihan yang berpengalaman. Tanyakan hal-hal yang ingin kamu ketahui seputar karier dan dapatkan jawaban yang kredibel dan solutif.',
-        image: new URL(`../../../../images/menu-konsultasi/Konsultasi-1-on-1.png`, import.meta.url).href,
+        title: 'Formula Khusus untuk Persiapan Karier',
+        desc: 'Kamu akan belajar teori berdasarkan kebutuhan industri saat ini dan praktik langsung untuk menghasilkan portofolio yang bisa menunjang karier.',
+        image: new URL(`../../../../images/menu-pelatihan/Group.png`, import.meta.url).href,
         escape: true
     },
     {
-        title: 'Bebas Pilih Mentor Sesuai Rencana Kariermu',
-        desc: 'Jobhun menghadirkan <i>experts</i> dari berbagai bidang dan industri agar kamu bisa memilih sesuai dengan rencana karier impianmu.',
-        image: new URL(`../../../../images/menu-konsultasi/Bebas-pilih-mentor.png`, import.meta.url).href,
+        title: 'Interaksi secara Langsung dengan Expert',
+        desc: 'Saat kelas, kamu dapat berinteraksi secara langsung dan intensif dengan <i>expert</i>. Tanya sepuasnya seputar materi sampai kamu benar-benar paham.',
+        image: new URL(`../../../../images/menu-pelatihan/Vector.png`, import.meta.url).href,
         escape: true
     },
     {
-        title: 'Fleksibilitas Waktu dan Materi',
-        desc: 'Konsultasi akan dilakukan melalui <i>platform video conference</i> sesuai dengan waktu yang telah kamu tentukan. Diskusikan berbagai hal dari teori, praktik, penggunaan <i>tools</i>, studi kasus, hingga tips berkarier seperti para <i>experts</i>!',
-        image: new URL(`../../../../images/menu-konsultasi/Fleksibilitas-waktu.png`, import.meta.url).href,
+        title: 'Portofolio Penunjang Karier',
+        desc: 'Hasil dari praktik yang kamu lakukan selama pelatihan dapat menjadi portofolio yang menunjang karier. Kamu juga akan mendapatkan sertifikat yang dapat digunakan saat melamar kerja.',
+        image: new URL(`../../../../images/menu-pelatihan/files.png`, import.meta.url).href,
         escape: true
     },
     {
-        title: 'Mentor yang Berpengalaman dan Memiliki Kompetensi',
-        desc: 'Dapatkan <i>expert</i> yang bersedia memandumu meraih jalan sukses sesuai dengan aspirasi kariermu. Jadilah lebih percaya diri!',
-        image: new URL(`../../../../images/menu-konsultasi/Mentor-yang-berpengalaman.png`, import.meta.url).href,
+        title: 'Expert Berpengalaman & Berkualitas',
+        desc: '<i>Expert</i> yang mengajar merupakan ahli profesional di bidangnya dan telah memiliki segudang pengalaman. <i>Expert</i> Jobhun juga berasal dari perusahaan-perusahaan ternama.',
+        image: new URL(`../../../../images/menu-pelatihan/star.png`, import.meta.url).href,
+        escape: true
+    },
+    {
+        title: 'Biaya Terjangkau & Berbagai Pilihan Pembayaran',
+        desc: 'Biaya pelatihan di Jobhun memiliki harga di bawah rata-rata namun tetap berkualitas. Metode pembayaran pun dapat dilakukan di berbagai <i>platform</i> dari tunai hingga cicilan.',
+        image: new URL(`../../../../images/menu-pelatihan/money.png`, import.meta.url).href,
         escape: true
     }
 ]
@@ -320,11 +326,11 @@ const toFormulirJadiExpert = ()=>{
                 <h1 class="text-2xl md:text-3xl text-black text-center font-bold mt-14">
                     Mengapa Harus Menggunakan Layanan Ini?
                 </h1>
-                <div class="grid grid-cols-2 xl:grid-cols-4 md:grid-cols-2 gap-6 items-center mt-10 ">
+                <div class="justify-center grid grid-cols-2 xl:grid-cols-3 md:grid-cols-2 gap-6 items-center content-center mt-10 ">
                     <div class="border-gray-300 border-2 bg-transparent w-full h-full text-center p-3 rounded-md" style="position: relative;" 
-                    v-for="(detail, i) in detaiLayananKonsultasi" :key="i">
+                    v-for="(detail, i) in detaiLayananPelatihan" :key="i">
                         <div class="py-3">
-                            <img :src="detail.image" class="h-20 mx-auto">
+                            <img :src="detail.image" class="h-12 lg:h-20 mx-auto">
                         </div>
                         <div class="text-md font-bold text-black bottom" v-if="detail.hasOwnProperty('escape')" v-html="detail.title">
                         </div>

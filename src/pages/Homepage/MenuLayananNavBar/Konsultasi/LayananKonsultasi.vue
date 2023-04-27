@@ -324,7 +324,7 @@ const toFormulirJadiExpert = ()=>{
                     <div class="border-gray-300 border-2 bg-transparent w-full h-full text-center p-3 rounded-md" style="position: relative;" 
                     v-for="(detail, i) in detaiLayananKonsultasi" :key="i">
                         <div class="py-3">
-                            <img :src="detail.image" class="h-20 mx-auto">
+                            <img :src="detail.image" class="h-12 lg:h-20 mx-auto">
                         </div>
                         <div class="text-md font-bold text-black bottom" v-if="detail.hasOwnProperty('escape')" v-html="detail.title">
                         </div>
@@ -380,7 +380,7 @@ const toFormulirJadiExpert = ()=>{
                 </h1>
             </div>
             <div class="mt-20">
-                <div class="grid grid-cols-4">
+                <div class="grid lg:grid-cols-4 grid-cols-2">
                     <span v-for="(bidang, i) in bidang" :key="i" class="">
                         {{ bidang }}
                     </span>
@@ -415,8 +415,8 @@ const toFormulirJadiExpert = ()=>{
                     Pilihan Expert
                 </h1>
                 <div class="">
-                    <div class="px-0 lg:px-8 py-8 w-full max-w-7xl mx-auto">
-                        <div class="grid grid-cols-2 xl:grid-cols-3 md:grid-cols-3 gap-6 mt-10 px-40">
+                    <div class="px-0 lg:px-8 py-8 w-full max-w-9xl mx-auto">
+                        <div class="grid grid-cols-1 xl:grid-cols-3 md:grid-cols-3 gap-6 mt-10 px-14 lg:px-28 md:px-28">
                             <div v-for="(expert, index) in expertFeatured" :key="expert">
                                 <CardExpert :expert="expert" v-if="index < 6" />
                             </div>

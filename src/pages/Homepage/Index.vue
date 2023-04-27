@@ -1,7 +1,7 @@
 <script setup>
     import { ref, computed } from 'vue'
     import Banner from './Banner.vue'
-    import CardMentors from './CardSectionHome.vue'
+    import Buttons from './Buttons.vue'
     import Carousel from './Carousel.vue'
     import StickyChat from './StickyChat.vue'
 </script>
@@ -9,8 +9,7 @@
     <div class="flex overflow-hidden">
         <div class="relative flex flex-col overflow-y-auto overflow-x-hidden">
                 <Banner/>
-                <CardMentors/>
-                <Carousel/>
+                <Buttons/>
                 <StickyChat/>
             </div>
         </div>
