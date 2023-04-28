@@ -3,9 +3,9 @@
 <template>
     <div class="justify-center px-6 sm:px-6 lg:mx-28 md:mx-20 flex">
         <div class="lg:w-1/2 my-auto">
-            <div class="max-w-1xl mx-auto lg:block hidden mt-8 md:mt-10">
-                <div class="mb-44">
-                    <img src="/src/images/cropped-logo-jobhun-3.png" alt="Logo Jobhun" class="h-8 md:h-20" />
+            <div class="max-w-1xl mx-auto mt-8 md:mt-10">
+                <div class="md:mb-44 mb-10">
+                    <img src="/src/images/cropped-logo-jobhun-3.png" alt="Logo Jobhun" class="h-12 md:h-20" />
                 </div>
             </div>
             <div class="w-full max-w-1xl mx-auto mt-5 md:mt-10 lg:mt-0">
