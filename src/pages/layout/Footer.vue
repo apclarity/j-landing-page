@@ -23,38 +23,12 @@ import IconInstagram from '../../partials/icons/icon-instagram.vue'
         </div>
         <hr class="my-6 border-gray-300 sm:mx-auto lg:my-8">
         <div class="sm:flex sm:items-center sm:justify-between">
-            <ul class="items-center text-sm text-gray-500 sm:mb-0 flex flex-wrap">
-                <li>
-                    <a href="#" class="mr-4 ml-4 hover:underline md:ml-6 md:mr-6 ">Tentang Jobhun</a>
-                </li>
-                <li>
-                    <a href="#" class="mr-4 ml-4 hover:underline md:ml-6 md:mr-6">Program</a>
-                </li>
-                <li>
-                    <a href="#" class="mr-4 ml-4 hover:underline md:ml-6 md:mr-6">Blog</a>
-                </li>
-                <li>
-                    <a href="#" class="mr-4 ml-4 hover:underline md:ml-6 md:mr-6">Karier</a>
-                </li>
-                <li>
-                    <a href="#" class="mr-4 ml-4 hover:underline md:ml-6 md:mr-6">Kerja Sama</a>
-                </li>
-                <li>
-                    <a href="#" class="mr-4 ml-4 hover:underline md:ml-6 md:mr-6">Liputan Media</a>
-                </li>
-                <li>
-                    <a href="#" class="mr-4 ml-4 hover:underline md:ml-6 md:mr-6">Syarat & Ketentuan</a>
-                </li>
-                <li>
-                    <a href="#" class="mr-4 ml-4 hover:underline md:ml-6 md:mr-6">Kebijakan Privasi</a>
-                </li>
-                <!-- <br><br>
-                <li>
-                    
-                </li> -->
-            </ul>
-
-            <ul class="flex flex-wrap items-center text-sm mb-6 text-gray-500 sm:mb-0 md:text-right text-left md:justify-end justify-start py-3 ml-4 md:ml-0 mt-5 md:mt-0">
+            <div class="text-sm text-gray-500 sm:mb-0 flex flex-wrap py-3 w-full">
+                <span class="mr-4 md:mr-6 ml-4 md:ml-0">
+                    E-mail: info@jobhun.id; partnership@jobhun.id | Phone: 081332905635
+                </span>
+            </div>
+            <ul class="flex flex-wrap items-center text-sm mb-6 text-gray-500 sm:mb-0 md:text-right text-left md:justify-end justify-start py-3 ml-4 md:ml-0">
                 <li>
                     <p class="mr-4 md:mr-6 font-bold text-gray-600">
                         Jobhun – PT Jobhun Membangun Indonesia
@@ -66,13 +40,9 @@ import IconInstagram from '../../partials/icons/icon-instagram.vue'
                         Indonesia 60286
                     </p>
                 </li>
-                <br>
                 <li>
                     <p class="mr-4 md:mr-6">
                         HQ: Maspion Square, M.IT 3 Blok F.08, Jl. Ahmad Yani 73, Margorejo, Wonocolo, Surabaya, Jawa Timur, Indonesia 60238
-                    </p>
-                    <p class="mr-4 md:mr-6">
-                        E-mail: info@jobhun.id; partnership@jobhun.id | Phone: 081332905635
                     </p>
                 </li>
             </ul>
