@@ -20,7 +20,7 @@
     leave-to-class="opacity-0 translate-y-4"
   >
     <div v-show="modalOpen" :id="id" class="fixed inset-0 z-50 overflow-hidden flex items-center my-4 justify-center px-4 sm:px-6" role="dialog" aria-modal="true">
-      <div ref="modalContent" class="bg-white rounded shadow-lg overflow-auto max-w-lg w-full max-h-full">
+      <div ref="modalContent" class="bg-black rounded shadow-lg overflow-auto w-full max-h-full" :class="{'max-w-lg': typeof fullScreen === 'undefined'}">
         <!-- Modal header -->
         <div class="px-5 py-3 border-b border-slate-200">
           <div class="flex justify-between items-center">
@@ -44,7 +44,7 @@ import { ref, onMounted, onUnmounted } from 'vue'
 
 export default {
   name: 'ModalBasic',
-  props: ['id', 'modalOpen', 'title'],
+  props: ['id', 'modalOpen', 'title', 'fullScreen'],
   emits: ['close-modal'],
   setup(props, { emit }) {
 
