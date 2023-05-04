@@ -49,7 +49,7 @@ import IconInstagram from '../../partials/icons/icon-instagram.vue'
         </div>
         <hr class="border-gray-300 mt-6 mb-3">
         <p class="block text-sm mt-5 text-gray-500 md:text-center text-center mr-4 md:mr-6 ml-4 md:ml-0">
-            © Copyright 2022 <b class="text-sm">PT Jobhun Membangun Indonesia. All Right Reserved.</b>
+            © Copyright 2023 <b class="text-sm">PT Jobhun Membangun Indonesia. All Right Reserved.</b>
         </p>
     </footer>
 

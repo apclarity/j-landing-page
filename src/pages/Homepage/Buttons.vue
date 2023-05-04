@@ -28,18 +28,19 @@ let closeModal = () => {
 </script>
 <template>
     <div>
-        <div class="modal-mask" v-if="modalOpenStatus">
+        <!-- <div class="modal-mask" v-if="modalOpenStatus">
             <div class="modal-wrapper">
                 <div class="modal-container">
-
                     <div class="modal-header">
                         <slot name="header">
                             <CompanyProfile @closeModal="closeModal"/>
                         </slot>
                     </div>  
-                        
                 </div>
             </div>
+        </div> -->
+        <div v-if="modalOpenStatus">
+            <CompanyProfile :modalOpenStatus="modalOpenStatus" @close-modal="closeModal"/>
         </div>
         <div class="px-8 lg:px-8 py-20 md:py-32 w-full mx-auto max-w-7xl grid grid-cols-1 md:grid-cols-2 gap-8">
             <div class="" v-for="(button, i) in kebutuhan" :key="i">
@@ -61,6 +62,10 @@ let closeModal = () => {
 .modal-wrapper {
   display: table-cell;
   vertical-align: middle;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .modal-mask {
   position: fixed;

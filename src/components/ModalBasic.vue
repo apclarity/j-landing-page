@@ -8,7 +8,7 @@
     leave-from-class="opacity-100"
     leave-to-class="opacity-0"
   >
-    <div v-show="modalOpen" class="fixed inset-0 bg-slate-900 bg-opacity-30 z-50 transition-opacity" aria-hidden="true"></div>
+    <div v-show="modalOpen" class="fixed inset-0 bg-slate-900 bg-opacity-70 z-50 transition-opacity" aria-hidden="true"></div>
   </transition>
   <!-- Modal dialog -->
   <transition
@@ -19,7 +19,7 @@
     leave-from-class="opacity-100 translate-y-0"
     leave-to-class="opacity-0 translate-y-4"
   >
-    <div v-show="modalOpen" :id="id" class="fixed inset-0 z-50 overflow-hidden flex items-center my-4 justify-center px-4 sm:px-6" role="dialog" aria-modal="true">
+    <div v-show="modalOpen" :id="id" class="fixed inset-0 z-50 overflow-hidden flex items-center my-4 justify-center px-4 sm:px-6 w-1" role="dialog" aria-modal="true">
       <div ref="modalContent" class="bg-black rounded shadow-lg overflow-auto w-full max-h-full" :class="{'max-w-lg': typeof fullScreen === 'undefined'}">
         <!-- Modal header -->
         <div class="px-5 py-3 border-b border-slate-200">
