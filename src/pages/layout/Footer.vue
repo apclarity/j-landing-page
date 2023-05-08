@@ -24,9 +24,7 @@ import IconInstagram from '../../partials/icons/icon-instagram.vue'
         <hr class="my-6 border-gray-300 sm:mx-auto lg:my-8">
         <div class="sm:flex sm:items-center sm:justify-between">
             <div class="text-sm text-gray-500 sm:mb-0 flex flex-wrap py-3 w-full">
-                <span class="mr-4 md:mr-6 ml-4 md:ml-0">
-                    E-mail: info@jobhun.id; partnership@jobhun.id | Phone: 081332905635
-                </span>
+                
             </div>
             <ul class="flex flex-wrap items-center text-sm mb-6 text-gray-500 sm:mb-0 md:text-right text-left md:justify-end justify-start py-3 ml-4 md:ml-0">
                 <li>
@@ -45,11 +43,16 @@ import IconInstagram from '../../partials/icons/icon-instagram.vue'
                         HQ: Maspion Square, M.IT 3 Blok F.08, Jl. Ahmad Yani 73, Margorejo, Wonocolo, Surabaya, Jawa Timur, Indonesia 60238
                     </p>
                 </li>
+                <li>
+                    <span class="mr-4 md:mr-6">
+                        E-mail: info@jobhun.id; partnership@jobhun.id | Phone: 08125982369
+                    </span>
+                </li>
             </ul>
         </div>
         <hr class="border-gray-300 mt-6 mb-3">
         <p class="block text-sm mt-5 text-gray-500 md:text-center text-center mr-4 md:mr-6 ml-4 md:ml-0">
-            © Copyright 2023 <b class="text-sm">PT Jobhun Membangun Indonesia. All Right Reserved.</b>
+            <b class="text-sm">© Copyright 2023 PT Jobhun Membangun Indonesia. All Right Reserved.</b>
         </p>
     </footer>
 
