@@ -1,8 +1,8 @@
 <template>
-    <div class="flex-auto max-w-9xl min-w-0 mx-auto pt-6 lg:px-8 px-6 lg:pt-8 py-3 md:py-8">
+    <div class="flex-auto max-w-9xl min-w-0 mx-auto pt-6 lg:px-8 px-6 lg:pt-8">
         <div class="flex justify-center">
             <div class="lg:w-1/2 my-auto xs:mx-10">
-                <div class="max-w-1xl mx-auto mt-8 md:mt-10 w-full">
+                <div class="max-w-1xl mx-auto w-full mb-10">
                     <div class="">
                         <img src="/src/images/cropped-logo-jobhun-3.png" alt="Logo Jobhun" class="h-12 md:h-20 object-contain" />
                     </div>

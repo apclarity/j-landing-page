@@ -42,7 +42,7 @@ let closeModal = () => {
         <div v-if="modalOpenStatus">
             <CompanyProfile :modalOpenStatus="modalOpenStatus" @close-modal="closeModal"/>
         </div>
-        <div class="px-8 lg:px-8 py-14 md:py-32 w-full mx-auto max-w-7xl grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="px-8 lg:px-8 w-full mx-auto max-w-7xl grid grid-cols-1 md:grid-cols-2 gap-8">
             <div class="" v-for="(button, i) in kebutuhan" :key="i">
                 <div v-if="button.title != 'Profil Jobhun'">
                     <button class="w-full h-20 bg-jobhunYellow hover:bg-yellow-400 rounded-lg button-link hover:shadow-lg">
