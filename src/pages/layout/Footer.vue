@@ -45,7 +45,7 @@ import IconInstagram from '../../partials/icons/icon-instagram.vue'
                 </li>
                 <li>
                     <span class="mr-4 md:mr-6">
-                        E-mail: info@jobhun.id; partnership@jobhun.id | Phone: 08125982369
+                        E-mail: info@jobhun.id; partnership@jobhun.id | Phone: 081252982369
                     </span>
                 </li>
             </ul>
