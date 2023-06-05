@@ -15,8 +15,8 @@ const closeModal = () => {
 }
 
 let images = [];
-for (let i = 1; i <= 28; i++) {
-    let img = '../../images/proposalb2b/Proposal B2B Corporate Program_000'
+for (let i = 1; i <= 33; i++) {
+    let img = '../../images/proposalb2b/00'
     if (i < 10) {
         img += '0'
     }

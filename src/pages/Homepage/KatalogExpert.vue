@@ -15,8 +15,8 @@ const closeModal = () => {
 }
 
 let images = [];
-for (let i = 1; i <= 28; i++) {
-    let img = '../../images/katalogexpert/Jobhun Katalog Expert_page-00'
+for (let i = 1; i <= 64; i++) {
+    let img = '../../images/katalogexpert/00'
     if (i < 10) {
         img += '0'
     }
