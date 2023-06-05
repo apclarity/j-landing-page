@@ -1,7 +1,10 @@
 <script setup>
+import { ref } from 'vue'
 import ModalBasic from '../../components/ModalBasic.vue'
 import CompanyProfile from './CompanyProfile.vue'
-import {ref} from 'vue'
+import KatalogExpert from './KatalogExpert.vue';
+import ProposalB2B from './ProposalB2B.vue'
+
 const kebutuhan = [
     {
         title: 'Profil Jobhun',
@@ -21,9 +24,21 @@ const kebutuhan = [
     }
 ]
 let modalOpenStatus = ref(false)
+let modalOpenStatusCompProfile = ref(false)
+let modalOpenStatusKatalogExpert = ref(false)
+let modalOpenStatusProposalB2B = ref(false)
 
-let closeModal = () => {
-    modalOpenStatus.value = false
+
+let closeModalCompProfile = () => {
+    modalOpenStatusCompProfile.value = false
+}
+
+let closeModalKatalogExpert = () => {
+    modalOpenStatusKatalogExpert.value = false
+}
+
+let closeModalProposalB2B = () => {
+    modalOpenStatusProposalB2B.value = false
 }
 </script>
 <template>
@@ -39,20 +54,38 @@ let closeModal = () => {
                 </div>
             </div>
         </div> -->
-        <div v-if="modalOpenStatus">
-            <CompanyProfile :modalOpenStatus="modalOpenStatus" @close-modal="closeModal"/>
+        <div v-if="modalOpenStatusCompProfile">
+            <CompanyProfile :modalOpenStatus="modalOpenStatusCompProfile" @close-modal="closeModalCompProfile"/>
+        </div>
+        <div v-if="modalOpenStatusKatalogExpert">
+            <KatalogExpert :modalOpenStatus="modalOpenStatusKatalogExpert" @close-modal="closeModalKatalogExpert"/>
+        </div>
+        <div v-if="modalOpenStatusProposalB2B">
+            <ProposalB2B :modalOpenStatus="modalOpenStatusProposalB2B" @close-modal="closeModalProposalB2B"/>
         </div>
         <div class="px-8 lg:px-8 w-full mx-auto max-w-7xl grid grid-cols-1 md:grid-cols-2 gap-8">
             <div class="" v-for="(button, i) in kebutuhan" :key="i">
-                <div v-if="button.title != 'Profil Jobhun'">
-                    <button class="w-full h-20 bg-jobhunYellow hover:bg-yellow-400 rounded-lg button-link hover:shadow-lg">
-                        <a :href="button.link" class="font-bold text-black text-2xl">{{ button.title }}</a>
-                    </button>
-                </div>
-                <div v-else>
-                    <button class="w-full h-20 bg-jobhunYellow hover:bg-yellow-400 rounded-lg button-link hover:shadow-lg" @click="modalOpenStatus = true">
-                        <a href="#" class="font-bold text-black text-2xl">{{ button.title }}</a>
-                    </button>
+                <div>
+                    <div v-if="button.title === 'Pendaftaran layanan & program'">
+                        <button class="w-full h-20 bg-jobhunYellow hover:bg-yellow-400 rounded-lg button-link hover:shadow-lg">
+                            <a :href="button.link" class="font-bold text-black text-2xl">{{ button.title }}</a>
+                        </button>
+                    </div>
+                    <div v-else-if="button.title === 'Profil Jobhun'">
+                        <button class="w-full h-20 bg-jobhunYellow hover:bg-yellow-400 rounded-lg button-link hover:shadow-lg" @click="modalOpenStatusCompProfile = true">
+                            <a href="#" class="font-bold text-black text-2xl">{{ button.title }}</a>
+                        </button>
+                    </div>
+                    <div v-else-if="button.title === 'Katalog experts'">
+                        <button class="w-full h-20 bg-jobhunYellow hover:bg-yellow-400 rounded-lg button-link hover:shadow-lg" @click="modalOpenStatusKatalogExpert = true">
+                            <a href="#" class="font-bold text-black text-2xl">{{ button.title }}</a>
+                        </button>
+                    </div>
+                    <div v-else-if="button.title === 'Layanan B2B & B2G'">
+                        <button class="w-full h-20 bg-jobhunYellow hover:bg-yellow-400 rounded-lg button-link hover:shadow-lg" @click="modalOpenStatusProposalB2B = true">
+                            <a href="#" class="font-bold text-black text-2xl">{{ button.title }}</a>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
